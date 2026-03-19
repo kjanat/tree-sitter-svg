@@ -1,0 +1,42 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "svg",
+      "camelcase": "Svg",
+      "title": "SVG",
+      "scope": "source.svg",
+      "file-types": [
+        "svg"
+      ],
+      "injection-regex": "^svg$",
+      "class-name": "TreeSitterSvg"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "SVG grammar for Tree-sitter",
+    "authors": [
+      {
+        "name": "Kaj Kowalski",
+        "email": "info@kajkowalski.nl",
+        "url": "https://github.com/kjanat"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/kjanat/tree-sitter-svg",
+      "funding": ""
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "java": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": true
+  }
+}
