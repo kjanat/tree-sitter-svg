@@ -8,10 +8,10 @@
 // @ts-check
 
 export default grammar({
-  name: "svg",
+	name: 'svg',
 
-  rules: {
-    // TODO: add the actual grammar rules
-    source_file: $ => "hello"
-  }
+	rules: {
+		// TODO: add the actual grammar rules
+		source_file: $ => 'hello',
+	},
 });
