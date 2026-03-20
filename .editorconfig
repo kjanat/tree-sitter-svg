@@ -3,13 +3,13 @@ root = true
 [*]
 charset = utf-8
 
-[*.{json,toml,yml,gyp,xml}]
+[*.{toml,yml,gyp,xml}]
 indent_style = space
 indent_size = 2
 
-[*.{js,ts}]
-indent_style = space
-indent_size = 2
+[*.{js,ts,json}]
+indent_style = tab
+tab_width = 2
 
 [*.scm]
 indent_style = space

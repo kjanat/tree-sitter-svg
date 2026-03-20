@@ -2342,7 +2342,9 @@ export default grammar({
 
 		href_attribute_name: _ => choice('href', 'xlink:href'),
 
-		href_attribute_value: $ => quoted($.iri_reference),
+		href_attribute_value: $ => quoted($.href_reference),
+
+		href_reference: $ => choice($.data_uri, $.iri_reference),
 
 		functional_iri_attribute: $ =>
 			prec(
@@ -3709,6 +3711,33 @@ export default grammar({
 		raw_text: _ => token(/[^"']+/),
 
 		mime_type: _ => token(/[A-Za-z0-9!#$&^_.+-]+\/[A-Za-z0-9!#$&^_.+-]+/),
+
+		data_uri: $ =>
+			seq(
+				'data:',
+				optional(field('media_type', $.data_uri_media_type)),
+				repeat(field('parameter', $.data_uri_parameter)),
+				optional(field('encoding', $.data_uri_encoding)),
+				',',
+				optional(field('payload', $.data_uri_payload)),
+			),
+
+		data_uri_media_type: $ => $.mime_type,
+
+		data_uri_parameter: $ =>
+			seq(
+				';',
+				field('name', $.data_uri_parameter_name),
+				optional(seq('=', field('value', $.data_uri_parameter_value))),
+			),
+
+		data_uri_parameter_name: _ => token(/[A-Za-z0-9!#$&^_.+-]+/),
+
+		data_uri_parameter_value: _ => token(/[^;,"'&<]+/),
+
+		data_uri_encoding: _ => token(prec(1, /;[Bb][Aa][Ss][Ee]64/)),
+
+		data_uri_payload: _ => token(/[^"'&<]+/),
 
 		number_or_percentage: $ => choice($.number, $.percentage),
 

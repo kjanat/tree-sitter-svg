@@ -36,7 +36,8 @@
 
 ((href_attribute
   value: (href_attribute_value
-    (iri_reference) @local.reference))
+    (href_reference
+      (iri_reference) @local.reference)))
  (#match? @local.reference "^#")
  (#strip! @local.reference "^#"))
 

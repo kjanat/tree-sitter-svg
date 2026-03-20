@@ -11461,7 +11461,7 @@
 							"members": [
 								{
 									"type": "SYMBOL",
-									"name": "iri_reference"
+									"name": "href_reference"
 								},
 								{
 									"type": "BLANK"
@@ -11486,7 +11486,7 @@
 							"members": [
 								{
 									"type": "SYMBOL",
-									"name": "iri_reference"
+									"name": "href_reference"
 								},
 								{
 									"type": "BLANK"
@@ -11498,6 +11498,19 @@
 							"value": "'"
 						}
 					]
+				}
+			]
+		},
+		"href_reference": {
+			"type": "CHOICE",
+			"members": [
+				{
+					"type": "SYMBOL",
+					"name": "data_uri"
+				},
+				{
+					"type": "SYMBOL",
+					"name": "iri_reference"
 				}
 			]
 		},
@@ -21932,6 +21945,156 @@
 			"content": {
 				"type": "PATTERN",
 				"value": "[A-Za-z0-9!#$&^_.+-]+\\/[A-Za-z0-9!#$&^_.+-]+"
+			}
+		},
+		"data_uri": {
+			"type": "SEQ",
+			"members": [
+				{
+					"type": "STRING",
+					"value": "data:"
+				},
+				{
+					"type": "CHOICE",
+					"members": [
+						{
+							"type": "FIELD",
+							"name": "media_type",
+							"content": {
+								"type": "SYMBOL",
+								"name": "data_uri_media_type"
+							}
+						},
+						{
+							"type": "BLANK"
+						}
+					]
+				},
+				{
+					"type": "REPEAT",
+					"content": {
+						"type": "FIELD",
+						"name": "parameter",
+						"content": {
+							"type": "SYMBOL",
+							"name": "data_uri_parameter"
+						}
+					}
+				},
+				{
+					"type": "CHOICE",
+					"members": [
+						{
+							"type": "FIELD",
+							"name": "encoding",
+							"content": {
+								"type": "SYMBOL",
+								"name": "data_uri_encoding"
+							}
+						},
+						{
+							"type": "BLANK"
+						}
+					]
+				},
+				{
+					"type": "STRING",
+					"value": ","
+				},
+				{
+					"type": "CHOICE",
+					"members": [
+						{
+							"type": "FIELD",
+							"name": "payload",
+							"content": {
+								"type": "SYMBOL",
+								"name": "data_uri_payload"
+							}
+						},
+						{
+							"type": "BLANK"
+						}
+					]
+				}
+			]
+		},
+		"data_uri_media_type": {
+			"type": "SYMBOL",
+			"name": "mime_type"
+		},
+		"data_uri_parameter": {
+			"type": "SEQ",
+			"members": [
+				{
+					"type": "STRING",
+					"value": ";"
+				},
+				{
+					"type": "FIELD",
+					"name": "name",
+					"content": {
+						"type": "SYMBOL",
+						"name": "data_uri_parameter_name"
+					}
+				},
+				{
+					"type": "CHOICE",
+					"members": [
+						{
+							"type": "SEQ",
+							"members": [
+								{
+									"type": "STRING",
+									"value": "="
+								},
+								{
+									"type": "FIELD",
+									"name": "value",
+									"content": {
+										"type": "SYMBOL",
+										"name": "data_uri_parameter_value"
+									}
+								}
+							]
+						},
+						{
+							"type": "BLANK"
+						}
+					]
+				}
+			]
+		},
+		"data_uri_parameter_name": {
+			"type": "TOKEN",
+			"content": {
+				"type": "PATTERN",
+				"value": "[A-Za-z0-9!#$&^_.+-]+"
+			}
+		},
+		"data_uri_parameter_value": {
+			"type": "TOKEN",
+			"content": {
+				"type": "PATTERN",
+				"value": "[^;,\"'&<]+"
+			}
+		},
+		"data_uri_encoding": {
+			"type": "TOKEN",
+			"content": {
+				"type": "PREC",
+				"value": 1,
+				"content": {
+					"type": "PATTERN",
+					"value": ";[Bb][Aa][Ss][Ee]64"
+				}
+			}
+		},
+		"data_uri_payload": {
+			"type": "TOKEN",
+			"content": {
+				"type": "PATTERN",
+				"value": "[^\"'&<]+"
 			}
 		},
 		"number_or_percentage": {

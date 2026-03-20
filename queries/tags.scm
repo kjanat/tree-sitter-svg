@@ -46,7 +46,8 @@
 
 ((href_attribute
   value: (href_attribute_value
-    (iri_reference) @name)) @reference.id
+    (href_reference
+      (iri_reference) @name))) @reference.id
  (#match? @name "^#")
  (#strip! @name "^#"))
 

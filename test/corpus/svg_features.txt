@@ -253,8 +253,42 @@ Typed references and paint servers
           (href_attribute
             name: (href_attribute_name)
             value: (href_attribute_value
-              (iri_reference))))))
+              (href_reference
+                (iri_reference)))))))
     (text)
+    (svg_root_end_tag
+      name: (name)))
+  (text))
+
+==================
+Structured data URI href values
+==================
+
+<svg><image href="data:image/svg+xml;charset=utf-8;base64,PHN2Zy8+"/></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (svg_root_start_tag
+      name: (name))
+    (element
+      (self_closing_tag
+        name: (name)
+        (attribute
+          (href_attribute
+            name: (href_attribute_name)
+            value: (href_attribute_value
+              (href_reference
+                (data_uri
+                  media_type: (data_uri_media_type
+                    (mime_type))
+                  parameter: (data_uri_parameter
+                    name: (data_uri_parameter_name)
+                    value: (data_uri_parameter_value))
+                  encoding: (data_uri_encoding)
+                  payload: (data_uri_payload))))))))
     (svg_root_end_tag
       name: (name)))
   (text))
@@ -500,7 +534,8 @@ Scoped filter primitives and text links
             (href_attribute
               (href_attribute_name)
               (href_attribute_value
-                (iri_reference)))))
+                (href_reference
+                  (iri_reference))))))
         (element
           (start_tag
             (name))
@@ -637,7 +672,8 @@ Defs, gradients, filter primitives, text containers, linking type
           (href_attribute
             (href_attribute_name)
             (href_attribute_value
-              (iri_reference))))
+              (href_reference
+                (iri_reference)))))
         (linking_media_element_attribute
           (linking_media_type_attribute
             (linking_media_type_attribute_name)

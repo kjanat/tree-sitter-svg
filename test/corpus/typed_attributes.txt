@@ -458,12 +458,14 @@ IRI attributes
         (href_attribute
           (href_attribute_name)
           (href_attribute_value
-            (iri_reference))))
+            (href_reference
+              (iri_reference)))))
       (attribute
         (href_attribute
           (href_attribute_name)
           (href_attribute_value
-            (iri_reference))))
+            (href_reference
+              (iri_reference)))))
       (attribute
         (functional_iri_attribute
           (functional_iri_attribute_name)

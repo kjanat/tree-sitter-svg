@@ -1234,6 +1234,93 @@
 		}
 	},
 	{
+		"type": "data_uri",
+		"named": true,
+		"fields": {
+			"encoding": {
+				"multiple": false,
+				"required": false,
+				"types": [
+					{
+						"type": "data_uri_encoding",
+						"named": true
+					}
+				]
+			},
+			"media_type": {
+				"multiple": false,
+				"required": false,
+				"types": [
+					{
+						"type": "data_uri_media_type",
+						"named": true
+					}
+				]
+			},
+			"parameter": {
+				"multiple": true,
+				"required": false,
+				"types": [
+					{
+						"type": "data_uri_parameter",
+						"named": true
+					}
+				]
+			},
+			"payload": {
+				"multiple": false,
+				"required": false,
+				"types": [
+					{
+						"type": "data_uri_payload",
+						"named": true
+					}
+				]
+			}
+		}
+	},
+	{
+		"type": "data_uri_media_type",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": false,
+			"required": true,
+			"types": [
+				{
+					"type": "mime_type",
+					"named": true
+				}
+			]
+		}
+	},
+	{
+		"type": "data_uri_parameter",
+		"named": true,
+		"fields": {
+			"name": {
+				"multiple": false,
+				"required": true,
+				"types": [
+					{
+						"type": "data_uri_parameter_name",
+						"named": true
+					}
+				]
+			},
+			"value": {
+				"multiple": false,
+				"required": false,
+				"types": [
+					{
+						"type": "data_uri_parameter_value",
+						"named": true
+					}
+				]
+			}
+		}
+	},
+	{
 		"type": "defs_content",
 		"named": true,
 		"fields": {},
@@ -4362,6 +4449,25 @@
 			"multiple": false,
 			"required": false,
 			"types": [
+				{
+					"type": "href_reference",
+					"named": true
+				}
+			]
+		}
+	},
+	{
+		"type": "href_reference",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": false,
+			"required": true,
+			"types": [
+				{
+					"type": "data_uri",
+					"named": true
+				},
 				{
 					"type": "iri_reference",
 					"named": true
@@ -10082,6 +10188,26 @@
 	{
 		"type": "darken",
 		"named": false
+	},
+	{
+		"type": "data:",
+		"named": false
+	},
+	{
+		"type": "data_uri_encoding",
+		"named": true
+	},
+	{
+		"type": "data_uri_parameter_name",
+		"named": true
+	},
+	{
+		"type": "data_uri_parameter_value",
+		"named": true
+	},
+	{
+		"type": "data_uri_payload",
+		"named": true
 	},
 	{
 		"type": "default",
