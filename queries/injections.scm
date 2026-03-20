@@ -51,6 +51,16 @@
       (style_text_single) @injection.content)))
  (#set! injection.language "css"))
 
+((event_attribute
+  (event_attribute_value
+    (script_text_double) @injection.content))
+ (#set! injection.language "javascript"))
+
+((event_attribute
+  (event_attribute_value
+    (script_text_single) @injection.content))
+ (#set! injection.language "javascript"))
+
 ((generic_attribute
   name: (attribute_name) @_name
   value: (quoted_attribute_value

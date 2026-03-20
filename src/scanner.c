@@ -9,7 +9,9 @@
 
 enum TokenType {
   START_TAG_NAME,
+  SVG_START_TAG_NAME,
   END_TAG_NAME,
+  SVG_END_TAG_NAME,
   ERRONEOUS_END_TAG_NAME,
   SELF_CLOSING_TAG_DELIMITER,
 };
@@ -22,11 +24,32 @@ static inline void advance(TSLexer *lexer) {
 }
 
 static inline bool is_name_start_char(int32_t c) {
-  return c == ':' || c == '_' || isalpha((unsigned char)c);
+  return c == ':' || c == '_' || c >= 0x80 || isalpha((unsigned char)c);
 }
 
 static inline bool is_name_char(int32_t c) {
   return is_name_start_char(c) || c == '-' || c == '.' || isdigit((unsigned char)c);
+}
+
+static inline bool is_svg_name(const String *name) {
+  if (name->size < 3) {
+    return false;
+  }
+
+  uint32_t local_start = 0;
+  for (uint32_t i = 0; i < name->size; i++) {
+    if (name->contents[i] == ':') {
+      local_start = i + 1;
+    }
+  }
+
+  if (name->size - local_start != 3) {
+    return false;
+  }
+
+  return name->contents[local_start] == 's' &&
+         name->contents[local_start + 1] == 'v' &&
+         name->contents[local_start + 2] == 'g';
 }
 
 static inline bool string_eq(const String *a, const String *b) {
@@ -63,30 +86,37 @@ static String scan_tag_name(TSLexer *lexer) {
   return name;
 }
 
-static bool scan_start_tag_name(TagStack *tags, TSLexer *lexer) {
+static bool scan_start_tag_name(TagStack *tags, TSLexer *lexer, bool require_svg_root) {
   String name = scan_tag_name(lexer);
   if (name.size == 0) {
+    string_destroy(&name);
+    return false;
+  }
+
+  if (require_svg_root && !is_svg_name(&name)) {
     string_destroy(&name);
     return false;
   }
 
   array_push(tags, name);
-  lexer->result_symbol = START_TAG_NAME;
+  lexer->result_symbol = require_svg_root ? SVG_START_TAG_NAME : START_TAG_NAME;
   return true;
 }
 
-static bool scan_end_tag_name(TagStack *tags, TSLexer *lexer, const bool *valid_symbols) {
+static bool scan_end_tag_name(TagStack *tags, TSLexer *lexer, const bool *valid_symbols, bool require_svg_root) {
   String name = scan_tag_name(lexer);
   if (name.size == 0) {
     string_destroy(&name);
     return false;
   }
 
-  if (tags->size > 0 && string_eq(array_back(tags), &name)) {
+  bool name_matches_svg = !require_svg_root || is_svg_name(&name);
+
+  if (name_matches_svg && tags->size > 0 && string_eq(array_back(tags), &name)) {
     String last = array_pop(tags);
     string_destroy(&last);
     string_destroy(&name);
-    lexer->result_symbol = END_TAG_NAME;
+    lexer->result_symbol = require_svg_root ? SVG_END_TAG_NAME : END_TAG_NAME;
     return true;
   }
 
@@ -222,14 +252,24 @@ bool tree_sitter_svg_external_scanner_scan(void *payload, TSLexer *lexer, const 
   TagStack *tags = (TagStack *)payload;
 
   bool start_valid = valid_symbols[START_TAG_NAME];
+  bool svg_start_valid = valid_symbols[SVG_START_TAG_NAME];
   bool end_valid = valid_symbols[END_TAG_NAME];
+  bool svg_end_valid = valid_symbols[SVG_END_TAG_NAME];
   bool erroneous_end_valid = valid_symbols[ERRONEOUS_END_TAG_NAME];
   bool self_closing_valid = valid_symbols[SELF_CLOSING_TAG_DELIMITER];
 
-  if ((start_valid && end_valid) ||
+  if ((start_valid && svg_start_valid) ||
+      (end_valid && svg_end_valid) ||
+      (start_valid && end_valid) ||
+      (start_valid && svg_end_valid) ||
       (start_valid && erroneous_end_valid) ||
+      (svg_start_valid && end_valid) ||
+      (svg_start_valid && svg_end_valid) ||
+      (svg_start_valid && erroneous_end_valid) ||
       (start_valid && self_closing_valid) ||
+      (svg_start_valid && self_closing_valid) ||
       (self_closing_valid && end_valid) ||
+      (self_closing_valid && svg_end_valid) ||
       (self_closing_valid && erroneous_end_valid)) {
     return false;
   }
@@ -238,12 +278,20 @@ bool tree_sitter_svg_external_scanner_scan(void *payload, TSLexer *lexer, const 
     return scan_self_closing_tag_delimiter(tags, lexer);
   }
 
+  if (valid_symbols[SVG_START_TAG_NAME]) {
+    return scan_start_tag_name(tags, lexer, true);
+  }
+
   if (valid_symbols[START_TAG_NAME]) {
-    return scan_start_tag_name(tags, lexer);
+    return scan_start_tag_name(tags, lexer, false);
+  }
+
+  if (valid_symbols[SVG_END_TAG_NAME]) {
+    return scan_end_tag_name(tags, lexer, valid_symbols, true);
   }
 
   if (valid_symbols[END_TAG_NAME] || valid_symbols[ERRONEOUS_END_TAG_NAME]) {
-    return scan_end_tag_name(tags, lexer, valid_symbols);
+    return scan_end_tag_name(tags, lexer, valid_symbols, false);
   }
 
   return false;

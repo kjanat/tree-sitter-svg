@@ -1,30 +1,65 @@
 ==================
-Comments, PI, CDATA
+Comments, PI, CDATA, entities
 ==================
 
 <svg>
   <!-- marker -->
   <?xml-stylesheet type="text/css" href="theme.css"?>
   <![CDATA[<literal>still text</literal>]]>
+  <text>Tom &amp; Jerry &#x41; &#65;</text>
 </svg>
 
 ---
 
 (source_file
   (text)
-  (element
-    (start_tag
-      (name))
+  root: (svg_root_element
+    (svg_root_start_tag
+      name: (name))
     (text)
     (comment)
     (text)
     (processing_instruction
-      (name)
-      (pi_content))
+      target: (name)
+      content: (pi_content))
     (text)
     (cdata_section
       (cdata_text))
     (text)
-    (end_tag
-      (name)))
+    (element
+      (start_tag
+        name: (name))
+      (text)
+      (entity_reference)
+      (text)
+      (entity_reference)
+      (text)
+      (entity_reference)
+      (end_tag
+        name: (name)))
+    (text)
+    (svg_root_end_tag
+      name: (name)))
+  (text))
+
+==================
+Misc text around root
+==================
+
+
+<svg><g/></svg>
+
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (svg_root_start_tag
+      name: (name))
+    (element
+      (self_closing_tag
+        name: (name)))
+    (svg_root_end_tag
+      name: (name)))
   (text))

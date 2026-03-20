@@ -24,7 +24,13 @@
 
 ## SVG Spec Gotchas
 
+- SVG 2 `svg_path` grammar allows empty/whitespace-only `d` values; treat `d=""` and `d="   "` as valid parse cases
+- `svg` root detection should accept namespaced forms like `svg:svg` by checking local-name segment after the last `:`
+
 ## Tree-sitter Quirks
 
 - `<?xml` can be lexically stolen by generic `<?` processing-instruction rules; `token(prec(..., '<?xml'))` fixes declaration recognition
 - `tree-sitter` v0.25.0 native addon fails to compile with newer Node/V8 toolchains in this repo setup; Node 22 LTS works — Volta pin set to 22.22.1
+- Non-start grammar rules cannot match empty strings; wrap optional emptiness in parent rules instead of making the child nullable
+- Overlapping whitespace tokens (e.g. `misc_text` vs path whitespace) can cause wrong token choice; assign precedence for context-specific whitespace tokens
+- `tree-sitter test -u` will not update sections that still parse with `ERROR`/`MISSING`; fix grammar/input first, then rerun update
