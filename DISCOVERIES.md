@@ -4,6 +4,7 @@
 
 - External scanner enum order must exactly match `externals` order in `grammar.js`; mismatches silently corrupt tokenization
 - For simple external tokens (tag names, `/>`), avoid `mark_end` unless doing lookahead rollback; premature `mark_end` can truncate tokens
+- `tree-sitter build --wasm` can look stuck at `Extracting wasi-sdk...`, but for this grammar the real stall is later in wasm backend codegen for `src/parser.c`; syntax-only and LLVM IR emission finish quickly, object/wasm emission does not
 
 ## Grammar
 
