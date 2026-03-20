@@ -49,10 +49,42 @@ export default grammar({
 		xml_declaration: $ =>
 			seq(
 				'<?xml',
-				repeat1(seq($._s, $.attribute)),
+				$._s,
+				$.xml_version_attribute,
+				optional(seq($._s, $.xml_encoding_attribute)),
+				optional(seq($._s, $.xml_standalone_attribute)),
 				optional($._s),
 				'?>',
 			),
+
+		xml_version_attribute: $ =>
+			seq(
+				field('name', $.xml_version_attribute_name),
+				'=',
+				field('value', $.quoted_attribute_value),
+			),
+
+		xml_version_attribute_name: _ => 'version',
+
+		xml_encoding_attribute: $ =>
+			seq(
+				field('name', $.xml_encoding_attribute_name),
+				'=',
+				field('value', $.quoted_attribute_value),
+			),
+
+		xml_encoding_attribute_name: _ => 'encoding',
+
+		xml_standalone_attribute: $ =>
+			seq(
+				field('name', $.xml_standalone_attribute_name),
+				'=',
+				field('value', $.xml_standalone_attribute_value),
+			),
+
+		xml_standalone_attribute_name: _ => 'standalone',
+
+		xml_standalone_attribute_value: _ => choice('"yes"', '"no"', "'yes'", "'no'"),
 
 		doctype: $ =>
 			seq(
@@ -164,12 +196,200 @@ export default grammar({
 			),
 
 		path_data: $ =>
-			repeat1(choice(
-				$.path_command,
-				$.path_number,
-				$.path_comma,
+			seq(
+				$.moveto_segment,
+				repeat(seq(optional($.path_wsp), $.path_segment)),
+			),
+
+		path_segment: $ =>
+			choice(
+				$.closepath_segment,
+				$.moveto_segment,
+				$.lineto_segment,
+				$.horizontal_lineto_segment,
+				$.vertical_lineto_segment,
+				$.curveto_segment,
+				$.smooth_curveto_segment,
+				$.quadratic_bezier_curveto_segment,
+				$.smooth_quadratic_bezier_curveto_segment,
+				$.elliptical_arc_segment,
+			),
+
+		moveto_segment: $ =>
+			prec.left(
+				seq(
+					field('command', alias($.moveto_command, $.path_command)),
+					optional($.path_wsp),
+					$.path_coordinate_pair,
+					repeat(seq($.path_comma_wsp, $.path_coordinate_pair)),
+				),
+			),
+
+		closepath_segment: $ => field('command', alias($.closepath_command, $.path_command)),
+
+		lineto_segment: $ =>
+			prec.left(
+				seq(
+					field('command', alias($.lineto_command, $.path_command)),
+					optional($.path_wsp),
+					$.path_coordinate_pair,
+					repeat(seq($.path_comma_wsp, $.path_coordinate_pair)),
+				),
+			),
+
+		horizontal_lineto_segment: $ =>
+			prec.left(
+				seq(
+					field('command', alias($.horizontal_lineto_command, $.path_command)),
+					optional($.path_wsp),
+					$.path_coordinate,
+					repeat(seq($.path_comma_wsp, $.path_coordinate)),
+				),
+			),
+
+		vertical_lineto_segment: $ =>
+			prec.left(
+				seq(
+					field('command', alias($.vertical_lineto_command, $.path_command)),
+					optional($.path_wsp),
+					$.path_coordinate,
+					repeat(seq($.path_comma_wsp, $.path_coordinate)),
+				),
+			),
+
+		curveto_segment: $ =>
+			prec.left(
+				seq(
+					field('command', alias($.curveto_command, $.path_command)),
+					optional($.path_wsp),
+					$.curveto_argument,
+					repeat(seq($.path_comma_wsp, $.curveto_argument)),
+				),
+			),
+
+		smooth_curveto_segment: $ =>
+			prec.left(
+				seq(
+					field('command', alias($.smooth_curveto_command, $.path_command)),
+					optional($.path_wsp),
+					$.smooth_curveto_argument,
+					repeat(seq($.path_comma_wsp, $.smooth_curveto_argument)),
+				),
+			),
+
+		quadratic_bezier_curveto_segment: $ =>
+			prec.left(
+				seq(
+					field('command', alias($.quadratic_bezier_curveto_command, $.path_command)),
+					optional($.path_wsp),
+					$.quadratic_bezier_curveto_argument,
+					repeat(seq($.path_comma_wsp, $.quadratic_bezier_curveto_argument)),
+				),
+			),
+
+		smooth_quadratic_bezier_curveto_segment: $ =>
+			prec.left(
+				seq(
+					field('command', alias($.smooth_quadratic_bezier_curveto_command, $.path_command)),
+					optional($.path_wsp),
+					$.path_coordinate_pair,
+					repeat(seq($.path_comma_wsp, $.path_coordinate_pair)),
+				),
+			),
+
+		elliptical_arc_segment: $ =>
+			prec.left(
+				seq(
+					field('command', alias($.elliptical_arc_command, $.path_command)),
+					optional($.path_wsp),
+					$.elliptical_arc_argument,
+					repeat(seq($.path_comma_wsp, $.elliptical_arc_argument)),
+				),
+			),
+
+		curveto_argument: $ =>
+			seq(
+				$.path_coordinate_pair,
+				$.path_comma_wsp,
+				$.path_coordinate_pair,
+				$.path_comma_wsp,
+				$.path_coordinate_pair,
+			),
+
+		smooth_curveto_argument: $ =>
+			seq(
+				$.path_coordinate_pair,
+				$.path_comma_wsp,
+				$.path_coordinate_pair,
+			),
+
+		quadratic_bezier_curveto_argument: $ =>
+			seq(
+				$.path_coordinate_pair,
+				$.path_comma_wsp,
+				$.path_coordinate_pair,
+			),
+
+		elliptical_arc_argument: $ =>
+			seq(
+				$.elliptical_arc_radii,
+				$.path_comma_wsp,
+				$.path_rotation,
+				$.path_comma_wsp,
+				$.path_arc_flag,
+				$.path_comma_wsp,
+				$.path_sweep_flag,
+				$.path_comma_wsp,
+				$.path_coordinate_pair,
+			),
+
+		elliptical_arc_radii: $ =>
+			seq(
+				$.path_coordinate,
+				$.path_comma_wsp,
+				$.path_coordinate,
+			),
+
+		path_coordinate_pair: $ =>
+			seq(
+				$.path_coordinate,
+				$.path_comma_wsp,
+				$.path_coordinate,
+			),
+
+		path_coordinate: $ => $.path_number,
+
+		path_rotation: $ => $.path_number,
+
+		path_arc_flag: _ => token(/[01]/),
+
+		path_sweep_flag: _ => token(/[01]/),
+
+		path_comma_wsp: $ =>
+			choice(
+				seq(optional($.path_wsp), $.path_comma, optional($.path_wsp)),
 				$.path_wsp,
-			)),
+			),
+
+		moveto_command: _ => token(/[Mm]/),
+
+		closepath_command: _ => token(/[Zz]/),
+
+		lineto_command: _ => token(/[Ll]/),
+
+		horizontal_lineto_command: _ => token(/[Hh]/),
+
+		vertical_lineto_command: _ => token(/[Vv]/),
+
+		curveto_command: _ => token(/[Cc]/),
+
+		smooth_curveto_command: _ => token(/[Ss]/),
+
+		quadratic_bezier_curveto_command: _ => token(/[Qq]/),
+
+		smooth_quadratic_bezier_curveto_command: _ => token(/[Tt]/),
+
+		elliptical_arc_command: _ => token(/[Aa]/),
 
 		path_command: _ => token(PATH_COMMAND),
 
@@ -218,16 +438,11 @@ export default grammar({
 		generic_attribute: $ =>
 			seq(
 				field('name', $.attribute_name),
-				optional(seq('=', field('value', $._attribute_value))),
+				'=',
+				field('value', $.quoted_attribute_value),
 			),
 
 		attribute_name: _ => token(/[A-Za-z_:][A-Za-z0-9_.:-]*/),
-
-		_attribute_value: $ =>
-			choice(
-				$.quoted_attribute_value,
-				$.unquoted_attribute_value,
-			),
 
 		quoted_attribute_value: $ =>
 			choice(
@@ -246,14 +461,6 @@ export default grammar({
 		attribute_text_double: _ => token(/[^"&<]+/),
 
 		attribute_text_single: _ => token(/[^'&<]+/),
-
-		unquoted_attribute_value: $ =>
-			repeat1(choice(
-				$.entity_reference,
-				$.unquoted_attribute_text,
-			)),
-
-		unquoted_attribute_text: _ => token(/[^<>&"'\s=]+/),
 
 		entity_reference: _ => token(/&(#x[0-9A-Fa-f]+|#[0-9]+|[A-Za-z_:][A-Za-z0-9_.:-]*);/),
 

@@ -12,11 +12,17 @@ node_modules/
 # Go artifacts
 _obj/
 
+# Java artifacts
+.classpath
+.project
+.settings/
+
 # Python artifacts
 .venv/
 dist/
 *.egg-info
 *.whl
+__pycache__/
 
 # C artifacts
 *.a

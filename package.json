@@ -2,26 +2,31 @@
 	"name": "tree-sitter-svg",
 	"version": "0.1.0",
 	"description": "SVG grammar for Tree-sitter",
-	"type": "module",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/kjanat/tree-sitter-svg.git"
-	},
-	"funding": "https://github.com/kjanat/funding",
-	"license": "MIT",
-	"author": {
-		"name": "Kaj Kowalski",
-		"email": "info@kajkowalski.nl",
-		"url": "https://github.com/kjanat"
-	},
-	"main": "bindings/node",
-	"types": "bindings/node",
 	"keywords": [
 		"incremental",
 		"parsing",
 		"tree-sitter",
 		"svg"
 	],
+	"homepage": "https://github.com/kjanat/tree-sitter-svg#readme",
+	"bugs": {
+		"url": "https://github.com/kjanat/tree-sitter-svg/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/kjanat/tree-sitter-svg.git"
+	},
+	"funding": {
+		"url": "https://github.com/kjanat/funding"
+	},
+	"license": "MIT",
+	"author": "Kaj Kowalski <info@kajkowalski.nl> (https://github.com/kjanat)",
+	"type": "module",
+	"main": "bindings/node",
+	"types": "bindings/node",
+	"directories": {
+		"test": "test"
+	},
 	"files": [
 		"grammar.js",
 		"tree-sitter.json",
@@ -32,6 +37,13 @@
 		"src/**",
 		"*.wasm"
 	],
+	"scripts": {
+		"install": "node-gyp-build",
+		"postinstall": "git config core.hooksPath .githooks",
+		"prestart": "tree-sitter build --wasm",
+		"start": "tree-sitter playground",
+		"test": "node --test bindings/node/*_test.js"
+	},
 	"dependencies": {
 		"node-addon-api": "^8.5.0",
 		"node-gyp-build": "^4.8.4"
@@ -48,13 +60,6 @@
 		"tree-sitter": {
 			"optional": true
 		}
-	},
-	"scripts": {
-		"install": "node-gyp-build",
-		"postinstall": "git config core.hooksPath .githooks",
-		"prestart": "tree-sitter build --wasm",
-		"start": "tree-sitter playground",
-		"test": "node --test bindings/node/*_test.js"
 	},
 	"packageManager": "bun@1.3.11",
 	"volta": {

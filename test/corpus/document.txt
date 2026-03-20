@@ -16,16 +16,14 @@ Document structure
 (source_file
   (text)
   (xml_declaration
-    (attribute
-      (generic_attribute
-        (attribute_name)
-        (quoted_attribute_value
-          (attribute_text_double))))
-    (attribute
-      (generic_attribute
-        (attribute_name)
-        (quoted_attribute_value
-          (attribute_text_double)))))
+    (xml_version_attribute
+      (xml_version_attribute_name)
+      (quoted_attribute_value
+        (attribute_text_double)))
+    (xml_encoding_attribute
+      (xml_encoding_attribute_name)
+      (quoted_attribute_value
+        (attribute_text_double))))
   (text)
   (doctype
     (name)

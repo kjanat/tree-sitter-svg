@@ -35,17 +35,30 @@ SVG feature nodes
             (path_attribute_value
               (double_quoted_path_data
                 (path_data
-                  (path_command)
-                  (path_number)
+                  (moveto_segment
+                    (path_command)
+                    (path_coordinate_pair
+                      (path_coordinate
+                        (path_number))
+                      (path_comma_wsp
+                        (path_wsp))
+                      (path_coordinate
+                        (path_number))))
                   (path_wsp)
-                  (path_number)
+                  (path_segment
+                    (lineto_segment
+                      (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number)))))
                   (path_wsp)
-                  (path_command)
-                  (path_number)
-                  (path_wsp)
-                  (path_number)
-                  (path_wsp)
-                  (path_command))))))
+                  (path_segment
+                    (closepath_segment
+                      (path_command))))))))
         (attribute
           (style_attribute
             (style_attribute_name)
