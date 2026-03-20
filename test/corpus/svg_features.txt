@@ -15,7 +15,7 @@ Embedded style, script and foreignObject
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (element
@@ -51,7 +51,7 @@ Embedded style, script and foreignObject
       (end_tag
         name: (name)))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -69,7 +69,7 @@ Script and style CDATA forms
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (element
@@ -86,7 +86,7 @@ Script and style CDATA forms
       (end_tag
         name: (name)))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -106,7 +106,7 @@ Typed style and event attributes
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (element
@@ -169,7 +169,7 @@ Typed style and event attributes
       (end_tag
         name: (name)))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -191,7 +191,7 @@ Typed references and paint servers
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (element
@@ -249,7 +249,7 @@ Typed references and paint servers
               (href_reference
                 (iri_reference)))))))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -264,7 +264,7 @@ Structured data URI href values
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (self_closing_tag
@@ -282,7 +282,7 @@ Structured data URI href values
                     value: (data_uri_parameter_value))
                   encoding: (data_uri_encoding)
                   payload: (data_uri_payload))))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -302,7 +302,7 @@ Shape content allows animation and descriptive only
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (element
@@ -343,7 +343,7 @@ Shape content allows animation and descriptive only
       (end_tag
         name: (name)))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -362,7 +362,7 @@ Defs accepts generic children
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (element
@@ -381,7 +381,7 @@ Defs accepts generic children
       (end_tag
         name: (name)))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -413,7 +413,7 @@ Scoped filter primitives and text links
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (element
@@ -514,7 +514,7 @@ Scoped filter primitives and text links
       (end_tag
         name: (name)))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -541,7 +541,7 @@ Defs, gradients, filter primitives, text containers, linking type
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (element
@@ -632,6 +632,6 @@ Defs, gradients, filter primitives, text containers, linking type
       (end_tag
         name: (name)))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))

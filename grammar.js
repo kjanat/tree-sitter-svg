@@ -22,12 +22,10 @@ export default grammar({
 
 	externals: $ => [
 		$._start_tag_name,
-		$._svg_start_tag_name,
 		$._path_start_tag_name,
 		$._script_start_tag_name,
 		$._style_start_tag_name,
 		$._end_tag_name,
-		$._svg_end_tag_name,
 		$._path_end_tag_name,
 		$._script_end_tag_name,
 		$._style_end_tag_name,
@@ -156,38 +154,12 @@ export default grammar({
 
 		svg_root_element: $ =>
 			choice(
-				$.svg_root_self_closing_tag,
+				$.self_closing_tag,
 				seq(
-					$.svg_root_start_tag,
+					$.start_tag,
 					repeat($._content),
-					choice($.svg_root_end_tag, $.erroneous_end_tag),
+					choice($.end_tag, $.erroneous_end_tag),
 				),
-			),
-
-		svg_root_start_tag: $ =>
-			seq(
-				'<',
-				field('name', alias($._svg_start_tag_name, $.name)),
-				repeat(seq($._s, $.attribute)),
-				optional($._s),
-				'>',
-			),
-
-		svg_root_end_tag: $ =>
-			seq(
-				'</',
-				field('name', alias($._svg_end_tag_name, $.name)),
-				optional($._s),
-				'>',
-			),
-
-		svg_root_self_closing_tag: $ =>
-			seq(
-				'<',
-				field('name', alias($._svg_start_tag_name, $.name)),
-				repeat(seq($._s, $.attribute)),
-				optional($._s),
-				'/>',
 			),
 
 		// ─── Generic Element ────────────────────────────────────────

@@ -9,7 +9,7 @@ ARIA attribute set
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (generic_attribute
@@ -31,7 +31,7 @@ ARIA attribute set
           name: (attribute_name)
           value: (quoted_attribute_value
             (attribute_text_double)))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -59,7 +59,7 @@ Animation attribute set
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (element
@@ -121,7 +121,7 @@ Animation attribute set
             value: (quoted_attribute_value
               (attribute_text_double))))))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -142,7 +142,7 @@ Filter effect attribute set
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (element
@@ -254,7 +254,7 @@ Filter effect attribute set
       (end_tag
         name: (name)))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -294,7 +294,7 @@ Text layout and typography attributes
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (element
@@ -433,7 +433,7 @@ Text layout and typography attributes
             value: (quoted_attribute_value
               (attribute_text_double))))))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -473,7 +473,7 @@ Coord system and linking/media attributes
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (generic_attribute
@@ -595,7 +595,7 @@ Coord system and linking/media attributes
             value: (quoted_attribute_value
               (attribute_text_double))))))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -627,7 +627,7 @@ Other regular long-tail attributes
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (generic_attribute
@@ -714,6 +714,6 @@ Other regular long-tail attributes
           name: (attribute_name)
           value: (quoted_attribute_value
             (attribute_text_double)))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))

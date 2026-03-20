@@ -6,11 +6,8 @@
   (name) @name) @definition.element
 
 (svg_root_element
-  (svg_root_start_tag
+  (start_tag
     (name) @name) @definition.element)
-
-(svg_root_self_closing_tag
-  (name) @name) @definition.element
 
 ; id definitions
 ((id_attribute

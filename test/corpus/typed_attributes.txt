@@ -11,7 +11,7 @@ Geometry length and percentage attributes
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (length_attribute
@@ -83,7 +83,7 @@ Geometry length and percentage attributes
                   (length
                     (number)))))))))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -98,7 +98,7 @@ ViewBox and preserveAspectRatio forms
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (viewbox_attribute
@@ -124,7 +124,7 @@ ViewBox and preserveAspectRatio forms
               (align_keyword)
               (wsp)
               (meet_or_slice_keyword))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -139,7 +139,7 @@ Transform lists
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (transform_attribute
@@ -191,7 +191,7 @@ Transform lists
                   (comma_wsp
                     (wsp))
                   (number))))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -206,7 +206,7 @@ Points list
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (self_closing_tag
@@ -232,7 +232,7 @@ Points list
                   (number)
                   (comma_wsp)
                   (number))))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -247,7 +247,7 @@ Paint keywords and functions
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (paint_attribute
@@ -273,7 +273,7 @@ Paint keywords and functions
             (paint_value
               (color_value
                 (functional_color)))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -288,7 +288,7 @@ Opacity and stroke dasharray
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (opacity_attribute
@@ -319,7 +319,7 @@ Opacity and stroke dasharray
           name: (attribute_name)
           value: (quoted_attribute_value
             (attribute_text_double)))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -334,7 +334,7 @@ Enumerated rendering attributes
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (generic_attribute
@@ -376,7 +376,7 @@ Enumerated rendering attributes
           name: (attribute_name)
           value: (quoted_attribute_value
             (attribute_text_double)))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -391,7 +391,7 @@ Identity and language attributes
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (id_attribute
@@ -423,7 +423,7 @@ Identity and language attributes
           name: (attribute_name)
           value: (quoted_attribute_value
             (attribute_text_double)))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -438,7 +438,7 @@ IRI attributes
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (href_attribute
@@ -490,6 +490,6 @@ IRI attributes
           value: (functional_iri_attribute_value
             (paint_server
               (iri_reference))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))

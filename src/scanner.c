@@ -9,12 +9,10 @@
 
 enum TokenType {
   START_TAG_NAME,
-  SVG_START_TAG_NAME,
   PATH_START_TAG_NAME,
   SCRIPT_START_TAG_NAME,
   STYLE_START_TAG_NAME,
   END_TAG_NAME,
-  SVG_END_TAG_NAME,
   PATH_END_TAG_NAME,
   SCRIPT_END_TAG_NAME,
   STYLE_END_TAG_NAME,
@@ -119,16 +117,15 @@ static bool scan_start_tag_name(TagStack *tags, TSLexer *lexer, const bool *vali
   }
 
   int32_t symbol = -1;
+  bool is_root_start = tags->size == 0;
 
-  if (is_svg_name(&name) && valid_symbols[SVG_START_TAG_NAME]) {
-    symbol = SVG_START_TAG_NAME;
-  } else if (is_path_name(&name) && valid_symbols[PATH_START_TAG_NAME]) {
+  if (is_path_name(&name) && valid_symbols[PATH_START_TAG_NAME]) {
     symbol = PATH_START_TAG_NAME;
   } else if (is_script_name(&name) && valid_symbols[SCRIPT_START_TAG_NAME]) {
     symbol = SCRIPT_START_TAG_NAME;
   } else if (is_style_name(&name) && valid_symbols[STYLE_START_TAG_NAME]) {
     symbol = STYLE_START_TAG_NAME;
-  } else if (valid_symbols[START_TAG_NAME]) {
+  } else if (valid_symbols[START_TAG_NAME] && (!is_root_start || is_svg_name(&name))) {
     symbol = START_TAG_NAME;
   }
 
@@ -154,9 +151,7 @@ static bool scan_end_tag_name(TagStack *tags, TSLexer *lexer, const bool *valid_
   if (top_matches) {
     int32_t symbol = -1;
 
-    if (is_svg_name(&name) && valid_symbols[SVG_END_TAG_NAME]) {
-      symbol = SVG_END_TAG_NAME;
-    } else if (is_path_name(&name) && valid_symbols[PATH_END_TAG_NAME]) {
+    if (is_path_name(&name) && valid_symbols[PATH_END_TAG_NAME]) {
       symbol = PATH_END_TAG_NAME;
     } else if (is_script_name(&name) && valid_symbols[SCRIPT_END_TAG_NAME]) {
       symbol = SCRIPT_END_TAG_NAME;
@@ -379,7 +374,6 @@ bool tree_sitter_svg_external_scanner_scan(void *payload, TSLexer *lexer, const 
 
   bool any_start_valid =
       valid_symbols[START_TAG_NAME] ||
-      valid_symbols[SVG_START_TAG_NAME] ||
       valid_symbols[PATH_START_TAG_NAME] ||
       valid_symbols[SCRIPT_START_TAG_NAME] ||
       valid_symbols[STYLE_START_TAG_NAME];
@@ -390,7 +384,6 @@ bool tree_sitter_svg_external_scanner_scan(void *payload, TSLexer *lexer, const 
 
   bool any_end_valid =
       valid_symbols[END_TAG_NAME] ||
-      valid_symbols[SVG_END_TAG_NAME] ||
       valid_symbols[PATH_END_TAG_NAME] ||
       valid_symbols[SCRIPT_END_TAG_NAME] ||
       valid_symbols[STYLE_END_TAG_NAME] ||

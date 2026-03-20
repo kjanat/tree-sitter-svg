@@ -21,6 +21,7 @@
 - Using `$.attribute` (typed + generic) on specialized container tags restores extension/custom attribute support without weakening the global XML quoting constraint
 - Filter primitive conformance needs family-scoped tag tokens and rules (`feColorMatrix`, `feTurbulence`, `feComponentTransfer` + `feFunc*`, `feMerge` + `feMergeNode`, lighting + light-source) rather than one shared primitive bucket
 - `text` content should include linking/media (`<a>`) to accept common inline link patterns (`<text><a><tspan>…`)
+- Zed's `jsx_tag_auto_close` matches exact grammar node names for open/close tags; if the SVG root uses distinct tag node kinds from nested elements, root auto-close fails even when the visible CST looks equivalent
 
 ## Testing
 

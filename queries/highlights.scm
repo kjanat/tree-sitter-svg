@@ -16,19 +16,10 @@
 (start_tag
   (name) @tag)
 
-(svg_root_start_tag
-  (name) @tag)
-
 (end_tag
   (name) @tag)
 
-(svg_root_end_tag
-  (name) @tag)
-
 (self_closing_tag
-  (name) @tag)
-
-(svg_root_self_closing_tag
   (name) @tag)
 
 (attribute_name) @attribute

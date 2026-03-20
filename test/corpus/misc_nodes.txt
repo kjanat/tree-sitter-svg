@@ -14,7 +14,7 @@ Comments, PI, CDATA, entities
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (comment)
@@ -38,7 +38,7 @@ Comments, PI, CDATA, entities
       (end_tag
         name: (name)))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -55,11 +55,11 @@ Misc text around root
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (self_closing_tag
         name: (name)))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))

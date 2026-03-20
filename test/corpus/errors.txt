@@ -55,14 +55,14 @@ Mismatched end tag name
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (start_tag
         name: (name))
       (erroneous_end_tag
         name: (name)))
-    (erroneous_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -217,7 +217,7 @@ Pinned recovery: feFuncR outside feComponentTransfer
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (start_tag
@@ -232,7 +232,7 @@ Pinned recovery: feFuncR outside feComponentTransfer
                 (attribute_text_double))))))
       (end_tag
         name: (name)))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -247,7 +247,7 @@ Pinned recovery: feMergeNode outside feMerge
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (start_tag
@@ -257,7 +257,7 @@ Pinned recovery: feMergeNode outside feMerge
           name: (name)))
       (end_tag
         name: (name)))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -272,7 +272,7 @@ Pinned recovery: light source outside lighting primitive
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (start_tag
@@ -282,6 +282,6 @@ Pinned recovery: light source outside lighting primitive
           name: (name)))
       (end_tag
         name: (name)))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))

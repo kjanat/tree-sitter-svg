@@ -28,7 +28,7 @@ XML declaration + doctype + svg root
     external_id: (doctype_external_id))
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (generic_attribute
@@ -116,7 +116,7 @@ XML declaration + doctype + svg root
       (end_tag
         name: (name)))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -137,7 +137,7 @@ Namespaced svg root and nested svg
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (generic_attribute
@@ -242,7 +242,7 @@ Namespaced svg root and nested svg
       (end_tag
         name: (name)))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -257,7 +257,7 @@ Self-closing root with spaced Eq
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_self_closing_tag
+    (self_closing_tag
       name: (name)
       (attribute
         (length_attribute
@@ -303,12 +303,12 @@ Root with pre and post misc nodes
     content: (pi_content))
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (self_closing_tag
         name: (name)))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text)
   (comment)

@@ -2100,6 +2100,10 @@
 					"named": true
 				},
 				{
+					"type": "end_tag",
+					"named": true
+				},
+				{
 					"type": "entity_reference",
 					"named": true
 				},
@@ -2112,87 +2116,15 @@
 					"named": true
 				},
 				{
-					"type": "svg_root_end_tag",
+					"type": "self_closing_tag",
 					"named": true
 				},
 				{
-					"type": "svg_root_self_closing_tag",
-					"named": true
-				},
-				{
-					"type": "svg_root_start_tag",
+					"type": "start_tag",
 					"named": true
 				},
 				{
 					"type": "text",
-					"named": true
-				}
-			]
-		}
-	},
-	{
-		"type": "svg_root_end_tag",
-		"named": true,
-		"fields": {
-			"name": {
-				"multiple": false,
-				"required": true,
-				"types": [
-					{
-						"type": "name",
-						"named": true
-					}
-				]
-			}
-		}
-	},
-	{
-		"type": "svg_root_self_closing_tag",
-		"named": true,
-		"fields": {
-			"name": {
-				"multiple": false,
-				"required": true,
-				"types": [
-					{
-						"type": "name",
-						"named": true
-					}
-				]
-			}
-		},
-		"children": {
-			"multiple": true,
-			"required": false,
-			"types": [
-				{
-					"type": "attribute",
-					"named": true
-				}
-			]
-		}
-	},
-	{
-		"type": "svg_root_start_tag",
-		"named": true,
-		"fields": {
-			"name": {
-				"multiple": false,
-				"required": true,
-				"types": [
-					{
-						"type": "name",
-						"named": true
-					}
-				]
-			}
-		},
-		"children": {
-			"multiple": true,
-			"required": false,
-			"types": [
-				{
-					"type": "attribute",
 					"named": true
 				}
 			]

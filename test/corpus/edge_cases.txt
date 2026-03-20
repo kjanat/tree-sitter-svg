@@ -13,7 +13,7 @@ Single-quoted typed attribute values
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (viewbox_attribute
@@ -115,7 +115,7 @@ Single-quoted typed attribute values
               (paint_server
                 (iri_reference)))))))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -133,7 +133,7 @@ Empty typed attribute values
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (viewbox_attribute
@@ -170,7 +170,7 @@ Empty typed attribute values
             name: (class_attribute_name)
             value: (class_attribute_value)))))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -187,7 +187,7 @@ Length attribute auto keyword
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (length_attribute
@@ -209,7 +209,7 @@ Length attribute auto keyword
             value: (length_attribute_value
               (length_or_percentage_or_auto))))))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -228,7 +228,7 @@ Length units variety
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (element
@@ -324,7 +324,7 @@ Length units variety
                     (number)
                     (length_unit)))))))))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -342,7 +342,7 @@ Negative numbers in viewBox and coordinates
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (viewbox_attribute
@@ -424,7 +424,7 @@ Negative numbers in viewBox and coordinates
                   (length
                     (number)))))))))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -439,7 +439,7 @@ ViewBox comma-separated
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (viewbox_attribute
@@ -453,7 +453,7 @@ ViewBox comma-separated
               (number)
               (comma_wsp)
               (number))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -468,7 +468,7 @@ ViewBox mixed separators
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (viewbox_attribute
@@ -484,7 +484,7 @@ ViewBox mixed separators
               (comma_wsp
                 (wsp))
               (number))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -499,7 +499,7 @@ PreserveAspectRatio none
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (preserve_aspect_ratio_attribute
@@ -507,7 +507,7 @@ PreserveAspectRatio none
           value: (preserve_aspect_ratio_attribute_value
             (preserve_aspect_ratio_value
               (align_keyword))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -533,7 +533,7 @@ PreserveAspectRatio all alignment values
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (element
@@ -640,7 +640,7 @@ PreserveAspectRatio all alignment values
                 (wsp)
                 (meet_or_slice_keyword)))))))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -660,7 +660,7 @@ Transform single-arg translate and multi-arg rotate
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (element
@@ -721,7 +721,7 @@ Transform single-arg translate and multi-arg rotate
                       (wsp))
                     (number)))))))))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -736,7 +736,7 @@ Paint inherit and context keywords
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (paint_attribute
@@ -758,7 +758,7 @@ Paint inherit and context keywords
           name: (paint_attribute_name)
           value: (paint_attribute_value
             (paint_value)))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -773,7 +773,7 @@ Paint hex colors
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (paint_attribute
@@ -803,7 +803,7 @@ Paint hex colors
             (paint_value
               (color_value
                 (hex_color)))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -818,7 +818,7 @@ Paint url with fallback keywords
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (paint_attribute
@@ -836,7 +836,7 @@ Paint url with fallback keywords
               (paint_server
                 (iri_reference)
                 (wsp)))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -851,7 +851,7 @@ Functional color variants rgba and hsla
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (paint_attribute
@@ -867,7 +867,7 @@ Functional color variants rgba and hsla
             (paint_value
               (color_value
                 (functional_color)))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -884,7 +884,7 @@ Multiple event attributes
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (element
@@ -916,7 +916,7 @@ Multiple event attributes
             value: (event_attribute_value
               content: (script_text_double))))))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -933,7 +933,7 @@ Event attribute single-quoted with double-quotes inside
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (element
@@ -945,7 +945,7 @@ Event attribute single-quoted with double-quotes inside
             value: (event_attribute_value
               content: (script_text_single))))))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -960,7 +960,7 @@ Script element with attributes and raw text
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (start_tag
@@ -973,7 +973,7 @@ Script element with attributes and raw text
       (raw_text)
       (end_tag
         name: (name)))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -988,7 +988,7 @@ Style element with media attribute
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (start_tag
@@ -1006,7 +1006,7 @@ Style element with media attribute
       (raw_text)
       (end_tag
         name: (name)))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -1021,7 +1021,7 @@ Empty script and style elements
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (start_tag
@@ -1033,7 +1033,7 @@ Empty script and style elements
         name: (name))
       (end_tag
         name: (name)))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -1048,7 +1048,7 @@ Self-closing script and style
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (self_closing_tag
@@ -1056,7 +1056,7 @@ Self-closing script and style
     (element
       (self_closing_tag
         name: (name)))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -1083,7 +1083,7 @@ Deep nesting six levels
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (element
@@ -1125,7 +1125,7 @@ Deep nesting six levels
       (end_tag
         name: (name)))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -1140,7 +1140,7 @@ Interleaved text and elements
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (element
@@ -1154,7 +1154,7 @@ Interleaved text and elements
       (self_closing_tag
         name: (name)))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -1169,7 +1169,7 @@ Entity references named numeric decimal hex
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (start_tag
@@ -1189,7 +1189,7 @@ Entity references named numeric decimal hex
       (entity_reference)
       (end_tag
         name: (name)))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -1204,7 +1204,7 @@ CDATA in non-script element
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (start_tag
@@ -1213,7 +1213,7 @@ CDATA in non-script element
         (cdata_text))
       (end_tag
         name: (name)))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -1230,7 +1230,7 @@ Multiple namespace prefixes
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (generic_attribute
@@ -1258,7 +1258,7 @@ Multiple namespace prefixes
               (href_reference
                 (iri_reference)))))))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -1278,7 +1278,7 @@ DOCTYPE with SYSTEM id
     external_id: (doctype_external_id))
   (text)
   root: (svg_root_element
-    (svg_root_self_closing_tag
+    (self_closing_tag
       name: (name)))
   (text))
 
@@ -1293,10 +1293,10 @@ Empty comment
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (comment)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -1311,10 +1311,10 @@ Comment with single dashes inside
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (comment)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -1345,7 +1345,7 @@ Processing instruction xml-stylesheet
     content: (pi_content))
   (text)
   root: (svg_root_element
-    (svg_root_self_closing_tag
+    (self_closing_tag
       name: (name)))
   (text))
 
@@ -1360,7 +1360,7 @@ Data URI without charset or base64
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (self_closing_tag
@@ -1374,7 +1374,7 @@ Data URI without charset or base64
                   media_type: (data_uri_media_type
                     (mime_type))
                   payload: (data_uri_payload))))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -1389,7 +1389,7 @@ Data URI with charset no base64
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (self_closing_tag
@@ -1406,7 +1406,7 @@ Data URI with charset no base64
                     name: (data_uri_parameter_name)
                     value: (data_uri_parameter_value))
                   payload: (data_uri_payload))))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -1421,7 +1421,7 @@ Href external URL
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (self_closing_tag
@@ -1432,7 +1432,7 @@ Href external URL
             value: (href_attribute_value
               (href_reference
                 (iri_reference)))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -1447,7 +1447,7 @@ Href empty fragment
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (self_closing_tag
@@ -1458,7 +1458,7 @@ Href empty fragment
             value: (href_attribute_value
               (href_reference
                 (iri_reference)))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -1473,7 +1473,7 @@ Class single value
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (class_attribute
@@ -1481,7 +1481,7 @@ Class single value
           value: (class_attribute_value
             (class_list
               (class_name))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -1496,7 +1496,7 @@ Class with hyphens and numbers
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (class_attribute
@@ -1508,7 +1508,7 @@ Class with hyphens and numbers
               (class_name)
               (wsp)
               (class_name))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -1523,7 +1523,7 @@ ID with unicode characters
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (self_closing_tag
@@ -1541,7 +1541,7 @@ ID with unicode characters
             name: (id_attribute_name)
             value: (id_attribute_value
               (id_token))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -1556,7 +1556,7 @@ Path element with mixed typed attributes
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (self_closing_tag
@@ -1636,7 +1636,7 @@ Path element with mixed typed attributes
             value: (opacity_attribute_value
               (number_or_percentage
                 (number)))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -1651,7 +1651,7 @@ All typed attributes on root svg
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (id_attribute
@@ -1737,7 +1737,7 @@ All typed attributes on root svg
           value: (style_attribute_value
             (double_quoted_style_value
               content: (style_text_double))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -1756,7 +1756,7 @@ Points with various separators
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (element
@@ -1835,7 +1835,7 @@ Points with various separators
                   (comma_wsp)
                   (number))))))))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -1850,7 +1850,7 @@ Functional IRI none keyword
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (functional_iri_attribute
@@ -1864,7 +1864,7 @@ Functional IRI none keyword
         (functional_iri_attribute
           name: (functional_iri_attribute_name)
           value: (functional_iri_attribute_value))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -1879,7 +1879,7 @@ Multiple functional IRI attributes on one element
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (self_closing_tag
@@ -1914,7 +1914,7 @@ Multiple functional IRI attributes on one element
             value: (functional_iri_attribute_value
               (paint_server
                 (iri_reference)))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -1929,7 +1929,7 @@ Paint with rgb and url fallback combined
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (paint_attribute
@@ -1941,7 +1941,7 @@ Paint with rgb and url fallback combined
                 (wsp)
                 (color_value
                   (functional_color))))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -1960,7 +1960,7 @@ Transform attribute aliases
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (element
@@ -2001,7 +2001,7 @@ Transform attribute aliases
                     (comma_wsp)
                     (number)))))))))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -2016,7 +2016,7 @@ Opacity zero and one boundaries
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (opacity_attribute
@@ -2042,7 +2042,7 @@ Opacity zero and one boundaries
           value: (opacity_attribute_value
             (number_or_percentage
               (number))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -2057,7 +2057,7 @@ Opacity percentage boundaries
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (opacity_attribute
@@ -2080,7 +2080,7 @@ Opacity percentage boundaries
             (number_or_percentage
               (percentage
                 (number)))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -2103,7 +2103,7 @@ Mixed self-closing and paired elements
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (element
@@ -2154,7 +2154,7 @@ Mixed self-closing and paired elements
       (end_tag
         name: (name)))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -2171,7 +2171,7 @@ Style attribute with complex CSS
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (element
@@ -2184,7 +2184,7 @@ Style attribute with complex CSS
               (double_quoted_style_value
                 content: (style_text_double)))))))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -2205,7 +2205,7 @@ ForeignObject with nested HTML-like content
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
     (element
@@ -2272,7 +2272,7 @@ ForeignObject with nested HTML-like content
       (end_tag
         name: (name)))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -2287,7 +2287,7 @@ Script with JS containing angle brackets
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (start_tag
@@ -2295,7 +2295,7 @@ Script with JS containing angle brackets
       (raw_text)
       (end_tag
         name: (name)))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -2310,10 +2310,10 @@ Whitespace-only text nodes
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -2330,7 +2330,7 @@ Tab and newline in attribute value
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (viewbox_attribute
@@ -2347,7 +2347,7 @@ Tab and newline in attribute value
               (comma_wsp
                 (wsp))
               (number))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -2362,7 +2362,7 @@ Erroneous end tag in nested context
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (start_tag
