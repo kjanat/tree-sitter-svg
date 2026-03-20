@@ -31,6 +31,14 @@ export default grammar({
 		$._gradient_stop_start_tag_name,
 		$._filter_start_tag_name,
 		$._filter_primitive_start_tag_name,
+		$._filter_color_matrix_start_tag_name,
+		$._filter_turbulence_start_tag_name,
+		$._filter_component_transfer_start_tag_name,
+		$._filter_component_transfer_function_start_tag_name,
+		$._filter_merge_start_tag_name,
+		$._filter_merge_node_start_tag_name,
+		$._filter_lighting_start_tag_name,
+		$._filter_light_source_start_tag_name,
 		$._text_container_start_tag_name,
 		$._linking_media_start_tag_name,
 		$._script_start_tag_name,
@@ -47,6 +55,14 @@ export default grammar({
 		$._gradient_stop_end_tag_name,
 		$._filter_end_tag_name,
 		$._filter_primitive_end_tag_name,
+		$._filter_color_matrix_end_tag_name,
+		$._filter_turbulence_end_tag_name,
+		$._filter_component_transfer_end_tag_name,
+		$._filter_component_transfer_function_end_tag_name,
+		$._filter_merge_end_tag_name,
+		$._filter_merge_node_end_tag_name,
+		$._filter_lighting_end_tag_name,
+		$._filter_light_source_end_tag_name,
 		$._text_container_end_tag_name,
 		$._linking_media_end_tag_name,
 		$._script_end_tag_name,
@@ -184,18 +200,7 @@ export default grammar({
 
 		defs_content: $ =>
 			choice(
-				$._path_element,
-				$._shape_element,
-				$._clip_path_element,
-				$._defs_element,
-				$._gradient_element,
-				$._filter_element,
-				$._text_container_element,
-				$._linking_media_element,
-				$._script_element,
-				$._style_element,
-				$._animation_element,
-				$._descriptive_element,
+				$.element,
 				$._text_like_content,
 			),
 
@@ -254,17 +259,165 @@ export default grammar({
 
 		_filter_primitive_element: $ =>
 			choice(
+				$._filter_primitive_core_element,
+				$._filter_color_matrix_element,
+				$._filter_turbulence_element,
+				$._filter_component_transfer_element,
+				$._filter_merge_element,
+				$._filter_lighting_element,
+			),
+
+		_filter_primitive_core_element: $ =>
+			choice(
 				alias($.filter_primitive_self_closing_tag, $.self_closing_tag),
 				seq(
 					alias($.filter_primitive_start_tag, $.start_tag),
-					repeat($.filter_primitive_content),
+					repeat($.filter_primitive_core_content),
 					choice(alias($.filter_primitive_end_tag, $.end_tag), $.erroneous_end_tag),
 				),
 			),
 
-		filter_primitive_content: $ =>
+		filter_primitive_core_content: $ =>
 			choice(
-				$._filter_primitive_element,
+				$._animation_element,
+				$._descriptive_element,
+				$._text_like_content,
+			),
+
+		_filter_color_matrix_element: $ =>
+			choice(
+				alias($.filter_color_matrix_self_closing_tag, $.self_closing_tag),
+				seq(
+					alias($.filter_color_matrix_start_tag, $.start_tag),
+					repeat($.filter_color_matrix_content),
+					choice(alias($.filter_color_matrix_end_tag, $.end_tag), $.erroneous_end_tag),
+				),
+			),
+
+		filter_color_matrix_content: $ =>
+			choice(
+				$._animation_element,
+				$._descriptive_element,
+				$._text_like_content,
+			),
+
+		_filter_turbulence_element: $ =>
+			choice(
+				alias($.filter_turbulence_self_closing_tag, $.self_closing_tag),
+				seq(
+					alias($.filter_turbulence_start_tag, $.start_tag),
+					repeat($.filter_turbulence_content),
+					choice(alias($.filter_turbulence_end_tag, $.end_tag), $.erroneous_end_tag),
+				),
+			),
+
+		filter_turbulence_content: $ =>
+			choice(
+				$._animation_element,
+				$._descriptive_element,
+				$._text_like_content,
+			),
+
+		_filter_component_transfer_element: $ =>
+			choice(
+				alias($.filter_component_transfer_self_closing_tag, $.self_closing_tag),
+				seq(
+					alias($.filter_component_transfer_start_tag, $.start_tag),
+					repeat($.filter_component_transfer_content),
+					choice(alias($.filter_component_transfer_end_tag, $.end_tag), $.erroneous_end_tag),
+				),
+			),
+
+		filter_component_transfer_content: $ =>
+			choice(
+				$._filter_component_transfer_function_element,
+				$._animation_element,
+				$._descriptive_element,
+				$._text_like_content,
+			),
+
+		_filter_component_transfer_function_element: $ =>
+			choice(
+				alias($.filter_component_transfer_function_self_closing_tag, $.self_closing_tag),
+				seq(
+					alias($.filter_component_transfer_function_start_tag, $.start_tag),
+					repeat($.filter_component_transfer_function_content),
+					choice(alias($.filter_component_transfer_function_end_tag, $.end_tag), $.erroneous_end_tag),
+				),
+			),
+
+		filter_component_transfer_function_content: $ =>
+			choice(
+				$._animation_element,
+				$._descriptive_element,
+				$._text_like_content,
+			),
+
+		_filter_merge_element: $ =>
+			choice(
+				alias($.filter_merge_self_closing_tag, $.self_closing_tag),
+				seq(
+					alias($.filter_merge_start_tag, $.start_tag),
+					repeat($.filter_merge_content),
+					choice(alias($.filter_merge_end_tag, $.end_tag), $.erroneous_end_tag),
+				),
+			),
+
+		filter_merge_content: $ =>
+			choice(
+				$._filter_merge_node_element,
+				$._animation_element,
+				$._descriptive_element,
+				$._text_like_content,
+			),
+
+		_filter_merge_node_element: $ =>
+			choice(
+				alias($.filter_merge_node_self_closing_tag, $.self_closing_tag),
+				seq(
+					alias($.filter_merge_node_start_tag, $.start_tag),
+					repeat($.filter_merge_node_content),
+					choice(alias($.filter_merge_node_end_tag, $.end_tag), $.erroneous_end_tag),
+				),
+			),
+
+		filter_merge_node_content: $ =>
+			choice(
+				$._animation_element,
+				$._descriptive_element,
+				$._text_like_content,
+			),
+
+		_filter_lighting_element: $ =>
+			choice(
+				alias($.filter_lighting_self_closing_tag, $.self_closing_tag),
+				seq(
+					alias($.filter_lighting_start_tag, $.start_tag),
+					repeat($.filter_lighting_content),
+					choice(alias($.filter_lighting_end_tag, $.end_tag), $.erroneous_end_tag),
+				),
+			),
+
+		filter_lighting_content: $ =>
+			choice(
+				$._filter_light_source_element,
+				$._animation_element,
+				$._descriptive_element,
+				$._text_like_content,
+			),
+
+		_filter_light_source_element: $ =>
+			choice(
+				alias($.filter_light_source_self_closing_tag, $.self_closing_tag),
+				seq(
+					alias($.filter_light_source_start_tag, $.start_tag),
+					repeat($.filter_light_source_content),
+					choice(alias($.filter_light_source_end_tag, $.end_tag), $.erroneous_end_tag),
+				),
+			),
+
+		filter_light_source_content: $ =>
+			choice(
 				$._animation_element,
 				$._descriptive_element,
 				$._text_like_content,
@@ -283,6 +436,7 @@ export default grammar({
 		text_container_content: $ =>
 			choice(
 				$._text_container_element,
+				$._linking_media_element,
 				$._animation_element,
 				$._descriptive_element,
 				$._text_like_content,
@@ -481,7 +635,7 @@ export default grammar({
 			seq(
 				'<',
 				field('name', alias($._clip_path_start_tag_name, $.name)),
-				repeat(seq($._s, $._typed_attribute)),
+				repeat(seq($._s, $.attribute)),
 				optional($._s),
 				'>',
 			),
@@ -490,7 +644,7 @@ export default grammar({
 			seq(
 				'<',
 				field('name', alias($._defs_start_tag_name, $.name)),
-				repeat(seq($._s, $._typed_attribute)),
+				repeat(seq($._s, $.attribute)),
 				optional($._s),
 				'>',
 			),
@@ -499,7 +653,7 @@ export default grammar({
 			seq(
 				'<',
 				field('name', alias($._gradient_start_tag_name, $.name)),
-				repeat(seq($._s, $._typed_attribute)),
+				repeat(seq($._s, $.attribute)),
 				optional($._s),
 				'>',
 			),
@@ -508,7 +662,7 @@ export default grammar({
 			seq(
 				'<',
 				field('name', alias($._gradient_stop_start_tag_name, $.name)),
-				repeat(seq($._s, $._typed_attribute)),
+				repeat(seq($._s, $.attribute)),
 				optional($._s),
 				'>',
 			),
@@ -517,7 +671,7 @@ export default grammar({
 			seq(
 				'<',
 				field('name', alias($._filter_start_tag_name, $.name)),
-				repeat(seq($._s, $._typed_attribute)),
+				repeat(seq($._s, $.attribute)),
 				optional($._s),
 				'>',
 			),
@@ -526,7 +680,79 @@ export default grammar({
 			seq(
 				'<',
 				field('name', alias($._filter_primitive_start_tag_name, $.name)),
-				repeat(seq($._s, $.filter_primitive_attribute)),
+				repeat(seq($._s, $.filter_primitive_core_attribute)),
+				optional($._s),
+				'>',
+			),
+
+		filter_color_matrix_start_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._filter_color_matrix_start_tag_name, $.name)),
+				repeat(seq($._s, $.filter_color_matrix_attribute)),
+				optional($._s),
+				'>',
+			),
+
+		filter_turbulence_start_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._filter_turbulence_start_tag_name, $.name)),
+				repeat(seq($._s, $.filter_turbulence_attribute)),
+				optional($._s),
+				'>',
+			),
+
+		filter_component_transfer_start_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._filter_component_transfer_start_tag_name, $.name)),
+				repeat(seq($._s, $.filter_primitive_core_attribute)),
+				optional($._s),
+				'>',
+			),
+
+		filter_component_transfer_function_start_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._filter_component_transfer_function_start_tag_name, $.name)),
+				repeat(seq($._s, $.filter_component_transfer_function_attribute)),
+				optional($._s),
+				'>',
+			),
+
+		filter_merge_start_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._filter_merge_start_tag_name, $.name)),
+				repeat(seq($._s, $.filter_primitive_core_attribute)),
+				optional($._s),
+				'>',
+			),
+
+		filter_merge_node_start_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._filter_merge_node_start_tag_name, $.name)),
+				repeat(seq($._s, $.filter_primitive_core_attribute)),
+				optional($._s),
+				'>',
+			),
+
+		filter_lighting_start_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._filter_lighting_start_tag_name, $.name)),
+				repeat(seq($._s, $.filter_primitive_core_attribute)),
+				optional($._s),
+				'>',
+			),
+
+		filter_light_source_start_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._filter_light_source_start_tag_name, $.name)),
+				repeat(seq($._s, $.filter_primitive_core_attribute)),
 				optional($._s),
 				'>',
 			),
@@ -535,7 +761,7 @@ export default grammar({
 			seq(
 				'<',
 				field('name', alias($._text_container_start_tag_name, $.name)),
-				repeat(seq($._s, $._typed_attribute)),
+				repeat(seq($._s, $.attribute)),
 				optional($._s),
 				'>',
 			),
@@ -625,7 +851,7 @@ export default grammar({
 			seq(
 				'<',
 				field('name', alias($._clip_path_start_tag_name, $.name)),
-				repeat(seq($._s, $._typed_attribute)),
+				repeat(seq($._s, $.attribute)),
 				optional($._s),
 				'/>',
 			),
@@ -634,7 +860,7 @@ export default grammar({
 			seq(
 				'<',
 				field('name', alias($._defs_start_tag_name, $.name)),
-				repeat(seq($._s, $._typed_attribute)),
+				repeat(seq($._s, $.attribute)),
 				optional($._s),
 				'/>',
 			),
@@ -643,7 +869,7 @@ export default grammar({
 			seq(
 				'<',
 				field('name', alias($._gradient_start_tag_name, $.name)),
-				repeat(seq($._s, $._typed_attribute)),
+				repeat(seq($._s, $.attribute)),
 				optional($._s),
 				'/>',
 			),
@@ -652,7 +878,7 @@ export default grammar({
 			seq(
 				'<',
 				field('name', alias($._gradient_stop_start_tag_name, $.name)),
-				repeat(seq($._s, $._typed_attribute)),
+				repeat(seq($._s, $.attribute)),
 				optional($._s),
 				'/>',
 			),
@@ -661,7 +887,7 @@ export default grammar({
 			seq(
 				'<',
 				field('name', alias($._filter_start_tag_name, $.name)),
-				repeat(seq($._s, $._typed_attribute)),
+				repeat(seq($._s, $.attribute)),
 				optional($._s),
 				'/>',
 			),
@@ -670,7 +896,79 @@ export default grammar({
 			seq(
 				'<',
 				field('name', alias($._filter_primitive_start_tag_name, $.name)),
-				repeat(seq($._s, $.filter_primitive_attribute)),
+				repeat(seq($._s, $.filter_primitive_core_attribute)),
+				optional($._s),
+				'/>',
+			),
+
+		filter_color_matrix_self_closing_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._filter_color_matrix_start_tag_name, $.name)),
+				repeat(seq($._s, $.filter_color_matrix_attribute)),
+				optional($._s),
+				'/>',
+			),
+
+		filter_turbulence_self_closing_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._filter_turbulence_start_tag_name, $.name)),
+				repeat(seq($._s, $.filter_turbulence_attribute)),
+				optional($._s),
+				'/>',
+			),
+
+		filter_component_transfer_self_closing_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._filter_component_transfer_start_tag_name, $.name)),
+				repeat(seq($._s, $.filter_primitive_core_attribute)),
+				optional($._s),
+				'/>',
+			),
+
+		filter_component_transfer_function_self_closing_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._filter_component_transfer_function_start_tag_name, $.name)),
+				repeat(seq($._s, $.filter_component_transfer_function_attribute)),
+				optional($._s),
+				'/>',
+			),
+
+		filter_merge_self_closing_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._filter_merge_start_tag_name, $.name)),
+				repeat(seq($._s, $.filter_primitive_core_attribute)),
+				optional($._s),
+				'/>',
+			),
+
+		filter_merge_node_self_closing_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._filter_merge_node_start_tag_name, $.name)),
+				repeat(seq($._s, $.filter_primitive_core_attribute)),
+				optional($._s),
+				'/>',
+			),
+
+		filter_lighting_self_closing_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._filter_lighting_start_tag_name, $.name)),
+				repeat(seq($._s, $.filter_primitive_core_attribute)),
+				optional($._s),
+				'/>',
+			),
+
+		filter_light_source_self_closing_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._filter_light_source_start_tag_name, $.name)),
+				repeat(seq($._s, $.filter_primitive_core_attribute)),
 				optional($._s),
 				'/>',
 			),
@@ -679,7 +977,7 @@ export default grammar({
 			seq(
 				'<',
 				field('name', alias($._text_container_start_tag_name, $.name)),
-				repeat(seq($._s, $._typed_attribute)),
+				repeat(seq($._s, $.attribute)),
 				optional($._s),
 				'/>',
 			),
@@ -810,6 +1108,70 @@ export default grammar({
 				'>',
 			),
 
+		filter_color_matrix_end_tag: $ =>
+			seq(
+				'</',
+				field('name', alias($._filter_color_matrix_end_tag_name, $.name)),
+				optional($._s),
+				'>',
+			),
+
+		filter_turbulence_end_tag: $ =>
+			seq(
+				'</',
+				field('name', alias($._filter_turbulence_end_tag_name, $.name)),
+				optional($._s),
+				'>',
+			),
+
+		filter_component_transfer_end_tag: $ =>
+			seq(
+				'</',
+				field('name', alias($._filter_component_transfer_end_tag_name, $.name)),
+				optional($._s),
+				'>',
+			),
+
+		filter_component_transfer_function_end_tag: $ =>
+			seq(
+				'</',
+				field('name', alias($._filter_component_transfer_function_end_tag_name, $.name)),
+				optional($._s),
+				'>',
+			),
+
+		filter_merge_end_tag: $ =>
+			seq(
+				'</',
+				field('name', alias($._filter_merge_end_tag_name, $.name)),
+				optional($._s),
+				'>',
+			),
+
+		filter_merge_node_end_tag: $ =>
+			seq(
+				'</',
+				field('name', alias($._filter_merge_node_end_tag_name, $.name)),
+				optional($._s),
+				'>',
+			),
+
+		filter_lighting_end_tag: $ =>
+			seq(
+				'</',
+				field('name', alias($._filter_lighting_end_tag_name, $.name)),
+				optional($._s),
+				'>',
+			),
+
+		filter_light_source_end_tag: $ =>
+			seq(
+				'</',
+				field('name', alias($._filter_light_source_end_tag_name, $.name)),
+				optional($._s),
+				'>',
+			),
+
 		text_container_end_tag: $ =>
 			seq(
 				'</',
@@ -921,9 +1283,23 @@ export default grammar({
 				$.event_attribute,
 			),
 
-		filter_primitive_attribute: $ =>
+		filter_primitive_core_attribute: $ => $._typed_attribute,
+
+		filter_color_matrix_attribute: $ =>
 			choice(
-				$.filter_primitive_type_attribute,
+				$.filter_color_matrix_type_attribute,
+				$._typed_attribute,
+			),
+
+		filter_turbulence_attribute: $ =>
+			choice(
+				$.filter_turbulence_type_attribute,
+				$._typed_attribute,
+			),
+
+		filter_component_transfer_function_attribute: $ =>
+			choice(
+				$.filter_component_transfer_function_type_attribute,
 				$._typed_attribute,
 			),
 
@@ -991,25 +1367,56 @@ export default grammar({
 
 		style_mime_type: _ => 'text/css',
 
-		filter_primitive_type_attribute: $ =>
+		filter_color_matrix_type_attribute: $ =>
 			seq(
-				field('name', $.filter_primitive_type_attribute_name),
+				field('name', $.filter_color_matrix_type_attribute_name),
 				$._eq,
-				field('value', $.filter_primitive_type_attribute_value),
+				field('value', $.filter_color_matrix_type_attribute_value),
 			),
 
-		filter_primitive_type_attribute_name: _ => 'type',
+		filter_color_matrix_type_attribute_name: _ => 'type',
 
-		filter_primitive_type_attribute_value: $ => quoted($.filter_primitive_type_keyword),
+		filter_color_matrix_type_attribute_value: $ => quoted($.filter_color_matrix_type_keyword),
 
-		filter_primitive_type_keyword: _ =>
+		filter_color_matrix_type_keyword: _ =>
 			choice(
 				'matrix',
 				'saturate',
 				'hueRotate',
 				'luminanceToAlpha',
+			),
+
+		filter_turbulence_type_attribute: $ =>
+			seq(
+				field('name', $.filter_turbulence_type_attribute_name),
+				$._eq,
+				field('value', $.filter_turbulence_type_attribute_value),
+			),
+
+		filter_turbulence_type_attribute_name: _ => 'type',
+
+		filter_turbulence_type_attribute_value: $ => quoted($.filter_turbulence_type_keyword),
+
+		filter_turbulence_type_keyword: _ =>
+			choice(
 				'fractalNoise',
 				'turbulence',
+			),
+
+		filter_component_transfer_function_type_attribute: $ =>
+			seq(
+				field('name', $.filter_component_transfer_function_type_attribute_name),
+				$._eq,
+				field('value', $.filter_component_transfer_function_type_attribute_value),
+			),
+
+		filter_component_transfer_function_type_attribute_name: _ => 'type',
+
+		filter_component_transfer_function_type_attribute_value: $ =>
+			quoted($.filter_component_transfer_function_type_keyword),
+
+		filter_component_transfer_function_type_keyword: _ =>
+			choice(
 				'identity',
 				'table',
 				'discrete',

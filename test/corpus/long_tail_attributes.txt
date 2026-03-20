@@ -199,16 +199,17 @@ Filter effect attribute set
     (element
       (start_tag
         (name)
-        (id_attribute
-          (id_attribute_name)
-          (id_attribute_value
-            (id_token))))
+        (attribute
+          (id_attribute
+            (id_attribute_name)
+            (id_attribute_value
+              (id_token)))))
       (filter_content
         (text))
       (filter_content
         (self_closing_tag
           (name)
-          (filter_primitive_attribute
+          (filter_turbulence_attribute
             (filter_effect_attribute
               (filter_pair_number_attribute
                 (filter_pair_number_attribute_name)
@@ -218,24 +219,24 @@ Filter effect attribute set
                     (comma_wsp
                       (wsp))
                     (number))))))
-          (filter_primitive_attribute
+          (filter_turbulence_attribute
             (filter_effect_attribute
               (filter_integer_attribute
                 (filter_integer_attribute_name)
                 (filter_integer_attribute_value
                   (integer)))))
-          (filter_primitive_attribute
+          (filter_turbulence_attribute
             (filter_effect_attribute
               (filter_number_attribute
                 (filter_number_attribute_name)
                 (filter_number_attribute_value
                   (number)))))
-          (filter_primitive_attribute
+          (filter_turbulence_attribute
             (filter_effect_attribute
               (filter_stitch_tiles_attribute
                 (filter_stitch_tiles_attribute_name)
                 (filter_stitch_tiles_attribute_value))))
-          (filter_primitive_attribute
+          (filter_turbulence_attribute
             (filter_effect_attribute
               (filter_result_attribute
                 (filter_result_attribute_name)
@@ -246,31 +247,31 @@ Filter effect attribute set
       (filter_content
         (self_closing_tag
           (name)
-          (filter_primitive_attribute
+          (filter_primitive_core_attribute
             (filter_effect_attribute
               (filter_input_attribute
                 (filter_input_attribute_name)
                 (filter_input_attribute_value
                   (filter_input_value)))))
-          (filter_primitive_attribute
+          (filter_primitive_core_attribute
             (filter_effect_attribute
               (filter_input_attribute
                 (filter_input_attribute_name)
                 (filter_input_attribute_value
                   (filter_input_value
                     (id_token))))))
-          (filter_primitive_attribute
+          (filter_primitive_core_attribute
             (filter_effect_attribute
               (filter_number_attribute
                 (filter_number_attribute_name)
                 (filter_number_attribute_value
                   (number)))))
-          (filter_primitive_attribute
+          (filter_primitive_core_attribute
             (filter_effect_attribute
               (filter_channel_selector_attribute
                 (filter_channel_selector_attribute_name)
                 (filter_channel_selector_attribute_value))))
-          (filter_primitive_attribute
+          (filter_primitive_core_attribute
             (filter_effect_attribute
               (filter_channel_selector_attribute
                 (filter_channel_selector_attribute_name)
@@ -280,7 +281,7 @@ Filter effect attribute set
       (filter_content
         (self_closing_tag
           (name)
-          (filter_primitive_attribute
+          (filter_primitive_core_attribute
             (filter_effect_attribute
               (filter_number_list_attribute
                 (filter_number_list_attribute_name)
@@ -311,7 +312,7 @@ Filter effect attribute set
                     (comma_wsp
                       (wsp))
                     (number))))))
-          (filter_primitive_attribute
+          (filter_primitive_core_attribute
             (filter_effect_attribute
               (filter_order_attribute
                 (filter_order_attribute_name)
@@ -321,31 +322,31 @@ Filter effect attribute set
                     (comma_wsp
                       (wsp))
                     (integer))))))
-          (filter_primitive_attribute
+          (filter_primitive_core_attribute
             (filter_effect_attribute
               (filter_number_attribute
                 (filter_number_attribute_name)
                 (filter_number_attribute_value
                   (number)))))
-          (filter_primitive_attribute
+          (filter_primitive_core_attribute
             (filter_effect_attribute
               (filter_number_attribute
                 (filter_number_attribute_name)
                 (filter_number_attribute_value
                   (number)))))
-          (filter_primitive_attribute
+          (filter_primitive_core_attribute
             (filter_effect_attribute
               (filter_integer_attribute
                 (filter_integer_attribute_name)
                 (filter_integer_attribute_value
                   (integer)))))
-          (filter_primitive_attribute
+          (filter_primitive_core_attribute
             (filter_effect_attribute
               (filter_integer_attribute
                 (filter_integer_attribute_name)
                 (filter_integer_attribute_value
                   (integer)))))
-          (filter_primitive_attribute
+          (filter_primitive_core_attribute
             (filter_effect_attribute
               (filter_edge_mode_attribute
                 (filter_edge_mode_attribute_name)
@@ -401,140 +402,162 @@ Text layout and typography attributes
     (element
       (start_tag
         (name)
-        (text_layout_attribute
-          (alignment_baseline_attribute
-            (alignment_baseline_attribute_name)
-            (alignment_baseline_attribute_value)))
-        (text_layout_attribute
-          (baseline_shift_attribute
-            (baseline_shift_attribute_name)
-            (baseline_shift_attribute_value)))
-        (text_layout_attribute
-          (direction_attribute
-            (direction_attribute_name)
-            (direction_attribute_value)))
-        (text_layout_attribute
-          (dominant_baseline_attribute
-            (dominant_baseline_attribute_name)
-            (dominant_baseline_attribute_value)))
-        (text_layout_attribute
-          (text_length_list_attribute
-            (text_length_list_attribute_name)
-            (text_length_list_attribute_value
-              (number_or_length_or_percentage_list
-                (number_or_length_or_percentage
-                  (length
-                    (number)))
-                (comma_wsp
-                  (wsp))
-                (number_or_length_or_percentage
-                  (length
-                    (number)))
-                (comma_wsp
-                  (wsp))
-                (number_or_length_or_percentage
-                  (length
-                    (number)))))))
-        (text_layout_attribute
-          (text_length_list_attribute
-            (text_length_list_attribute_name)
-            (text_length_list_attribute_value
-              (number_or_length_or_percentage_list
-                (number_or_length_or_percentage
-                  (length
-                    (number)))
-                (comma_wsp
-                  (wsp))
-                (number_or_length_or_percentage
-                  (length
-                    (number)))))))
-        (text_layout_attribute
-          (font_family_attribute
-            (font_family_attribute_name)
-            (font_family_attribute_value
-              (raw_text))))
-        (text_layout_attribute
-          (font_size_adjust_attribute
-            (font_size_adjust_attribute_name)
-            (font_size_adjust_attribute_value
-              (number))))
-        (text_layout_attribute
-          (font_stretch_attribute
-            (font_stretch_attribute_name)
-            (font_stretch_attribute_value)))
-        (text_layout_attribute
-          (font_style_attribute
-            (font_style_attribute_name)
-            (font_style_attribute_value)))
-        (text_layout_attribute
-          (font_variant_attribute
-            (font_variant_attribute_name)
-            (font_variant_attribute_value)))
-        (text_layout_attribute
-          (font_weight_attribute
-            (font_weight_attribute_name)
-            (font_weight_attribute_value)))
-        (text_layout_attribute
-          (glyph_orientation_attribute
-            (glyph_orientation_attribute_name)
-            (glyph_orientation_attribute_value
-              (angle
+        (attribute
+          (text_layout_attribute
+            (alignment_baseline_attribute
+              (alignment_baseline_attribute_name)
+              (alignment_baseline_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (baseline_shift_attribute
+              (baseline_shift_attribute_name)
+              (baseline_shift_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (direction_attribute
+              (direction_attribute_name)
+              (direction_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (dominant_baseline_attribute
+              (dominant_baseline_attribute_name)
+              (dominant_baseline_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (text_length_list_attribute
+              (text_length_list_attribute_name)
+              (text_length_list_attribute_value
+                (number_or_length_or_percentage_list
+                  (number_or_length_or_percentage
+                    (length
+                      (number)))
+                  (comma_wsp
+                    (wsp))
+                  (number_or_length_or_percentage
+                    (length
+                      (number)))
+                  (comma_wsp
+                    (wsp))
+                  (number_or_length_or_percentage
+                    (length
+                      (number))))))))
+        (attribute
+          (text_layout_attribute
+            (text_length_list_attribute
+              (text_length_list_attribute_name)
+              (text_length_list_attribute_value
+                (number_or_length_or_percentage_list
+                  (number_or_length_or_percentage
+                    (length
+                      (number)))
+                  (comma_wsp
+                    (wsp))
+                  (number_or_length_or_percentage
+                    (length
+                      (number))))))))
+        (attribute
+          (text_layout_attribute
+            (font_family_attribute
+              (font_family_attribute_name)
+              (font_family_attribute_value
+                (raw_text)))))
+        (attribute
+          (text_layout_attribute
+            (font_size_adjust_attribute
+              (font_size_adjust_attribute_name)
+              (font_size_adjust_attribute_value
                 (number)))))
-        (text_layout_attribute
-          (glyph_orientation_attribute
-            (glyph_orientation_attribute_name)
-            (glyph_orientation_attribute_value)))
-        (text_layout_attribute
-          (length_adjust_attribute
-            (length_adjust_attribute_name)
-            (length_adjust_attribute_value)))
-        (text_layout_attribute
-          (letter_word_spacing_attribute
-            (letter_word_spacing_attribute_name)
-            (letter_word_spacing_attribute_value
-              (length
-                (number)))))
-        (text_layout_attribute
-          (text_length_list_attribute
-            (text_length_list_attribute_name)
-            (text_length_list_attribute_value
-              (number_or_length_or_percentage_list
-                (number_or_length_or_percentage
-                  (length
-                    (number)))
-                (comma_wsp
-                  (wsp))
-                (number_or_length_or_percentage
-                  (length
-                    (number)))
-                (comma_wsp
-                  (wsp))
-                (number_or_length_or_percentage
-                  (length
-                    (number)))))))
-        (text_layout_attribute
-          (text_anchor_attribute
-            (text_anchor_attribute_name)
-            (text_anchor_attribute_value)))
-        (text_layout_attribute
-          (text_decoration_attribute
-            (text_decoration_attribute_name)
-            (text_decoration_attribute_value
-              (raw_text))))
-        (text_layout_attribute
-          (unicode_bidi_attribute
-            (unicode_bidi_attribute_name)
-            (unicode_bidi_attribute_value)))
-        (text_layout_attribute
-          (letter_word_spacing_attribute
-            (letter_word_spacing_attribute_name)
-            (letter_word_spacing_attribute_value
-              (length
-                (number)))))
-        (text_layout_attribute
-          (writing_mode_attribute
-            (writing_mode_attribute_name)
-            (writing_mode_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (font_stretch_attribute
+              (font_stretch_attribute_name)
+              (font_stretch_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (font_style_attribute
+              (font_style_attribute_name)
+              (font_style_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (font_variant_attribute
+              (font_variant_attribute_name)
+              (font_variant_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (font_weight_attribute
+              (font_weight_attribute_name)
+              (font_weight_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (glyph_orientation_attribute
+              (glyph_orientation_attribute_name)
+              (glyph_orientation_attribute_value
+                (angle
+                  (number))))))
+        (attribute
+          (text_layout_attribute
+            (glyph_orientation_attribute
+              (glyph_orientation_attribute_name)
+              (glyph_orientation_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (length_adjust_attribute
+              (length_adjust_attribute_name)
+              (length_adjust_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (letter_word_spacing_attribute
+              (letter_word_spacing_attribute_name)
+              (letter_word_spacing_attribute_value
+                (length
+                  (number))))))
+        (attribute
+          (text_layout_attribute
+            (text_length_list_attribute
+              (text_length_list_attribute_name)
+              (text_length_list_attribute_value
+                (number_or_length_or_percentage_list
+                  (number_or_length_or_percentage
+                    (length
+                      (number)))
+                  (comma_wsp
+                    (wsp))
+                  (number_or_length_or_percentage
+                    (length
+                      (number)))
+                  (comma_wsp
+                    (wsp))
+                  (number_or_length_or_percentage
+                    (length
+                      (number))))))))
+        (attribute
+          (text_layout_attribute
+            (text_anchor_attribute
+              (text_anchor_attribute_name)
+              (text_anchor_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (text_decoration_attribute
+              (text_decoration_attribute_name)
+              (text_decoration_attribute_value
+                (raw_text)))))
+        (attribute
+          (text_layout_attribute
+            (unicode_bidi_attribute
+              (unicode_bidi_attribute_name)
+              (unicode_bidi_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (letter_word_spacing_attribute
+              (letter_word_spacing_attribute_name)
+              (letter_word_spacing_attribute_value
+                (length
+                  (number))))))
+        (attribute
+          (text_layout_attribute
+            (writing_mode_attribute
+              (writing_mode_attribute_name)
+              (writing_mode_attribute_value)))))
       (text_container_content
         (text))
       (end_tag
@@ -543,18 +566,21 @@ Text layout and typography attributes
     (element
       (self_closing_tag
         (name)
-        (text_layout_attribute
-          (method_attribute
-            (method_attribute_name)
-            (method_attribute_value)))
-        (text_layout_attribute
-          (side_attribute
-            (side_attribute_name)
-            (side_attribute_value)))
-        (text_layout_attribute
-          (spacing_attribute
-            (spacing_attribute_name)
-            (spacing_attribute_value)))))
+        (attribute
+          (text_layout_attribute
+            (method_attribute
+              (method_attribute_name)
+              (method_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (side_attribute
+              (side_attribute_name)
+              (side_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (spacing_attribute
+              (spacing_attribute_name)
+              (spacing_attribute_value))))))
     (text)
     (svg_root_end_tag
       (name)))

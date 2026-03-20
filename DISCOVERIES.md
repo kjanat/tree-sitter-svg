@@ -15,6 +15,9 @@
 - To enforce content models for selected elements, add name-specialized externals + hidden element subrules (e.g. `_path_element`) instead of broad generic children
 - Category overlap in scanner name predicates is precedence-sensitive (e.g. if an element name belongs to two families, first matching branch wins)
 - Tight `defs` content models surface omitted common definition elements quickly (e.g. `clipPath`); either add explicit families or expect recovery nodes
+- Using `$.attribute` (typed + generic) on specialized container tags restores extension/custom attribute support without weakening the global XML quoting constraint
+- Filter primitive conformance needs family-scoped tag tokens and rules (`feColorMatrix`, `feTurbulence`, `feComponentTransfer` + `feFunc*`, `feMerge` + `feMergeNode`, lighting + light-source) rather than one shared primitive bucket
+- `text` content should include linking/media (`<a>`) to accept common inline link patterns (`<text><a><tspan>…`)
 
 ## Testing
 

@@ -91,20 +91,22 @@ XML declaration + doctype + svg root
       (element
         (start_tag
           name: (name)
-          (length_attribute
-            name: (length_attribute_name)
-            value: (length_attribute_value
-              (length_or_percentage_or_auto
-                (length_or_percentage
-                  (length
-                    (number))))))
-          (length_attribute
-            name: (length_attribute_name)
-            value: (length_attribute_value
-              (length_or_percentage_or_auto
-                (length_or_percentage
-                  (length
-                    (number)))))))
+          (attribute
+            (length_attribute
+              name: (length_attribute_name)
+              value: (length_attribute_value
+                (length_or_percentage_or_auto
+                  (length_or_percentage
+                    (length
+                      (number)))))))
+          (attribute
+            (length_attribute
+              name: (length_attribute_name)
+              value: (length_attribute_value
+                (length_or_percentage_or_auto
+                  (length_or_percentage
+                    (length
+                      (number))))))))
         (text_container_content
           (text))
         (text_container_content

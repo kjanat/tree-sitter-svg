@@ -202,21 +202,25 @@ Typed references and paint servers
       (defs_content
         (text))
       (defs_content
-        (self_closing_tag
-          name: (name)
-          (id_attribute
-            name: (id_attribute_name)
-            value: (id_attribute_value
-              (id_token)))))
+        (element
+          (self_closing_tag
+            name: (name)
+            (attribute
+              (id_attribute
+                name: (id_attribute_name)
+                value: (id_attribute_value
+                  (id_token)))))))
       (defs_content
         (text))
       (defs_content
-        (self_closing_tag
-          name: (name)
-          (id_attribute
-            name: (id_attribute_name)
-            value: (id_attribute_value
-              (id_token)))))
+        (element
+          (self_closing_tag
+            name: (name)
+            (attribute
+              (id_attribute
+                name: (id_attribute_name)
+                value: (id_attribute_value
+                  (id_token)))))))
       (defs_content
         (text))
       (end_tag
@@ -325,6 +329,195 @@ Shape content allows animation and descriptive only
   (text))
 
 ==================
+Defs accepts generic children
+==================
+
+<svg>
+  <defs>
+    <g id="groupA"/>
+  </defs>
+</svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (svg_root_start_tag
+      (name))
+    (text)
+    (element
+      (start_tag
+        (name))
+      (defs_content
+        (text))
+      (defs_content
+        (element
+          (self_closing_tag
+            (name)
+            (attribute
+              (id_attribute
+                (id_attribute_name)
+                (id_attribute_value
+                  (id_token)))))))
+      (defs_content
+        (text))
+      (end_tag
+        (name)))
+    (text)
+    (svg_root_end_tag
+      (name)))
+  (text))
+
+==================
+Scoped filter primitives and text links
+==================
+
+<svg>
+  <defs>
+    <filter id="scoped">
+      <feColorMatrix type="matrix"/>
+      <feTurbulence type="fractalNoise"/>
+      <feComponentTransfer>
+        <feFuncR type="linear"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+      </feMerge>
+      <feDiffuseLighting>
+        <fePointLight/>
+      </feDiffuseLighting>
+    </filter>
+  </defs>
+  <text><a href="#scoped"><tspan>hit</tspan></a></text>
+</svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (svg_root_start_tag
+      (name))
+    (text)
+    (element
+      (start_tag
+        (name))
+      (defs_content
+        (text))
+      (defs_content
+        (element
+          (start_tag
+            (name)
+            (attribute
+              (id_attribute
+                (id_attribute_name)
+                (id_attribute_value
+                  (id_token)))))
+          (filter_content
+            (text))
+          (filter_content
+            (self_closing_tag
+              (name)
+              (filter_color_matrix_attribute
+                (filter_color_matrix_type_attribute
+                  (filter_color_matrix_type_attribute_name)
+                  (filter_color_matrix_type_attribute_value
+                    (filter_color_matrix_type_keyword))))))
+          (filter_content
+            (text))
+          (filter_content
+            (self_closing_tag
+              (name)
+              (filter_turbulence_attribute
+                (filter_turbulence_type_attribute
+                  (filter_turbulence_type_attribute_name)
+                  (filter_turbulence_type_attribute_value
+                    (filter_turbulence_type_keyword))))))
+          (filter_content
+            (text))
+          (filter_content
+            (start_tag
+              (name))
+            (filter_component_transfer_content
+              (text))
+            (filter_component_transfer_content
+              (self_closing_tag
+                (name)
+                (filter_component_transfer_function_attribute
+                  (filter_component_transfer_function_type_attribute
+                    (filter_component_transfer_function_type_attribute_name)
+                    (filter_component_transfer_function_type_attribute_value
+                      (filter_component_transfer_function_type_keyword))))))
+            (filter_component_transfer_content
+              (text))
+            (end_tag
+              (name)))
+          (filter_content
+            (text))
+          (filter_content
+            (start_tag
+              (name))
+            (filter_merge_content
+              (text))
+            (filter_merge_content
+              (self_closing_tag
+                (name)))
+            (filter_merge_content
+              (text))
+            (end_tag
+              (name)))
+          (filter_content
+            (text))
+          (filter_content
+            (start_tag
+              (name))
+            (filter_lighting_content
+              (text))
+            (filter_lighting_content
+              (self_closing_tag
+                (name)))
+            (filter_lighting_content
+              (text))
+            (end_tag
+              (name)))
+          (filter_content
+            (text))
+          (end_tag
+            (name))))
+      (defs_content
+        (text))
+      (end_tag
+        (name)))
+    (text)
+    (element
+      (start_tag
+        (name))
+      (text_container_content
+        (start_tag
+          (name)
+          (linking_media_element_attribute
+            (href_attribute
+              (href_attribute_name)
+              (href_attribute_value
+                (iri_reference)))))
+        (element
+          (start_tag
+            (name))
+          (text_container_content
+            (text))
+          (end_tag
+            (name)))
+        (end_tag
+          (name)))
+      (end_tag
+        (name)))
+    (text)
+    (svg_root_end_tag
+      (name)))
+  (text))
+
+==================
 Defs, gradients, filter primitives, text containers, linking type
 ==================
 
@@ -356,63 +549,69 @@ Defs, gradients, filter primitives, text containers, linking type
       (defs_content
         (text))
       (defs_content
-        (start_tag
-          (name)
-          (id_attribute
-            (id_attribute_name)
-            (id_attribute_value
-              (id_token))))
-        (gradient_content
-          (text))
-        (gradient_content
-          (self_closing_tag
+        (element
+          (start_tag
             (name)
-            (other_regular_attribute
-              (offset_attribute
-                (offset_attribute_name)
-                (offset_attribute_value
-                  (number_or_percentage
-                    (percentage
-                      (number))))))))
-        (gradient_content
-          (text))
-        (gradient_content
-          (self_closing_tag
-            (name)
-            (other_regular_attribute
-              (offset_attribute
-                (offset_attribute_name)
-                (offset_attribute_value
-                  (number_or_percentage
-                    (percentage
-                      (number))))))))
-        (gradient_content
-          (text))
-        (end_tag
-          (name)))
+            (attribute
+              (id_attribute
+                (id_attribute_name)
+                (id_attribute_value
+                  (id_token)))))
+          (gradient_content
+            (text))
+          (gradient_content
+            (self_closing_tag
+              (name)
+              (attribute
+                (other_regular_attribute
+                  (offset_attribute
+                    (offset_attribute_name)
+                    (offset_attribute_value
+                      (number_or_percentage
+                        (percentage
+                          (number)))))))))
+          (gradient_content
+            (text))
+          (gradient_content
+            (self_closing_tag
+              (name)
+              (attribute
+                (other_regular_attribute
+                  (offset_attribute
+                    (offset_attribute_name)
+                    (offset_attribute_value
+                      (number_or_percentage
+                        (percentage
+                          (number)))))))))
+          (gradient_content
+            (text))
+          (end_tag
+            (name))))
       (defs_content
         (text))
       (defs_content
-        (start_tag
-          (name)
-          (id_attribute
-            (id_attribute_name)
-            (id_attribute_value
-              (id_token))))
-        (filter_content
-          (text))
-        (filter_content
-          (self_closing_tag
+        (element
+          (start_tag
             (name)
-            (filter_primitive_attribute
-              (filter_primitive_type_attribute
-                (filter_primitive_type_attribute_name)
-                (filter_primitive_type_attribute_value
-                  (filter_primitive_type_keyword))))))
-        (filter_content
-          (text))
-        (end_tag
-          (name)))
+            (attribute
+              (id_attribute
+                (id_attribute_name)
+                (id_attribute_value
+                  (id_token)))))
+          (filter_content
+            (text))
+          (filter_content
+            (self_closing_tag
+              (name)
+              (filter_turbulence_attribute
+                (filter_turbulence_type_attribute
+                  (filter_turbulence_type_attribute_name)
+                  (filter_turbulence_type_attribute_value
+                    (filter_turbulence_type_keyword))))))
+          (filter_content
+            (text))
+          (end_tag
+            (name))))
       (defs_content
         (text))
       (end_tag
