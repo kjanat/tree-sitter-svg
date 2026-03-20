@@ -217,6 +217,10 @@
 					"named": true
 				},
 				{
+					"type": "erroneous_end_tag",
+					"named": true
+				},
+				{
 					"type": "processing_instruction",
 					"named": true
 				},
@@ -325,6 +329,22 @@
 	},
 	{
 		"type": "end_tag",
+		"named": true,
+		"fields": {
+			"name": {
+				"multiple": false,
+				"required": true,
+				"types": [
+					{
+						"type": "name",
+						"named": true
+					}
+				]
+			}
+		}
+	},
+	{
+		"type": "erroneous_end_tag",
 		"named": true,
 		"fields": {
 			"name": {
@@ -924,29 +944,28 @@
 		"type": "source_file",
 		"named": true,
 		"root": true,
-		"fields": {},
+		"fields": {
+			"root": {
+				"multiple": false,
+				"required": true,
+				"types": [
+					{
+						"type": "element",
+						"named": true
+					}
+				]
+			}
+		},
 		"children": {
 			"multiple": true,
 			"required": false,
 			"types": [
-				{
-					"type": "cdata_section",
-					"named": true
-				},
 				{
 					"type": "comment",
 					"named": true
 				},
 				{
 					"type": "doctype",
-					"named": true
-				},
-				{
-					"type": "element",
-					"named": true
-				},
-				{
-					"type": "entity_reference",
 					"named": true
 				},
 				{
@@ -1034,6 +1053,11 @@
 				}
 			]
 		}
+	},
+	{
+		"type": "text",
+		"named": true,
+		"fields": {}
 	},
 	{
 		"type": "vertical_lineto_segment",
@@ -1309,10 +1333,6 @@
 	},
 	{
 		"type": "style_text_single",
-		"named": true
-	},
-	{
-		"type": "text",
 		"named": true
 	},
 	{

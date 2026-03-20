@@ -1,0 +1,71 @@
+=============================
+Implicit separators and arcs
+=============================
+
+<svg><path d="M10-20L30.5-.25A10 20 30 01 40 50z"/></svg>
+
+---
+
+(source_file
+  (text)
+  (element
+    (start_tag
+      (name))
+    (element
+      (self_closing_tag
+        (name)
+        (attribute
+          (path_attribute
+            (path_attribute_name)
+            (path_attribute_value
+              (double_quoted_path_data
+                (path_data
+                  (moveto_segment
+                    (path_command)
+                    (path_coordinate_pair
+                      (path_coordinate
+                        (path_number))
+                      (path_coordinate
+                        (path_number))))
+                  (path_segment
+                    (lineto_segment
+                      (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_coordinate
+                          (path_number)))))
+                  (path_segment
+                    (elliptical_arc_segment
+                      (path_command)
+                      (elliptical_arc_argument
+                        (elliptical_arc_radii
+                          (path_coordinate
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate
+                            (path_number)))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_rotation
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_arc_flag)
+                        (path_sweep_flag)
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate_pair
+                          (path_coordinate
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate
+                            (path_number))))))
+                  (path_segment
+                    (closepath_segment
+                      (path_command))))))))))
+    (end_tag
+      (name)))
+  (text))

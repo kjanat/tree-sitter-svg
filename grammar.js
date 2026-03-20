@@ -13,27 +13,45 @@ const PATH_NUMBER = /[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?/;
 export default grammar({
 	name: 'svg',
 
+	externals: $ => [
+		$._start_tag_name,
+		$._end_tag_name,
+		$._erroneous_end_tag_name,
+		'/>',
+	],
+
 	extras: () => [],
 
 	rules: {
-		source_file: $ => repeat($._node),
+		source_file: $ =>
+			seq(
+				repeat($._pre_root_item),
+				field('root', $.element),
+				repeat($._post_root_item),
+			),
 
-		_node: $ =>
+		_pre_root_item: $ =>
 			choice(
 				$.xml_declaration,
 				$.doctype,
 				$.processing_instruction,
 				$.comment,
-				$.element,
-				$.cdata_section,
-				$.entity_reference,
-				$.text,
+				alias($.misc_text, $.text),
 			),
+
+		_post_root_item: $ =>
+			choice(
+				$.processing_instruction,
+				$.comment,
+				alias($.misc_text, $.text),
+			),
+
+		misc_text: _ => token(/[ \t\r\n]+/),
 
 		element: $ =>
 			choice(
 				$.self_closing_tag,
-				seq($.start_tag, repeat($._content), $.end_tag),
+				seq($.start_tag, repeat($._content), choice($.end_tag, $.erroneous_end_tag)),
 			),
 
 		_content: $ =>
@@ -48,7 +66,7 @@ export default grammar({
 
 		xml_declaration: $ =>
 			seq(
-				'<?xml',
+				$._xml_declaration_start,
 				$._s,
 				$.xml_version_attribute,
 				optional(seq($._s, $.xml_encoding_attribute)),
@@ -56,6 +74,8 @@ export default grammar({
 				optional($._s),
 				'?>',
 			),
+
+		_xml_declaration_start: _ => token(prec(2, '<?xml')),
 
 		xml_version_attribute: $ =>
 			seq(
@@ -104,10 +124,18 @@ export default grammar({
 		processing_instruction: $ =>
 			seq(
 				'<?',
-				field('target', $.name),
+				field('target', alias($.pi_target_name, $.name)),
 				optional(seq($._s, field('content', $.pi_content))),
 				'?>',
 			),
+
+		pi_target_name: _ =>
+			token(choice(
+				/[A-WYZa-wyz_:][A-Za-z0-9_.:-]*/,
+				/[xX][A-LN-Za-ln-z0-9_.:-][A-Za-z0-9_.:-]*/,
+				/[xX][mM][A-KM-Za-km-z0-9_.:-][A-Za-z0-9_.:-]*/,
+				/[xX][mM][lL][A-Za-z0-9_.:-]+/,
+			)),
 
 		pi_content: _ => token(/([^?]|\?[^>])+/),
 
@@ -133,7 +161,7 @@ export default grammar({
 		start_tag: $ =>
 			seq(
 				'<',
-				field('name', $.name),
+				field('name', alias($._start_tag_name, $.name)),
 				repeat(seq($._s, $.attribute)),
 				optional($._s),
 				'>',
@@ -142,7 +170,7 @@ export default grammar({
 		self_closing_tag: $ =>
 			seq(
 				'<',
-				field('name', $.name),
+				field('name', alias($._start_tag_name, $.name)),
 				repeat(seq($._s, $.attribute)),
 				optional($._s),
 				'/>',
@@ -151,7 +179,15 @@ export default grammar({
 		end_tag: $ =>
 			seq(
 				'</',
-				field('name', $.name),
+				field('name', alias($._end_tag_name, $.name)),
+				optional($._s),
+				'>',
+			),
+
+		erroneous_end_tag: $ =>
+			seq(
+				'</',
+				field('name', alias($._erroneous_end_tag_name, $.name)),
 				optional($._s),
 				'>',
 			),
@@ -333,27 +369,27 @@ export default grammar({
 		elliptical_arc_argument: $ =>
 			seq(
 				$.elliptical_arc_radii,
-				$.path_comma_wsp,
+				optional($.path_comma_wsp),
 				$.path_rotation,
-				$.path_comma_wsp,
+				optional($.path_comma_wsp),
 				$.path_arc_flag,
-				$.path_comma_wsp,
+				optional($.path_comma_wsp),
 				$.path_sweep_flag,
-				$.path_comma_wsp,
+				optional($.path_comma_wsp),
 				$.path_coordinate_pair,
 			),
 
 		elliptical_arc_radii: $ =>
 			seq(
 				$.path_coordinate,
-				$.path_comma_wsp,
+				optional($.path_comma_wsp),
 				$.path_coordinate,
 			),
 
 		path_coordinate_pair: $ =>
 			seq(
 				$.path_coordinate,
-				$.path_comma_wsp,
+				optional($.path_comma_wsp),
 				$.path_coordinate,
 			),
 
