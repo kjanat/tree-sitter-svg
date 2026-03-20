@@ -38,6 +38,7 @@
 		"*.wasm"
 	],
 	"scripts": {
+		"fmt": "dprint fmt .",
 		"install": "node-gyp-build",
 		"postinstall": "git config core.hooksPath .githooks",
 		"prestart": "tree-sitter build --wasm",
