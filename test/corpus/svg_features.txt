@@ -199,25 +199,26 @@ Typed references and paint servers
     (element
       (start_tag
         name: (name))
-      (text)
-      (element
+      (defs_content
+        (text))
+      (defs_content
         (self_closing_tag
           name: (name)
-          (attribute
-            (id_attribute
-              name: (id_attribute_name)
-              value: (id_attribute_value
-                (id_token))))))
-      (text)
-      (element
+          (id_attribute
+            name: (id_attribute_name)
+            value: (id_attribute_value
+              (id_token)))))
+      (defs_content
+        (text))
+      (defs_content
         (self_closing_tag
           name: (name)
-          (attribute
-            (id_attribute
-              name: (id_attribute_name)
-              value: (id_attribute_value
-                (id_token))))))
-      (text)
+          (id_attribute
+            name: (id_attribute_name)
+            value: (id_attribute_value
+              (id_token)))))
+      (defs_content
+        (text))
       (end_tag
         name: (name)))
     (text)
@@ -316,6 +317,134 @@ Shape content allows animation and descriptive only
                     (clock_value))))))))
       (shape_content
         (text))
+      (end_tag
+        (name)))
+    (text)
+    (svg_root_end_tag
+      (name)))
+  (text))
+
+==================
+Defs, gradients, filter primitives, text containers, linking type
+==================
+
+<svg>
+  <defs>
+    <linearGradient id="g1">
+      <stop offset="0%"/>
+      <stop offset="100%"/>
+    </linearGradient>
+    <filter id="f1">
+      <feTurbulence type="fractalNoise"/>
+    </filter>
+  </defs>
+  <text><tspan>Hello</tspan></text>
+  <a href="#g1" type="text/css">go</a>
+</svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (svg_root_start_tag
+      (name))
+    (text)
+    (element
+      (start_tag
+        (name))
+      (defs_content
+        (text))
+      (defs_content
+        (start_tag
+          (name)
+          (id_attribute
+            (id_attribute_name)
+            (id_attribute_value
+              (id_token))))
+        (gradient_content
+          (text))
+        (gradient_content
+          (self_closing_tag
+            (name)
+            (other_regular_attribute
+              (offset_attribute
+                (offset_attribute_name)
+                (offset_attribute_value
+                  (number_or_percentage
+                    (percentage
+                      (number))))))))
+        (gradient_content
+          (text))
+        (gradient_content
+          (self_closing_tag
+            (name)
+            (other_regular_attribute
+              (offset_attribute
+                (offset_attribute_name)
+                (offset_attribute_value
+                  (number_or_percentage
+                    (percentage
+                      (number))))))))
+        (gradient_content
+          (text))
+        (end_tag
+          (name)))
+      (defs_content
+        (text))
+      (defs_content
+        (start_tag
+          (name)
+          (id_attribute
+            (id_attribute_name)
+            (id_attribute_value
+              (id_token))))
+        (filter_content
+          (text))
+        (filter_content
+          (self_closing_tag
+            (name)
+            (filter_primitive_attribute
+              (filter_primitive_type_attribute
+                (filter_primitive_type_attribute_name)
+                (filter_primitive_type_attribute_value
+                  (filter_primitive_type_keyword))))))
+        (filter_content
+          (text))
+        (end_tag
+          (name)))
+      (defs_content
+        (text))
+      (end_tag
+        (name)))
+    (text)
+    (element
+      (start_tag
+        (name))
+      (text_container_content
+        (start_tag
+          (name))
+        (text_container_content
+          (text))
+        (end_tag
+          (name)))
+      (end_tag
+        (name)))
+    (text)
+    (element
+      (start_tag
+        (name)
+        (linking_media_element_attribute
+          (href_attribute
+            (href_attribute_name)
+            (href_attribute_value
+              (iri_reference))))
+        (linking_media_element_attribute
+          (linking_media_type_attribute
+            (linking_media_type_attribute_name)
+            (linking_media_type_attribute_value
+              (mime_type)))))
+      (text)
       (end_tag
         (name)))
     (text)

@@ -805,6 +805,65 @@
 		}
 	},
 	{
+		"type": "clip_path_content",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": true,
+			"required": true,
+			"types": [
+				{
+					"type": "cdata_section",
+					"named": true
+				},
+				{
+					"type": "comment",
+					"named": true
+				},
+				{
+					"type": "element",
+					"named": true
+				},
+				{
+					"type": "end_tag",
+					"named": true
+				},
+				{
+					"type": "entity_reference",
+					"named": true
+				},
+				{
+					"type": "erroneous_end_tag",
+					"named": true
+				},
+				{
+					"type": "path_content",
+					"named": true
+				},
+				{
+					"type": "processing_instruction",
+					"named": true
+				},
+				{
+					"type": "self_closing_tag",
+					"named": true
+				},
+				{
+					"type": "shape_content",
+					"named": true
+				},
+				{
+					"type": "start_tag",
+					"named": true
+				},
+				{
+					"type": "text",
+					"named": true
+				}
+			]
+		}
+	},
+	{
 		"type": "clock_or_keyword",
 		"named": true,
 		"fields": {},
@@ -1175,6 +1234,41 @@
 		}
 	},
 	{
+		"type": "defs_content",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": false,
+			"required": true,
+			"types": [
+				{
+					"type": "cdata_section",
+					"named": true
+				},
+				{
+					"type": "comment",
+					"named": true
+				},
+				{
+					"type": "element",
+					"named": true
+				},
+				{
+					"type": "entity_reference",
+					"named": true
+				},
+				{
+					"type": "processing_instruction",
+					"named": true
+				},
+				{
+					"type": "text",
+					"named": true
+				}
+			]
+		}
+	},
+	{
 		"type": "direction_attribute",
 		"named": true,
 		"fields": {
@@ -1449,7 +1543,15 @@
 					"named": true
 				},
 				{
+					"type": "clip_path_content",
+					"named": true
+				},
+				{
 					"type": "comment",
+					"named": true
+				},
+				{
+					"type": "defs_content",
 					"named": true
 				},
 				{
@@ -1466,6 +1568,14 @@
 				},
 				{
 					"type": "erroneous_end_tag",
+					"named": true
+				},
+				{
+					"type": "filter_content",
+					"named": true
+				},
+				{
+					"type": "gradient_content",
 					"named": true
 				},
 				{
@@ -1490,6 +1600,10 @@
 				},
 				{
 					"type": "text",
+					"named": true
+				},
+				{
+					"type": "text_container_content",
 					"named": true
 				}
 			]
@@ -1795,6 +1909,666 @@
 		"fields": {}
 	},
 	{
+		"type": "filter_color_matrix_attribute",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": false,
+			"required": true,
+			"types": [
+				{
+					"type": "animation_attribute",
+					"named": true
+				},
+				{
+					"type": "aria_attribute",
+					"named": true
+				},
+				{
+					"type": "class_attribute",
+					"named": true
+				},
+				{
+					"type": "color_rendering_attribute",
+					"named": true
+				},
+				{
+					"type": "color_rendering_misc_attribute",
+					"named": true
+				},
+				{
+					"type": "coord_system_attribute",
+					"named": true
+				},
+				{
+					"type": "display_attribute",
+					"named": true
+				},
+				{
+					"type": "event_attribute",
+					"named": true
+				},
+				{
+					"type": "fill_rule_attribute",
+					"named": true
+				},
+				{
+					"type": "filter_color_matrix_type_attribute",
+					"named": true
+				},
+				{
+					"type": "filter_effect_attribute",
+					"named": true
+				},
+				{
+					"type": "functional_iri_attribute",
+					"named": true
+				},
+				{
+					"type": "href_attribute",
+					"named": true
+				},
+				{
+					"type": "id_attribute",
+					"named": true
+				},
+				{
+					"type": "lang_attribute",
+					"named": true
+				},
+				{
+					"type": "length_attribute",
+					"named": true
+				},
+				{
+					"type": "linking_media_attribute",
+					"named": true
+				},
+				{
+					"type": "number_attribute",
+					"named": true
+				},
+				{
+					"type": "opacity_attribute",
+					"named": true
+				},
+				{
+					"type": "other_regular_attribute",
+					"named": true
+				},
+				{
+					"type": "overflow_attribute",
+					"named": true
+				},
+				{
+					"type": "paint_attribute",
+					"named": true
+				},
+				{
+					"type": "path_attribute",
+					"named": true
+				},
+				{
+					"type": "pointer_events_attribute",
+					"named": true
+				},
+				{
+					"type": "points_attribute",
+					"named": true
+				},
+				{
+					"type": "preserve_aspect_ratio_attribute",
+					"named": true
+				},
+				{
+					"type": "shape_rendering_attribute",
+					"named": true
+				},
+				{
+					"type": "stroke_dasharray_attribute",
+					"named": true
+				},
+				{
+					"type": "stroke_linecap_attribute",
+					"named": true
+				},
+				{
+					"type": "stroke_linejoin_attribute",
+					"named": true
+				},
+				{
+					"type": "style_attribute",
+					"named": true
+				},
+				{
+					"type": "text_layout_attribute",
+					"named": true
+				},
+				{
+					"type": "text_rendering_attribute",
+					"named": true
+				},
+				{
+					"type": "transform_attribute",
+					"named": true
+				},
+				{
+					"type": "vector_effect_attribute",
+					"named": true
+				},
+				{
+					"type": "viewbox_attribute",
+					"named": true
+				},
+				{
+					"type": "visibility_attribute",
+					"named": true
+				},
+				{
+					"type": "xml_space_attribute",
+					"named": true
+				}
+			]
+		}
+	},
+	{
+		"type": "filter_color_matrix_content",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": true,
+			"required": true,
+			"types": [
+				{
+					"type": "cdata_section",
+					"named": true
+				},
+				{
+					"type": "comment",
+					"named": true
+				},
+				{
+					"type": "element",
+					"named": true
+				},
+				{
+					"type": "end_tag",
+					"named": true
+				},
+				{
+					"type": "entity_reference",
+					"named": true
+				},
+				{
+					"type": "erroneous_end_tag",
+					"named": true
+				},
+				{
+					"type": "processing_instruction",
+					"named": true
+				},
+				{
+					"type": "self_closing_tag",
+					"named": true
+				},
+				{
+					"type": "start_tag",
+					"named": true
+				},
+				{
+					"type": "text",
+					"named": true
+				}
+			]
+		}
+	},
+	{
+		"type": "filter_color_matrix_type_attribute",
+		"named": true,
+		"fields": {
+			"name": {
+				"multiple": false,
+				"required": true,
+				"types": [
+					{
+						"type": "filter_color_matrix_type_attribute_name",
+						"named": true
+					}
+				]
+			},
+			"value": {
+				"multiple": false,
+				"required": true,
+				"types": [
+					{
+						"type": "filter_color_matrix_type_attribute_value",
+						"named": true
+					}
+				]
+			}
+		}
+	},
+	{
+		"type": "filter_color_matrix_type_attribute_name",
+		"named": true,
+		"fields": {}
+	},
+	{
+		"type": "filter_color_matrix_type_attribute_value",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": false,
+			"required": false,
+			"types": [
+				{
+					"type": "filter_color_matrix_type_keyword",
+					"named": true
+				}
+			]
+		}
+	},
+	{
+		"type": "filter_color_matrix_type_keyword",
+		"named": true,
+		"fields": {}
+	},
+	{
+		"type": "filter_component_transfer_content",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": true,
+			"required": true,
+			"types": [
+				{
+					"type": "cdata_section",
+					"named": true
+				},
+				{
+					"type": "comment",
+					"named": true
+				},
+				{
+					"type": "element",
+					"named": true
+				},
+				{
+					"type": "end_tag",
+					"named": true
+				},
+				{
+					"type": "entity_reference",
+					"named": true
+				},
+				{
+					"type": "erroneous_end_tag",
+					"named": true
+				},
+				{
+					"type": "filter_component_transfer_function_content",
+					"named": true
+				},
+				{
+					"type": "processing_instruction",
+					"named": true
+				},
+				{
+					"type": "self_closing_tag",
+					"named": true
+				},
+				{
+					"type": "start_tag",
+					"named": true
+				},
+				{
+					"type": "text",
+					"named": true
+				}
+			]
+		}
+	},
+	{
+		"type": "filter_component_transfer_function_attribute",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": false,
+			"required": true,
+			"types": [
+				{
+					"type": "animation_attribute",
+					"named": true
+				},
+				{
+					"type": "aria_attribute",
+					"named": true
+				},
+				{
+					"type": "class_attribute",
+					"named": true
+				},
+				{
+					"type": "color_rendering_attribute",
+					"named": true
+				},
+				{
+					"type": "color_rendering_misc_attribute",
+					"named": true
+				},
+				{
+					"type": "coord_system_attribute",
+					"named": true
+				},
+				{
+					"type": "display_attribute",
+					"named": true
+				},
+				{
+					"type": "event_attribute",
+					"named": true
+				},
+				{
+					"type": "fill_rule_attribute",
+					"named": true
+				},
+				{
+					"type": "filter_component_transfer_function_type_attribute",
+					"named": true
+				},
+				{
+					"type": "filter_effect_attribute",
+					"named": true
+				},
+				{
+					"type": "functional_iri_attribute",
+					"named": true
+				},
+				{
+					"type": "href_attribute",
+					"named": true
+				},
+				{
+					"type": "id_attribute",
+					"named": true
+				},
+				{
+					"type": "lang_attribute",
+					"named": true
+				},
+				{
+					"type": "length_attribute",
+					"named": true
+				},
+				{
+					"type": "linking_media_attribute",
+					"named": true
+				},
+				{
+					"type": "number_attribute",
+					"named": true
+				},
+				{
+					"type": "opacity_attribute",
+					"named": true
+				},
+				{
+					"type": "other_regular_attribute",
+					"named": true
+				},
+				{
+					"type": "overflow_attribute",
+					"named": true
+				},
+				{
+					"type": "paint_attribute",
+					"named": true
+				},
+				{
+					"type": "path_attribute",
+					"named": true
+				},
+				{
+					"type": "pointer_events_attribute",
+					"named": true
+				},
+				{
+					"type": "points_attribute",
+					"named": true
+				},
+				{
+					"type": "preserve_aspect_ratio_attribute",
+					"named": true
+				},
+				{
+					"type": "shape_rendering_attribute",
+					"named": true
+				},
+				{
+					"type": "stroke_dasharray_attribute",
+					"named": true
+				},
+				{
+					"type": "stroke_linecap_attribute",
+					"named": true
+				},
+				{
+					"type": "stroke_linejoin_attribute",
+					"named": true
+				},
+				{
+					"type": "style_attribute",
+					"named": true
+				},
+				{
+					"type": "text_layout_attribute",
+					"named": true
+				},
+				{
+					"type": "text_rendering_attribute",
+					"named": true
+				},
+				{
+					"type": "transform_attribute",
+					"named": true
+				},
+				{
+					"type": "vector_effect_attribute",
+					"named": true
+				},
+				{
+					"type": "viewbox_attribute",
+					"named": true
+				},
+				{
+					"type": "visibility_attribute",
+					"named": true
+				},
+				{
+					"type": "xml_space_attribute",
+					"named": true
+				}
+			]
+		}
+	},
+	{
+		"type": "filter_component_transfer_function_content",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": true,
+			"required": true,
+			"types": [
+				{
+					"type": "cdata_section",
+					"named": true
+				},
+				{
+					"type": "comment",
+					"named": true
+				},
+				{
+					"type": "element",
+					"named": true
+				},
+				{
+					"type": "end_tag",
+					"named": true
+				},
+				{
+					"type": "entity_reference",
+					"named": true
+				},
+				{
+					"type": "erroneous_end_tag",
+					"named": true
+				},
+				{
+					"type": "processing_instruction",
+					"named": true
+				},
+				{
+					"type": "self_closing_tag",
+					"named": true
+				},
+				{
+					"type": "start_tag",
+					"named": true
+				},
+				{
+					"type": "text",
+					"named": true
+				}
+			]
+		}
+	},
+	{
+		"type": "filter_component_transfer_function_type_attribute",
+		"named": true,
+		"fields": {
+			"name": {
+				"multiple": false,
+				"required": true,
+				"types": [
+					{
+						"type": "filter_component_transfer_function_type_attribute_name",
+						"named": true
+					}
+				]
+			},
+			"value": {
+				"multiple": false,
+				"required": true,
+				"types": [
+					{
+						"type": "filter_component_transfer_function_type_attribute_value",
+						"named": true
+					}
+				]
+			}
+		}
+	},
+	{
+		"type": "filter_component_transfer_function_type_attribute_name",
+		"named": true,
+		"fields": {}
+	},
+	{
+		"type": "filter_component_transfer_function_type_attribute_value",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": false,
+			"required": false,
+			"types": [
+				{
+					"type": "filter_component_transfer_function_type_keyword",
+					"named": true
+				}
+			]
+		}
+	},
+	{
+		"type": "filter_component_transfer_function_type_keyword",
+		"named": true,
+		"fields": {}
+	},
+	{
+		"type": "filter_content",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": true,
+			"required": false,
+			"types": [
+				{
+					"type": "cdata_section",
+					"named": true
+				},
+				{
+					"type": "comment",
+					"named": true
+				},
+				{
+					"type": "element",
+					"named": true
+				},
+				{
+					"type": "end_tag",
+					"named": true
+				},
+				{
+					"type": "entity_reference",
+					"named": true
+				},
+				{
+					"type": "erroneous_end_tag",
+					"named": true
+				},
+				{
+					"type": "filter_color_matrix_content",
+					"named": true
+				},
+				{
+					"type": "filter_component_transfer_content",
+					"named": true
+				},
+				{
+					"type": "filter_lighting_content",
+					"named": true
+				},
+				{
+					"type": "filter_merge_content",
+					"named": true
+				},
+				{
+					"type": "filter_primitive_core_content",
+					"named": true
+				},
+				{
+					"type": "filter_turbulence_content",
+					"named": true
+				},
+				{
+					"type": "processing_instruction",
+					"named": true
+				},
+				{
+					"type": "self_closing_tag",
+					"named": true
+				},
+				{
+					"type": "start_tag",
+					"named": true
+				},
+				{
+					"type": "text",
+					"named": true
+				}
+			]
+		}
+	},
+	{
 		"type": "filter_edge_mode_attribute",
 		"named": true,
 		"fields": {
@@ -1986,6 +2760,218 @@
 			"types": [
 				{
 					"type": "integer",
+					"named": true
+				}
+			]
+		}
+	},
+	{
+		"type": "filter_light_source_content",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": true,
+			"required": true,
+			"types": [
+				{
+					"type": "cdata_section",
+					"named": true
+				},
+				{
+					"type": "comment",
+					"named": true
+				},
+				{
+					"type": "element",
+					"named": true
+				},
+				{
+					"type": "end_tag",
+					"named": true
+				},
+				{
+					"type": "entity_reference",
+					"named": true
+				},
+				{
+					"type": "erroneous_end_tag",
+					"named": true
+				},
+				{
+					"type": "processing_instruction",
+					"named": true
+				},
+				{
+					"type": "self_closing_tag",
+					"named": true
+				},
+				{
+					"type": "start_tag",
+					"named": true
+				},
+				{
+					"type": "text",
+					"named": true
+				}
+			]
+		}
+	},
+	{
+		"type": "filter_lighting_content",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": true,
+			"required": true,
+			"types": [
+				{
+					"type": "cdata_section",
+					"named": true
+				},
+				{
+					"type": "comment",
+					"named": true
+				},
+				{
+					"type": "element",
+					"named": true
+				},
+				{
+					"type": "end_tag",
+					"named": true
+				},
+				{
+					"type": "entity_reference",
+					"named": true
+				},
+				{
+					"type": "erroneous_end_tag",
+					"named": true
+				},
+				{
+					"type": "filter_light_source_content",
+					"named": true
+				},
+				{
+					"type": "processing_instruction",
+					"named": true
+				},
+				{
+					"type": "self_closing_tag",
+					"named": true
+				},
+				{
+					"type": "start_tag",
+					"named": true
+				},
+				{
+					"type": "text",
+					"named": true
+				}
+			]
+		}
+	},
+	{
+		"type": "filter_merge_content",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": true,
+			"required": true,
+			"types": [
+				{
+					"type": "cdata_section",
+					"named": true
+				},
+				{
+					"type": "comment",
+					"named": true
+				},
+				{
+					"type": "element",
+					"named": true
+				},
+				{
+					"type": "end_tag",
+					"named": true
+				},
+				{
+					"type": "entity_reference",
+					"named": true
+				},
+				{
+					"type": "erroneous_end_tag",
+					"named": true
+				},
+				{
+					"type": "filter_merge_node_content",
+					"named": true
+				},
+				{
+					"type": "processing_instruction",
+					"named": true
+				},
+				{
+					"type": "self_closing_tag",
+					"named": true
+				},
+				{
+					"type": "start_tag",
+					"named": true
+				},
+				{
+					"type": "text",
+					"named": true
+				}
+			]
+		}
+	},
+	{
+		"type": "filter_merge_node_content",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": true,
+			"required": true,
+			"types": [
+				{
+					"type": "cdata_section",
+					"named": true
+				},
+				{
+					"type": "comment",
+					"named": true
+				},
+				{
+					"type": "element",
+					"named": true
+				},
+				{
+					"type": "end_tag",
+					"named": true
+				},
+				{
+					"type": "entity_reference",
+					"named": true
+				},
+				{
+					"type": "erroneous_end_tag",
+					"named": true
+				},
+				{
+					"type": "processing_instruction",
+					"named": true
+				},
+				{
+					"type": "self_closing_tag",
+					"named": true
+				},
+				{
+					"type": "start_tag",
+					"named": true
+				},
+				{
+					"type": "text",
 					"named": true
 				}
 			]
@@ -2241,6 +3227,216 @@
 		"fields": {}
 	},
 	{
+		"type": "filter_primitive_core_attribute",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": false,
+			"required": true,
+			"types": [
+				{
+					"type": "animation_attribute",
+					"named": true
+				},
+				{
+					"type": "aria_attribute",
+					"named": true
+				},
+				{
+					"type": "class_attribute",
+					"named": true
+				},
+				{
+					"type": "color_rendering_attribute",
+					"named": true
+				},
+				{
+					"type": "color_rendering_misc_attribute",
+					"named": true
+				},
+				{
+					"type": "coord_system_attribute",
+					"named": true
+				},
+				{
+					"type": "display_attribute",
+					"named": true
+				},
+				{
+					"type": "event_attribute",
+					"named": true
+				},
+				{
+					"type": "fill_rule_attribute",
+					"named": true
+				},
+				{
+					"type": "filter_effect_attribute",
+					"named": true
+				},
+				{
+					"type": "functional_iri_attribute",
+					"named": true
+				},
+				{
+					"type": "href_attribute",
+					"named": true
+				},
+				{
+					"type": "id_attribute",
+					"named": true
+				},
+				{
+					"type": "lang_attribute",
+					"named": true
+				},
+				{
+					"type": "length_attribute",
+					"named": true
+				},
+				{
+					"type": "linking_media_attribute",
+					"named": true
+				},
+				{
+					"type": "number_attribute",
+					"named": true
+				},
+				{
+					"type": "opacity_attribute",
+					"named": true
+				},
+				{
+					"type": "other_regular_attribute",
+					"named": true
+				},
+				{
+					"type": "overflow_attribute",
+					"named": true
+				},
+				{
+					"type": "paint_attribute",
+					"named": true
+				},
+				{
+					"type": "path_attribute",
+					"named": true
+				},
+				{
+					"type": "pointer_events_attribute",
+					"named": true
+				},
+				{
+					"type": "points_attribute",
+					"named": true
+				},
+				{
+					"type": "preserve_aspect_ratio_attribute",
+					"named": true
+				},
+				{
+					"type": "shape_rendering_attribute",
+					"named": true
+				},
+				{
+					"type": "stroke_dasharray_attribute",
+					"named": true
+				},
+				{
+					"type": "stroke_linecap_attribute",
+					"named": true
+				},
+				{
+					"type": "stroke_linejoin_attribute",
+					"named": true
+				},
+				{
+					"type": "style_attribute",
+					"named": true
+				},
+				{
+					"type": "text_layout_attribute",
+					"named": true
+				},
+				{
+					"type": "text_rendering_attribute",
+					"named": true
+				},
+				{
+					"type": "transform_attribute",
+					"named": true
+				},
+				{
+					"type": "vector_effect_attribute",
+					"named": true
+				},
+				{
+					"type": "viewbox_attribute",
+					"named": true
+				},
+				{
+					"type": "visibility_attribute",
+					"named": true
+				},
+				{
+					"type": "xml_space_attribute",
+					"named": true
+				}
+			]
+		}
+	},
+	{
+		"type": "filter_primitive_core_content",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": true,
+			"required": true,
+			"types": [
+				{
+					"type": "cdata_section",
+					"named": true
+				},
+				{
+					"type": "comment",
+					"named": true
+				},
+				{
+					"type": "element",
+					"named": true
+				},
+				{
+					"type": "end_tag",
+					"named": true
+				},
+				{
+					"type": "entity_reference",
+					"named": true
+				},
+				{
+					"type": "erroneous_end_tag",
+					"named": true
+				},
+				{
+					"type": "processing_instruction",
+					"named": true
+				},
+				{
+					"type": "self_closing_tag",
+					"named": true
+				},
+				{
+					"type": "start_tag",
+					"named": true
+				},
+				{
+					"type": "text",
+					"named": true
+				}
+			]
+		}
+	},
+	{
 		"type": "filter_result_attribute",
 		"named": true,
 		"fields": {
@@ -2309,6 +3505,271 @@
 	},
 	{
 		"type": "filter_stitch_tiles_attribute_value",
+		"named": true,
+		"fields": {}
+	},
+	{
+		"type": "filter_turbulence_attribute",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": false,
+			"required": true,
+			"types": [
+				{
+					"type": "animation_attribute",
+					"named": true
+				},
+				{
+					"type": "aria_attribute",
+					"named": true
+				},
+				{
+					"type": "class_attribute",
+					"named": true
+				},
+				{
+					"type": "color_rendering_attribute",
+					"named": true
+				},
+				{
+					"type": "color_rendering_misc_attribute",
+					"named": true
+				},
+				{
+					"type": "coord_system_attribute",
+					"named": true
+				},
+				{
+					"type": "display_attribute",
+					"named": true
+				},
+				{
+					"type": "event_attribute",
+					"named": true
+				},
+				{
+					"type": "fill_rule_attribute",
+					"named": true
+				},
+				{
+					"type": "filter_effect_attribute",
+					"named": true
+				},
+				{
+					"type": "filter_turbulence_type_attribute",
+					"named": true
+				},
+				{
+					"type": "functional_iri_attribute",
+					"named": true
+				},
+				{
+					"type": "href_attribute",
+					"named": true
+				},
+				{
+					"type": "id_attribute",
+					"named": true
+				},
+				{
+					"type": "lang_attribute",
+					"named": true
+				},
+				{
+					"type": "length_attribute",
+					"named": true
+				},
+				{
+					"type": "linking_media_attribute",
+					"named": true
+				},
+				{
+					"type": "number_attribute",
+					"named": true
+				},
+				{
+					"type": "opacity_attribute",
+					"named": true
+				},
+				{
+					"type": "other_regular_attribute",
+					"named": true
+				},
+				{
+					"type": "overflow_attribute",
+					"named": true
+				},
+				{
+					"type": "paint_attribute",
+					"named": true
+				},
+				{
+					"type": "path_attribute",
+					"named": true
+				},
+				{
+					"type": "pointer_events_attribute",
+					"named": true
+				},
+				{
+					"type": "points_attribute",
+					"named": true
+				},
+				{
+					"type": "preserve_aspect_ratio_attribute",
+					"named": true
+				},
+				{
+					"type": "shape_rendering_attribute",
+					"named": true
+				},
+				{
+					"type": "stroke_dasharray_attribute",
+					"named": true
+				},
+				{
+					"type": "stroke_linecap_attribute",
+					"named": true
+				},
+				{
+					"type": "stroke_linejoin_attribute",
+					"named": true
+				},
+				{
+					"type": "style_attribute",
+					"named": true
+				},
+				{
+					"type": "text_layout_attribute",
+					"named": true
+				},
+				{
+					"type": "text_rendering_attribute",
+					"named": true
+				},
+				{
+					"type": "transform_attribute",
+					"named": true
+				},
+				{
+					"type": "vector_effect_attribute",
+					"named": true
+				},
+				{
+					"type": "viewbox_attribute",
+					"named": true
+				},
+				{
+					"type": "visibility_attribute",
+					"named": true
+				},
+				{
+					"type": "xml_space_attribute",
+					"named": true
+				}
+			]
+		}
+	},
+	{
+		"type": "filter_turbulence_content",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": true,
+			"required": true,
+			"types": [
+				{
+					"type": "cdata_section",
+					"named": true
+				},
+				{
+					"type": "comment",
+					"named": true
+				},
+				{
+					"type": "element",
+					"named": true
+				},
+				{
+					"type": "end_tag",
+					"named": true
+				},
+				{
+					"type": "entity_reference",
+					"named": true
+				},
+				{
+					"type": "erroneous_end_tag",
+					"named": true
+				},
+				{
+					"type": "processing_instruction",
+					"named": true
+				},
+				{
+					"type": "self_closing_tag",
+					"named": true
+				},
+				{
+					"type": "start_tag",
+					"named": true
+				},
+				{
+					"type": "text",
+					"named": true
+				}
+			]
+		}
+	},
+	{
+		"type": "filter_turbulence_type_attribute",
+		"named": true,
+		"fields": {
+			"name": {
+				"multiple": false,
+				"required": true,
+				"types": [
+					{
+						"type": "filter_turbulence_type_attribute_name",
+						"named": true
+					}
+				]
+			},
+			"value": {
+				"multiple": false,
+				"required": true,
+				"types": [
+					{
+						"type": "filter_turbulence_type_attribute_value",
+						"named": true
+					}
+				]
+			}
+		}
+	},
+	{
+		"type": "filter_turbulence_type_attribute_name",
+		"named": true,
+		"fields": {}
+	},
+	{
+		"type": "filter_turbulence_type_attribute_value",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": false,
+			"required": false,
+			"types": [
+				{
+					"type": "filter_turbulence_type_keyword",
+					"named": true
+				}
+			]
+		}
+	},
+	{
+		"type": "filter_turbulence_type_keyword",
 		"named": true,
 		"fields": {}
 	},
@@ -2717,6 +4178,112 @@
 			"types": [
 				{
 					"type": "angle",
+					"named": true
+				}
+			]
+		}
+	},
+	{
+		"type": "gradient_content",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": true,
+			"required": true,
+			"types": [
+				{
+					"type": "cdata_section",
+					"named": true
+				},
+				{
+					"type": "comment",
+					"named": true
+				},
+				{
+					"type": "element",
+					"named": true
+				},
+				{
+					"type": "end_tag",
+					"named": true
+				},
+				{
+					"type": "entity_reference",
+					"named": true
+				},
+				{
+					"type": "erroneous_end_tag",
+					"named": true
+				},
+				{
+					"type": "gradient_stop_content",
+					"named": true
+				},
+				{
+					"type": "processing_instruction",
+					"named": true
+				},
+				{
+					"type": "self_closing_tag",
+					"named": true
+				},
+				{
+					"type": "start_tag",
+					"named": true
+				},
+				{
+					"type": "text",
+					"named": true
+				}
+			]
+		}
+	},
+	{
+		"type": "gradient_stop_content",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": true,
+			"required": true,
+			"types": [
+				{
+					"type": "cdata_section",
+					"named": true
+				},
+				{
+					"type": "comment",
+					"named": true
+				},
+				{
+					"type": "element",
+					"named": true
+				},
+				{
+					"type": "end_tag",
+					"named": true
+				},
+				{
+					"type": "entity_reference",
+					"named": true
+				},
+				{
+					"type": "erroneous_end_tag",
+					"named": true
+				},
+				{
+					"type": "processing_instruction",
+					"named": true
+				},
+				{
+					"type": "self_closing_tag",
+					"named": true
+				},
+				{
+					"type": "start_tag",
+					"named": true
+				},
+				{
+					"type": "text",
 					"named": true
 				}
 			]
@@ -3457,9 +5024,214 @@
 				{
 					"type": "target_attribute",
 					"named": true
+				}
+			]
+		}
+	},
+	{
+		"type": "linking_media_element_attribute",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": false,
+			"required": true,
+			"types": [
+				{
+					"type": "animation_attribute",
+					"named": true
 				},
 				{
-					"type": "type_attribute",
+					"type": "aria_attribute",
+					"named": true
+				},
+				{
+					"type": "class_attribute",
+					"named": true
+				},
+				{
+					"type": "color_rendering_attribute",
+					"named": true
+				},
+				{
+					"type": "color_rendering_misc_attribute",
+					"named": true
+				},
+				{
+					"type": "coord_system_attribute",
+					"named": true
+				},
+				{
+					"type": "display_attribute",
+					"named": true
+				},
+				{
+					"type": "event_attribute",
+					"named": true
+				},
+				{
+					"type": "fill_rule_attribute",
+					"named": true
+				},
+				{
+					"type": "filter_effect_attribute",
+					"named": true
+				},
+				{
+					"type": "functional_iri_attribute",
+					"named": true
+				},
+				{
+					"type": "href_attribute",
+					"named": true
+				},
+				{
+					"type": "id_attribute",
+					"named": true
+				},
+				{
+					"type": "lang_attribute",
+					"named": true
+				},
+				{
+					"type": "length_attribute",
+					"named": true
+				},
+				{
+					"type": "linking_media_attribute",
+					"named": true
+				},
+				{
+					"type": "linking_media_type_attribute",
+					"named": true
+				},
+				{
+					"type": "number_attribute",
+					"named": true
+				},
+				{
+					"type": "opacity_attribute",
+					"named": true
+				},
+				{
+					"type": "other_regular_attribute",
+					"named": true
+				},
+				{
+					"type": "overflow_attribute",
+					"named": true
+				},
+				{
+					"type": "paint_attribute",
+					"named": true
+				},
+				{
+					"type": "path_attribute",
+					"named": true
+				},
+				{
+					"type": "pointer_events_attribute",
+					"named": true
+				},
+				{
+					"type": "points_attribute",
+					"named": true
+				},
+				{
+					"type": "preserve_aspect_ratio_attribute",
+					"named": true
+				},
+				{
+					"type": "shape_rendering_attribute",
+					"named": true
+				},
+				{
+					"type": "stroke_dasharray_attribute",
+					"named": true
+				},
+				{
+					"type": "stroke_linecap_attribute",
+					"named": true
+				},
+				{
+					"type": "stroke_linejoin_attribute",
+					"named": true
+				},
+				{
+					"type": "style_attribute",
+					"named": true
+				},
+				{
+					"type": "text_layout_attribute",
+					"named": true
+				},
+				{
+					"type": "text_rendering_attribute",
+					"named": true
+				},
+				{
+					"type": "transform_attribute",
+					"named": true
+				},
+				{
+					"type": "vector_effect_attribute",
+					"named": true
+				},
+				{
+					"type": "viewbox_attribute",
+					"named": true
+				},
+				{
+					"type": "visibility_attribute",
+					"named": true
+				},
+				{
+					"type": "xml_space_attribute",
+					"named": true
+				}
+			]
+		}
+	},
+	{
+		"type": "linking_media_type_attribute",
+		"named": true,
+		"fields": {
+			"name": {
+				"multiple": false,
+				"required": true,
+				"types": [
+					{
+						"type": "linking_media_type_attribute_name",
+						"named": true
+					}
+				]
+			},
+			"value": {
+				"multiple": false,
+				"required": true,
+				"types": [
+					{
+						"type": "linking_media_type_attribute_value",
+						"named": true
+					}
+				]
+			}
+		}
+	},
+	{
+		"type": "linking_media_type_attribute_name",
+		"named": true,
+		"fields": {}
+	},
+	{
+		"type": "linking_media_type_attribute_value",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": false,
+			"required": false,
+			"types": [
+				{
+					"type": "mime_type",
 					"named": true
 				}
 			]
@@ -5511,6 +7283,26 @@
 					"named": true
 				},
 				{
+					"type": "filter_color_matrix_attribute",
+					"named": true
+				},
+				{
+					"type": "filter_component_transfer_function_attribute",
+					"named": true
+				},
+				{
+					"type": "filter_primitive_core_attribute",
+					"named": true
+				},
+				{
+					"type": "filter_turbulence_attribute",
+					"named": true
+				},
+				{
+					"type": "linking_media_element_attribute",
+					"named": true
+				},
+				{
 					"type": "script_attribute",
 					"named": true
 				},
@@ -5955,6 +7747,26 @@
 			"types": [
 				{
 					"type": "attribute",
+					"named": true
+				},
+				{
+					"type": "filter_color_matrix_attribute",
+					"named": true
+				},
+				{
+					"type": "filter_component_transfer_function_attribute",
+					"named": true
+				},
+				{
+					"type": "filter_primitive_core_attribute",
+					"named": true
+				},
+				{
+					"type": "filter_turbulence_attribute",
+					"named": true
+				},
+				{
+					"type": "linking_media_element_attribute",
 					"named": true
 				},
 				{
@@ -6493,6 +8305,61 @@
 		"fields": {}
 	},
 	{
+		"type": "text_container_content",
+		"named": true,
+		"fields": {},
+		"children": {
+			"multiple": true,
+			"required": true,
+			"types": [
+				{
+					"type": "cdata_section",
+					"named": true
+				},
+				{
+					"type": "comment",
+					"named": true
+				},
+				{
+					"type": "element",
+					"named": true
+				},
+				{
+					"type": "end_tag",
+					"named": true
+				},
+				{
+					"type": "entity_reference",
+					"named": true
+				},
+				{
+					"type": "erroneous_end_tag",
+					"named": true
+				},
+				{
+					"type": "processing_instruction",
+					"named": true
+				},
+				{
+					"type": "self_closing_tag",
+					"named": true
+				},
+				{
+					"type": "start_tag",
+					"named": true
+				},
+				{
+					"type": "text",
+					"named": true
+				},
+				{
+					"type": "text_container_content",
+					"named": true
+				}
+			]
+		}
+	},
+	{
 		"type": "text_decoration_attribute",
 		"named": true,
 		"fields": {
@@ -7013,61 +8880,6 @@
 				}
 			]
 		}
-	},
-	{
-		"type": "type_attribute",
-		"named": true,
-		"fields": {
-			"name": {
-				"multiple": false,
-				"required": true,
-				"types": [
-					{
-						"type": "type_attribute_name",
-						"named": true
-					}
-				]
-			},
-			"value": {
-				"multiple": false,
-				"required": true,
-				"types": [
-					{
-						"type": "type_attribute_value",
-						"named": true
-					}
-				]
-			}
-		}
-	},
-	{
-		"type": "type_attribute_name",
-		"named": true,
-		"fields": {}
-	},
-	{
-		"type": "type_attribute_value",
-		"named": true,
-		"fields": {},
-		"children": {
-			"multiple": false,
-			"required": false,
-			"types": [
-				{
-					"type": "mime_type",
-					"named": true
-				},
-				{
-					"type": "type_keyword",
-					"named": true
-				}
-			]
-		}
-	},
-	{
-		"type": "type_keyword",
-		"named": true,
-		"fields": {}
 	},
 	{
 		"type": "unicode_bidi_attribute",

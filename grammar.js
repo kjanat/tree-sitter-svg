@@ -25,6 +25,14 @@ export default grammar({
 		$._svg_start_tag_name,
 		$._path_start_tag_name,
 		$._shape_start_tag_name,
+		$._clip_path_start_tag_name,
+		$._defs_start_tag_name,
+		$._gradient_start_tag_name,
+		$._gradient_stop_start_tag_name,
+		$._filter_start_tag_name,
+		$._filter_primitive_start_tag_name,
+		$._text_container_start_tag_name,
+		$._linking_media_start_tag_name,
 		$._script_start_tag_name,
 		$._style_start_tag_name,
 		$._animation_start_tag_name,
@@ -33,6 +41,14 @@ export default grammar({
 		$._svg_end_tag_name,
 		$._path_end_tag_name,
 		$._shape_end_tag_name,
+		$._clip_path_end_tag_name,
+		$._defs_end_tag_name,
+		$._gradient_end_tag_name,
+		$._gradient_stop_end_tag_name,
+		$._filter_end_tag_name,
+		$._filter_primitive_end_tag_name,
+		$._text_container_end_tag_name,
+		$._linking_media_end_tag_name,
 		$._script_end_tag_name,
 		$._style_end_tag_name,
 		$._animation_end_tag_name,
@@ -76,6 +92,12 @@ export default grammar({
 			choice(
 				$._path_element,
 				$._shape_element,
+				$._clip_path_element,
+				$._defs_element,
+				$._gradient_element,
+				$._filter_element,
+				$._text_container_element,
+				$._linking_media_element,
 				$._script_element,
 				$._style_element,
 				$.self_closing_tag,
@@ -129,6 +151,151 @@ export default grammar({
 				$._animation_element,
 				$._descriptive_element,
 				$._text_like_content,
+			),
+
+		_clip_path_element: $ =>
+			choice(
+				alias($.clip_path_self_closing_tag, $.self_closing_tag),
+				seq(
+					alias($.clip_path_start_tag, $.start_tag),
+					repeat($.clip_path_content),
+					choice(alias($.clip_path_end_tag, $.end_tag), $.erroneous_end_tag),
+				),
+			),
+
+		clip_path_content: $ =>
+			choice(
+				$._path_element,
+				$._shape_element,
+				$._animation_element,
+				$._descriptive_element,
+				$._text_like_content,
+			),
+
+		_defs_element: $ =>
+			choice(
+				alias($.defs_self_closing_tag, $.self_closing_tag),
+				seq(
+					alias($.defs_start_tag, $.start_tag),
+					repeat($.defs_content),
+					choice(alias($.defs_end_tag, $.end_tag), $.erroneous_end_tag),
+				),
+			),
+
+		defs_content: $ =>
+			choice(
+				$._path_element,
+				$._shape_element,
+				$._clip_path_element,
+				$._defs_element,
+				$._gradient_element,
+				$._filter_element,
+				$._text_container_element,
+				$._linking_media_element,
+				$._script_element,
+				$._style_element,
+				$._animation_element,
+				$._descriptive_element,
+				$._text_like_content,
+			),
+
+		_gradient_element: $ =>
+			choice(
+				alias($.gradient_self_closing_tag, $.self_closing_tag),
+				seq(
+					alias($.gradient_start_tag, $.start_tag),
+					repeat($.gradient_content),
+					choice(alias($.gradient_end_tag, $.end_tag), $.erroneous_end_tag),
+				),
+			),
+
+		gradient_content: $ =>
+			choice(
+				$._gradient_stop_element,
+				$._animation_element,
+				$._descriptive_element,
+				$._text_like_content,
+			),
+
+		_gradient_stop_element: $ =>
+			choice(
+				alias($.gradient_stop_self_closing_tag, $.self_closing_tag),
+				seq(
+					alias($.gradient_stop_start_tag, $.start_tag),
+					repeat($.gradient_stop_content),
+					choice(alias($.gradient_stop_end_tag, $.end_tag), $.erroneous_end_tag),
+				),
+			),
+
+		gradient_stop_content: $ =>
+			choice(
+				$._animation_element,
+				$._descriptive_element,
+				$._text_like_content,
+			),
+
+		_filter_element: $ =>
+			choice(
+				alias($.filter_self_closing_tag, $.self_closing_tag),
+				seq(
+					alias($.filter_start_tag, $.start_tag),
+					repeat($.filter_content),
+					choice(alias($.filter_end_tag, $.end_tag), $.erroneous_end_tag),
+				),
+			),
+
+		filter_content: $ =>
+			choice(
+				$._filter_primitive_element,
+				$._animation_element,
+				$._descriptive_element,
+				$._text_like_content,
+			),
+
+		_filter_primitive_element: $ =>
+			choice(
+				alias($.filter_primitive_self_closing_tag, $.self_closing_tag),
+				seq(
+					alias($.filter_primitive_start_tag, $.start_tag),
+					repeat($.filter_primitive_content),
+					choice(alias($.filter_primitive_end_tag, $.end_tag), $.erroneous_end_tag),
+				),
+			),
+
+		filter_primitive_content: $ =>
+			choice(
+				$._filter_primitive_element,
+				$._animation_element,
+				$._descriptive_element,
+				$._text_like_content,
+			),
+
+		_text_container_element: $ =>
+			choice(
+				alias($.text_container_self_closing_tag, $.self_closing_tag),
+				seq(
+					alias($.text_container_start_tag, $.start_tag),
+					repeat($.text_container_content),
+					choice(alias($.text_container_end_tag, $.end_tag), $.erroneous_end_tag),
+				),
+			),
+
+		text_container_content: $ =>
+			choice(
+				$._text_container_element,
+				$._animation_element,
+				$._descriptive_element,
+				$._text_like_content,
+			),
+
+		_linking_media_element: $ =>
+			choice(
+				alias($.linking_media_self_closing_tag, $.self_closing_tag),
+				seq(
+					alias($.linking_media_start_tag, $.start_tag),
+					repeat($._content),
+					choice(alias($.linking_media_end_tag, $.end_tag), $.erroneous_end_tag),
+				),
 			),
 
 		_script_element: $ =>
@@ -310,6 +477,78 @@ export default grammar({
 				'>',
 			),
 
+		clip_path_start_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._clip_path_start_tag_name, $.name)),
+				repeat(seq($._s, $._typed_attribute)),
+				optional($._s),
+				'>',
+			),
+
+		defs_start_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._defs_start_tag_name, $.name)),
+				repeat(seq($._s, $._typed_attribute)),
+				optional($._s),
+				'>',
+			),
+
+		gradient_start_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._gradient_start_tag_name, $.name)),
+				repeat(seq($._s, $._typed_attribute)),
+				optional($._s),
+				'>',
+			),
+
+		gradient_stop_start_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._gradient_stop_start_tag_name, $.name)),
+				repeat(seq($._s, $._typed_attribute)),
+				optional($._s),
+				'>',
+			),
+
+		filter_start_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._filter_start_tag_name, $.name)),
+				repeat(seq($._s, $._typed_attribute)),
+				optional($._s),
+				'>',
+			),
+
+		filter_primitive_start_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._filter_primitive_start_tag_name, $.name)),
+				repeat(seq($._s, $.filter_primitive_attribute)),
+				optional($._s),
+				'>',
+			),
+
+		text_container_start_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._text_container_start_tag_name, $.name)),
+				repeat(seq($._s, $._typed_attribute)),
+				optional($._s),
+				'>',
+			),
+
+		linking_media_start_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._linking_media_start_tag_name, $.name)),
+				repeat(seq($._s, $.linking_media_element_attribute)),
+				optional($._s),
+				'>',
+			),
+
 		script_start_tag: $ =>
 			seq(
 				'<',
@@ -378,6 +617,78 @@ export default grammar({
 				'<',
 				field('name', alias($._shape_start_tag_name, $.name)),
 				repeat(seq($._s, $.attribute)),
+				optional($._s),
+				'/>',
+			),
+
+		clip_path_self_closing_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._clip_path_start_tag_name, $.name)),
+				repeat(seq($._s, $._typed_attribute)),
+				optional($._s),
+				'/>',
+			),
+
+		defs_self_closing_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._defs_start_tag_name, $.name)),
+				repeat(seq($._s, $._typed_attribute)),
+				optional($._s),
+				'/>',
+			),
+
+		gradient_self_closing_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._gradient_start_tag_name, $.name)),
+				repeat(seq($._s, $._typed_attribute)),
+				optional($._s),
+				'/>',
+			),
+
+		gradient_stop_self_closing_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._gradient_stop_start_tag_name, $.name)),
+				repeat(seq($._s, $._typed_attribute)),
+				optional($._s),
+				'/>',
+			),
+
+		filter_self_closing_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._filter_start_tag_name, $.name)),
+				repeat(seq($._s, $._typed_attribute)),
+				optional($._s),
+				'/>',
+			),
+
+		filter_primitive_self_closing_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._filter_primitive_start_tag_name, $.name)),
+				repeat(seq($._s, $.filter_primitive_attribute)),
+				optional($._s),
+				'/>',
+			),
+
+		text_container_self_closing_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._text_container_start_tag_name, $.name)),
+				repeat(seq($._s, $._typed_attribute)),
+				optional($._s),
+				'/>',
+			),
+
+		linking_media_self_closing_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._linking_media_start_tag_name, $.name)),
+				repeat(seq($._s, $.linking_media_element_attribute)),
 				optional($._s),
 				'/>',
 			),
@@ -451,6 +762,70 @@ export default grammar({
 				'>',
 			),
 
+		clip_path_end_tag: $ =>
+			seq(
+				'</',
+				field('name', alias($._clip_path_end_tag_name, $.name)),
+				optional($._s),
+				'>',
+			),
+
+		defs_end_tag: $ =>
+			seq(
+				'</',
+				field('name', alias($._defs_end_tag_name, $.name)),
+				optional($._s),
+				'>',
+			),
+
+		gradient_end_tag: $ =>
+			seq(
+				'</',
+				field('name', alias($._gradient_end_tag_name, $.name)),
+				optional($._s),
+				'>',
+			),
+
+		gradient_stop_end_tag: $ =>
+			seq(
+				'</',
+				field('name', alias($._gradient_stop_end_tag_name, $.name)),
+				optional($._s),
+				'>',
+			),
+
+		filter_end_tag: $ =>
+			seq(
+				'</',
+				field('name', alias($._filter_end_tag_name, $.name)),
+				optional($._s),
+				'>',
+			),
+
+		filter_primitive_end_tag: $ =>
+			seq(
+				'</',
+				field('name', alias($._filter_primitive_end_tag_name, $.name)),
+				optional($._s),
+				'>',
+			),
+
+		text_container_end_tag: $ =>
+			seq(
+				'</',
+				field('name', alias($._text_container_end_tag_name, $.name)),
+				optional($._s),
+				'>',
+			),
+
+		linking_media_end_tag: $ =>
+			seq(
+				'</',
+				field('name', alias($._linking_media_end_tag_name, $.name)),
+				optional($._s),
+				'>',
+			),
+
 		script_end_tag: $ =>
 			seq(
 				'</',
@@ -501,6 +876,12 @@ export default grammar({
 
 		attribute: $ =>
 			choice(
+				$._typed_attribute,
+				$.generic_attribute,
+			),
+
+		_typed_attribute: $ =>
+			choice(
 				$.path_attribute,
 				$.style_attribute,
 				$.aria_attribute,
@@ -538,7 +919,18 @@ export default grammar({
 				$.href_attribute,
 				$.functional_iri_attribute,
 				$.event_attribute,
-				$.generic_attribute,
+			),
+
+		filter_primitive_attribute: $ =>
+			choice(
+				$.filter_primitive_type_attribute,
+				$._typed_attribute,
+			),
+
+		linking_media_element_attribute: $ =>
+			choice(
+				$.linking_media_type_attribute,
+				$._typed_attribute,
 			),
 
 		script_attribute: $ =>
@@ -598,6 +990,43 @@ export default grammar({
 		style_element_type_attribute_value: $ => quoted($.style_mime_type),
 
 		style_mime_type: _ => 'text/css',
+
+		filter_primitive_type_attribute: $ =>
+			seq(
+				field('name', $.filter_primitive_type_attribute_name),
+				$._eq,
+				field('value', $.filter_primitive_type_attribute_value),
+			),
+
+		filter_primitive_type_attribute_name: _ => 'type',
+
+		filter_primitive_type_attribute_value: $ => quoted($.filter_primitive_type_keyword),
+
+		filter_primitive_type_keyword: _ =>
+			choice(
+				'matrix',
+				'saturate',
+				'hueRotate',
+				'luminanceToAlpha',
+				'fractalNoise',
+				'turbulence',
+				'identity',
+				'table',
+				'discrete',
+				'linear',
+				'gamma',
+			),
+
+		linking_media_type_attribute: $ =>
+			seq(
+				field('name', $.linking_media_type_attribute_name),
+				$._eq,
+				field('value', $.linking_media_type_attribute_value),
+			),
+
+		linking_media_type_attribute_name: _ => 'type',
+
+		linking_media_type_attribute_value: $ => quoted($.mime_type),
 
 		_eq: $ => seq(optional($._s), '=', optional($._s)),
 
@@ -2512,7 +2941,6 @@ export default grammar({
 				$.referrerpolicy_attribute,
 				$.rel_attribute,
 				$.target_attribute,
-				$.type_attribute,
 			),
 
 		crossorigin_attribute: $ =>
@@ -2614,37 +3042,6 @@ export default grammar({
 		target_attribute_name: _ => 'target',
 
 		target_attribute_value: $ => quoted(choice('_self', '_parent', '_top', '_blank', $.id_token)),
-
-		type_attribute: $ =>
-			seq(
-				field('name', $.type_attribute_name),
-				$._eq,
-				field('value', $.type_attribute_value),
-			),
-
-		type_attribute_name: _ => 'type',
-
-		type_attribute_value: $ => quoted(choice($.mime_type, $.type_keyword)),
-
-		type_keyword: _ =>
-			choice(
-				'matrix',
-				'saturate',
-				'hueRotate',
-				'luminanceToAlpha',
-				'translate',
-				'scale',
-				'rotate',
-				'skewX',
-				'skewY',
-				'fractalNoise',
-				'turbulence',
-				'identity',
-				'table',
-				'discrete',
-				'linear',
-				'gamma',
-			),
 
 		color_rendering_misc_attribute: $ =>
 			choice(

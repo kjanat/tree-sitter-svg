@@ -13,6 +13,8 @@
 - Using hidden pre/post-root rules keeps document-structure helpers out of the visible CST
 - For context-specific attributes (e.g. `type` on `<script>`/`<style>`), avoid including `generic_attribute` in the same element-specific attribute list or strict typing is bypassed
 - To enforce content models for selected elements, add name-specialized externals + hidden element subrules (e.g. `_path_element`) instead of broad generic children
+- Category overlap in scanner name predicates is precedence-sensitive (e.g. if an element name belongs to two families, first matching branch wins)
+- Tight `defs` content models surface omitted common definition elements quickly (e.g. `clipPath`); either add explicit families or expect recovery nodes
 
 ## Testing
 
