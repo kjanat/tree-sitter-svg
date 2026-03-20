@@ -253,3 +253,72 @@ Typed references and paint servers
     (svg_root_end_tag
       name: (name)))
   (text))
+
+==================
+Shape content allows animation and descriptive only
+==================
+
+<svg>
+  <rect>
+    <title>r</title>
+    <animate attributeName="x" from="0" to="10" dur="1s"/>
+  </rect>
+</svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (svg_root_start_tag
+      (name))
+    (text)
+    (element
+      (start_tag
+        (name))
+      (shape_content
+        (text))
+      (shape_content
+        (start_tag
+          (name))
+        (text)
+        (end_tag
+          (name)))
+      (shape_content
+        (text))
+      (shape_content
+        (self_closing_tag
+          (name)
+          (attribute
+            (animation_attribute
+              (attribute_name_attribute
+                (attribute_name_attribute_name)
+                (attribute_name_attribute_value
+                  (name)))))
+          (attribute
+            (animation_attribute
+              (from_attribute
+                (from_attribute_name)
+                (from_attribute_value
+                  (animation_value_expression)))))
+          (attribute
+            (animation_attribute
+              (to_attribute
+                (to_attribute_name)
+                (to_attribute_value
+                  (animation_value_expression)))))
+          (attribute
+            (animation_attribute
+              (dur_attribute
+                (dur_attribute_name)
+                (dur_attribute_value
+                  (clock_or_keyword
+                    (clock_value))))))))
+      (shape_content
+        (text))
+      (end_tag
+        (name)))
+    (text)
+    (svg_root_end_tag
+      (name)))
+  (text))

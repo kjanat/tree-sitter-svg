@@ -11,6 +11,8 @@
 - Generic XML attributes should require quoted values; allowing valueless/unquoted attrs accepts non-XML SVG
 - Tag-name matching needs an external scanner stack; CFG-only grammar cannot enforce `<a>...</a>` equality
 - Using hidden pre/post-root rules keeps document-structure helpers out of the visible CST
+- For context-specific attributes (e.g. `type` on `<script>`/`<style>`), avoid including `generic_attribute` in the same element-specific attribute list or strict typing is bypassed
+- To enforce content models for selected elements, add name-specialized externals + hidden element subrules (e.g. `_path_element`) instead of broad generic children
 
 ## Testing
 
@@ -35,3 +37,5 @@
 - Overlapping whitespace tokens (e.g. `misc_text` vs path whitespace) can cause wrong token choice; assign precedence for context-specific whitespace tokens
 - `tree-sitter test -u` will not update sections that still parse with `ERROR`/`MISSING`; fix grammar/input first, then rerun update
 - If one rule is a strict superset of another (e.g. `length` includes bare numbers), avoid including both in the same `choice` without precedence; this creates unresolved LR conflicts
+- Aliasing a named subrule to `$.element` inside the `element` rule can create nested `(element (element ...))`; use hidden subrules (`_foo_element`) to keep CST stable
+- With many specialized externals, choose token symbol *after* scanning the full name against all valid symbols; pairwise ambiguity guards do not scale

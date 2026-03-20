@@ -10,8 +10,20 @@
 enum TokenType {
   START_TAG_NAME,
   SVG_START_TAG_NAME,
+  PATH_START_TAG_NAME,
+  SHAPE_START_TAG_NAME,
+  SCRIPT_START_TAG_NAME,
+  STYLE_START_TAG_NAME,
+  ANIMATION_START_TAG_NAME,
+  DESCRIPTIVE_START_TAG_NAME,
   END_TAG_NAME,
   SVG_END_TAG_NAME,
+  PATH_END_TAG_NAME,
+  SHAPE_END_TAG_NAME,
+  SCRIPT_END_TAG_NAME,
+  STYLE_END_TAG_NAME,
+  ANIMATION_END_TAG_NAME,
+  DESCRIPTIVE_END_TAG_NAME,
   ERRONEOUS_END_TAG_NAME,
   SELF_CLOSING_TAG_DELIMITER,
 };
@@ -31,25 +43,67 @@ static inline bool is_name_char(int32_t c) {
   return is_name_start_char(c) || c == '-' || c == '.' || isdigit((unsigned char)c);
 }
 
-static inline bool is_svg_name(const String *name) {
-  if (name->size < 3) {
-    return false;
-  }
-
-  uint32_t local_start = 0;
+static inline uint32_t local_name_start(const String *name) {
+  uint32_t start = 0;
   for (uint32_t i = 0; i < name->size; i++) {
     if (name->contents[i] == ':') {
-      local_start = i + 1;
+      start = i + 1;
     }
   }
 
-  if (name->size - local_start != 3) {
+  return start;
+}
+
+static inline bool local_name_eq(const String *name, const char *value) {
+  uint32_t start = local_name_start(name);
+  uint32_t local_size = name->size - start;
+  size_t expected_size = strlen(value);
+
+  if (local_size != expected_size) {
     return false;
   }
 
-  return name->contents[local_start] == 's' &&
-         name->contents[local_start + 1] == 'v' &&
-         name->contents[local_start + 2] == 'g';
+  return memcmp(name->contents + start, value, expected_size) == 0;
+}
+
+static inline bool is_svg_name(const String *name) {
+  return local_name_eq(name, "svg");
+}
+
+static inline bool is_path_name(const String *name) {
+  return local_name_eq(name, "path");
+}
+
+static inline bool is_script_name(const String *name) {
+  return local_name_eq(name, "script");
+}
+
+static inline bool is_shape_name(const String *name) {
+  return local_name_eq(name, "rect") ||
+         local_name_eq(name, "circle") ||
+         local_name_eq(name, "ellipse") ||
+         local_name_eq(name, "line") ||
+         local_name_eq(name, "polyline") ||
+         local_name_eq(name, "polygon") ||
+         local_name_eq(name, "image");
+}
+
+static inline bool is_style_name(const String *name) {
+  return local_name_eq(name, "style");
+}
+
+static inline bool is_animation_name(const String *name) {
+  return local_name_eq(name, "animate") ||
+         local_name_eq(name, "animateMotion") ||
+         local_name_eq(name, "animateTransform") ||
+         local_name_eq(name, "set") ||
+         local_name_eq(name, "discard");
+}
+
+static inline bool is_descriptive_name(const String *name) {
+  return local_name_eq(name, "desc") ||
+         local_name_eq(name, "title") ||
+         local_name_eq(name, "metadata");
 }
 
 static inline bool string_eq(const String *a, const String *b) {
@@ -86,38 +140,80 @@ static String scan_tag_name(TSLexer *lexer) {
   return name;
 }
 
-static bool scan_start_tag_name(TagStack *tags, TSLexer *lexer, bool require_svg_root) {
+static bool scan_start_tag_name(TagStack *tags, TSLexer *lexer, const bool *valid_symbols) {
   String name = scan_tag_name(lexer);
   if (name.size == 0) {
     string_destroy(&name);
     return false;
   }
 
-  if (require_svg_root && !is_svg_name(&name)) {
+  int32_t symbol = -1;
+
+  if (is_svg_name(&name) && valid_symbols[SVG_START_TAG_NAME]) {
+    symbol = SVG_START_TAG_NAME;
+  } else if (is_path_name(&name) && valid_symbols[PATH_START_TAG_NAME]) {
+    symbol = PATH_START_TAG_NAME;
+  } else if (is_shape_name(&name) && valid_symbols[SHAPE_START_TAG_NAME]) {
+    symbol = SHAPE_START_TAG_NAME;
+  } else if (is_script_name(&name) && valid_symbols[SCRIPT_START_TAG_NAME]) {
+    symbol = SCRIPT_START_TAG_NAME;
+  } else if (is_style_name(&name) && valid_symbols[STYLE_START_TAG_NAME]) {
+    symbol = STYLE_START_TAG_NAME;
+  } else if (is_animation_name(&name) && valid_symbols[ANIMATION_START_TAG_NAME]) {
+    symbol = ANIMATION_START_TAG_NAME;
+  } else if (is_descriptive_name(&name) && valid_symbols[DESCRIPTIVE_START_TAG_NAME]) {
+    symbol = DESCRIPTIVE_START_TAG_NAME;
+  } else if (valid_symbols[START_TAG_NAME]) {
+    symbol = START_TAG_NAME;
+  }
+
+  if (symbol < 0) {
     string_destroy(&name);
     return false;
   }
 
   array_push(tags, name);
-  lexer->result_symbol = require_svg_root ? SVG_START_TAG_NAME : START_TAG_NAME;
+  lexer->result_symbol = symbol;
   return true;
 }
 
-static bool scan_end_tag_name(TagStack *tags, TSLexer *lexer, const bool *valid_symbols, bool require_svg_root) {
+static bool scan_end_tag_name(TagStack *tags, TSLexer *lexer, const bool *valid_symbols) {
   String name = scan_tag_name(lexer);
   if (name.size == 0) {
     string_destroy(&name);
     return false;
   }
 
-  bool name_matches_svg = !require_svg_root || is_svg_name(&name);
+  bool top_matches = tags->size > 0 && string_eq(array_back(tags), &name);
 
-  if (name_matches_svg && tags->size > 0 && string_eq(array_back(tags), &name)) {
-    String last = array_pop(tags);
-    string_destroy(&last);
-    string_destroy(&name);
-    lexer->result_symbol = require_svg_root ? SVG_END_TAG_NAME : END_TAG_NAME;
-    return true;
+  if (top_matches) {
+    int32_t symbol = -1;
+
+    if (is_svg_name(&name) && valid_symbols[SVG_END_TAG_NAME]) {
+      symbol = SVG_END_TAG_NAME;
+    } else if (is_path_name(&name) && valid_symbols[PATH_END_TAG_NAME]) {
+      symbol = PATH_END_TAG_NAME;
+    } else if (is_shape_name(&name) && valid_symbols[SHAPE_END_TAG_NAME]) {
+      symbol = SHAPE_END_TAG_NAME;
+    } else if (is_script_name(&name) && valid_symbols[SCRIPT_END_TAG_NAME]) {
+      symbol = SCRIPT_END_TAG_NAME;
+    } else if (is_style_name(&name) && valid_symbols[STYLE_END_TAG_NAME]) {
+      symbol = STYLE_END_TAG_NAME;
+    } else if (is_animation_name(&name) && valid_symbols[ANIMATION_END_TAG_NAME]) {
+      symbol = ANIMATION_END_TAG_NAME;
+    } else if (is_descriptive_name(&name) && valid_symbols[DESCRIPTIVE_END_TAG_NAME]) {
+      symbol = DESCRIPTIVE_END_TAG_NAME;
+    } else if (valid_symbols[END_TAG_NAME]) {
+      symbol = END_TAG_NAME;
+    }
+
+    if (symbol >= 0) {
+      String last = array_pop(tags);
+      string_destroy(&last);
+      string_destroy(&name);
+      lexer->result_symbol = symbol;
+      return true;
+    }
   }
 
   string_destroy(&name);
@@ -251,47 +347,37 @@ void tree_sitter_svg_external_scanner_deserialize(void *payload, const char *buf
 bool tree_sitter_svg_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
   TagStack *tags = (TagStack *)payload;
 
-  bool start_valid = valid_symbols[START_TAG_NAME];
-  bool svg_start_valid = valid_symbols[SVG_START_TAG_NAME];
-  bool end_valid = valid_symbols[END_TAG_NAME];
-  bool svg_end_valid = valid_symbols[SVG_END_TAG_NAME];
-  bool erroneous_end_valid = valid_symbols[ERRONEOUS_END_TAG_NAME];
-  bool self_closing_valid = valid_symbols[SELF_CLOSING_TAG_DELIMITER];
-
-  if ((start_valid && svg_start_valid) ||
-      (end_valid && svg_end_valid) ||
-      (start_valid && end_valid) ||
-      (start_valid && svg_end_valid) ||
-      (start_valid && erroneous_end_valid) ||
-      (svg_start_valid && end_valid) ||
-      (svg_start_valid && svg_end_valid) ||
-      (svg_start_valid && erroneous_end_valid) ||
-      (start_valid && self_closing_valid) ||
-      (svg_start_valid && self_closing_valid) ||
-      (self_closing_valid && end_valid) ||
-      (self_closing_valid && svg_end_valid) ||
-      (self_closing_valid && erroneous_end_valid)) {
-    return false;
-  }
-
   if (valid_symbols[SELF_CLOSING_TAG_DELIMITER] && lexer->lookahead == '/') {
     return scan_self_closing_tag_delimiter(tags, lexer);
   }
 
-  if (valid_symbols[SVG_START_TAG_NAME]) {
-    return scan_start_tag_name(tags, lexer, true);
+  bool any_start_valid =
+      valid_symbols[START_TAG_NAME] ||
+      valid_symbols[SVG_START_TAG_NAME] ||
+      valid_symbols[PATH_START_TAG_NAME] ||
+      valid_symbols[SHAPE_START_TAG_NAME] ||
+      valid_symbols[SCRIPT_START_TAG_NAME] ||
+      valid_symbols[STYLE_START_TAG_NAME] ||
+      valid_symbols[ANIMATION_START_TAG_NAME] ||
+      valid_symbols[DESCRIPTIVE_START_TAG_NAME];
+
+  if (any_start_valid && scan_start_tag_name(tags, lexer, valid_symbols)) {
+    return true;
   }
 
-  if (valid_symbols[START_TAG_NAME]) {
-    return scan_start_tag_name(tags, lexer, false);
-  }
+  bool any_end_valid =
+      valid_symbols[END_TAG_NAME] ||
+      valid_symbols[SVG_END_TAG_NAME] ||
+      valid_symbols[PATH_END_TAG_NAME] ||
+      valid_symbols[SHAPE_END_TAG_NAME] ||
+      valid_symbols[SCRIPT_END_TAG_NAME] ||
+      valid_symbols[STYLE_END_TAG_NAME] ||
+      valid_symbols[ANIMATION_END_TAG_NAME] ||
+      valid_symbols[DESCRIPTIVE_END_TAG_NAME] ||
+      valid_symbols[ERRONEOUS_END_TAG_NAME];
 
-  if (valid_symbols[SVG_END_TAG_NAME]) {
-    return scan_end_tag_name(tags, lexer, valid_symbols, true);
-  }
-
-  if (valid_symbols[END_TAG_NAME] || valid_symbols[ERRONEOUS_END_TAG_NAME]) {
-    return scan_end_tag_name(tags, lexer, valid_symbols, false);
+  if (any_end_valid && scan_end_tag_name(tags, lexer, valid_symbols)) {
+    return true;
   }
 
   return false;

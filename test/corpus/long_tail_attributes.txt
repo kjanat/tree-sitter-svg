@@ -744,7 +744,7 @@ Coord system and linking/media attributes
           (type_attribute
             (type_attribute_name)
             (type_attribute_value
-              (raw_text))))))
+              (mime_type))))))
     (svg_root_end_tag
       (name)))
   (text))

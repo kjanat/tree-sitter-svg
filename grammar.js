@@ -23,8 +23,20 @@ export default grammar({
 	externals: $ => [
 		$._start_tag_name,
 		$._svg_start_tag_name,
+		$._path_start_tag_name,
+		$._shape_start_tag_name,
+		$._script_start_tag_name,
+		$._style_start_tag_name,
+		$._animation_start_tag_name,
+		$._descriptive_start_tag_name,
 		$._end_tag_name,
 		$._svg_end_tag_name,
+		$._path_end_tag_name,
+		$._shape_end_tag_name,
+		$._script_end_tag_name,
+		$._style_end_tag_name,
+		$._animation_end_tag_name,
+		$._descriptive_end_tag_name,
 		$._erroneous_end_tag_name,
 		'/>',
 	],
@@ -62,6 +74,10 @@ export default grammar({
 
 		element: $ =>
 			choice(
+				$._path_element,
+				$._shape_element,
+				$._script_element,
+				$._style_element,
 				$.self_closing_tag,
 				seq($.start_tag, repeat($._content), choice($.end_tag, $.erroneous_end_tag)),
 			),
@@ -69,11 +85,108 @@ export default grammar({
 		_content: $ =>
 			choice(
 				$.element,
+				$._text_like_content,
+			),
+
+		_text_like_content: $ =>
+			choice(
 				$.comment,
 				$.processing_instruction,
 				$.cdata_section,
 				$.entity_reference,
 				$.text,
+			),
+
+		_path_element: $ =>
+			choice(
+				alias($.path_self_closing_tag, $.self_closing_tag),
+				seq(
+					alias($.path_start_tag, $.start_tag),
+					repeat($.path_content),
+					choice(alias($.path_end_tag, $.end_tag), $.erroneous_end_tag),
+				),
+			),
+
+		path_content: $ =>
+			choice(
+				$._animation_element,
+				$._descriptive_element,
+				$._text_like_content,
+			),
+
+		_shape_element: $ =>
+			choice(
+				alias($.shape_self_closing_tag, $.self_closing_tag),
+				seq(
+					alias($.shape_start_tag, $.start_tag),
+					repeat($.shape_content),
+					choice(alias($.shape_end_tag, $.end_tag), $.erroneous_end_tag),
+				),
+			),
+
+		shape_content: $ =>
+			choice(
+				$._animation_element,
+				$._descriptive_element,
+				$._text_like_content,
+			),
+
+		_script_element: $ =>
+			choice(
+				alias($.script_self_closing_tag, $.self_closing_tag),
+				seq(
+					alias($.script_start_tag, $.start_tag),
+					repeat($._script_content),
+					choice(alias($.script_end_tag, $.end_tag), $.erroneous_end_tag),
+				),
+			),
+
+		_script_content: $ =>
+			choice(
+				$.comment,
+				$.processing_instruction,
+				$.cdata_section,
+				$.entity_reference,
+				$.text,
+			),
+
+		_style_element: $ =>
+			choice(
+				alias($.style_self_closing_tag, $.self_closing_tag),
+				seq(
+					alias($.style_element_start_tag, $.start_tag),
+					repeat($._style_content),
+					choice(alias($.style_end_tag, $.end_tag), $.erroneous_end_tag),
+				),
+			),
+
+		_style_content: $ =>
+			choice(
+				$.comment,
+				$.processing_instruction,
+				$.cdata_section,
+				$.entity_reference,
+				$.text,
+			),
+
+		_animation_element: $ =>
+			choice(
+				alias($.animation_self_closing_tag, $.self_closing_tag),
+				seq(
+					alias($.animation_start_tag, $.start_tag),
+					repeat($._content),
+					choice(alias($.animation_end_tag, $.end_tag), $.erroneous_end_tag),
+				),
+			),
+
+		_descriptive_element: $ =>
+			choice(
+				alias($.descriptive_self_closing_tag, $.self_closing_tag),
+				seq(
+					alias($.descriptive_start_tag, $.start_tag),
+					repeat($._text_like_content),
+					choice(alias($.descriptive_end_tag, $.end_tag), $.erroneous_end_tag),
+				),
 			),
 
 		xml_declaration: $ =>
@@ -179,6 +292,60 @@ export default grammar({
 				'>',
 			),
 
+		path_start_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._path_start_tag_name, $.name)),
+				repeat(seq($._s, $.attribute)),
+				optional($._s),
+				'>',
+			),
+
+		shape_start_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._shape_start_tag_name, $.name)),
+				repeat(seq($._s, $.attribute)),
+				optional($._s),
+				'>',
+			),
+
+		script_start_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._script_start_tag_name, $.name)),
+				repeat(seq($._s, $.script_attribute)),
+				optional($._s),
+				'>',
+			),
+
+		style_element_start_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._style_start_tag_name, $.name)),
+				repeat(seq($._s, $.style_element_attribute)),
+				optional($._s),
+				'>',
+			),
+
+		animation_start_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._animation_start_tag_name, $.name)),
+				repeat(seq($._s, $.attribute)),
+				optional($._s),
+				'>',
+			),
+
+		descriptive_start_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._descriptive_start_tag_name, $.name)),
+				repeat(seq($._s, $.attribute)),
+				optional($._s),
+				'>',
+			),
+
 		svg_root_start_tag: $ =>
 			seq(
 				'<',
@@ -197,6 +364,60 @@ export default grammar({
 				'/>',
 			),
 
+		path_self_closing_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._path_start_tag_name, $.name)),
+				repeat(seq($._s, $.attribute)),
+				optional($._s),
+				'/>',
+			),
+
+		shape_self_closing_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._shape_start_tag_name, $.name)),
+				repeat(seq($._s, $.attribute)),
+				optional($._s),
+				'/>',
+			),
+
+		script_self_closing_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._script_start_tag_name, $.name)),
+				repeat(seq($._s, $.script_attribute)),
+				optional($._s),
+				'/>',
+			),
+
+		style_self_closing_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._style_start_tag_name, $.name)),
+				repeat(seq($._s, $.style_element_attribute)),
+				optional($._s),
+				'/>',
+			),
+
+		animation_self_closing_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._animation_start_tag_name, $.name)),
+				repeat(seq($._s, $.attribute)),
+				optional($._s),
+				'/>',
+			),
+
+		descriptive_self_closing_tag: $ =>
+			seq(
+				'<',
+				field('name', alias($._descriptive_start_tag_name, $.name)),
+				repeat(seq($._s, $.attribute)),
+				optional($._s),
+				'/>',
+			),
+
 		svg_root_self_closing_tag: $ =>
 			seq(
 				'<',
@@ -210,6 +431,54 @@ export default grammar({
 			seq(
 				'</',
 				field('name', alias($._end_tag_name, $.name)),
+				optional($._s),
+				'>',
+			),
+
+		path_end_tag: $ =>
+			seq(
+				'</',
+				field('name', alias($._path_end_tag_name, $.name)),
+				optional($._s),
+				'>',
+			),
+
+		shape_end_tag: $ =>
+			seq(
+				'</',
+				field('name', alias($._shape_end_tag_name, $.name)),
+				optional($._s),
+				'>',
+			),
+
+		script_end_tag: $ =>
+			seq(
+				'</',
+				field('name', alias($._script_end_tag_name, $.name)),
+				optional($._s),
+				'>',
+			),
+
+		style_end_tag: $ =>
+			seq(
+				'</',
+				field('name', alias($._style_end_tag_name, $.name)),
+				optional($._s),
+				'>',
+			),
+
+		animation_end_tag: $ =>
+			seq(
+				'</',
+				field('name', alias($._animation_end_tag_name, $.name)),
+				optional($._s),
+				'>',
+			),
+
+		descriptive_end_tag: $ =>
+			seq(
+				'</',
+				field('name', alias($._descriptive_end_tag_name, $.name)),
 				optional($._s),
 				'>',
 			),
@@ -271,6 +540,64 @@ export default grammar({
 				$.event_attribute,
 				$.generic_attribute,
 			),
+
+		script_attribute: $ =>
+			choice(
+				$.script_type_attribute,
+				$.crossorigin_attribute,
+				$.href_attribute,
+				$.referrerpolicy_attribute,
+				$.id_attribute,
+				$.class_attribute,
+				$.lang_attribute,
+				$.xml_space_attribute,
+				$.event_attribute,
+			),
+
+		style_element_attribute: $ =>
+			choice(
+				$.style_element_type_attribute,
+				$.media_attribute,
+				$.title_attribute,
+				$.id_attribute,
+				$.class_attribute,
+				$.lang_attribute,
+				$.xml_space_attribute,
+				$.event_attribute,
+			),
+
+		script_type_attribute: $ =>
+			seq(
+				field('name', $.script_type_attribute_name),
+				$._eq,
+				field('value', $.script_type_attribute_value),
+			),
+
+		script_type_attribute_name: _ => 'type',
+
+		script_type_attribute_value: $ => quoted($.script_mime_type),
+
+		script_mime_type: _ =>
+			choice(
+				'application/ecmascript',
+				'application/javascript',
+				'text/ecmascript',
+				'text/javascript',
+				'module',
+			),
+
+		style_element_type_attribute: $ =>
+			seq(
+				field('name', $.style_element_type_attribute_name),
+				$._eq,
+				field('value', $.style_element_type_attribute_value),
+			),
+
+		style_element_type_attribute_name: _ => 'type',
+
+		style_element_type_attribute_value: $ => quoted($.style_mime_type),
+
+		style_mime_type: _ => 'text/css',
 
 		_eq: $ => seq(optional($._s), '=', optional($._s)),
 
@@ -2297,7 +2624,27 @@ export default grammar({
 
 		type_attribute_name: _ => 'type',
 
-		type_attribute_value: $ => quoted($.raw_text),
+		type_attribute_value: $ => quoted(choice($.mime_type, $.type_keyword)),
+
+		type_keyword: _ =>
+			choice(
+				'matrix',
+				'saturate',
+				'hueRotate',
+				'luminanceToAlpha',
+				'translate',
+				'scale',
+				'rotate',
+				'skewX',
+				'skewY',
+				'fractalNoise',
+				'turbulence',
+				'identity',
+				'table',
+				'discrete',
+				'linear',
+				'gamma',
+			),
 
 		color_rendering_misc_attribute: $ =>
 			choice(
@@ -2556,6 +2903,8 @@ export default grammar({
 		iri_reference_list: $ => seq($.iri_reference, repeat(seq($.wsp, $.iri_reference))),
 
 		raw_text: _ => token(/[^"']+/),
+
+		mime_type: _ => token(/[A-Za-z0-9!#$&^_.+-]+\/[A-Za-z0-9!#$&^_.+-]+/),
 
 		number_or_percentage: $ => choice($.number, $.percentage),
 
