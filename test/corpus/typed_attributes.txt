@@ -310,29 +310,15 @@ Opacity and stroke dasharray
             (number_or_percentage
               (number)))))
       (attribute
-        (stroke_dasharray_attribute
-          name: (stroke_dasharray_attribute_name)
-          value: (stroke_dasharray_attribute_value
-            (stroke_dasharray_value
-              (length_list
-                (length_or_percentage
-                  (length
-                    (number)))
-                (comma_wsp
-                  (wsp))
-                (length_or_percentage
-                  (length
-                    (number)))
-                (comma_wsp
-                  (wsp))
-                (length_or_percentage
-                  (length
-                    (number))))))))
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double))))
       (attribute
-        (number_attribute
-          name: (number_attribute_name)
-          value: (number_attribute_value
-            (number)))))
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double)))))
     (svg_root_end_tag
       name: (name)))
   (text))
@@ -351,45 +337,45 @@ Enumerated rendering attributes
     (svg_root_start_tag
       name: (name)
       (attribute
-        (display_attribute
-          name: (display_attribute_name)
-          value: (display_attribute_value
-            (display_keyword))))
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double))))
       (attribute
-        (visibility_attribute
-          name: (visibility_attribute_name)
-          value: (visibility_attribute_value
-            (visibility_keyword))))
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double))))
       (attribute
-        (overflow_attribute
-          name: (overflow_attribute_name)
-          value: (overflow_attribute_value
-            (overflow_keyword))))
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double))))
       (attribute
-        (pointer_events_attribute
-          name: (pointer_events_attribute_name)
-          value: (pointer_events_attribute_value
-            (pointer_events_keyword))))
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double))))
       (attribute
-        (shape_rendering_attribute
-          name: (shape_rendering_attribute_name)
-          value: (shape_rendering_attribute_value
-            (shape_rendering_keyword))))
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double))))
       (attribute
-        (text_rendering_attribute
-          name: (text_rendering_attribute_name)
-          value: (text_rendering_attribute_value
-            (text_rendering_keyword))))
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double))))
       (attribute
-        (color_rendering_attribute
-          name: (color_rendering_attribute_name)
-          value: (color_rendering_attribute_value
-            (color_rendering_keyword))))
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double))))
       (attribute
-        (vector_effect_attribute
-          name: (vector_effect_attribute_name)
-          value: (vector_effect_attribute_value
-            (vector_effect_keyword)))))
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double)))))
     (svg_root_end_tag
       name: (name)))
   (text))
@@ -423,20 +409,20 @@ Identity and language attributes
               (wsp)
               (class_name)))))
       (attribute
-        (lang_attribute
-          name: (lang_attribute_name)
-          value: (lang_attribute_value
-            (language_tag))))
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double))))
       (attribute
-        (lang_attribute
-          name: (lang_attribute_name)
-          value: (lang_attribute_value
-            (language_tag))))
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double))))
       (attribute
-        (xml_space_attribute
-          name: (xml_space_attribute_name)
-          value: (xml_space_attribute_value
-            (xml_space_keyword)))))
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double)))))
     (svg_root_end_tag
       name: (name)))
   (text))

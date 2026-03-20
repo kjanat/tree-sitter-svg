@@ -42,7 +42,7 @@
 		"install": "node-gyp-build",
 		"postinstall": "git config core.hooksPath .githooks",
 		"prestart": "tree-sitter build --wasm",
-		"start": "tree-sitter playground",
+		"start": "tree-sitter playground --quiet",
 		"test": "node --test bindings/node/*_test.js"
 	},
 	"dependencies": {

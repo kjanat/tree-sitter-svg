@@ -5,6 +5,7 @@
 - External scanner enum order must exactly match `externals` order in `grammar.js`; mismatches silently corrupt tokenization
 - For simple external tokens (tag names, `/>`), avoid `mark_end` unless doing lookahead rollback; premature `mark_end` can truncate tokens
 - `tree-sitter build --wasm` can look stuck at `Extracting wasi-sdk...`, but for this grammar the real stall is later in wasm backend codegen for `src/parser.c`; syntax-only and LLVM IR emission finish quickly, object/wasm emission does not
+- WASM build fails when parser.c exceeds ~100K lines; at 102K lines (458 rules, 50 externals) the WASM backend cannot complete; at 21K lines (120 rules, 13 externals) it succeeds instantly
 
 ## Grammar
 
@@ -45,3 +46,11 @@
 - If one rule is a strict superset of another (e.g. `length` includes bare numbers), avoid including both in the same `choice` without precedence; this creates unresolved LR conflicts
 - Aliasing a named subrule to `$.element` inside the `element` rule can create nested `(element (element ...))`; use hidden subrules (`_foo_element`) to keep CST stable
 - With many specialized externals, choose token symbol *after* scanning the full name against all valid symbols; pairwise ambiguity guards do not scale
+
+## Architecture: Parse Structure Not Schema
+
+- Encoding SVG element categories × attribute combinations in the grammar causes LR state explosion (458 rules → 102K-line parser.c); collapsing to 5 element types + 14 typed attributes → 120 rules, 21K-line parser.c (79% reduction)
+- Content model constraints (e.g. "path cannot contain child elements") belong in linting/query layers, not the parser; grammar should accept structurally valid XML
+- `raw_text` external token for script/style must guard against error recovery: when tree-sitter sets all `valid_symbols` true, check `!valid_symbols[START_TAG_NAME] && !valid_symbols[END_TAG_NAME]` to prevent raw_text from consuming normal content
+- Only 5 element names need scanner recognition: svg (root enforcement), path (d attribute), script/style (raw text capture), plus generic fallback
+- Attribute sub-grammars worth keeping in the parser are those with genuine value syntax (path data, viewBox numbers, transform functions, paint functions, URI references) — keyword-only attributes (calcMode, spreadMethod, edgeMode) belong in queries

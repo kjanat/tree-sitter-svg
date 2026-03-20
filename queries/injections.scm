@@ -1,35 +1,22 @@
+; CSS in <style> element (via raw_text)
 ((element
   (start_tag (name) @_start)
-  (text) @injection.content
+  (raw_text) @injection.content
   (end_tag (name) @_end))
  (#match? @_start "(^|:)style$")
  (#match? @_end "(^|:)style$")
  (#set! injection.language "css"))
 
+; JS in <script> element (via raw_text)
 ((element
   (start_tag (name) @_start)
-  (cdata_section (cdata_text) @injection.content)
-  (end_tag (name) @_end))
- (#match? @_start "(^|:)style$")
- (#match? @_end "(^|:)style$")
- (#set! injection.language "css"))
-
-((element
-  (start_tag (name) @_start)
-  (text) @injection.content
+  (raw_text) @injection.content
   (end_tag (name) @_end))
  (#match? @_start "(^|:)script$")
  (#match? @_end "(^|:)script$")
  (#set! injection.language "javascript"))
 
-((element
-  (start_tag (name) @_start)
-  (cdata_section (cdata_text) @injection.content)
-  (end_tag (name) @_end))
- (#match? @_start "(^|:)script$")
- (#match? @_end "(^|:)script$")
- (#set! injection.language "javascript"))
-
+; HTML in <foreignObject>
 ((element
   (start_tag (name) @_start)
   (element) @injection.content
@@ -39,6 +26,7 @@
  (#set! injection.language "html")
  (#set! injection.include-children))
 
+; CSS in style="..." attribute
 ((style_attribute
   (style_attribute_value
     (double_quoted_style_value
@@ -51,6 +39,7 @@
       (style_text_single) @injection.content)))
  (#set! injection.language "css"))
 
+; JS in event attributes (onclick, onload, etc.)
 ((event_attribute
   (event_attribute_value
     (script_text_double) @injection.content))
@@ -61,6 +50,7 @@
     (script_text_single) @injection.content))
  (#set! injection.language "javascript"))
 
+; CSS in generic style="..." (fallback for when style parsed as generic_attribute)
 ((generic_attribute
   name: (attribute_name) @_name
   value: (quoted_attribute_value

@@ -15,9 +15,9 @@ All path commands
       (self_closing_tag
         name: (name)
         (attribute
-          (path_attribute
-            name: (path_attribute_name)
-            value: (path_attribute_value
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
               (double_quoted_path_data
                 (path_data_content
                   (path_data
@@ -192,9 +192,9 @@ Implicit separators and arcs
       (self_closing_tag
         name: (name)
         (attribute
-          (path_attribute
-            name: (path_attribute_name)
-            value: (path_attribute_value
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
               (double_quoted_path_data
                 (path_data_content
                   (path_data
@@ -265,9 +265,9 @@ Outer whitespace around path data
       (self_closing_tag
         name: (name)
         (attribute
-          (path_attribute
-            name: (path_attribute_name)
-            value: (path_attribute_value
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
               (double_quoted_path_data
                 (path_data_content
                   (path_wsp)
@@ -318,17 +318,17 @@ Empty and whitespace-only path data
       (self_closing_tag
         name: (name)
         (attribute
-          (path_attribute
-            name: (path_attribute_name)
-            value: (path_attribute_value
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
               (double_quoted_path_data))))))
     (element
       (self_closing_tag
         name: (name)
         (attribute
-          (path_attribute
-            name: (path_attribute_name)
-            value: (path_attribute_value
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
               (double_quoted_path_data
                 (path_data_content
                   (path_wsp))))))))
@@ -353,9 +353,9 @@ Single-quoted path data
       (self_closing_tag
         name: (name)
         (attribute
-          (path_attribute
-            name: (path_attribute_name)
-            value: (path_attribute_value
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
               (single_quoted_path_data
                 (path_data_content
                   (path_data
@@ -423,9 +423,9 @@ Multiple moveto segments
       (self_closing_tag
         name: (name)
         (attribute
-          (path_attribute
-            name: (path_attribute_name)
-            value: (path_attribute_value
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
               (double_quoted_path_data
                 (path_data_content
                   (path_data
@@ -481,9 +481,9 @@ Sign and exponent numbers
       (self_closing_tag
         name: (name)
         (attribute
-          (path_attribute
-            name: (path_attribute_name)
-            value: (path_attribute_value
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
               (double_quoted_path_data
                 (path_data_content
                   (path_data

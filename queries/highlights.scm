@@ -32,7 +32,7 @@
   (name) @tag)
 
 (attribute_name) @attribute
-(path_attribute_name) @attribute
+(d_attribute_name) @attribute
 (style_attribute_name) @attribute
 
 (quoted_attribute_value) @string

@@ -21,14 +21,14 @@ Embedded style, script and foreignObject
     (element
       (start_tag
         name: (name))
-      (text)
+      (raw_text)
       (end_tag
         name: (name)))
     (text)
     (element
       (start_tag
         name: (name))
-      (text)
+      (raw_text)
       (end_tag
         name: (name)))
     (text)
@@ -75,16 +75,14 @@ Script and style CDATA forms
     (element
       (start_tag
         name: (name))
-      (cdata_section
-        (cdata_text))
+      (raw_text)
       (end_tag
         name: (name)))
     (text)
     (element
       (start_tag
         name: (name))
-      (cdata_section
-        (cdata_text))
+      (raw_text)
       (end_tag
         name: (name)))
     (text)
@@ -199,30 +197,25 @@ Typed references and paint servers
     (element
       (start_tag
         name: (name))
-      (defs_content
-        (text))
-      (defs_content
-        (element
-          (self_closing_tag
-            name: (name)
-            (attribute
-              (id_attribute
-                name: (id_attribute_name)
-                value: (id_attribute_value
-                  (id_token)))))))
-      (defs_content
-        (text))
-      (defs_content
-        (element
-          (self_closing_tag
-            name: (name)
-            (attribute
-              (id_attribute
-                name: (id_attribute_name)
-                value: (id_attribute_value
-                  (id_token)))))))
-      (defs_content
-        (text))
+      (text)
+      (element
+        (self_closing_tag
+          name: (name)
+          (attribute
+            (id_attribute
+              name: (id_attribute_name)
+              value: (id_attribute_value
+                (id_token))))))
+      (text)
+      (element
+        (self_closing_tag
+          name: (name)
+          (attribute
+            (id_attribute
+              name: (id_attribute_name)
+              value: (id_attribute_value
+                (id_token))))))
+      (text)
       (end_tag
         name: (name)))
     (text)
@@ -315,46 +308,38 @@ Shape content allows animation and descriptive only
     (element
       (start_tag
         (name))
-      (shape_content
-        (text))
-      (shape_content
+      (text)
+      (element
         (start_tag
           (name))
         (text)
         (end_tag
           (name)))
-      (shape_content
-        (text))
-      (shape_content
+      (text)
+      (element
         (self_closing_tag
           (name)
           (attribute
-            (animation_attribute
-              (attribute_name_attribute
-                (attribute_name_attribute_name)
-                (attribute_name_attribute_value
-                  (name)))))
+            (generic_attribute
+              (attribute_name)
+              (quoted_attribute_value
+                (attribute_text_double))))
           (attribute
-            (animation_attribute
-              (from_attribute
-                (from_attribute_name)
-                (from_attribute_value
-                  (animation_value_expression)))))
+            (generic_attribute
+              (attribute_name)
+              (quoted_attribute_value
+                (attribute_text_double))))
           (attribute
-            (animation_attribute
-              (to_attribute
-                (to_attribute_name)
-                (to_attribute_value
-                  (animation_value_expression)))))
+            (generic_attribute
+              (attribute_name)
+              (quoted_attribute_value
+                (attribute_text_double))))
           (attribute
-            (animation_attribute
-              (dur_attribute
-                (dur_attribute_name)
-                (dur_attribute_value
-                  (clock_or_keyword
-                    (clock_value))))))))
-      (shape_content
-        (text))
+            (generic_attribute
+              (attribute_name)
+              (quoted_attribute_value
+                (attribute_text_double))))))
+      (text)
       (end_tag
         (name)))
     (text)
@@ -383,19 +368,16 @@ Defs accepts generic children
     (element
       (start_tag
         (name))
-      (defs_content
-        (text))
-      (defs_content
-        (element
-          (self_closing_tag
-            (name)
-            (attribute
-              (id_attribute
-                (id_attribute_name)
-                (id_attribute_value
-                  (id_token)))))))
-      (defs_content
-        (text))
+      (text)
+      (element
+        (self_closing_tag
+          (name)
+          (attribute
+            (id_attribute
+              (id_attribute_name)
+              (id_attribute_value
+                (id_token))))))
+      (text)
       (end_tag
         (name)))
     (text)
@@ -437,100 +419,85 @@ Scoped filter primitives and text links
     (element
       (start_tag
         (name))
-      (defs_content
-        (text))
-      (defs_content
+      (text)
+      (element
+        (start_tag
+          (name)
+          (attribute
+            (id_attribute
+              (id_attribute_name)
+              (id_attribute_value
+                (id_token)))))
+        (text)
         (element
-          (start_tag
+          (self_closing_tag
             (name)
             (attribute
-              (id_attribute
-                (id_attribute_name)
-                (id_attribute_value
-                  (id_token)))))
-          (filter_content
-            (text))
-          (filter_content
+              (generic_attribute
+                (attribute_name)
+                (quoted_attribute_value
+                  (attribute_text_double))))))
+        (text)
+        (element
+          (self_closing_tag
+            (name)
+            (attribute
+              (generic_attribute
+                (attribute_name)
+                (quoted_attribute_value
+                  (attribute_text_double))))))
+        (text)
+        (element
+          (start_tag
+            (name))
+          (text)
+          (element
             (self_closing_tag
               (name)
-              (filter_color_matrix_attribute
-                (filter_color_matrix_type_attribute
-                  (filter_color_matrix_type_attribute_name)
-                  (filter_color_matrix_type_attribute_value
-                    (filter_color_matrix_type_keyword))))))
-          (filter_content
-            (text))
-          (filter_content
-            (self_closing_tag
-              (name)
-              (filter_turbulence_attribute
-                (filter_turbulence_type_attribute
-                  (filter_turbulence_type_attribute_name)
-                  (filter_turbulence_type_attribute_value
-                    (filter_turbulence_type_keyword))))))
-          (filter_content
-            (text))
-          (filter_content
-            (start_tag
-              (name))
-            (filter_component_transfer_content
-              (text))
-            (filter_component_transfer_content
-              (self_closing_tag
-                (name)
-                (filter_component_transfer_function_attribute
-                  (filter_component_transfer_function_type_attribute
-                    (filter_component_transfer_function_type_attribute_name)
-                    (filter_component_transfer_function_type_attribute_value
-                      (filter_component_transfer_function_type_keyword))))))
-            (filter_component_transfer_content
-              (text))
-            (end_tag
-              (name)))
-          (filter_content
-            (text))
-          (filter_content
-            (start_tag
-              (name))
-            (filter_merge_content
-              (text))
-            (filter_merge_content
-              (self_closing_tag
-                (name)))
-            (filter_merge_content
-              (text))
-            (end_tag
-              (name)))
-          (filter_content
-            (text))
-          (filter_content
-            (start_tag
-              (name))
-            (filter_lighting_content
-              (text))
-            (filter_lighting_content
-              (self_closing_tag
-                (name)))
-            (filter_lighting_content
-              (text))
-            (end_tag
-              (name)))
-          (filter_content
-            (text))
+              (attribute
+                (generic_attribute
+                  (attribute_name)
+                  (quoted_attribute_value
+                    (attribute_text_double))))))
+          (text)
           (end_tag
-            (name))))
-      (defs_content
-        (text))
+            (name)))
+        (text)
+        (element
+          (start_tag
+            (name))
+          (text)
+          (element
+            (self_closing_tag
+              (name)))
+          (text)
+          (end_tag
+            (name)))
+        (text)
+        (element
+          (start_tag
+            (name))
+          (text)
+          (element
+            (self_closing_tag
+              (name)))
+          (text)
+          (end_tag
+            (name)))
+        (text)
+        (end_tag
+          (name)))
+      (text)
       (end_tag
         (name)))
     (text)
     (element
       (start_tag
         (name))
-      (text_container_content
+      (element
         (start_tag
           (name)
-          (linking_media_element_attribute
+          (attribute
             (href_attribute
               (href_attribute_name)
               (href_attribute_value
@@ -539,8 +506,7 @@ Scoped filter primitives and text links
         (element
           (start_tag
             (name))
-          (text_container_content
-            (text))
+          (text)
           (end_tag
             (name)))
         (end_tag
@@ -581,85 +547,68 @@ Defs, gradients, filter primitives, text containers, linking type
     (element
       (start_tag
         (name))
-      (defs_content
-        (text))
-      (defs_content
+      (text)
+      (element
+        (start_tag
+          (name)
+          (attribute
+            (id_attribute
+              (id_attribute_name)
+              (id_attribute_value
+                (id_token)))))
+        (text)
         (element
-          (start_tag
+          (self_closing_tag
             (name)
             (attribute
-              (id_attribute
-                (id_attribute_name)
-                (id_attribute_value
-                  (id_token)))))
-          (gradient_content
-            (text))
-          (gradient_content
-            (self_closing_tag
-              (name)
-              (attribute
-                (other_regular_attribute
-                  (offset_attribute
-                    (offset_attribute_name)
-                    (offset_attribute_value
-                      (number_or_percentage
-                        (percentage
-                          (number)))))))))
-          (gradient_content
-            (text))
-          (gradient_content
-            (self_closing_tag
-              (name)
-              (attribute
-                (other_regular_attribute
-                  (offset_attribute
-                    (offset_attribute_name)
-                    (offset_attribute_value
-                      (number_or_percentage
-                        (percentage
-                          (number)))))))))
-          (gradient_content
-            (text))
-          (end_tag
-            (name))))
-      (defs_content
-        (text))
-      (defs_content
+              (generic_attribute
+                (attribute_name)
+                (quoted_attribute_value
+                  (attribute_text_double))))))
+        (text)
         (element
-          (start_tag
+          (self_closing_tag
             (name)
             (attribute
-              (id_attribute
-                (id_attribute_name)
-                (id_attribute_value
-                  (id_token)))))
-          (filter_content
-            (text))
-          (filter_content
-            (self_closing_tag
-              (name)
-              (filter_turbulence_attribute
-                (filter_turbulence_type_attribute
-                  (filter_turbulence_type_attribute_name)
-                  (filter_turbulence_type_attribute_value
-                    (filter_turbulence_type_keyword))))))
-          (filter_content
-            (text))
-          (end_tag
-            (name))))
-      (defs_content
-        (text))
+              (generic_attribute
+                (attribute_name)
+                (quoted_attribute_value
+                  (attribute_text_double))))))
+        (text)
+        (end_tag
+          (name)))
+      (text)
+      (element
+        (start_tag
+          (name)
+          (attribute
+            (id_attribute
+              (id_attribute_name)
+              (id_attribute_value
+                (id_token)))))
+        (text)
+        (element
+          (self_closing_tag
+            (name)
+            (attribute
+              (generic_attribute
+                (attribute_name)
+                (quoted_attribute_value
+                  (attribute_text_double))))))
+        (text)
+        (end_tag
+          (name)))
+      (text)
       (end_tag
         (name)))
     (text)
     (element
       (start_tag
         (name))
-      (text_container_content
+      (element
         (start_tag
           (name))
-        (text_container_content
-          (text))
+        (text)
         (end_tag
           (name)))
       (end_tag
@@ -668,17 +617,17 @@ Defs, gradients, filter primitives, text containers, linking type
     (element
       (start_tag
         (name)
-        (linking_media_element_attribute
+        (attribute
           (href_attribute
             (href_attribute_name)
             (href_attribute_value
               (href_reference
                 (iri_reference)))))
-        (linking_media_element_attribute
-          (linking_media_type_attribute
-            (linking_media_type_attribute_name)
-            (linking_media_type_attribute_value
-              (mime_type)))))
+        (attribute
+          (generic_attribute
+            (attribute_name)
+            (quoted_attribute_value
+              (attribute_text_double)))))
       (text)
       (end_tag
         (name)))
