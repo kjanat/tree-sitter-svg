@@ -86,7 +86,7 @@ Embedded languages are injected via `queries/injections.scm`:
 | `locals.scm`     | Local scope/reference tracking |
 | `tags.scm`       | Symbol/tag navigation          |
 
-## Installation
+<!--## Installation
 
 <details>
 <summary><strong>Node.js</strong></summary>
@@ -238,7 +238,7 @@ Via Maven (coordinates TBD — build from source for now):
 </dependency>
 ```
 
-</details>
+</details>-->
 
 ## Development
 
