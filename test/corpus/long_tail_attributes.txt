@@ -1,0 +1,962 @@
+==================
+ARIA attribute set
+==================
+
+<svg aria-label="icon" aria-hidden="true" aria-describedby="a b" aria-roledescription="diagram node"></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (svg_root_start_tag
+      (name)
+      (attribute
+        (aria_attribute
+          (aria_attribute_name)
+          (aria_attribute_value
+            (aria_token_list
+              (aria_token)))))
+      (attribute
+        (aria_attribute
+          (aria_attribute_name)
+          (aria_attribute_value
+            (aria_token_list
+              (aria_token)))))
+      (attribute
+        (aria_attribute
+          (aria_attribute_name)
+          (aria_attribute_value
+            (aria_token_list
+              (aria_token)
+              (wsp)
+              (aria_token)))))
+      (attribute
+        (aria_attribute
+          (aria_attribute_name)
+          (aria_attribute_value
+            (aria_token_list
+              (aria_token)
+              (wsp)
+              (aria_token))))))
+    (svg_root_end_tag
+      (name)))
+  (text))
+
+==================
+Animation attribute set
+==================
+
+<svg>
+  <animate
+    attributeName="x"
+    begin="0s;id.click+1s"
+    dur="2s"
+    calcMode="spline"
+    keyTimes="0;0.5;1"
+    keySplines="0.1 0.2 0.3 0.4;0.2 0.2 0.8 0.8"
+    values="0;10;20"
+    repeatCount="indefinite"
+    restart="always"
+    additive="sum"
+    accumulate="none"/>
+</svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (svg_root_start_tag
+      (name))
+    (text)
+    (element
+      (self_closing_tag
+        (name)
+        (attribute
+          (animation_attribute
+            (attribute_name_attribute
+              (attribute_name_attribute_name)
+              (attribute_name_attribute_value
+                (name)))))
+        (attribute
+          (animation_attribute
+            (begin_attribute
+              (begin_attribute_name)
+              (begin_attribute_value
+                (timing_value_list
+                  (timing_value
+                    (clock_value))
+                  (timing_value
+                    (timing_event_value)))))))
+        (attribute
+          (animation_attribute
+            (dur_attribute
+              (dur_attribute_name)
+              (dur_attribute_value
+                (clock_or_keyword
+                  (clock_value))))))
+        (attribute
+          (animation_attribute
+            (calc_mode_attribute
+              (calc_mode_attribute_name)
+              (calc_mode_attribute_value
+                (calc_mode_keyword)))))
+        (attribute
+          (animation_attribute
+            (key_times_attribute
+              (key_times_attribute_name)
+              (key_times_attribute_value
+                (semicolon_number_list
+                  (number)
+                  (number)
+                  (number))))))
+        (attribute
+          (animation_attribute
+            (key_splines_attribute
+              (key_splines_attribute_name)
+              (key_splines_attribute_value
+                (key_spline_list
+                  (key_spline
+                    (number)
+                    (comma_wsp
+                      (wsp))
+                    (number)
+                    (comma_wsp
+                      (wsp))
+                    (number)
+                    (comma_wsp
+                      (wsp))
+                    (number))
+                  (key_spline
+                    (number)
+                    (comma_wsp
+                      (wsp))
+                    (number)
+                    (comma_wsp
+                      (wsp))
+                    (number)
+                    (comma_wsp
+                      (wsp))
+                    (number)))))))
+        (attribute
+          (animation_attribute
+            (values_attribute
+              (values_attribute_name)
+              (values_attribute_value
+                (animation_value_list
+                  (animation_value_expression)
+                  (animation_value_expression)
+                  (animation_value_expression))))))
+        (attribute
+          (animation_attribute
+            (repeat_count_attribute
+              (repeat_count_attribute_name)
+              (repeat_count_attribute_value))))
+        (attribute
+          (animation_attribute
+            (restart_attribute
+              (restart_attribute_name)
+              (restart_attribute_value
+                (restart_keyword)))))
+        (attribute
+          (animation_attribute
+            (additive_attribute
+              (additive_attribute_name)
+              (additive_attribute_value
+                (additive_keyword)))))
+        (attribute
+          (animation_attribute
+            (accumulate_attribute
+              (accumulate_attribute_name)
+              (accumulate_attribute_value
+                (accumulate_keyword)))))))
+    (text)
+    (svg_root_end_tag
+      (name)))
+  (text))
+
+==================
+Filter effect attribute set
+==================
+
+<svg>
+  <filter id="f1">
+    <feTurbulence baseFrequency="0.01 0.05" numOctaves="3" seed="7" stitchTiles="stitch" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="B"/>
+    <feConvolveMatrix kernelMatrix="1 0 -1 2 0 -2 1 0 -1" order="3 3" divisor="1" bias="0" targetX="1" targetY="1" edgeMode="duplicate"/>
+  </filter>
+</svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (svg_root_start_tag
+      (name))
+    (text)
+    (element
+      (start_tag
+        (name)
+        (attribute
+          (id_attribute
+            (id_attribute_name)
+            (id_attribute_value
+              (id_token)))))
+      (text)
+      (element
+        (self_closing_tag
+          (name)
+          (attribute
+            (filter_effect_attribute
+              (filter_pair_number_attribute
+                (filter_pair_number_attribute_name)
+                (filter_pair_number_attribute_value
+                  (number_pair
+                    (number)
+                    (comma_wsp
+                      (wsp))
+                    (number))))))
+          (attribute
+            (filter_effect_attribute
+              (filter_integer_attribute
+                (filter_integer_attribute_name)
+                (filter_integer_attribute_value
+                  (integer)))))
+          (attribute
+            (filter_effect_attribute
+              (filter_number_attribute
+                (filter_number_attribute_name)
+                (filter_number_attribute_value
+                  (number)))))
+          (attribute
+            (filter_effect_attribute
+              (filter_stitch_tiles_attribute
+                (filter_stitch_tiles_attribute_name)
+                (filter_stitch_tiles_attribute_value))))
+          (attribute
+            (filter_effect_attribute
+              (filter_result_attribute
+                (filter_result_attribute_name)
+                (filter_result_attribute_value
+                  (id_token)))))))
+      (text)
+      (element
+        (self_closing_tag
+          (name)
+          (attribute
+            (filter_effect_attribute
+              (filter_input_attribute
+                (filter_input_attribute_name)
+                (filter_input_attribute_value
+                  (filter_input_value)))))
+          (attribute
+            (filter_effect_attribute
+              (filter_input_attribute
+                (filter_input_attribute_name)
+                (filter_input_attribute_value
+                  (filter_input_value
+                    (id_token))))))
+          (attribute
+            (filter_effect_attribute
+              (filter_number_attribute
+                (filter_number_attribute_name)
+                (filter_number_attribute_value
+                  (number)))))
+          (attribute
+            (filter_effect_attribute
+              (filter_channel_selector_attribute
+                (filter_channel_selector_attribute_name)
+                (filter_channel_selector_attribute_value))))
+          (attribute
+            (filter_effect_attribute
+              (filter_channel_selector_attribute
+                (filter_channel_selector_attribute_name)
+                (filter_channel_selector_attribute_value))))))
+      (text)
+      (element
+        (self_closing_tag
+          (name)
+          (attribute
+            (filter_effect_attribute
+              (filter_number_list_attribute
+                (filter_number_list_attribute_name)
+                (filter_number_list_attribute_value
+                  (number_list
+                    (number)
+                    (comma_wsp
+                      (wsp))
+                    (number)
+                    (comma_wsp
+                      (wsp))
+                    (number)
+                    (comma_wsp
+                      (wsp))
+                    (number)
+                    (comma_wsp
+                      (wsp))
+                    (number)
+                    (comma_wsp
+                      (wsp))
+                    (number)
+                    (comma_wsp
+                      (wsp))
+                    (number)
+                    (comma_wsp
+                      (wsp))
+                    (number)
+                    (comma_wsp
+                      (wsp))
+                    (number))))))
+          (attribute
+            (filter_effect_attribute
+              (filter_order_attribute
+                (filter_order_attribute_name)
+                (filter_order_attribute_value
+                  (integer_pair
+                    (integer)
+                    (comma_wsp
+                      (wsp))
+                    (integer))))))
+          (attribute
+            (filter_effect_attribute
+              (filter_number_attribute
+                (filter_number_attribute_name)
+                (filter_number_attribute_value
+                  (number)))))
+          (attribute
+            (filter_effect_attribute
+              (filter_number_attribute
+                (filter_number_attribute_name)
+                (filter_number_attribute_value
+                  (number)))))
+          (attribute
+            (filter_effect_attribute
+              (filter_integer_attribute
+                (filter_integer_attribute_name)
+                (filter_integer_attribute_value
+                  (integer)))))
+          (attribute
+            (filter_effect_attribute
+              (filter_integer_attribute
+                (filter_integer_attribute_name)
+                (filter_integer_attribute_value
+                  (integer)))))
+          (attribute
+            (filter_effect_attribute
+              (filter_edge_mode_attribute
+                (filter_edge_mode_attribute_name)
+                (filter_edge_mode_attribute_value))))))
+      (text)
+      (end_tag
+        (name)))
+    (text)
+    (svg_root_end_tag
+      (name)))
+  (text))
+
+==================
+Text layout and typography attributes
+==================
+
+<svg>
+  <text
+    alignment-baseline="middle"
+    baseline-shift="super"
+    direction="ltr"
+    dominant-baseline="central"
+    dx="1 2 3"
+    dy="4 5"
+    font-family="Fira Sans, serif"
+    font-size-adjust="0.5"
+    font-stretch="semi-condensed"
+    font-style="italic"
+    font-variant="small-caps"
+    font-weight="700"
+    glyph-orientation-horizontal="90deg"
+    glyph-orientation-vertical="auto"
+    lengthAdjust="spacingAndGlyphs"
+    letter-spacing="2"
+    rotate="0 30 60"
+    text-anchor="middle"
+    text-decoration="underline overline"
+    unicode-bidi="isolate"
+    word-spacing="3"
+    writing-mode="vertical-rl">x</text>
+  <textPath method="align" side="left" spacing="exact"/>
+</svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (svg_root_start_tag
+      (name))
+    (text)
+    (element
+      (start_tag
+        (name)
+        (attribute
+          (text_layout_attribute
+            (alignment_baseline_attribute
+              (alignment_baseline_attribute_name)
+              (alignment_baseline_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (baseline_shift_attribute
+              (baseline_shift_attribute_name)
+              (baseline_shift_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (direction_attribute
+              (direction_attribute_name)
+              (direction_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (dominant_baseline_attribute
+              (dominant_baseline_attribute_name)
+              (dominant_baseline_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (text_length_list_attribute
+              (text_length_list_attribute_name)
+              (text_length_list_attribute_value
+                (number_or_length_or_percentage_list
+                  (number_or_length_or_percentage
+                    (length
+                      (number)))
+                  (comma_wsp
+                    (wsp))
+                  (number_or_length_or_percentage
+                    (length
+                      (number)))
+                  (comma_wsp
+                    (wsp))
+                  (number_or_length_or_percentage
+                    (length
+                      (number))))))))
+        (attribute
+          (text_layout_attribute
+            (text_length_list_attribute
+              (text_length_list_attribute_name)
+              (text_length_list_attribute_value
+                (number_or_length_or_percentage_list
+                  (number_or_length_or_percentage
+                    (length
+                      (number)))
+                  (comma_wsp
+                    (wsp))
+                  (number_or_length_or_percentage
+                    (length
+                      (number))))))))
+        (attribute
+          (text_layout_attribute
+            (font_family_attribute
+              (font_family_attribute_name)
+              (font_family_attribute_value
+                (raw_text)))))
+        (attribute
+          (text_layout_attribute
+            (font_size_adjust_attribute
+              (font_size_adjust_attribute_name)
+              (font_size_adjust_attribute_value
+                (number)))))
+        (attribute
+          (text_layout_attribute
+            (font_stretch_attribute
+              (font_stretch_attribute_name)
+              (font_stretch_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (font_style_attribute
+              (font_style_attribute_name)
+              (font_style_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (font_variant_attribute
+              (font_variant_attribute_name)
+              (font_variant_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (font_weight_attribute
+              (font_weight_attribute_name)
+              (font_weight_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (glyph_orientation_attribute
+              (glyph_orientation_attribute_name)
+              (glyph_orientation_attribute_value
+                (angle
+                  (number))))))
+        (attribute
+          (text_layout_attribute
+            (glyph_orientation_attribute
+              (glyph_orientation_attribute_name)
+              (glyph_orientation_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (length_adjust_attribute
+              (length_adjust_attribute_name)
+              (length_adjust_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (letter_word_spacing_attribute
+              (letter_word_spacing_attribute_name)
+              (letter_word_spacing_attribute_value
+                (length
+                  (number))))))
+        (attribute
+          (text_layout_attribute
+            (text_length_list_attribute
+              (text_length_list_attribute_name)
+              (text_length_list_attribute_value
+                (number_or_length_or_percentage_list
+                  (number_or_length_or_percentage
+                    (length
+                      (number)))
+                  (comma_wsp
+                    (wsp))
+                  (number_or_length_or_percentage
+                    (length
+                      (number)))
+                  (comma_wsp
+                    (wsp))
+                  (number_or_length_or_percentage
+                    (length
+                      (number))))))))
+        (attribute
+          (text_layout_attribute
+            (text_anchor_attribute
+              (text_anchor_attribute_name)
+              (text_anchor_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (text_decoration_attribute
+              (text_decoration_attribute_name)
+              (text_decoration_attribute_value
+                (raw_text)))))
+        (attribute
+          (text_layout_attribute
+            (unicode_bidi_attribute
+              (unicode_bidi_attribute_name)
+              (unicode_bidi_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (letter_word_spacing_attribute
+              (letter_word_spacing_attribute_name)
+              (letter_word_spacing_attribute_value
+                (length
+                  (number))))))
+        (attribute
+          (text_layout_attribute
+            (writing_mode_attribute
+              (writing_mode_attribute_name)
+              (writing_mode_attribute_value)))))
+      (text)
+      (end_tag
+        (name)))
+    (text)
+    (element
+      (self_closing_tag
+        (name)
+        (attribute
+          (text_layout_attribute
+            (method_attribute
+              (method_attribute_name)
+              (method_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (side_attribute
+              (side_attribute_name)
+              (side_attribute_value))))
+        (attribute
+          (text_layout_attribute
+            (spacing_attribute
+              (spacing_attribute_name)
+              (spacing_attribute_value))))))
+    (text)
+    (svg_root_end_tag
+      (name)))
+  (text))
+
+==================
+Coord system and linking/media attributes
+==================
+
+<svg
+  clipPathUnits="userSpaceOnUse"
+  filterUnits="objectBoundingBox"
+  gradientUnits="userSpaceOnUse"
+  markerUnits="strokeWidth"
+  maskContentUnits="objectBoundingBox"
+  maskUnits="userSpaceOnUse"
+  patternContentUnits="userSpaceOnUse"
+  patternUnits="objectBoundingBox"
+  primitiveUnits="userSpaceOnUse"
+  spreadMethod="reflect"
+  orient="auto-start-reverse"
+  zoomAndPan="magnify"
+  fr="50%"
+  origin="center"
+  crossorigin="anonymous"
+  download="diagram.svg"
+  hreflang="en-US"
+  media="screen and (min-width: 600px)"
+  ping="https://a.example/ping https://b.example/ping"
+  referrerpolicy="strict-origin-when-cross-origin"
+  rel="noopener noreferrer"
+  target="_blank"
+  type="text/css"></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (svg_root_start_tag
+      (name)
+      (attribute
+        (coord_system_attribute
+          (units_attribute
+            (units_attribute_name)
+            (units_attribute_value))))
+      (attribute
+        (coord_system_attribute
+          (units_attribute
+            (units_attribute_name)
+            (units_attribute_value))))
+      (attribute
+        (coord_system_attribute
+          (units_attribute
+            (units_attribute_name)
+            (units_attribute_value))))
+      (attribute
+        (coord_system_attribute
+          (marker_units_attribute
+            (marker_units_attribute_name)
+            (marker_units_attribute_value))))
+      (attribute
+        (coord_system_attribute
+          (units_attribute
+            (units_attribute_name)
+            (units_attribute_value))))
+      (attribute
+        (coord_system_attribute
+          (units_attribute
+            (units_attribute_name)
+            (units_attribute_value))))
+      (attribute
+        (coord_system_attribute
+          (units_attribute
+            (units_attribute_name)
+            (units_attribute_value))))
+      (attribute
+        (coord_system_attribute
+          (units_attribute
+            (units_attribute_name)
+            (units_attribute_value))))
+      (attribute
+        (coord_system_attribute
+          (units_attribute
+            (units_attribute_name)
+            (units_attribute_value))))
+      (attribute
+        (coord_system_attribute
+          (spread_method_attribute
+            (spread_method_attribute_name)
+            (spread_method_attribute_value))))
+      (attribute
+        (coord_system_attribute
+          (orient_attribute
+            (orient_attribute_name)
+            (orient_attribute_value))))
+      (attribute
+        (coord_system_attribute
+          (zoom_and_pan_attribute
+            (zoom_and_pan_attribute_name)
+            (zoom_and_pan_attribute_value))))
+      (attribute
+        (coord_system_attribute
+          (fr_attribute
+            (fr_attribute_name)
+            (fr_attribute_value
+              (number_or_percentage
+                (percentage
+                  (number)))))))
+      (attribute
+        (coord_system_attribute
+          (origin_attribute
+            (origin_attribute_name)
+            (origin_attribute_value
+              (raw_text)))))
+      (attribute
+        (linking_media_attribute
+          (crossorigin_attribute
+            (crossorigin_attribute_name)
+            (crossorigin_attribute_value))))
+      (attribute
+        (linking_media_attribute
+          (download_attribute
+            (download_attribute_name)
+            (download_attribute_value
+              (raw_text)))))
+      (attribute
+        (linking_media_attribute
+          (hreflang_attribute
+            (hreflang_attribute_name)
+            (hreflang_attribute_value
+              (language_tag)))))
+      (attribute
+        (linking_media_attribute
+          (media_attribute
+            (media_attribute_name)
+            (media_attribute_value
+              (raw_text)))))
+      (attribute
+        (linking_media_attribute
+          (ping_attribute
+            (ping_attribute_name)
+            (ping_attribute_value
+              (iri_reference_list
+                (iri_reference)
+                (wsp)
+                (iri_reference))))))
+      (attribute
+        (linking_media_attribute
+          (referrerpolicy_attribute
+            (referrerpolicy_attribute_name)
+            (referrerpolicy_attribute_value))))
+      (attribute
+        (linking_media_attribute
+          (rel_attribute
+            (rel_attribute_name)
+            (rel_attribute_value
+              (raw_text)))))
+      (attribute
+        (linking_media_attribute
+          (target_attribute
+            (target_attribute_name)
+            (target_attribute_value))))
+      (attribute
+        (linking_media_attribute
+          (type_attribute
+            (type_attribute_name)
+            (type_attribute_value
+              (raw_text))))))
+    (svg_root_end_tag
+      (name)))
+  (text))
+
+==================
+Other regular long-tail attributes
+==================
+
+<svg
+  max="10"
+  min="0"
+  mode="multiply"
+  offset="50%"
+  paint-order="stroke fill markers"
+  path="M0 0 L10 10"
+  playbackorder="forward"
+  pointsAtX="1"
+  pointsAtY="2"
+  pointsAtZ="3"
+  requiredExtensions="https://example.com/extA https://example.com/extB"
+  role="img graphics-symbol"
+  systemLanguage="en,nl-BE"
+  timelinebegin="0s"
+  title="Legend"
+  xlink:title="Legend fallback"
+  z="10"></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (svg_root_start_tag
+      (name)
+      (attribute
+        (other_regular_attribute
+          (max_attribute
+            (max_attribute_name)
+            (max_attribute_value
+              (number)))))
+      (attribute
+        (other_regular_attribute
+          (min_attribute
+            (min_attribute_name)
+            (min_attribute_value
+              (number)))))
+      (attribute
+        (other_regular_attribute
+          (mode_attribute
+            (mode_attribute_name)
+            (mode_attribute_value))))
+      (attribute
+        (other_regular_attribute
+          (offset_attribute
+            (offset_attribute_name)
+            (offset_attribute_value
+              (number_or_percentage
+                (percentage
+                  (number)))))))
+      (attribute
+        (other_regular_attribute
+          (paint_order_attribute
+            (paint_order_attribute_name)
+            (paint_order_attribute_value
+              (paint_order_list
+                (paint_order_item)
+                (wsp)
+                (paint_order_item)
+                (wsp)
+                (paint_order_item))))))
+      (attribute
+        (other_regular_attribute
+          (path_data_attribute
+            (path_data_attribute_name)
+            (path_data_attribute_value
+              (path_data_content
+                (path_data
+                  (moveto_segment
+                    (path_command)
+                    (path_coordinate_pair
+                      (path_coordinate
+                        (path_number))
+                      (path_comma_wsp
+                        (path_wsp))
+                      (path_coordinate
+                        (path_number))))
+                  (path_wsp)
+                  (path_segment
+                    (lineto_segment
+                      (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number)))))))))))
+      (attribute
+        (other_regular_attribute
+          (playbackorder_attribute
+            (playbackorder_attribute_name)
+            (playbackorder_attribute_value))))
+      (attribute
+        (other_regular_attribute
+          (points_at_attribute
+            (points_at_attribute_name)
+            (points_at_attribute_value
+              (number)))))
+      (attribute
+        (other_regular_attribute
+          (points_at_attribute
+            (points_at_attribute_name)
+            (points_at_attribute_value
+              (number)))))
+      (attribute
+        (other_regular_attribute
+          (points_at_attribute
+            (points_at_attribute_name)
+            (points_at_attribute_value
+              (number)))))
+      (attribute
+        (other_regular_attribute
+          (required_extensions_attribute
+            (required_extensions_attribute_name)
+            (required_extensions_attribute_value
+              (iri_reference_list
+                (iri_reference)
+                (wsp)
+                (iri_reference))))))
+      (attribute
+        (other_regular_attribute
+          (role_attribute
+            (role_attribute_name)
+            (role_attribute_value
+              (raw_text)))))
+      (attribute
+        (other_regular_attribute
+          (system_language_attribute
+            (system_language_attribute_name)
+            (system_language_attribute_value
+              (language_tag_list
+                (language_tag)
+                (comma_wsp)
+                (language_tag))))))
+      (attribute
+        (other_regular_attribute
+          (timelinebegin_attribute
+            (timelinebegin_attribute_name)
+            (timelinebegin_attribute_value
+              (timing_event_value)))))
+      (attribute
+        (other_regular_attribute
+          (title_attribute
+            (title_attribute_name)
+            (title_attribute_value
+              (raw_text)))))
+      (attribute
+        (other_regular_attribute
+          (title_attribute
+            (title_attribute_name)
+            (title_attribute_value
+              (raw_text)))))
+      (attribute
+        (other_regular_attribute
+          (z_attribute
+            (z_attribute_name)
+            (z_attribute_value
+              (number))))))
+    (svg_root_end_tag
+      (name)))
+  (text))
+
+================================================================================
+Invalid animation calcMode
+:error
+================================================================================
+
+<svg><animate calcMode="curved"/></svg>
+
+--------------------------------------------------------------------------------
+
+
+
+================================================================================
+Invalid filter edgeMode
+:error
+================================================================================
+
+<svg><filter><feConvolveMatrix edgeMode="mirror"/></filter></svg>
+
+--------------------------------------------------------------------------------
+
+
+
+================================================================================
+Invalid zoomAndPan keyword
+:error
+================================================================================
+
+<svg zoomAndPan="auto"></svg>
+
+--------------------------------------------------------------------------------
+
+
+
+================================================================================
+Invalid spreadMethod keyword
+:error
+================================================================================
+
+<svg spreadMethod="clamp"></svg>
+
+--------------------------------------------------------------------------------
+
+

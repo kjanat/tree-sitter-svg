@@ -34,3 +34,4 @@
 - Non-start grammar rules cannot match empty strings; wrap optional emptiness in parent rules instead of making the child nullable
 - Overlapping whitespace tokens (e.g. `misc_text` vs path whitespace) can cause wrong token choice; assign precedence for context-specific whitespace tokens
 - `tree-sitter test -u` will not update sections that still parse with `ERROR`/`MISSING`; fix grammar/input first, then rerun update
+- If one rule is a strict superset of another (e.g. `length` includes bare numbers), avoid including both in the same `choice` without precedence; this creates unresolved LR conflicts

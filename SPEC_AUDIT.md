@@ -79,3 +79,9 @@ implemented grammar/test changes tied to those excerpts.
 - `tree-sitter generate`
 - `tree-sitter test`
 - `node --test bindings/node/*_test.js`
+
+## Coverage Snapshot
+
+- SVG2 attribute-index comparison source: https://www.w3.org/TR/SVG2/attindex.html
+- Current local coverage report: `UNTYPED_SVG2_ATTRIBUTES.md`
+- Result in this pass: `Total untyped attributes: 0` (excluding dynamically typed `on*` event attributes)

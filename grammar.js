@@ -234,6 +234,14 @@ export default grammar({
 			choice(
 				$.path_attribute,
 				$.style_attribute,
+				$.aria_attribute,
+				$.animation_attribute,
+				$.filter_effect_attribute,
+				$.text_layout_attribute,
+				$.coord_system_attribute,
+				$.linking_media_attribute,
+				$.color_rendering_misc_attribute,
+				$.other_regular_attribute,
 				$.viewbox_attribute,
 				$.preserve_aspect_ratio_attribute,
 				$.transform_attribute,
@@ -1217,6 +1225,1337 @@ export default grammar({
 		script_text_double: _ => token(/[^"]+/),
 
 		script_text_single: _ => token(/[^']+/),
+
+		aria_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.aria_attribute_name),
+					$._eq,
+					field('value', $.aria_attribute_value),
+				),
+			),
+
+		aria_attribute_name: _ =>
+			choice(
+				'aria-activedescendant',
+				'aria-atomic',
+				'aria-autocomplete',
+				'aria-busy',
+				'aria-checked',
+				'aria-colcount',
+				'aria-colindex',
+				'aria-colspan',
+				'aria-controls',
+				'aria-current',
+				'aria-describedby',
+				'aria-details',
+				'aria-disabled',
+				'aria-dropeffect',
+				'aria-errormessage',
+				'aria-expanded',
+				'aria-flowto',
+				'aria-grabbed',
+				'aria-haspopup',
+				'aria-hidden',
+				'aria-invalid',
+				'aria-keyshortcuts',
+				'aria-label',
+				'aria-labelledby',
+				'aria-level',
+				'aria-live',
+				'aria-modal',
+				'aria-multiline',
+				'aria-multiselectable',
+				'aria-orientation',
+				'aria-owns',
+				'aria-placeholder',
+				'aria-posinset',
+				'aria-pressed',
+				'aria-readonly',
+				'aria-relevant',
+				'aria-required',
+				'aria-roledescription',
+				'aria-rowcount',
+				'aria-rowindex',
+				'aria-rowspan',
+				'aria-selected',
+				'aria-setsize',
+				'aria-sort',
+				'aria-valuemax',
+				'aria-valuemin',
+				'aria-valuenow',
+				'aria-valuetext',
+			),
+
+		aria_attribute_value: $ => quoted($.aria_token_list),
+
+		aria_token_list: $ => seq($.aria_token, repeat(seq($.wsp, $.aria_token))),
+
+		aria_token: _ => token(/[A-Za-z0-9_.:-]+/),
+
+		animation_attribute: $ =>
+			choice(
+				$.accumulate_attribute,
+				$.additive_attribute,
+				$.attribute_name_attribute,
+				$.begin_attribute,
+				$.by_attribute,
+				$.calc_mode_attribute,
+				$.dur_attribute,
+				$.end_attribute,
+				$.from_attribute,
+				$.key_points_attribute,
+				$.key_splines_attribute,
+				$.key_times_attribute,
+				$.repeat_count_attribute,
+				$.repeat_dur_attribute,
+				$.restart_attribute,
+				$.to_attribute,
+				$.values_attribute,
+			),
+
+		accumulate_attribute: $ =>
+			seq(
+				field('name', $.accumulate_attribute_name),
+				$._eq,
+				field('value', $.accumulate_attribute_value),
+			),
+
+		accumulate_attribute_name: _ => 'accumulate',
+
+		accumulate_attribute_value: $ => quoted($.accumulate_keyword),
+
+		accumulate_keyword: _ => choice('none', 'sum'),
+
+		additive_attribute: $ =>
+			seq(
+				field('name', $.additive_attribute_name),
+				$._eq,
+				field('value', $.additive_attribute_value),
+			),
+
+		additive_attribute_name: _ => 'additive',
+
+		additive_attribute_value: $ => quoted($.additive_keyword),
+
+		additive_keyword: _ => choice('replace', 'sum'),
+
+		attribute_name_attribute: $ =>
+			seq(
+				field('name', $.attribute_name_attribute_name),
+				$._eq,
+				field('value', $.attribute_name_attribute_value),
+			),
+
+		attribute_name_attribute_name: _ => 'attributeName',
+
+		attribute_name_attribute_value: $ => quoted($.name),
+
+		begin_attribute: $ =>
+			seq(
+				field('name', $.begin_attribute_name),
+				$._eq,
+				field('value', $.begin_attribute_value),
+			),
+
+		begin_attribute_name: _ => 'begin',
+
+		begin_attribute_value: $ => quoted($.timing_value_list),
+
+		by_attribute: $ =>
+			seq(
+				field('name', $.by_attribute_name),
+				$._eq,
+				field('value', $.by_attribute_value),
+			),
+
+		by_attribute_name: _ => 'by',
+
+		by_attribute_value: $ => quoted($.animation_value_expression),
+
+		calc_mode_attribute: $ =>
+			seq(
+				field('name', $.calc_mode_attribute_name),
+				$._eq,
+				field('value', $.calc_mode_attribute_value),
+			),
+
+		calc_mode_attribute_name: _ => 'calcMode',
+
+		calc_mode_attribute_value: $ => quoted($.calc_mode_keyword),
+
+		calc_mode_keyword: _ => choice('discrete', 'linear', 'paced', 'spline'),
+
+		dur_attribute: $ =>
+			seq(
+				field('name', $.dur_attribute_name),
+				$._eq,
+				field('value', $.dur_attribute_value),
+			),
+
+		dur_attribute_name: _ => 'dur',
+
+		dur_attribute_value: $ => quoted($.clock_or_keyword),
+
+		end_attribute: $ =>
+			seq(
+				field('name', $.end_attribute_name),
+				$._eq,
+				field('value', $.end_attribute_value),
+			),
+
+		end_attribute_name: _ => 'end',
+
+		end_attribute_value: $ => quoted($.timing_value_list),
+
+		from_attribute: $ =>
+			seq(
+				field('name', $.from_attribute_name),
+				$._eq,
+				field('value', $.from_attribute_value),
+			),
+
+		from_attribute_name: _ => 'from',
+
+		from_attribute_value: $ => quoted($.animation_value_expression),
+
+		key_points_attribute: $ =>
+			seq(
+				field('name', $.key_points_attribute_name),
+				$._eq,
+				field('value', $.key_points_attribute_value),
+			),
+
+		key_points_attribute_name: _ => 'keyPoints',
+
+		key_points_attribute_value: $ => quoted($.semicolon_number_list),
+
+		key_splines_attribute: $ =>
+			seq(
+				field('name', $.key_splines_attribute_name),
+				$._eq,
+				field('value', $.key_splines_attribute_value),
+			),
+
+		key_splines_attribute_name: _ => 'keySplines',
+
+		key_splines_attribute_value: $ => quoted($.key_spline_list),
+
+		key_times_attribute: $ =>
+			seq(
+				field('name', $.key_times_attribute_name),
+				$._eq,
+				field('value', $.key_times_attribute_value),
+			),
+
+		key_times_attribute_name: _ => 'keyTimes',
+
+		key_times_attribute_value: $ => quoted($.semicolon_number_list),
+
+		repeat_count_attribute: $ =>
+			seq(
+				field('name', $.repeat_count_attribute_name),
+				$._eq,
+				field('value', $.repeat_count_attribute_value),
+			),
+
+		repeat_count_attribute_name: _ => 'repeatCount',
+
+		repeat_count_attribute_value: $ => quoted(choice($.number, 'indefinite')),
+
+		repeat_dur_attribute: $ =>
+			seq(
+				field('name', $.repeat_dur_attribute_name),
+				$._eq,
+				field('value', $.repeat_dur_attribute_value),
+			),
+
+		repeat_dur_attribute_name: _ => 'repeatDur',
+
+		repeat_dur_attribute_value: $ => quoted($.clock_or_keyword),
+
+		restart_attribute: $ =>
+			seq(
+				field('name', $.restart_attribute_name),
+				$._eq,
+				field('value', $.restart_attribute_value),
+			),
+
+		restart_attribute_name: _ => 'restart',
+
+		restart_attribute_value: $ => quoted($.restart_keyword),
+
+		restart_keyword: _ => choice('always', 'whenNotActive', 'never'),
+
+		to_attribute: $ =>
+			seq(
+				field('name', $.to_attribute_name),
+				$._eq,
+				field('value', $.to_attribute_value),
+			),
+
+		to_attribute_name: _ => 'to',
+
+		to_attribute_value: $ => quoted($.animation_value_expression),
+
+		values_attribute: $ =>
+			seq(
+				field('name', $.values_attribute_name),
+				$._eq,
+				field('value', $.values_attribute_value),
+			),
+
+		values_attribute_name: _ => 'values',
+
+		values_attribute_value: $ => quoted($.animation_value_list),
+
+		timing_value_list: $ =>
+			seq(
+				$.timing_value,
+				repeat(seq(optional($.wsp), ';', optional($.wsp), $.timing_value)),
+				optional(seq(optional($.wsp), ';')),
+			),
+
+		timing_value: $ => choice($.clock_value, 'indefinite', $.timing_event_value),
+
+		clock_or_keyword: $ => choice($.clock_value, 'media', 'indefinite'),
+
+		clock_value: _ => token(/[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:h|min|s|ms)?/),
+
+		timing_event_value: _ => token(/[^;"']+/),
+
+		animation_value_expression: _ => token(/[^;"']+/),
+
+		animation_value_list: $ =>
+			seq(
+				$.animation_value_expression,
+				repeat(seq(optional($.wsp), ';', optional($.wsp), $.animation_value_expression)),
+				optional(seq(optional($.wsp), ';')),
+			),
+
+		semicolon_number_list: $ =>
+			seq(
+				$.number,
+				repeat(seq(optional($.wsp), ';', optional($.wsp), $.number)),
+			),
+
+		key_spline_list: $ =>
+			seq(
+				$.key_spline,
+				repeat(seq(optional($.wsp), ';', optional($.wsp), $.key_spline)),
+			),
+
+		key_spline: $ =>
+			seq(
+				$.number,
+				$.comma_wsp,
+				$.number,
+				$.comma_wsp,
+				$.number,
+				$.comma_wsp,
+				$.number,
+			),
+
+		filter_effect_attribute: $ =>
+			choice(
+				$.filter_number_attribute,
+				$.filter_pair_number_attribute,
+				$.filter_integer_attribute,
+				$.filter_order_attribute,
+				$.filter_number_list_attribute,
+				$.filter_input_attribute,
+				$.filter_result_attribute,
+				$.filter_edge_mode_attribute,
+				$.filter_stitch_tiles_attribute,
+				$.filter_operator_attribute,
+				$.filter_preserve_alpha_attribute,
+				$.filter_channel_selector_attribute,
+			),
+
+		filter_number_attribute: $ =>
+			seq(
+				field('name', $.filter_number_attribute_name),
+				$._eq,
+				field('value', $.filter_number_attribute_value),
+			),
+
+		filter_number_attribute_name: _ =>
+			choice(
+				'amplitude',
+				'azimuth',
+				'bias',
+				'diffuseConstant',
+				'divisor',
+				'elevation',
+				'exponent',
+				'intercept',
+				'k1',
+				'k2',
+				'k3',
+				'k4',
+				'limitingConeAngle',
+				'scale',
+				'seed',
+				'slope',
+				'specularConstant',
+				'specularExponent',
+				'surfaceScale',
+			),
+
+		filter_number_attribute_value: $ => quoted($.number),
+
+		filter_pair_number_attribute: $ =>
+			seq(
+				field('name', $.filter_pair_number_attribute_name),
+				$._eq,
+				field('value', $.filter_pair_number_attribute_value),
+			),
+
+		filter_pair_number_attribute_name: _ =>
+			choice(
+				'baseFrequency',
+				'kernelUnitLength',
+				'radius',
+				'stdDeviation',
+			),
+
+		filter_pair_number_attribute_value: $ => quoted(choice($.number, $.number_pair)),
+
+		filter_integer_attribute: $ =>
+			seq(
+				field('name', $.filter_integer_attribute_name),
+				$._eq,
+				field('value', $.filter_integer_attribute_value),
+			),
+
+		filter_integer_attribute_name: _ =>
+			choice(
+				'numOctaves',
+				'targetX',
+				'targetY',
+			),
+
+		filter_integer_attribute_value: $ => quoted($.integer),
+
+		filter_order_attribute: $ =>
+			seq(
+				field('name', $.filter_order_attribute_name),
+				$._eq,
+				field('value', $.filter_order_attribute_value),
+			),
+
+		filter_order_attribute_name: _ => 'order',
+
+		filter_order_attribute_value: $ => quoted(choice($.integer, $.integer_pair)),
+
+		filter_number_list_attribute: $ =>
+			seq(
+				field('name', $.filter_number_list_attribute_name),
+				$._eq,
+				field('value', $.filter_number_list_attribute_value),
+			),
+
+		filter_number_list_attribute_name: _ => choice('kernelMatrix', 'tableValues'),
+
+		filter_number_list_attribute_value: $ => quoted($.number_list),
+
+		filter_input_attribute: $ =>
+			seq(
+				field('name', $.filter_input_attribute_name),
+				$._eq,
+				field('value', $.filter_input_attribute_value),
+			),
+
+		filter_input_attribute_name: _ => choice('in', 'in2'),
+
+		filter_input_attribute_value: $ => quoted($.filter_input_value),
+
+		filter_input_value: $ =>
+			choice(
+				'SourceGraphic',
+				'SourceAlpha',
+				'BackgroundImage',
+				'BackgroundAlpha',
+				'FillPaint',
+				'StrokePaint',
+				$.id_token,
+			),
+
+		filter_result_attribute: $ =>
+			seq(
+				field('name', $.filter_result_attribute_name),
+				$._eq,
+				field('value', $.filter_result_attribute_value),
+			),
+
+		filter_result_attribute_name: _ => 'result',
+
+		filter_result_attribute_value: $ => quoted($.id_token),
+
+		filter_edge_mode_attribute: $ =>
+			seq(
+				field('name', $.filter_edge_mode_attribute_name),
+				$._eq,
+				field('value', $.filter_edge_mode_attribute_value),
+			),
+
+		filter_edge_mode_attribute_name: _ => 'edgeMode',
+
+		filter_edge_mode_attribute_value: $ => quoted(choice('duplicate', 'wrap', 'none')),
+
+		filter_stitch_tiles_attribute: $ =>
+			seq(
+				field('name', $.filter_stitch_tiles_attribute_name),
+				$._eq,
+				field('value', $.filter_stitch_tiles_attribute_value),
+			),
+
+		filter_stitch_tiles_attribute_name: _ => 'stitchTiles',
+
+		filter_stitch_tiles_attribute_value: $ => quoted(choice('stitch', 'noStitch')),
+
+		filter_operator_attribute: $ =>
+			seq(
+				field('name', $.filter_operator_attribute_name),
+				$._eq,
+				field('value', $.filter_operator_attribute_value),
+			),
+
+		filter_operator_attribute_name: _ => 'operator',
+
+		filter_operator_attribute_value: $ =>
+			quoted(choice('over', 'in', 'out', 'atop', 'xor', 'lighter', 'arithmetic', 'erode', 'dilate')),
+
+		filter_preserve_alpha_attribute: $ =>
+			seq(
+				field('name', $.filter_preserve_alpha_attribute_name),
+				$._eq,
+				field('value', $.filter_preserve_alpha_attribute_value),
+			),
+
+		filter_preserve_alpha_attribute_name: _ => 'preserveAlpha',
+
+		filter_preserve_alpha_attribute_value: $ => quoted(choice('true', 'false')),
+
+		filter_channel_selector_attribute: $ =>
+			seq(
+				field('name', $.filter_channel_selector_attribute_name),
+				$._eq,
+				field('value', $.filter_channel_selector_attribute_value),
+			),
+
+		filter_channel_selector_attribute_name: _ => choice('xChannelSelector', 'yChannelSelector'),
+
+		filter_channel_selector_attribute_value: $ => quoted(choice('R', 'G', 'B', 'A')),
+
+		text_layout_attribute: $ =>
+			choice(
+				$.text_length_list_attribute,
+				$.alignment_baseline_attribute,
+				$.baseline_shift_attribute,
+				$.direction_attribute,
+				$.dominant_baseline_attribute,
+				$.font_family_attribute,
+				$.font_size_adjust_attribute,
+				$.font_stretch_attribute,
+				$.font_style_attribute,
+				$.font_variant_attribute,
+				$.font_weight_attribute,
+				$.glyph_orientation_attribute,
+				$.length_adjust_attribute,
+				$.letter_word_spacing_attribute,
+				$.method_attribute,
+				$.side_attribute,
+				$.spacing_attribute,
+				$.text_anchor_attribute,
+				$.text_decoration_attribute,
+				$.unicode_bidi_attribute,
+				$.writing_mode_attribute,
+			),
+
+		text_length_list_attribute: $ =>
+			seq(
+				field('name', $.text_length_list_attribute_name),
+				$._eq,
+				field('value', $.text_length_list_attribute_value),
+			),
+
+		text_length_list_attribute_name: _ => choice('dx', 'dy', 'rotate'),
+
+		text_length_list_attribute_value: $ => quoted($.number_or_length_or_percentage_list),
+
+		alignment_baseline_attribute: $ =>
+			seq(
+				field('name', $.alignment_baseline_attribute_name),
+				$._eq,
+				field('value', $.alignment_baseline_attribute_value),
+			),
+
+		alignment_baseline_attribute_name: _ => 'alignment-baseline',
+
+		alignment_baseline_attribute_value: $ =>
+			quoted(
+				choice(
+					'auto',
+					'baseline',
+					'before-edge',
+					'text-before-edge',
+					'middle',
+					'central',
+					'after-edge',
+					'text-after-edge',
+					'ideographic',
+					'alphabetic',
+					'hanging',
+					'mathematical',
+					'inherit',
+				),
+			),
+
+		baseline_shift_attribute: $ =>
+			seq(
+				field('name', $.baseline_shift_attribute_name),
+				$._eq,
+				field('value', $.baseline_shift_attribute_value),
+			),
+
+		baseline_shift_attribute_name: _ => 'baseline-shift',
+
+		baseline_shift_attribute_value: $ => quoted(choice('baseline', 'sub', 'super', $.length_or_percentage, 'inherit')),
+
+		direction_attribute: $ =>
+			seq(
+				field('name', $.direction_attribute_name),
+				$._eq,
+				field('value', $.direction_attribute_value),
+			),
+
+		direction_attribute_name: _ => 'direction',
+
+		direction_attribute_value: $ => quoted(choice('ltr', 'rtl', 'inherit')),
+
+		dominant_baseline_attribute: $ =>
+			seq(
+				field('name', $.dominant_baseline_attribute_name),
+				$._eq,
+				field('value', $.dominant_baseline_attribute_value),
+			),
+
+		dominant_baseline_attribute_name: _ => 'dominant-baseline',
+
+		dominant_baseline_attribute_value: $ =>
+			quoted(
+				choice(
+					'auto',
+					'use-script',
+					'no-change',
+					'reset-size',
+					'ideographic',
+					'alphabetic',
+					'hanging',
+					'mathematical',
+					'central',
+					'middle',
+					'text-after-edge',
+					'text-before-edge',
+					'inherit',
+				),
+			),
+
+		font_family_attribute: $ =>
+			seq(
+				field('name', $.font_family_attribute_name),
+				$._eq,
+				field('value', $.font_family_attribute_value),
+			),
+
+		font_family_attribute_name: _ => 'font-family',
+
+		font_family_attribute_value: $ => quoted($.raw_text),
+
+		font_size_adjust_attribute: $ =>
+			seq(
+				field('name', $.font_size_adjust_attribute_name),
+				$._eq,
+				field('value', $.font_size_adjust_attribute_value),
+			),
+
+		font_size_adjust_attribute_name: _ => 'font-size-adjust',
+
+		font_size_adjust_attribute_value: $ => quoted(choice('none', $.number, 'inherit')),
+
+		font_stretch_attribute: $ =>
+			seq(
+				field('name', $.font_stretch_attribute_name),
+				$._eq,
+				field('value', $.font_stretch_attribute_value),
+			),
+
+		font_stretch_attribute_name: _ => 'font-stretch',
+
+		font_stretch_attribute_value: $ =>
+			quoted(
+				choice(
+					'normal',
+					'wider',
+					'narrower',
+					'ultra-condensed',
+					'extra-condensed',
+					'condensed',
+					'semi-condensed',
+					'semi-expanded',
+					'expanded',
+					'extra-expanded',
+					'ultra-expanded',
+					'inherit',
+				),
+			),
+
+		font_style_attribute: $ =>
+			seq(
+				field('name', $.font_style_attribute_name),
+				$._eq,
+				field('value', $.font_style_attribute_value),
+			),
+
+		font_style_attribute_name: _ => 'font-style',
+
+		font_style_attribute_value: $ => quoted(choice('normal', 'italic', 'oblique', 'inherit')),
+
+		font_variant_attribute: $ =>
+			seq(
+				field('name', $.font_variant_attribute_name),
+				$._eq,
+				field('value', $.font_variant_attribute_value),
+			),
+
+		font_variant_attribute_name: _ => 'font-variant',
+
+		font_variant_attribute_value: $ => quoted(choice('normal', 'small-caps', 'inherit')),
+
+		font_weight_attribute: $ =>
+			seq(
+				field('name', $.font_weight_attribute_name),
+				$._eq,
+				field('value', $.font_weight_attribute_value),
+			),
+
+		font_weight_attribute_name: _ => 'font-weight',
+
+		font_weight_attribute_value: $ =>
+			quoted(
+				choice(
+					'normal',
+					'bold',
+					'bolder',
+					'lighter',
+					'100',
+					'200',
+					'300',
+					'400',
+					'500',
+					'600',
+					'700',
+					'800',
+					'900',
+					'inherit',
+				),
+			),
+
+		glyph_orientation_attribute: $ =>
+			seq(
+				field('name', $.glyph_orientation_attribute_name),
+				$._eq,
+				field('value', $.glyph_orientation_attribute_value),
+			),
+
+		glyph_orientation_attribute_name: _ => choice('glyph-orientation-horizontal', 'glyph-orientation-vertical'),
+
+		glyph_orientation_attribute_value: $ => quoted(choice($.angle, 'auto')),
+
+		length_adjust_attribute: $ =>
+			seq(
+				field('name', $.length_adjust_attribute_name),
+				$._eq,
+				field('value', $.length_adjust_attribute_value),
+			),
+
+		length_adjust_attribute_name: _ => 'lengthAdjust',
+
+		length_adjust_attribute_value: $ => quoted(choice('spacing', 'spacingAndGlyphs')),
+
+		letter_word_spacing_attribute: $ =>
+			seq(
+				field('name', $.letter_word_spacing_attribute_name),
+				$._eq,
+				field('value', $.letter_word_spacing_attribute_value),
+			),
+
+		letter_word_spacing_attribute_name: _ => choice('letter-spacing', 'word-spacing'),
+
+		letter_word_spacing_attribute_value: $ => quoted(choice('normal', $.length, 'inherit')),
+
+		method_attribute: $ =>
+			seq(
+				field('name', $.method_attribute_name),
+				$._eq,
+				field('value', $.method_attribute_value),
+			),
+
+		method_attribute_name: _ => 'method',
+
+		method_attribute_value: $ => quoted(choice('align', 'stretch')),
+
+		side_attribute: $ =>
+			seq(
+				field('name', $.side_attribute_name),
+				$._eq,
+				field('value', $.side_attribute_value),
+			),
+
+		side_attribute_name: _ => 'side',
+
+		side_attribute_value: $ => quoted(choice('left', 'right')),
+
+		spacing_attribute: $ =>
+			seq(
+				field('name', $.spacing_attribute_name),
+				$._eq,
+				field('value', $.spacing_attribute_value),
+			),
+
+		spacing_attribute_name: _ => 'spacing',
+
+		spacing_attribute_value: $ => quoted(choice('auto', 'exact')),
+
+		text_anchor_attribute: $ =>
+			seq(
+				field('name', $.text_anchor_attribute_name),
+				$._eq,
+				field('value', $.text_anchor_attribute_value),
+			),
+
+		text_anchor_attribute_name: _ => 'text-anchor',
+
+		text_anchor_attribute_value: $ => quoted(choice('start', 'middle', 'end', 'inherit')),
+
+		text_decoration_attribute: $ =>
+			seq(
+				field('name', $.text_decoration_attribute_name),
+				$._eq,
+				field('value', $.text_decoration_attribute_value),
+			),
+
+		text_decoration_attribute_name: _ => 'text-decoration',
+
+		text_decoration_attribute_value: $ => quoted($.raw_text),
+
+		unicode_bidi_attribute: $ =>
+			seq(
+				field('name', $.unicode_bidi_attribute_name),
+				$._eq,
+				field('value', $.unicode_bidi_attribute_value),
+			),
+
+		unicode_bidi_attribute_name: _ => 'unicode-bidi',
+
+		unicode_bidi_attribute_value: $ =>
+			quoted(choice('normal', 'embed', 'bidi-override', 'isolate', 'isolate-override', 'plaintext', 'inherit')),
+
+		writing_mode_attribute: $ =>
+			seq(
+				field('name', $.writing_mode_attribute_name),
+				$._eq,
+				field('value', $.writing_mode_attribute_value),
+			),
+
+		writing_mode_attribute_name: _ => 'writing-mode',
+
+		writing_mode_attribute_value: $ =>
+			quoted(
+				choice('horizontal-tb', 'vertical-rl', 'vertical-lr', 'lr', 'lr-tb', 'rl', 'rl-tb', 'tb', 'tb-rl', 'inherit'),
+			),
+
+		coord_system_attribute: $ =>
+			choice(
+				$.units_attribute,
+				$.marker_units_attribute,
+				$.spread_method_attribute,
+				$.orient_attribute,
+				$.zoom_and_pan_attribute,
+				$.fr_attribute,
+				$.origin_attribute,
+			),
+
+		units_attribute: $ =>
+			seq(
+				field('name', $.units_attribute_name),
+				$._eq,
+				field('value', $.units_attribute_value),
+			),
+
+		units_attribute_name: _ =>
+			choice(
+				'clipPathUnits',
+				'filterUnits',
+				'gradientUnits',
+				'maskContentUnits',
+				'maskUnits',
+				'patternContentUnits',
+				'patternUnits',
+				'primitiveUnits',
+			),
+
+		units_attribute_value: $ => quoted(choice('userSpaceOnUse', 'objectBoundingBox')),
+
+		marker_units_attribute: $ =>
+			seq(
+				field('name', $.marker_units_attribute_name),
+				$._eq,
+				field('value', $.marker_units_attribute_value),
+			),
+
+		marker_units_attribute_name: _ => 'markerUnits',
+
+		marker_units_attribute_value: $ => quoted(choice('strokeWidth', 'userSpaceOnUse')),
+
+		spread_method_attribute: $ =>
+			seq(
+				field('name', $.spread_method_attribute_name),
+				$._eq,
+				field('value', $.spread_method_attribute_value),
+			),
+
+		spread_method_attribute_name: _ => 'spreadMethod',
+
+		spread_method_attribute_value: $ => quoted(choice('pad', 'reflect', 'repeat')),
+
+		orient_attribute: $ =>
+			seq(
+				field('name', $.orient_attribute_name),
+				$._eq,
+				field('value', $.orient_attribute_value),
+			),
+
+		orient_attribute_name: _ => 'orient',
+
+		orient_attribute_value: $ => quoted(choice('auto', 'auto-start-reverse', $.angle)),
+
+		zoom_and_pan_attribute: $ =>
+			seq(
+				field('name', $.zoom_and_pan_attribute_name),
+				$._eq,
+				field('value', $.zoom_and_pan_attribute_value),
+			),
+
+		zoom_and_pan_attribute_name: _ => 'zoomAndPan',
+
+		zoom_and_pan_attribute_value: $ => quoted(choice('disable', 'magnify')),
+
+		fr_attribute: $ =>
+			seq(
+				field('name', $.fr_attribute_name),
+				$._eq,
+				field('value', $.fr_attribute_value),
+			),
+
+		fr_attribute_name: _ => 'fr',
+
+		fr_attribute_value: $ => quoted($.number_or_percentage),
+
+		origin_attribute: $ =>
+			seq(
+				field('name', $.origin_attribute_name),
+				$._eq,
+				field('value', $.origin_attribute_value),
+			),
+
+		origin_attribute_name: _ => 'origin',
+
+		origin_attribute_value: $ => quoted($.raw_text),
+
+		linking_media_attribute: $ =>
+			choice(
+				$.crossorigin_attribute,
+				$.download_attribute,
+				$.hreflang_attribute,
+				$.media_attribute,
+				$.ping_attribute,
+				$.referrerpolicy_attribute,
+				$.rel_attribute,
+				$.target_attribute,
+				$.type_attribute,
+			),
+
+		crossorigin_attribute: $ =>
+			seq(
+				field('name', $.crossorigin_attribute_name),
+				$._eq,
+				field('value', $.crossorigin_attribute_value),
+			),
+
+		crossorigin_attribute_name: _ => 'crossorigin',
+
+		crossorigin_attribute_value: $ => quoted(choice('anonymous', 'use-credentials')),
+
+		download_attribute: $ =>
+			seq(
+				field('name', $.download_attribute_name),
+				$._eq,
+				field('value', $.download_attribute_value),
+			),
+
+		download_attribute_name: _ => 'download',
+
+		download_attribute_value: $ => quoted($.raw_text),
+
+		hreflang_attribute: $ =>
+			seq(
+				field('name', $.hreflang_attribute_name),
+				$._eq,
+				field('value', $.hreflang_attribute_value),
+			),
+
+		hreflang_attribute_name: _ => 'hreflang',
+
+		hreflang_attribute_value: $ => quoted($.language_tag),
+
+		media_attribute: $ =>
+			seq(
+				field('name', $.media_attribute_name),
+				$._eq,
+				field('value', $.media_attribute_value),
+			),
+
+		media_attribute_name: _ => 'media',
+
+		media_attribute_value: $ => quoted($.raw_text),
+
+		ping_attribute: $ =>
+			seq(
+				field('name', $.ping_attribute_name),
+				$._eq,
+				field('value', $.ping_attribute_value),
+			),
+
+		ping_attribute_name: _ => 'ping',
+
+		ping_attribute_value: $ => quoted($.iri_reference_list),
+
+		referrerpolicy_attribute: $ =>
+			seq(
+				field('name', $.referrerpolicy_attribute_name),
+				$._eq,
+				field('value', $.referrerpolicy_attribute_value),
+			),
+
+		referrerpolicy_attribute_name: _ => 'referrerpolicy',
+
+		referrerpolicy_attribute_value: $ =>
+			quoted(
+				choice(
+					'no-referrer',
+					'no-referrer-when-downgrade',
+					'same-origin',
+					'origin',
+					'strict-origin',
+					'origin-when-cross-origin',
+					'strict-origin-when-cross-origin',
+					'unsafe-url',
+				),
+			),
+
+		rel_attribute: $ =>
+			seq(
+				field('name', $.rel_attribute_name),
+				$._eq,
+				field('value', $.rel_attribute_value),
+			),
+
+		rel_attribute_name: _ => 'rel',
+
+		rel_attribute_value: $ => quoted($.raw_text),
+
+		target_attribute: $ =>
+			seq(
+				field('name', $.target_attribute_name),
+				$._eq,
+				field('value', $.target_attribute_value),
+			),
+
+		target_attribute_name: _ => 'target',
+
+		target_attribute_value: $ => quoted(choice('_self', '_parent', '_top', '_blank', $.id_token)),
+
+		type_attribute: $ =>
+			seq(
+				field('name', $.type_attribute_name),
+				$._eq,
+				field('value', $.type_attribute_value),
+			),
+
+		type_attribute_name: _ => 'type',
+
+		type_attribute_value: $ => quoted($.raw_text),
+
+		color_rendering_misc_attribute: $ =>
+			choice(
+				$.clip_attribute,
+				$.color_interpolation_attribute,
+				$.color_interpolation_filters_attribute,
+				$.image_rendering_attribute,
+			),
+
+		clip_attribute: $ =>
+			seq(
+				field('name', $.clip_attribute_name),
+				$._eq,
+				field('value', $.clip_attribute_value),
+			),
+
+		clip_attribute_name: _ => 'clip',
+
+		clip_attribute_value: $ => quoted(choice('auto', 'none', $.raw_text)),
+
+		color_interpolation_attribute: $ =>
+			seq(
+				field('name', $.color_interpolation_attribute_name),
+				$._eq,
+				field('value', $.color_interpolation_attribute_value),
+			),
+
+		color_interpolation_attribute_name: _ => 'color-interpolation',
+
+		color_interpolation_attribute_value: $ => quoted(choice('auto', 'sRGB', 'linearRGB', 'inherit')),
+
+		color_interpolation_filters_attribute: $ =>
+			seq(
+				field('name', $.color_interpolation_filters_attribute_name),
+				$._eq,
+				field('value', $.color_interpolation_filters_attribute_value),
+			),
+
+		color_interpolation_filters_attribute_name: _ => 'color-interpolation-filters',
+
+		color_interpolation_filters_attribute_value: $ => quoted(choice('auto', 'sRGB', 'linearRGB', 'inherit')),
+
+		image_rendering_attribute: $ =>
+			seq(
+				field('name', $.image_rendering_attribute_name),
+				$._eq,
+				field('value', $.image_rendering_attribute_value),
+			),
+
+		image_rendering_attribute_name: _ => 'image-rendering',
+
+		image_rendering_attribute_value: $ =>
+			quoted(choice('auto', 'optimizeSpeed', 'optimizeQuality', 'crisp-edges', 'pixelated', 'inherit')),
+
+		other_regular_attribute: $ =>
+			choice(
+				$.max_attribute,
+				$.min_attribute,
+				$.mode_attribute,
+				$.offset_attribute,
+				$.paint_order_attribute,
+				$.path_data_attribute,
+				$.playbackorder_attribute,
+				$.points_at_attribute,
+				$.required_extensions_attribute,
+				$.role_attribute,
+				$.system_language_attribute,
+				$.timelinebegin_attribute,
+				$.title_attribute,
+				$.z_attribute,
+			),
+
+		max_attribute: $ =>
+			seq(
+				field('name', $.max_attribute_name),
+				$._eq,
+				field('value', $.max_attribute_value),
+			),
+
+		max_attribute_name: _ => 'max',
+
+		max_attribute_value: $ => quoted(choice($.number, $.clock_value)),
+
+		min_attribute: $ =>
+			seq(
+				field('name', $.min_attribute_name),
+				$._eq,
+				field('value', $.min_attribute_value),
+			),
+
+		min_attribute_name: _ => 'min',
+
+		min_attribute_value: $ => quoted(choice($.number, $.clock_value)),
+
+		mode_attribute: $ =>
+			seq(
+				field('name', $.mode_attribute_name),
+				$._eq,
+				field('value', $.mode_attribute_value),
+			),
+
+		mode_attribute_name: _ => 'mode',
+
+		mode_attribute_value: $ =>
+			quoted(choice('normal', 'multiply', 'screen', 'darken', 'lighten', 'hue', 'saturate', 'color', 'luminosity')),
+
+		offset_attribute: $ =>
+			seq(
+				field('name', $.offset_attribute_name),
+				$._eq,
+				field('value', $.offset_attribute_value),
+			),
+
+		offset_attribute_name: _ => 'offset',
+
+		offset_attribute_value: $ => quoted($.number_or_percentage),
+
+		paint_order_attribute: $ =>
+			seq(
+				field('name', $.paint_order_attribute_name),
+				$._eq,
+				field('value', $.paint_order_attribute_value),
+			),
+
+		paint_order_attribute_name: _ => 'paint-order',
+
+		paint_order_attribute_value: $ => quoted(choice('normal', $.paint_order_list)),
+
+		paint_order_list: $ => seq($.paint_order_item, repeat(seq($.wsp, $.paint_order_item))),
+
+		paint_order_item: _ => choice('fill', 'stroke', 'markers'),
+
+		path_data_attribute: $ =>
+			seq(
+				field('name', $.path_data_attribute_name),
+				$._eq,
+				field('value', $.path_data_attribute_value),
+			),
+
+		path_data_attribute_name: _ => 'path',
+
+		path_data_attribute_value: $ =>
+			choice(
+				seq('"', optional($.path_data_content), '"'),
+				seq("'", optional($.path_data_content), "'"),
+			),
+
+		playbackorder_attribute: $ =>
+			seq(
+				field('name', $.playbackorder_attribute_name),
+				$._eq,
+				field('value', $.playbackorder_attribute_value),
+			),
+
+		playbackorder_attribute_name: _ => 'playbackorder',
+
+		playbackorder_attribute_value: $ => quoted(choice('forward', 'reverse')),
+
+		points_at_attribute: $ =>
+			seq(
+				field('name', $.points_at_attribute_name),
+				$._eq,
+				field('value', $.points_at_attribute_value),
+			),
+
+		points_at_attribute_name: _ => choice('pointsAtX', 'pointsAtY', 'pointsAtZ'),
+
+		points_at_attribute_value: $ => quoted($.number),
+
+		required_extensions_attribute: $ =>
+			seq(
+				field('name', $.required_extensions_attribute_name),
+				$._eq,
+				field('value', $.required_extensions_attribute_value),
+			),
+
+		required_extensions_attribute_name: _ => 'requiredExtensions',
+
+		required_extensions_attribute_value: $ => quoted($.iri_reference_list),
+
+		role_attribute: $ =>
+			seq(
+				field('name', $.role_attribute_name),
+				$._eq,
+				field('value', $.role_attribute_value),
+			),
+
+		role_attribute_name: _ => 'role',
+
+		role_attribute_value: $ => quoted($.raw_text),
+
+		system_language_attribute: $ =>
+			seq(
+				field('name', $.system_language_attribute_name),
+				$._eq,
+				field('value', $.system_language_attribute_value),
+			),
+
+		system_language_attribute_name: _ => 'systemLanguage',
+
+		system_language_attribute_value: $ => quoted($.language_tag_list),
+
+		timelinebegin_attribute: $ =>
+			seq(
+				field('name', $.timelinebegin_attribute_name),
+				$._eq,
+				field('value', $.timelinebegin_attribute_value),
+			),
+
+		timelinebegin_attribute_name: _ => 'timelinebegin',
+
+		timelinebegin_attribute_value: $ => quoted($.timing_event_value),
+
+		title_attribute: $ =>
+			seq(
+				field('name', $.title_attribute_name),
+				$._eq,
+				field('value', $.title_attribute_value),
+			),
+
+		title_attribute_name: _ => choice('title', 'xlink:title'),
+
+		title_attribute_value: $ => quoted($.raw_text),
+
+		z_attribute: $ =>
+			seq(
+				field('name', $.z_attribute_name),
+				$._eq,
+				field('value', $.z_attribute_value),
+			),
+
+		z_attribute_name: _ => 'z',
+
+		z_attribute_value: $ => quoted($.number),
+
+		number_or_length_or_percentage: $ => choice($.length, $.percentage),
+
+		number_or_length_or_percentage_list: $ =>
+			seq(
+				$.number_or_length_or_percentage,
+				repeat(seq($.comma_wsp, $.number_or_length_or_percentage)),
+			),
+
+		number_pair: $ => seq($.number, $.comma_wsp, $.number),
+
+		integer_pair: $ => seq($.integer, $.comma_wsp, $.integer),
+
+		number_list: $ => seq($.number, repeat(seq($.comma_wsp, $.number))),
+
+		integer: _ => token(/[+-]?[0-9]+/),
+
+		angle: $ => seq($.number, optional(choice('deg', 'grad', 'rad', 'turn'))),
+
+		language_tag_list: $ => seq($.language_tag, repeat(seq($.comma_wsp, $.language_tag))),
+
+		iri_reference_list: $ => seq($.iri_reference, repeat(seq($.wsp, $.iri_reference))),
+
+		raw_text: _ => token(/[^"']+/),
 
 		number_or_percentage: $ => choice($.number, $.percentage),
 
