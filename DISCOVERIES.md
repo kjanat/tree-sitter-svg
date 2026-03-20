@@ -6,6 +6,7 @@
 - For simple external tokens (tag names, `/>`), avoid `mark_end` unless doing lookahead rollback; premature `mark_end` can truncate tokens
 - `tree-sitter build --wasm` can look stuck at `Extracting wasi-sdk...`, but for this grammar the real stall is later in wasm backend codegen for `src/parser.c`; syntax-only and LLVM IR emission finish quickly, object/wasm emission does not
 - WASM build fails when parser.c exceeds ~100K lines; at 102K lines (458 rules, 50 externals) the WASM backend cannot complete; at 21K lines (120 rules, 13 externals) it succeeds instantly
+- Zed's extension builder uses wasi-sdk clang-19 to compile grammar WASM; 102K-line parser.c hung indefinitely (23GB RSS); 21K-line parser.c compiles in ~17s
 
 ## Grammar
 
