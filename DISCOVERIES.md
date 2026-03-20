@@ -19,7 +19,8 @@
 
 ## Bindings
 
-- `bun test` cannot load native Node `.node` addons (`tree-sitter` package); use `npm test` (`node --test`) instead
+- Bun cannot load Node-API `.node` addons via `import()`; use `require()` (or `process.dlopen`) for Bun-specific loading paths
+- `bun test` works in this repo when expected prebuild paths exist; test bootstrap can create the missing `tree-sitter` runtime prebuild path under `node_modules/tree-sitter/prebuilds/<platform>-<arch>/`
 
 ## SVG Spec Gotchas
 

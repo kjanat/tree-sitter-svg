@@ -1,12 +1,24 @@
 import { readFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../..', import.meta.url));
+const require = createRequire(import.meta.url);
+const nodeGypBuild = require('node-gyp-build');
+
+function loadBunBinding() {
+	const prebuild = `${root}/prebuilds/${process.platform}-${process.arch}/tree-sitter-svg.node`;
+
+	try {
+		return require(prebuild);
+	} catch {
+		return nodeGypBuild(root);
+	}
+}
 
 const binding = typeof process.versions.bun === 'string'
-	// Support `bun build --compile` by being statically analyzable enough to find the .node file at build-time
-	? await import(`${root}/prebuilds/${process.platform}-${process.arch}/tree-sitter-svg.node`)
-	: (await import('node-gyp-build')).default(root);
+	? loadBunBinding()
+	: nodeGypBuild(root);
 
 try {
 	const nodeTypes = await import(`${root}/src/node-types.json`, { with: { type: 'json' } });
