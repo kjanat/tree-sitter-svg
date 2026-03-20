@@ -37,12 +37,13 @@ _raw_text
 '/>'
 ```
 
-## Attributes: 138 → ~18
+## Attributes: 138 → 14 typed grammar rules
 
 **Criterion:** only typed if value has actual grammar structure (not just a
-quoted string).
+quoted string). Count refers to grammar rules (not covered attribute names —
+e.g. `paint_attribute` covers fill, stroke, color, etc.).
 
-### Typed (kept)
+### Typed (kept — 14 grammar rules)
 
 - `d_attribute` — path data sub-grammar (25 rules)
 - `viewbox_attribute` — 4-number structured value
@@ -50,14 +51,14 @@ quoted string).
 - `points_attribute` — coordinate pair list
 - `preserve_aspect_ratio_attribute` — enum grammar
 - `style_attribute` — CSS injection target
-- `fill_attribute`, `stroke_attribute` — paint value grammar
+- `paint_attribute` — paint value grammar (covers fill, stroke, color, stop-color, flood-color, lighting-color)
+- `functional_iri_attribute` — `url(#ref)` references (covers clip-path, mask, filter, marker-*, cursor)
 - `href_attribute` — IRI/URI reference, scope references
 - `id_attribute` — scope definition for locals.scm
 - `class_attribute` — multi-value token
 - `event_attribute` — JS injection target
-- `opacity_attribute` — numeric constraint
-- `width_attribute`, `height_attribute` — length/percentage
-- `x_attribute`, `y_attribute` — coordinate values
+- `opacity_attribute` — numeric constraint (covers opacity, fill-opacity, stroke-opacity)
+- `length_attribute` — length/percentage (covers x, y, width, height, r, rx, ry, cx, cy, dx, dy, etc.)
 
 ### Generic
 
@@ -111,7 +112,7 @@ All four query files rewritten for generic tree:
 | grammar.js rules   | 458    | ~120        |
 | Externals          | 50     | 13          |
 | Element categories | 24     | 5           |
-| Attribute rules    | 138    | ~18         |
+| Attribute rules    | 138    | 14          |
 | Node types         | 968    | ~150        |
 | parser.c lines     | 102K   | ~20-30K     |
 | WASM build         | fails  | should work |
@@ -123,9 +124,21 @@ All four query files rewritten for generic tree:
 3. Tag-name matching stack (start/end pairing)
 4. Content model awareness (scanner-level)
 
-## Unresolved Questions
+## Resolved Questions
 
-- foreignObject HTML injection: query-only or needs element type?
-- ARIA attributes: worth a typed `aria_attribute` or generic?
-- xmlns/namespace handling: stays in svg_root or generic?
-- exact set of ~18 typed attrs TBD during implementation
+- **foreignObject HTML injection:** Query-only. foreignObject is parsed as a
+  generic `element`; HTML injection is handled via tag-name predicates in
+  `injections.scm` (e.g. `#match? @_start "(^|:)foreignObject$"`). No dedicated
+  element type needed — the generic element + generic_attribute for xmlns is
+  sufficient (confirmed by corpus test "ForeignObject with nested HTML-like
+  content" in edge_cases.txt).
+- **ARIA attributes:** Generic. ARIA attributes are keyword-only values with no
+  meaningful sub-grammar; they parse as `generic_attribute` with
+  `attribute_name` + `quoted_attribute_value`. No `aria_attribute` rule needed.
+- **xmlns/namespace handling:** Stays in `svg_root` only. The `xmlns` attribute
+  appears as a `generic_attribute` on any element but is only semantically
+  meaningful on `svg_root_element`. No special rule needed.
+- **Typed attribute set:** 14 grammar rules (finalized during implementation).
+  See list above. Design originally estimated ~18; implementation consolidated
+  fill/stroke → `paint_attribute`, x/y/width/height → `length_attribute`, and
+  added `functional_iri_attribute` for `url(#ref)` parsing.

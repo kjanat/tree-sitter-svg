@@ -71,15 +71,13 @@ are parsed as generic `attribute_name`/`quoted_attribute_value` pairs.
 
 Embedded languages are injected via `queries/injections.scm`:
 
-| Context                          | Injected Language |
-| -------------------------------- | ----------------- |
-| `<style>` element content        | CSS               |
-| `<style>` CDATA content          | CSS               |
-| `style` attribute value          | CSS               |
-| `<script>` element content       | JavaScript        |
-| `<script>` CDATA content         | JavaScript        |
-| Event handler attribute values   | JavaScript        |
-| `<foreignObject>` child elements | HTML              |
+| Context                                      | Injected Language |
+| -------------------------------------------- | ----------------- |
+| `<style>` element content (including CDATA)  | CSS               |
+| `style` attribute value                      | CSS               |
+| `<script>` element content (including CDATA) | JavaScript        |
+| Event handler attribute values               | JavaScript        |
+| `<foreignObject>` child elements             | HTML              |
 
 ### Query Files
 

@@ -12,13 +12,13 @@ Single-quoted typed attribute values
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name)
+      name: (name)
       (attribute
         (viewbox_attribute
-          (viewbox_attribute_name)
-          (viewbox_attribute_value
+          name: (viewbox_attribute_name)
+          value: (viewbox_attribute_value
             (viewbox_value
               (number)
               (comma_wsp
@@ -32,8 +32,8 @@ Single-quoted typed attribute values
               (number)))))
       (attribute
         (preserve_aspect_ratio_attribute
-          (preserve_aspect_ratio_attribute_name)
-          (preserve_aspect_ratio_attribute_value
+          name: (preserve_aspect_ratio_attribute_name)
+          value: (preserve_aspect_ratio_attribute_value
             (preserve_aspect_ratio_value
               (align_keyword)
               (wsp)
@@ -41,35 +41,35 @@ Single-quoted typed attribute values
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
                     (number)))))))
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
                     (number)))))))
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
                     (number)))))))
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
@@ -77,46 +77,46 @@ Single-quoted typed attribute values
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (paint_attribute
-            (paint_attribute_name)
-            (paint_attribute_value
+            name: (paint_attribute_name)
+            value: (paint_attribute_value
               (paint_value
                 (color_value
                   (named_color))))))
         (attribute
           (paint_attribute
-            (paint_attribute_name)
-            (paint_attribute_value
+            name: (paint_attribute_name)
+            value: (paint_attribute_value
               (paint_value
                 (color_value
                   (named_color))))))
         (attribute
           (opacity_attribute
-            (opacity_attribute_name)
-            (opacity_attribute_value
+            name: (opacity_attribute_name)
+            value: (opacity_attribute_value
               (number_or_percentage
                 (number)))))))
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (href_attribute
-            (href_attribute_name)
-            (href_attribute_value
+            name: (href_attribute_name)
+            value: (href_attribute_value
               (href_reference
                 (iri_reference)))))
         (attribute
           (functional_iri_attribute
-            (functional_iri_attribute_name)
-            (functional_iri_attribute_value
+            name: (functional_iri_attribute_name)
+            value: (functional_iri_attribute_value
               (paint_server
                 (iri_reference)))))))
     (text)
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -132,46 +132,46 @@ Empty typed attribute values
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name)
+      name: (name)
       (attribute
         (viewbox_attribute
-          (viewbox_attribute_name)
-          (viewbox_attribute_value))))
+          name: (viewbox_attribute_name)
+          value: (viewbox_attribute_value))))
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (d_attribute
-            (d_attribute_name)
-            (d_attribute_value
+            name: (d_attribute_name)
+            value: (d_attribute_value
               (double_quoted_path_data))))))
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (style_attribute
-            (style_attribute_name)
-            (style_attribute_value
+            name: (style_attribute_name)
+            value: (style_attribute_value
               (double_quoted_style_value))))
         (attribute
           (paint_attribute
-            (paint_attribute_name)
-            (paint_attribute_value)))
+            name: (paint_attribute_name)
+            value: (paint_attribute_value)))
         (attribute
           (opacity_attribute
-            (opacity_attribute_name)
-            (opacity_attribute_value)))
+            name: (opacity_attribute_name)
+            value: (opacity_attribute_value)))
         (attribute
           (class_attribute
-            (class_attribute_name)
-            (class_attribute_value)))))
+            name: (class_attribute_name)
+            value: (class_attribute_value)))))
     (text)
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -186,31 +186,31 @@ Length attribute auto keyword
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name)
+      name: (name)
       (attribute
         (length_attribute
-          (length_attribute_name)
-          (length_attribute_value
+          name: (length_attribute_name)
+          value: (length_attribute_value
             (length_or_percentage_or_auto))))
       (attribute
         (length_attribute
-          (length_attribute_name)
-          (length_attribute_value
+          name: (length_attribute_name)
+          value: (length_attribute_value
             (length_or_percentage_or_auto)))))
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto))))))
     (text)
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -227,17 +227,17 @@ Length units variety
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
@@ -245,8 +245,8 @@ Length units variety
                     (length_unit)))))))
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
@@ -254,8 +254,8 @@ Length units variety
                     (length_unit)))))))
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
@@ -263,8 +263,8 @@ Length units variety
                     (length_unit)))))))
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
@@ -273,11 +273,11 @@ Length units variety
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
@@ -285,8 +285,8 @@ Length units variety
                     (length_unit)))))))
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
@@ -294,8 +294,8 @@ Length units variety
                     (length_unit)))))))
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
@@ -304,11 +304,11 @@ Length units variety
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
@@ -316,8 +316,8 @@ Length units variety
                     (length_unit)))))))
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
@@ -325,7 +325,7 @@ Length units variety
                     (length_unit)))))))))
     (text)
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -341,13 +341,13 @@ Negative numbers in viewBox and coordinates
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name)
+      name: (name)
       (attribute
         (viewbox_attribute
-          (viewbox_attribute_name)
-          (viewbox_attribute_value
+          name: (viewbox_attribute_name)
+          value: (viewbox_attribute_value
             (viewbox_value
               (number)
               (comma_wsp
@@ -362,35 +362,35 @@ Negative numbers in viewBox and coordinates
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
                     (number)))))))
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
                     (number)))))))
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
                     (number)))))))
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
@@ -398,34 +398,34 @@ Negative numbers in viewBox and coordinates
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
                     (number)))))))
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
                     (number)))))))
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
                     (number)))))))))
     (text)
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -438,13 +438,13 @@ ViewBox comma-separated
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name)
+      name: (name)
       (attribute
         (viewbox_attribute
-          (viewbox_attribute_name)
-          (viewbox_attribute_value
+          name: (viewbox_attribute_name)
+          value: (viewbox_attribute_value
             (viewbox_value
               (number)
               (comma_wsp)
@@ -454,7 +454,7 @@ ViewBox comma-separated
               (comma_wsp)
               (number))))))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -467,13 +467,13 @@ ViewBox mixed separators
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name)
+      name: (name)
       (attribute
         (viewbox_attribute
-          (viewbox_attribute_name)
-          (viewbox_attribute_value
+          name: (viewbox_attribute_name)
+          value: (viewbox_attribute_value
             (viewbox_value
               (number)
               (comma_wsp
@@ -485,7 +485,7 @@ ViewBox mixed separators
                 (wsp))
               (number))))))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -498,17 +498,17 @@ PreserveAspectRatio none
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name)
+      name: (name)
       (attribute
         (preserve_aspect_ratio_attribute
-          (preserve_aspect_ratio_attribute_name)
-          (preserve_aspect_ratio_attribute_value
+          name: (preserve_aspect_ratio_attribute_name)
+          value: (preserve_aspect_ratio_attribute_value
             (preserve_aspect_ratio_value
               (align_keyword))))))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -532,97 +532,97 @@ PreserveAspectRatio all alignment values
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (preserve_aspect_ratio_attribute
-            (preserve_aspect_ratio_attribute_name)
-            (preserve_aspect_ratio_attribute_value
+            name: (preserve_aspect_ratio_attribute_name)
+            value: (preserve_aspect_ratio_attribute_value
               (preserve_aspect_ratio_value
                 (align_keyword)))))))
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (preserve_aspect_ratio_attribute
-            (preserve_aspect_ratio_attribute_name)
-            (preserve_aspect_ratio_attribute_value
+            name: (preserve_aspect_ratio_attribute_name)
+            value: (preserve_aspect_ratio_attribute_value
               (preserve_aspect_ratio_value
                 (align_keyword)))))))
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (preserve_aspect_ratio_attribute
-            (preserve_aspect_ratio_attribute_name)
-            (preserve_aspect_ratio_attribute_value
+            name: (preserve_aspect_ratio_attribute_name)
+            value: (preserve_aspect_ratio_attribute_value
               (preserve_aspect_ratio_value
                 (align_keyword)))))))
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (preserve_aspect_ratio_attribute
-            (preserve_aspect_ratio_attribute_name)
-            (preserve_aspect_ratio_attribute_value
+            name: (preserve_aspect_ratio_attribute_name)
+            value: (preserve_aspect_ratio_attribute_value
               (preserve_aspect_ratio_value
                 (align_keyword)))))))
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (preserve_aspect_ratio_attribute
-            (preserve_aspect_ratio_attribute_name)
-            (preserve_aspect_ratio_attribute_value
+            name: (preserve_aspect_ratio_attribute_name)
+            value: (preserve_aspect_ratio_attribute_value
               (preserve_aspect_ratio_value
                 (align_keyword)))))))
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (preserve_aspect_ratio_attribute
-            (preserve_aspect_ratio_attribute_name)
-            (preserve_aspect_ratio_attribute_value
+            name: (preserve_aspect_ratio_attribute_name)
+            value: (preserve_aspect_ratio_attribute_value
               (preserve_aspect_ratio_value
                 (align_keyword)))))))
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (preserve_aspect_ratio_attribute
-            (preserve_aspect_ratio_attribute_name)
-            (preserve_aspect_ratio_attribute_value
+            name: (preserve_aspect_ratio_attribute_name)
+            value: (preserve_aspect_ratio_attribute_value
               (preserve_aspect_ratio_value
                 (align_keyword)))))))
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (preserve_aspect_ratio_attribute
-            (preserve_aspect_ratio_attribute_name)
-            (preserve_aspect_ratio_attribute_value
+            name: (preserve_aspect_ratio_attribute_name)
+            value: (preserve_aspect_ratio_attribute_value
               (preserve_aspect_ratio_value
                 (align_keyword)))))))
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (preserve_aspect_ratio_attribute
-            (preserve_aspect_ratio_attribute_name)
-            (preserve_aspect_ratio_attribute_value
+            name: (preserve_aspect_ratio_attribute_name)
+            value: (preserve_aspect_ratio_attribute_value
               (preserve_aspect_ratio_value
                 (align_keyword)
                 (wsp)
@@ -630,18 +630,18 @@ PreserveAspectRatio all alignment values
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (preserve_aspect_ratio_attribute
-            (preserve_aspect_ratio_attribute_name)
-            (preserve_aspect_ratio_attribute_value
+            name: (preserve_aspect_ratio_attribute_name)
+            value: (preserve_aspect_ratio_attribute_value
               (preserve_aspect_ratio_value
                 (align_keyword)
                 (wsp)
                 (meet_or_slice_keyword)))))))
     (text)
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -659,17 +659,17 @@ Transform single-arg translate and multi-arg rotate
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (transform_attribute
-            (transform_attribute_name)
-            (transform_attribute_value
+            name: (transform_attribute_name)
+            value: (transform_attribute_value
               (transform_list
                 (transform_function
                   (translate_transform
@@ -677,11 +677,11 @@ Transform single-arg translate and multi-arg rotate
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (transform_attribute
-            (transform_attribute_name)
-            (transform_attribute_value
+            name: (transform_attribute_name)
+            value: (transform_attribute_value
               (transform_list
                 (transform_function
                   (rotate_transform
@@ -693,11 +693,11 @@ Transform single-arg translate and multi-arg rotate
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (transform_attribute
-            (transform_attribute_name)
-            (transform_attribute_value
+            name: (transform_attribute_name)
+            value: (transform_attribute_value
               (transform_list
                 (transform_function
                   (translate_transform
@@ -708,11 +708,11 @@ Transform single-arg translate and multi-arg rotate
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (transform_attribute
-            (transform_attribute_name)
-            (transform_attribute_value
+            name: (transform_attribute_name)
+            value: (transform_attribute_value
               (transform_list
                 (transform_function
                   (scale_transform
@@ -722,7 +722,7 @@ Transform single-arg translate and multi-arg rotate
                     (number)))))))))
     (text)
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -735,31 +735,31 @@ Paint inherit and context keywords
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name)
+      name: (name)
       (attribute
         (paint_attribute
-          (paint_attribute_name)
-          (paint_attribute_value
+          name: (paint_attribute_name)
+          value: (paint_attribute_value
             (paint_value))))
       (attribute
         (paint_attribute
-          (paint_attribute_name)
-          (paint_attribute_value
+          name: (paint_attribute_name)
+          value: (paint_attribute_value
             (paint_value))))
       (attribute
         (paint_attribute
-          (paint_attribute_name)
-          (paint_attribute_value
+          name: (paint_attribute_name)
+          value: (paint_attribute_value
             (paint_value))))
       (attribute
         (paint_attribute
-          (paint_attribute_name)
-          (paint_attribute_value
+          name: (paint_attribute_name)
+          value: (paint_attribute_value
             (paint_value)))))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -772,39 +772,39 @@ Paint hex colors
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name)
+      name: (name)
       (attribute
         (paint_attribute
-          (paint_attribute_name)
-          (paint_attribute_value
+          name: (paint_attribute_name)
+          value: (paint_attribute_value
             (paint_value
               (color_value
                 (hex_color))))))
       (attribute
         (paint_attribute
-          (paint_attribute_name)
-          (paint_attribute_value
+          name: (paint_attribute_name)
+          value: (paint_attribute_value
             (paint_value
               (color_value
                 (hex_color))))))
       (attribute
         (paint_attribute
-          (paint_attribute_name)
-          (paint_attribute_value
+          name: (paint_attribute_name)
+          value: (paint_attribute_value
             (paint_value
               (color_value
                 (hex_color))))))
       (attribute
         (paint_attribute
-          (paint_attribute_name)
-          (paint_attribute_value
+          name: (paint_attribute_name)
+          value: (paint_attribute_value
             (paint_value
               (color_value
                 (hex_color)))))))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -817,27 +817,27 @@ Paint url with fallback keywords
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name)
+      name: (name)
       (attribute
         (paint_attribute
-          (paint_attribute_name)
-          (paint_attribute_value
+          name: (paint_attribute_name)
+          value: (paint_attribute_value
             (paint_value
               (paint_server
                 (iri_reference)
                 (wsp))))))
       (attribute
         (paint_attribute
-          (paint_attribute_name)
-          (paint_attribute_value
+          name: (paint_attribute_name)
+          value: (paint_attribute_value
             (paint_value
               (paint_server
                 (iri_reference)
                 (wsp)))))))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -850,25 +850,25 @@ Functional color variants rgba and hsla
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name)
+      name: (name)
       (attribute
         (paint_attribute
-          (paint_attribute_name)
-          (paint_attribute_value
+          name: (paint_attribute_name)
+          value: (paint_attribute_value
             (paint_value
               (color_value
                 (functional_color))))))
       (attribute
         (paint_attribute
-          (paint_attribute_name)
-          (paint_attribute_value
+          name: (paint_attribute_name)
+          value: (paint_attribute_value
             (paint_value
               (color_value
                 (functional_color)))))))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -883,41 +883,41 @@ Multiple event attributes
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (event_attribute
-            (event_attribute_name)
-            (event_attribute_value
-              (script_text_double))))
+            name: (event_attribute_name)
+            value: (event_attribute_value
+              content: (script_text_double))))
         (attribute
           (event_attribute
-            (event_attribute_name)
-            (event_attribute_value
-              (script_text_double))))
+            name: (event_attribute_name)
+            value: (event_attribute_value
+              content: (script_text_double))))
         (attribute
           (event_attribute
-            (event_attribute_name)
-            (event_attribute_value
-              (script_text_double))))
+            name: (event_attribute_name)
+            value: (event_attribute_value
+              content: (script_text_double))))
         (attribute
           (event_attribute
-            (event_attribute_name)
-            (event_attribute_value
-              (script_text_double))))
+            name: (event_attribute_name)
+            value: (event_attribute_value
+              content: (script_text_double))))
         (attribute
           (event_attribute
-            (event_attribute_name)
-            (event_attribute_value
-              (script_text_double))))))
+            name: (event_attribute_name)
+            value: (event_attribute_value
+              content: (script_text_double))))))
     (text)
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -932,21 +932,21 @@ Event attribute single-quoted with double-quotes inside
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (event_attribute
-            (event_attribute_name)
-            (event_attribute_value
-              (script_text_single))))))
+            name: (event_attribute_name)
+            value: (event_attribute_value
+              content: (script_text_single))))))
     (text)
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -959,22 +959,22 @@ Script element with attributes and raw text
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (element
       (start_tag
-        (name)
+        name: (name)
         (attribute
           (generic_attribute
-            (attribute_name)
-            (quoted_attribute_value
+            name: (attribute_name)
+            value: (quoted_attribute_value
               (attribute_text_double)))))
       (raw_text)
       (end_tag
-        (name)))
+        name: (name)))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -987,27 +987,27 @@ Style element with media attribute
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (element
       (start_tag
-        (name)
+        name: (name)
         (attribute
           (generic_attribute
-            (attribute_name)
-            (quoted_attribute_value
+            name: (attribute_name)
+            value: (quoted_attribute_value
               (attribute_text_double))))
         (attribute
           (generic_attribute
-            (attribute_name)
-            (quoted_attribute_value
+            name: (attribute_name)
+            value: (quoted_attribute_value
               (attribute_text_double)))))
       (raw_text)
       (end_tag
-        (name)))
+        name: (name)))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1020,21 +1020,21 @@ Empty script and style elements
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (element
       (start_tag
-        (name))
+        name: (name))
       (end_tag
-        (name)))
+        name: (name)))
     (element
       (start_tag
-        (name))
+        name: (name))
       (end_tag
-        (name)))
+        name: (name)))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1047,17 +1047,17 @@ Self-closing script and style
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (element
       (self_closing_tag
-        (name)))
+        name: (name)))
     (element
       (self_closing_tag
-        (name)))
+        name: (name)))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1082,51 +1082,51 @@ Deep nesting six levels
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (text)
     (element
       (start_tag
-        (name))
+        name: (name))
       (text)
       (element
         (start_tag
-          (name))
+          name: (name))
         (text)
         (element
           (start_tag
-            (name))
+            name: (name))
           (text)
           (element
             (start_tag
-              (name))
+              name: (name))
             (text)
             (element
               (start_tag
-                (name))
+                name: (name))
               (text)
               (element
                 (self_closing_tag
-                  (name)))
+                  name: (name)))
               (text)
               (end_tag
-                (name)))
+                name: (name)))
             (text)
             (end_tag
-              (name)))
+              name: (name)))
           (text)
           (end_tag
-            (name)))
+            name: (name)))
         (text)
         (end_tag
-          (name)))
+          name: (name)))
       (text)
       (end_tag
-        (name)))
+        name: (name)))
     (text)
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1139,23 +1139,23 @@ Interleaved text and elements
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (text)
     (element
       (start_tag
-        (name))
+        name: (name))
       (text)
       (end_tag
-        (name)))
+        name: (name)))
     (text)
     (element
       (self_closing_tag
-        (name)))
+        name: (name)))
     (text)
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1168,12 +1168,12 @@ Entity references named numeric decimal hex
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (element
       (start_tag
-        (name))
+        name: (name))
       (entity_reference)
       (text)
       (entity_reference)
@@ -1188,9 +1188,9 @@ Entity references named numeric decimal hex
       (text)
       (entity_reference)
       (end_tag
-        (name)))
+        name: (name)))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1203,18 +1203,18 @@ CDATA in non-script element
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (element
       (start_tag
-        (name))
+        name: (name))
       (cdata_section
         (cdata_text))
       (end_tag
-        (name)))
+        name: (name)))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1229,37 +1229,37 @@ Multiple namespace prefixes
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name)
+      name: (name)
       (attribute
         (generic_attribute
-          (attribute_name)
-          (quoted_attribute_value
+          name: (attribute_name)
+          value: (quoted_attribute_value
             (attribute_text_double))))
       (attribute
         (generic_attribute
-          (attribute_name)
-          (quoted_attribute_value
+          name: (attribute_name)
+          value: (quoted_attribute_value
             (attribute_text_double))))
       (attribute
         (generic_attribute
-          (attribute_name)
-          (quoted_attribute_value
+          name: (attribute_name)
+          value: (quoted_attribute_value
             (attribute_text_double)))))
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (href_attribute
-            (href_attribute_name)
-            (href_attribute_value
+            name: (href_attribute_name)
+            value: (href_attribute_value
               (href_reference
                 (iri_reference)))))))
     (text)
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1274,12 +1274,12 @@ DOCTYPE with SYSTEM id
 (source_file
   (text)
   (doctype
-    (name)
-    (doctype_external_id))
+    name: (name)
+    external_id: (doctype_external_id))
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_self_closing_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1292,12 +1292,12 @@ Empty comment
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (comment)
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1310,12 +1310,12 @@ Comment with single dashes inside
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (comment)
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1341,12 +1341,12 @@ Processing instruction xml-stylesheet
 (source_file
   (text)
   (processing_instruction
-    (name)
-    (pi_content))
+    target: (name)
+    content: (pi_content))
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_self_closing_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1359,23 +1359,23 @@ Data URI without charset or base64
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (href_attribute
-            (href_attribute_name)
-            (href_attribute_value
+            name: (href_attribute_name)
+            value: (href_attribute_value
               (href_reference
                 (data_uri
-                  (data_uri_media_type
+                  media_type: (data_uri_media_type
                     (mime_type))
-                  (data_uri_payload))))))))
+                  payload: (data_uri_payload))))))))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1388,26 +1388,26 @@ Data URI with charset no base64
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (href_attribute
-            (href_attribute_name)
-            (href_attribute_value
+            name: (href_attribute_name)
+            value: (href_attribute_value
               (href_reference
                 (data_uri
-                  (data_uri_media_type
+                  media_type: (data_uri_media_type
                     (mime_type))
-                  (data_uri_parameter
-                    (data_uri_parameter_name)
-                    (data_uri_parameter_value))
-                  (data_uri_payload))))))))
+                  parameter: (data_uri_parameter
+                    name: (data_uri_parameter_name)
+                    value: (data_uri_parameter_value))
+                  payload: (data_uri_payload))))))))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1420,20 +1420,20 @@ Href external URL
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (href_attribute
-            (href_attribute_name)
-            (href_attribute_value
+            name: (href_attribute_name)
+            value: (href_attribute_value
               (href_reference
                 (iri_reference)))))))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1446,20 +1446,20 @@ Href empty fragment
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (href_attribute
-            (href_attribute_name)
-            (href_attribute_value
+            name: (href_attribute_name)
+            value: (href_attribute_value
               (href_reference
                 (iri_reference)))))))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1472,17 +1472,17 @@ Class single value
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name)
+      name: (name)
       (attribute
         (class_attribute
-          (class_attribute_name)
-          (class_attribute_value
+          name: (class_attribute_name)
+          value: (class_attribute_value
             (class_list
               (class_name))))))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1495,13 +1495,13 @@ Class with hyphens and numbers
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name)
+      name: (name)
       (attribute
         (class_attribute
-          (class_attribute_name)
-          (class_attribute_value
+          name: (class_attribute_name)
+          value: (class_attribute_value
             (class_list
               (class_name)
               (wsp)
@@ -1509,7 +1509,7 @@ Class with hyphens and numbers
               (wsp)
               (class_name))))))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1522,27 +1522,27 @@ ID with unicode characters
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (id_attribute
-            (id_attribute_name)
-            (id_attribute_value
+            name: (id_attribute_name)
+            value: (id_attribute_value
               (id_token))))))
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (id_attribute
-            (id_attribute_name)
-            (id_attribute_value
+            name: (id_attribute_name)
+            value: (id_attribute_value
               (id_token))))))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1555,26 +1555,26 @@ Path element with mixed typed attributes
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (id_attribute
-            (id_attribute_name)
-            (id_attribute_value
+            name: (id_attribute_name)
+            value: (id_attribute_value
               (id_token))))
         (attribute
           (d_attribute
-            (d_attribute_name)
-            (d_attribute_value
+            name: (d_attribute_name)
+            value: (d_attribute_value
               (double_quoted_path_data
                 (path_data_content
                   (path_data
                     (moveto_segment
-                      (path_command)
+                      command: (path_command)
                       (path_coordinate_pair
                         (path_coordinate
                           (path_number))
@@ -1584,7 +1584,7 @@ Path element with mixed typed attributes
                           (path_number))))
                     (path_segment
                       (lineto_segment
-                        (path_command)
+                        command: (path_command)
                         (path_coordinate_pair
                           (path_coordinate
                             (path_number))
@@ -1594,36 +1594,36 @@ Path element with mixed typed attributes
                             (path_number)))))))))))
         (attribute
           (paint_attribute
-            (paint_attribute_name)
-            (paint_attribute_value
+            name: (paint_attribute_name)
+            value: (paint_attribute_value
               (paint_value
                 (color_value
                   (named_color))))))
         (attribute
           (paint_attribute
-            (paint_attribute_name)
-            (paint_attribute_value
+            name: (paint_attribute_name)
+            value: (paint_attribute_value
               (paint_value
                 (color_value
                   (hex_color))))))
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
                     (number)))))))
         (attribute
           (class_attribute
-            (class_attribute_name)
-            (class_attribute_value
+            name: (class_attribute_name)
+            value: (class_attribute_value
               (class_list
                 (class_name)))))
         (attribute
           (transform_attribute
-            (transform_attribute_name)
-            (transform_attribute_value
+            name: (transform_attribute_name)
+            value: (transform_attribute_value
               (transform_list
                 (transform_function
                   (translate_transform
@@ -1632,12 +1632,12 @@ Path element with mixed typed attributes
                     (number)))))))
         (attribute
           (opacity_attribute
-            (opacity_attribute_name)
-            (opacity_attribute_value
+            name: (opacity_attribute_name)
+            value: (opacity_attribute_value
               (number_or_percentage
                 (number)))))))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1650,24 +1650,24 @@ All typed attributes on root svg
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name)
+      name: (name)
       (attribute
         (id_attribute
-          (id_attribute_name)
-          (id_attribute_value
+          name: (id_attribute_name)
+          value: (id_attribute_value
             (id_token))))
       (attribute
         (class_attribute
-          (class_attribute_name)
-          (class_attribute_value
+          name: (class_attribute_name)
+          value: (class_attribute_value
             (class_list
               (class_name)))))
       (attribute
         (viewbox_attribute
-          (viewbox_attribute_name)
-          (viewbox_attribute_value
+          name: (viewbox_attribute_name)
+          value: (viewbox_attribute_value
             (viewbox_value
               (number)
               (comma_wsp
@@ -1681,50 +1681,50 @@ All typed attributes on root svg
               (number)))))
       (attribute
         (preserve_aspect_ratio_attribute
-          (preserve_aspect_ratio_attribute_name)
-          (preserve_aspect_ratio_attribute_value
+          name: (preserve_aspect_ratio_attribute_name)
+          value: (preserve_aspect_ratio_attribute_value
             (preserve_aspect_ratio_value
               (align_keyword)
               (wsp)
               (meet_or_slice_keyword)))))
       (attribute
         (length_attribute
-          (length_attribute_name)
-          (length_attribute_value
+          name: (length_attribute_name)
+          value: (length_attribute_value
             (length_or_percentage_or_auto
               (length_or_percentage
                 (length
                   (number)))))))
       (attribute
         (length_attribute
-          (length_attribute_name)
-          (length_attribute_value
+          name: (length_attribute_name)
+          value: (length_attribute_value
             (length_or_percentage_or_auto
               (length_or_percentage
                 (length
                   (number)))))))
       (attribute
         (paint_attribute
-          (paint_attribute_name)
-          (paint_attribute_value
+          name: (paint_attribute_name)
+          value: (paint_attribute_value
             (paint_value))))
       (attribute
         (paint_attribute
-          (paint_attribute_name)
-          (paint_attribute_value
+          name: (paint_attribute_name)
+          value: (paint_attribute_value
             (paint_value
               (color_value
                 (named_color))))))
       (attribute
         (opacity_attribute
-          (opacity_attribute_name)
-          (opacity_attribute_value
+          name: (opacity_attribute_name)
+          value: (opacity_attribute_value
             (number_or_percentage
               (number)))))
       (attribute
         (transform_attribute
-          (transform_attribute_name)
-          (transform_attribute_value
+          name: (transform_attribute_name)
+          value: (transform_attribute_value
             (transform_list
               (transform_function
                 (translate_transform
@@ -1733,12 +1733,12 @@ All typed attributes on root svg
                   (number)))))))
       (attribute
         (style_attribute
-          (style_attribute_name)
-          (style_attribute_value
+          name: (style_attribute_name)
+          value: (style_attribute_value
             (double_quoted_style_value
-              (style_text_double))))))
+              content: (style_text_double))))))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1755,17 +1755,17 @@ Points with various separators
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (points_attribute
-            (points_attribute_name)
-            (points_attribute_value
+            name: (points_attribute_name)
+            value: (points_attribute_value
               (coordinate_pair_list
                 (coordinate_pair
                   (number)
@@ -1786,11 +1786,11 @@ Points with various separators
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (points_attribute
-            (points_attribute_name)
-            (points_attribute_value
+            name: (points_attribute_name)
+            value: (points_attribute_value
               (coordinate_pair_list
                 (coordinate_pair
                   (number)
@@ -1812,11 +1812,11 @@ Points with various separators
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (points_attribute
-            (points_attribute_name)
-            (points_attribute_value
+            name: (points_attribute_name)
+            value: (points_attribute_value
               (coordinate_pair_list
                 (coordinate_pair
                   (number)
@@ -1836,7 +1836,7 @@ Points with various separators
                   (number))))))))
     (text)
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1849,23 +1849,23 @@ Functional IRI none keyword
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name)
+      name: (name)
       (attribute
         (functional_iri_attribute
-          (functional_iri_attribute_name)
-          (functional_iri_attribute_value)))
+          name: (functional_iri_attribute_name)
+          value: (functional_iri_attribute_value)))
       (attribute
         (functional_iri_attribute
-          (functional_iri_attribute_name)
-          (functional_iri_attribute_value)))
+          name: (functional_iri_attribute_name)
+          value: (functional_iri_attribute_value)))
       (attribute
         (functional_iri_attribute
-          (functional_iri_attribute_name)
-          (functional_iri_attribute_value))))
+          name: (functional_iri_attribute_name)
+          value: (functional_iri_attribute_value))))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1878,44 +1878,44 @@ Multiple functional IRI attributes on one element
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (functional_iri_attribute
-            (functional_iri_attribute_name)
-            (functional_iri_attribute_value
+            name: (functional_iri_attribute_name)
+            value: (functional_iri_attribute_value
               (paint_server
                 (iri_reference)))))
         (attribute
           (functional_iri_attribute
-            (functional_iri_attribute_name)
-            (functional_iri_attribute_value
+            name: (functional_iri_attribute_name)
+            value: (functional_iri_attribute_value
               (paint_server
                 (iri_reference)))))
         (attribute
           (functional_iri_attribute
-            (functional_iri_attribute_name)
-            (functional_iri_attribute_value
+            name: (functional_iri_attribute_name)
+            value: (functional_iri_attribute_value
               (paint_server
                 (iri_reference)))))
         (attribute
           (functional_iri_attribute
-            (functional_iri_attribute_name)
-            (functional_iri_attribute_value
+            name: (functional_iri_attribute_name)
+            value: (functional_iri_attribute_value
               (paint_server
                 (iri_reference)))))
         (attribute
           (functional_iri_attribute
-            (functional_iri_attribute_name)
-            (functional_iri_attribute_value
+            name: (functional_iri_attribute_name)
+            value: (functional_iri_attribute_value
               (paint_server
                 (iri_reference)))))))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1928,13 +1928,13 @@ Paint with rgb and url fallback combined
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name)
+      name: (name)
       (attribute
         (paint_attribute
-          (paint_attribute_name)
-          (paint_attribute_value
+          name: (paint_attribute_name)
+          value: (paint_attribute_value
             (paint_value
               (paint_server
                 (iri_reference)
@@ -1942,7 +1942,7 @@ Paint with rgb and url fallback combined
                 (color_value
                   (functional_color))))))))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -1959,17 +1959,17 @@ Transform attribute aliases
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (transform_attribute
-            (transform_attribute_name)
-            (transform_attribute_value
+            name: (transform_attribute_name)
+            value: (transform_attribute_value
               (transform_list
                 (transform_function
                   (translate_transform
@@ -1977,11 +1977,11 @@ Transform attribute aliases
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (transform_attribute
-            (transform_attribute_name)
-            (transform_attribute_value
+            name: (transform_attribute_name)
+            value: (transform_attribute_value
               (transform_list
                 (transform_function
                   (rotate_transform
@@ -1989,11 +1989,11 @@ Transform attribute aliases
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (transform_attribute
-            (transform_attribute_name)
-            (transform_attribute_value
+            name: (transform_attribute_name)
+            value: (transform_attribute_value
               (transform_list
                 (transform_function
                   (scale_transform
@@ -2002,7 +2002,7 @@ Transform attribute aliases
                     (number)))))))))
     (text)
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -2015,35 +2015,35 @@ Opacity zero and one boundaries
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name)
+      name: (name)
       (attribute
         (opacity_attribute
-          (opacity_attribute_name)
-          (opacity_attribute_value
+          name: (opacity_attribute_name)
+          value: (opacity_attribute_value
             (number_or_percentage
               (number)))))
       (attribute
         (opacity_attribute
-          (opacity_attribute_name)
-          (opacity_attribute_value
+          name: (opacity_attribute_name)
+          value: (opacity_attribute_value
             (number_or_percentage
               (number)))))
       (attribute
         (opacity_attribute
-          (opacity_attribute_name)
-          (opacity_attribute_value
+          name: (opacity_attribute_name)
+          value: (opacity_attribute_value
             (number_or_percentage
               (number)))))
       (attribute
         (opacity_attribute
-          (opacity_attribute_name)
-          (opacity_attribute_value
+          name: (opacity_attribute_name)
+          value: (opacity_attribute_value
             (number_or_percentage
               (number))))))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -2056,32 +2056,32 @@ Opacity percentage boundaries
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name)
+      name: (name)
       (attribute
         (opacity_attribute
-          (opacity_attribute_name)
-          (opacity_attribute_value
+          name: (opacity_attribute_name)
+          value: (opacity_attribute_value
             (number_or_percentage
               (percentage
                 (number))))))
       (attribute
         (opacity_attribute
-          (opacity_attribute_name)
-          (opacity_attribute_value
+          name: (opacity_attribute_name)
+          value: (opacity_attribute_value
             (number_or_percentage
               (percentage
                 (number))))))
       (attribute
         (opacity_attribute
-          (opacity_attribute_name)
-          (opacity_attribute_value
+          name: (opacity_attribute_name)
+          value: (opacity_attribute_value
             (number_or_percentage
               (percentage
                 (number)))))))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -2102,47 +2102,47 @@ Mixed self-closing and paired elements
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (text)
     (element
       (start_tag
-        (name))
+        name: (name))
       (text)
       (element
         (self_closing_tag
-          (name)))
+          name: (name)))
       (text)
       (element
         (start_tag
-          (name))
+          name: (name))
         (end_tag
-          (name)))
+          name: (name)))
       (text)
       (element
         (self_closing_tag
-          (name)))
+          name: (name)))
       (text)
       (element
         (start_tag
-          (name))
+          name: (name))
         (text)
         (end_tag
-          (name)))
+          name: (name)))
       (text)
       (element
         (self_closing_tag
-          (name)
+          name: (name)
           (attribute
             (d_attribute
-              (d_attribute_name)
-              (d_attribute_value
+              name: (d_attribute_name)
+              value: (d_attribute_value
                 (double_quoted_path_data
                   (path_data_content
                     (path_data
                       (moveto_segment
-                        (path_command)
+                        command: (path_command)
                         (path_coordinate_pair
                           (path_coordinate
                             (path_number))
@@ -2152,10 +2152,10 @@ Mixed self-closing and paired elements
                             (path_number))))))))))))
       (text)
       (end_tag
-        (name)))
+        name: (name)))
     (text)
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -2170,22 +2170,22 @@ Style attribute with complex CSS
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (text)
     (element
       (self_closing_tag
-        (name)
+        name: (name)
         (attribute
           (style_attribute
-            (style_attribute_name)
-            (style_attribute_value
+            name: (style_attribute_name)
+            value: (style_attribute_value
               (double_quoted_style_value
-                (style_text_double)))))))
+                content: (style_text_double)))))))
     (text)
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -2204,41 +2204,41 @@ ForeignObject with nested HTML-like content
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (text)
     (element
       (start_tag
-        (name)
+        name: (name)
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
                     (number)))))))
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
                     (number)))))))
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
                     (number)))))))
         (attribute
           (length_attribute
-            (length_attribute_name)
-            (length_attribute_value
+            name: (length_attribute_name)
+            value: (length_attribute_value
               (length_or_percentage_or_auto
                 (length_or_percentage
                   (length
@@ -2246,34 +2246,34 @@ ForeignObject with nested HTML-like content
       (text)
       (element
         (start_tag
-          (name)
+          name: (name)
           (attribute
             (generic_attribute
-              (attribute_name)
-              (quoted_attribute_value
+              name: (attribute_name)
+              value: (quoted_attribute_value
                 (attribute_text_double)))))
         (text)
         (element
           (start_tag
-            (name))
+            name: (name))
           (text)
           (element
             (start_tag
-              (name))
+              name: (name))
             (text)
             (end_tag
-              (name)))
+              name: (name)))
           (end_tag
-            (name)))
+            name: (name)))
         (text)
         (end_tag
-          (name)))
+          name: (name)))
       (text)
       (end_tag
-        (name)))
+        name: (name)))
     (text)
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -2286,17 +2286,17 @@ Script with JS containing angle brackets
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (element
       (start_tag
-        (name))
+        name: (name))
       (raw_text)
       (end_tag
-        (name)))
+        name: (name)))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -2309,12 +2309,12 @@ Whitespace-only text nodes
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (text)
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -2329,13 +2329,13 @@ Tab and newline in attribute value
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name)
+      name: (name)
       (attribute
         (viewbox_attribute
-          (viewbox_attribute_name)
-          (viewbox_attribute_value
+          name: (viewbox_attribute_name)
+          value: (viewbox_attribute_value
             (viewbox_value
               (number)
               (comma_wsp
@@ -2348,7 +2348,7 @@ Tab and newline in attribute value
                 (wsp))
               (number))))))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================
@@ -2361,21 +2361,21 @@ Erroneous end tag in nested context
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (element
       (start_tag
-        (name))
+        name: (name))
       (element
         (start_tag
-          (name))
+          name: (name))
         (erroneous_end_tag
-          (name)))
+          name: (name)))
       (end_tag
-        (name)))
+        name: (name)))
     (erroneous_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ==================

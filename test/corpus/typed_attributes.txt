@@ -437,59 +437,59 @@ IRI attributes
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name)
+      name: (name)
       (attribute
         (href_attribute
-          (href_attribute_name)
-          (href_attribute_value
+          name: (href_attribute_name)
+          value: (href_attribute_value
             (href_reference
               (iri_reference)))))
       (attribute
         (href_attribute
-          (href_attribute_name)
-          (href_attribute_value
+          name: (href_attribute_name)
+          value: (href_attribute_value
             (href_reference
               (iri_reference)))))
       (attribute
         (functional_iri_attribute
-          (functional_iri_attribute_name)
-          (functional_iri_attribute_value
+          name: (functional_iri_attribute_name)
+          value: (functional_iri_attribute_value
             (paint_server
               (iri_reference)))))
       (attribute
         (functional_iri_attribute
-          (functional_iri_attribute_name)
-          (functional_iri_attribute_value)))
+          name: (functional_iri_attribute_name)
+          value: (functional_iri_attribute_value)))
       (attribute
         (functional_iri_attribute
-          (functional_iri_attribute_name)
-          (functional_iri_attribute_value
+          name: (functional_iri_attribute_name)
+          value: (functional_iri_attribute_value
             (iri_reference))))
       (attribute
         (functional_iri_attribute
-          (functional_iri_attribute_name)
-          (functional_iri_attribute_value
+          name: (functional_iri_attribute_name)
+          value: (functional_iri_attribute_value
             (paint_server
               (iri_reference)))))
       (attribute
         (functional_iri_attribute
-          (functional_iri_attribute_name)
-          (functional_iri_attribute_value
+          name: (functional_iri_attribute_name)
+          value: (functional_iri_attribute_value
             (iri_reference))))
       (attribute
         (functional_iri_attribute
-          (functional_iri_attribute_name)
-          (functional_iri_attribute_value
+          name: (functional_iri_attribute_name)
+          value: (functional_iri_attribute_value
             (paint_server
               (iri_reference)))))
       (attribute
         (functional_iri_attribute
-          (functional_iri_attribute_name)
-          (functional_iri_attribute_value
+          name: (functional_iri_attribute_name)
+          value: (functional_iri_attribute_value
             (paint_server
               (iri_reference))))))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))

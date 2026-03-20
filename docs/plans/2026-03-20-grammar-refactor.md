@@ -1,7 +1,5 @@
 # Grammar Refactor: Structural Tiers — Implementation Plan
 
-> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
-
 **Goal:** Refactor grammar from 458 rules / 50 externals to ~120 rules / 13 externals so parser.c builds as WASM while preserving path data, injections, tag matching, and content model awareness.
 
 **Architecture:** Collapse 24 element categories to 5 (svg_root, script, style, path, generic). Collapse 138 typed attributes to ~18 that have actual value sub-grammars. Push SVG vocabulary awareness from grammar rules into query files and scanner-level validation.
@@ -98,10 +96,18 @@ Add `scan_raw_text` function for script/style content:
 
 ```c
 static bool scan_raw_text(TagStack *tags, TSLexer *lexer) {
-  // Consume everything until we see `</` followed by the tag name
-  // on top of the stack (script or style).
-  // This captures raw text content for injection queries.
-  // Reference: tree-sitter-html's raw_text scanner pattern.
+  // Retrieve the current tag name from the TagStack (script or style).
+  // Iterate lexer char-by-char, advancing normally:
+  //   - On '<': mark_end, advance, check for '/'
+  //   - On '</': match tag name char-by-char via lookahead
+  //   - Accept match only if next char after name is a delimiter
+  //     (whitespace, '>', or EOF) to avoid false positives like </scriptFoo>
+  //   - On full match: emit RAW_TEXT without consuming the closing tag
+  //     (caller parses the end tag separately) and return true
+  //   - On no content before match: return false (empty raw_text)
+  //   - On EOF: mark_end, emit RAW_TEXT if any content was consumed
+  // Guard: only called when valid_symbols[RAW_TEXT] && !valid_symbols[START_TAG_NAME]
+  // to prevent raw_text from consuming normal content during error recovery.
 }
 ```
 
@@ -718,13 +724,13 @@ git commit -m "refactor(queries): adapt to structural-tiers grammar"
 
 ---
 
-## Task 7: Verify WASM build and parser size
+## Task 7: Verify WASM build and compiled artifact sizes
 
 **Files:**
 
 - None modified
 
-**Step 1: Check parser.c size**
+**Step 1: Check parser.c line count (quick sanity check)**
 
 ```bash
 wc -l src/parser.c
@@ -732,15 +738,28 @@ wc -l src/parser.c
 
 Expected: <30K lines (target: ~20-30K, down from 102K)
 
-**Step 2: Attempt WASM build**
+**Step 2: Measure compiled artifact sizes**
 
 ```bash
-tree-sitter build --wasm
+# Native object size
+cc -c -I src -std=c11 -O2 src/parser.c -o /tmp/parser.o && size /tmp/parser.o
+# WASM build and output size
+tree-sitter build --wasm && ls -lh tree-sitter-svg.wasm
 ```
 
-Expected: Completes successfully (this is the whole point)
+Assert: WASM output < 500KB, native .text+.data < 1MB
 
-**Step 3: Run full test suite one more time**
+**Step 3: WASM build fallback plan**
+
+If WASM build fails:
+
+1. Check if parser.c > 50K lines → further reduce grammar (merge more
+   attribute rules, simplify path sub-grammar)
+2. If parser.c < 50K but WASM still fails → try Emscripten with explicit
+   memory flags: `-s INITIAL_MEMORY=16777216 -s TOTAL_MEMORY=33554432`
+3. Document which approach (grammar reduction vs memory tuning) was needed
+
+**Step 4: Run full test suite**
 
 ```bash
 tree-sitter test
@@ -748,7 +767,7 @@ tree-sitter test
 
 Expected: All tests pass
 
-**Step 4: Run native build**
+**Step 5: Run native build**
 
 ```bash
 make clean && make
@@ -756,7 +775,7 @@ make clean && make
 
 Expected: Compiles successfully
 
-**Step 5: Commit any generated files**
+**Step 6: Commit any generated files**
 
 ```bash
 git add src/parser.c src/node-types.json src/grammar.json

@@ -216,24 +216,24 @@ Pinned recovery: feFuncR outside feComponentTransfer
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (element
       (start_tag
-        (name))
+        name: (name))
       (element
         (self_closing_tag
-          (name)
+          name: (name)
           (attribute
             (generic_attribute
-              (attribute_name)
-              (quoted_attribute_value
+              name: (attribute_name)
+              value: (quoted_attribute_value
                 (attribute_text_double))))))
       (end_tag
-        (name)))
+        name: (name)))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ================================================================================
@@ -246,19 +246,19 @@ Pinned recovery: feMergeNode outside feMerge
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (element
       (start_tag
-        (name))
+        name: (name))
       (element
         (self_closing_tag
-          (name)))
+          name: (name)))
       (end_tag
-        (name)))
+        name: (name)))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
 
 ================================================================================
@@ -271,17 +271,17 @@ Pinned recovery: light source outside lighting primitive
 
 (source_file
   (text)
-  (svg_root_element
+  root: (svg_root_element
     (svg_root_start_tag
-      (name))
+      name: (name))
     (element
       (start_tag
-        (name))
+        name: (name))
       (element
         (self_closing_tag
-          (name)))
+          name: (name)))
       (end_tag
-        (name)))
+        name: (name)))
     (svg_root_end_tag
-      (name)))
+      name: (name)))
   (text))
