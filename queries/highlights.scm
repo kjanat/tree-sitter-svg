@@ -42,7 +42,7 @@
 (style_text_double) @string
 (style_text_single) @string
 
-(path_command) @keyword
+(path_command) @function.builtin
 (path_number) @number
 (path_arc_flag) @boolean
 (path_sweep_flag) @boolean
