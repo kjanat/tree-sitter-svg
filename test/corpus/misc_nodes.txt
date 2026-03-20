@@ -1,0 +1,30 @@
+==================
+Comments, PI, CDATA
+==================
+
+<svg>
+  <!-- marker -->
+  <?xml-stylesheet type="text/css" href="theme.css"?>
+  <![CDATA[<literal>still text</literal>]]>
+</svg>
+
+---
+
+(source_file
+  (text)
+  (element
+    (start_tag
+      (name))
+    (text)
+    (comment)
+    (text)
+    (processing_instruction
+      (name)
+      (pi_content))
+    (text)
+    (cdata_section
+      (cdata_text))
+    (text)
+    (end_tag
+      (name)))
+  (text))

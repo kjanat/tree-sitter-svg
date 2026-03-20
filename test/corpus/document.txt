@@ -1,0 +1,100 @@
+==================
+Document structure
+==================
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
+  <g id="icon">
+    <circle cx="5" cy="5" r="4"/>
+    <text x="5" y="6">Hi &amp; bye</text>
+  </g>
+</svg>
+
+---
+
+(source_file
+  (text)
+  (xml_declaration
+    (attribute
+      (generic_attribute
+        (attribute_name)
+        (quoted_attribute_value
+          (attribute_text_double))))
+    (attribute
+      (generic_attribute
+        (attribute_name)
+        (quoted_attribute_value
+          (attribute_text_double)))))
+  (text)
+  (doctype
+    (name)
+    (doctype_external_id))
+  (text)
+  (element
+    (start_tag
+      (name)
+      (attribute
+        (generic_attribute
+          (attribute_name)
+          (quoted_attribute_value
+            (attribute_text_double))))
+      (attribute
+        (generic_attribute
+          (attribute_name)
+          (quoted_attribute_value
+            (attribute_text_double)))))
+    (text)
+    (element
+      (start_tag
+        (name)
+        (attribute
+          (generic_attribute
+            (attribute_name)
+            (quoted_attribute_value
+              (attribute_text_double)))))
+      (text)
+      (element
+        (self_closing_tag
+          (name)
+          (attribute
+            (generic_attribute
+              (attribute_name)
+              (quoted_attribute_value
+                (attribute_text_double))))
+          (attribute
+            (generic_attribute
+              (attribute_name)
+              (quoted_attribute_value
+                (attribute_text_double))))
+          (attribute
+            (generic_attribute
+              (attribute_name)
+              (quoted_attribute_value
+                (attribute_text_double))))))
+      (text)
+      (element
+        (start_tag
+          (name)
+          (attribute
+            (generic_attribute
+              (attribute_name)
+              (quoted_attribute_value
+                (attribute_text_double))))
+          (attribute
+            (generic_attribute
+              (attribute_name)
+              (quoted_attribute_value
+                (attribute_text_double)))))
+        (text)
+        (entity_reference)
+        (text)
+        (end_tag
+          (name)))
+      (text)
+      (end_tag
+        (name)))
+    (text)
+    (end_tag
+      (name)))
+  (text))
