@@ -38,7 +38,19 @@
 (class_attribute_name) @attribute
 (event_attribute_name) @attribute
 
-(quoted_attribute_value) @string
+[(quoted_attribute_value)
+ (class_attribute_value)
+ (d_attribute_value)
+ (functional_iri_attribute_value)
+ (href_attribute_value)
+ (id_attribute_value)
+ (length_attribute_value)
+ (opacity_attribute_value)
+ (paint_attribute_value)
+ (points_attribute_value)
+ (preserve_aspect_ratio_attribute_value)
+ (transform_attribute_value)
+ (viewbox_attribute_value)] @string
 (style_text_double) @string
 (style_text_single) @string
 
