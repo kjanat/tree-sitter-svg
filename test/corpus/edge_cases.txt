@@ -1329,6 +1329,17 @@ Comment with double dashes is invalid XML
 
 
 
+(ERROR
+  (text)
+  (start_tag
+    name: (name))
+  (iri_reference)
+  (path_wsp)
+  (name)
+  (path_wsp)
+  (iri_reference)
+  (path_wsp))
+
 ==================
 Processing instruction xml-stylesheet
 ==================
@@ -2189,7 +2200,7 @@ Style attribute with complex CSS
   (text))
 
 ==================
-ForeignObject with nested HTML-like content
+ForeignObject handled as generic element with nested HTML-like content
 ==================
 
 <svg>
@@ -2387,4 +2398,18 @@ Multiple erroneous end tags
 
 ---
 
-
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (start_tag
+        name: (name))
+      (erroneous_end_tag
+        name: (name)))
+    (erroneous_end_tag
+      name: (name)))
+  (ERROR
+    (iri_reference)
+    (path_wsp)))
