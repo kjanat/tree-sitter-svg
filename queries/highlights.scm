@@ -54,6 +54,8 @@
 (style_text_double) @string
 (style_text_single) @string
 
+(iri_reference) @link_uri
+
 (path_command) @function.builtin
 (path_number) @number
 (path_arc_flag) @boolean
