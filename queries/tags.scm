@@ -34,6 +34,14 @@
  (#match? @name "^#")
  (#strip! @name "^#"))
 
+((paint_attribute
+  value: (paint_attribute_value
+    (paint_value
+      (paint_server
+        (iri_reference) @name)))) @reference.id
+ (#match? @name "^#")
+ (#strip! @name "^#"))
+
 ((generic_attribute
   name: (attribute_name) @_name
   value: (quoted_attribute_value

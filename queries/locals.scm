@@ -41,6 +41,14 @@
  (#match? @local.reference "^#")
  (#strip! @local.reference "^#"))
 
+((paint_attribute
+  value: (paint_attribute_value
+    (paint_value
+      (paint_server
+        (iri_reference) @local.reference))))
+ (#match? @local.reference "^#")
+ (#strip! @local.reference "^#"))
+
 ((functional_iri_attribute
   value: (functional_iri_attribute_value
     (iri_reference) @local.reference))
