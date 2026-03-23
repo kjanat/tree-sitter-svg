@@ -1319,7 +1319,7 @@ Comment with single dashes inside
   (text))
 
 ==================
-Comment with double dashes is invalid XML
+Pinned recovery: comment with double dashes is invalid XML
 :error
 ==================
 

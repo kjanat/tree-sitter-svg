@@ -56,3 +56,17 @@
 - `raw_text` external token for script/style must guard against error recovery: when tree-sitter sets all `valid_symbols` true, check `!valid_symbols[START_TAG_NAME] && !valid_symbols[END_TAG_NAME]` to prevent raw_text from consuming normal content
 - Only 5 element names need scanner recognition: svg (root enforcement), path (d attribute), script/style (raw text capture), plus generic fallback
 - Attribute sub-grammars worth keeping in the parser are those with genuine value syntax (path data, viewBox numbers, transform functions, paint functions, URI references) — keyword-only attributes (calcMode, spreadMethod, edgeMode) belong in queries
+## 2026-03-22: Helix 25.07.1 rejects `#strip!` in SVG queries
+
+Helix logged `Failed to compile highlights for 'svg': unknown predicate #strip!` even though
+the predicate only appeared in `queries/tags.scm` and `queries/locals.scm`.
+
+Practical consequence:
+- SVG buffers could show no Tree-sitter syntax highlighting at all when Helix loaded the query set.
+
+Workaround used here:
+- remove `#strip!` from the SVG Helix query set and keep only the `#match? "^#"` guards
+
+Tradeoff:
+- tag/locals references that rely on stripping the leading `#` may no longer resolve as precisely
+  in editors that do not support `#strip!`, but highlighting compiles again.

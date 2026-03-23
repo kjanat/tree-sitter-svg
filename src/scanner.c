@@ -1,7 +1,6 @@
 #include "tree_sitter/parser.h"
 #include "tree_sitter/array.h"
 
-#include <ctype.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -28,12 +27,20 @@ static inline void advance(TSLexer *lexer) {
   lexer->advance(lexer, false);
 }
 
+static inline bool is_ascii_alpha(int32_t c) {
+  return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
+}
+
+static inline bool is_ascii_digit(int32_t c) {
+  return c >= '0' && c <= '9';
+}
+
 static inline bool is_name_start_char(int32_t c) {
-  return c == ':' || c == '_' || c >= 0x80 || isalpha((unsigned char)c);
+  return c == ':' || c == '_' || c >= 0x80 || is_ascii_alpha(c);
 }
 
 static inline bool is_name_char(int32_t c) {
-  return is_name_start_char(c) || c == '-' || c == '.' || isdigit((unsigned char)c);
+  return is_name_start_char(c) || c == '-' || c == '.' || is_ascii_digit(c);
 }
 
 static inline uint32_t local_name_start(const String *name) {

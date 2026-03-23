@@ -31,42 +31,36 @@
   value: (href_attribute_value
     (href_reference
       (iri_reference) @name))) @reference.id
- (#match? @name "^#")
- (#strip! @name "^#"))
+ (#match? @name "^#"))
 
 ((paint_attribute
   value: (paint_attribute_value
     (paint_value
       (paint_server
         (iri_reference) @name)))) @reference.id
- (#match? @name "^#")
- (#strip! @name "^#"))
+ (#match? @name "^#"))
 
 ((generic_attribute
   name: (attribute_name) @_name
   value: (quoted_attribute_value
     (attribute_text_double) @name)) @reference.id
  (#any-of? @_name "href" "xlink:href")
- (#match? @name "^#")
- (#strip! @name "^#"))
+ (#match? @name "^#"))
 
 ((generic_attribute
   name: (attribute_name) @_name
   value: (quoted_attribute_value
     (attribute_text_single) @name)) @reference.id
  (#any-of? @_name "href" "xlink:href")
- (#match? @name "^#")
- (#strip! @name "^#"))
+ (#match? @name "^#"))
 
 ((functional_iri_attribute
   value: (functional_iri_attribute_value
     (iri_reference) @name)) @reference.id
- (#match? @name "^#")
- (#strip! @name "^#"))
+ (#match? @name "^#"))
 
 ((functional_iri_attribute
   value: (functional_iri_attribute_value
     (paint_server
       (iri_reference) @name))) @reference.id
- (#match? @name "^#")
- (#strip! @name "^#"))
+ (#match? @name "^#"))

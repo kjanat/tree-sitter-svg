@@ -23,41 +23,35 @@
   value: (quoted_attribute_value
     (attribute_text_double) @local.reference))
  (#any-of? @_name "href" "xlink:href")
- (#match? @local.reference "^#")
- (#strip! @local.reference "^#"))
+ (#match? @local.reference "^#"))
 
 ((generic_attribute
   name: (attribute_name) @_name
   value: (quoted_attribute_value
     (attribute_text_single) @local.reference))
  (#any-of? @_name "href" "xlink:href")
- (#match? @local.reference "^#")
- (#strip! @local.reference "^#"))
+ (#match? @local.reference "^#"))
 
 ((href_attribute
   value: (href_attribute_value
     (href_reference
       (iri_reference) @local.reference)))
- (#match? @local.reference "^#")
- (#strip! @local.reference "^#"))
+ (#match? @local.reference "^#"))
 
 ((paint_attribute
   value: (paint_attribute_value
     (paint_value
       (paint_server
         (iri_reference) @local.reference))))
- (#match? @local.reference "^#")
- (#strip! @local.reference "^#"))
+ (#match? @local.reference "^#"))
 
 ((functional_iri_attribute
   value: (functional_iri_attribute_value
     (iri_reference) @local.reference))
- (#match? @local.reference "^#")
- (#strip! @local.reference "^#"))
+ (#match? @local.reference "^#"))
 
 ((functional_iri_attribute
   value: (functional_iri_attribute_value
     (paint_server
       (iri_reference) @local.reference)))
- (#match? @local.reference "^#")
- (#strip! @local.reference "^#"))
+ (#match? @local.reference "^#"))
