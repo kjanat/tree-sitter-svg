@@ -39,6 +39,7 @@
 	],
 	"scripts": {
 		"fmt": "dprint fmt .",
+		"helix:sync": "DIR=\"${HOME}/.config/helix/runtime/queries/svg\"; mkdir -p \"${DIR}\" && cp queries/*.scm \"${DIR}\"",
 		"install": "node-gyp-build",
 		"postinstall": "git config core.hooksPath .githooks",
 		"prestart": "tree-sitter build --wasm",
