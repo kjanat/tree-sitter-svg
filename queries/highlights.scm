@@ -22,6 +22,9 @@
 (self_closing_tag
   (name) @tag)
 
+(erroneous_end_tag
+  (name) @tag)
+
 (attribute_name) @attribute
 (d_attribute_name) @attribute
 (viewbox_attribute_name) @attribute
@@ -38,6 +41,10 @@
 (class_attribute_name) @attribute
 (event_attribute_name) @attribute
 
+(hex_color) @constant
+(functional_color) @function.call
+(named_color) @constant
+
 [(quoted_attribute_value)
  (class_attribute_value)
  (functional_iri_attribute_value)
@@ -50,8 +57,18 @@
  (preserve_aspect_ratio_attribute_value)
  (transform_attribute_value)
  (viewbox_attribute_value)] @string
+
+(matrix_transform "matrix" @function.builtin)
+(translate_transform "translate" @function.builtin)
+(scale_transform "scale" @function.builtin)
+(rotate_transform "rotate" @function.builtin)
+(skew_x_transform "skewX" @function.builtin)
+(skew_y_transform "skewY" @function.builtin)
+
 (style_text_double) @string
 (style_text_single) @string
+(script_text_double) @string
+(script_text_single) @string
 
 (class_name) @link_uri
 (iri_reference) @link_uri
@@ -121,4 +138,9 @@
   "</"
   "/>"
   "="
+  "<!--"
+  "-->"
+  "<!DOCTYPE"
+  "<![CDATA["
+  "]]>"
 ] @punctuation.delimiter

@@ -16,7 +16,7 @@
  (#match? @_end "(^|:)script$")
  (#set! injection.language "javascript"))
 
-; HTML in <foreignObject>
+; HTML in <foreignObject> — element children
 ((element
   (start_tag (name) @_start)
   (element) @injection.content
@@ -24,7 +24,18 @@
  (#match? @_start "(^|:)foreignObject$")
  (#match? @_end "(^|:)foreignObject$")
  (#set! injection.language "html")
+ (#set! injection.combined)
  (#set! injection.include-children))
+
+; HTML in <foreignObject> — text children
+((element
+  (start_tag (name) @_start)
+  (text) @injection.content
+  (end_tag (name) @_end))
+ (#match? @_start "(^|:)foreignObject$")
+ (#match? @_end "(^|:)foreignObject$")
+ (#set! injection.language "html")
+ (#set! injection.combined))
 
 ; CSS in style="..." attribute
 ((style_attribute
