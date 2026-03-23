@@ -7,6 +7,8 @@
 - `tree-sitter build --wasm` can look stuck at `Extracting wasi-sdk...`, but for this grammar the real stall is later in wasm backend codegen for `src/parser.c`; syntax-only and LLVM IR emission finish quickly, object/wasm emission does not
 - WASM build fails when parser.c exceeds ~100K lines; at 102K lines (458 rules, 50 externals) the WASM backend cannot complete; at 21K lines (120 rules, 13 externals) it succeeds instantly
 - Zed's extension builder uses wasi-sdk clang-19 to compile grammar WASM; 102K-line parser.c hung indefinitely (23GB RSS); 21K-line parser.c compiles in ~17s
+- Scanner stores tag names as `Array(char)`, truncating `int32_t` lookahead to 8 bits; safe for SVG (ASCII-only names), matches tree-sitter-xml/html; widening to `Array(int32_t)` would require serialization format change
+- Serialization silently truncates tag stack when 1024-byte buffer exceeded; `written` count is patched to reflect actual serialized tags
 
 ## Grammar
 
@@ -56,17 +58,23 @@
 - `raw_text` external token for script/style must guard against error recovery: when tree-sitter sets all `valid_symbols` true, check `!valid_symbols[START_TAG_NAME] && !valid_symbols[END_TAG_NAME]` to prevent raw_text from consuming normal content
 - Only 5 element names need scanner recognition: svg (root enforcement), path (d attribute), script/style (raw text capture), plus generic fallback
 - Attribute sub-grammars worth keeping in the parser are those with genuine value syntax (path data, viewBox numbers, transform functions, paint functions, URI references) — keyword-only attributes (calcMode, spreadMethod, edgeMode) belong in queries
+- CDATA text cannot be tokenized correctly with a pure regex when content contains `]` before `]]>` (e.g. `a]]]>`); the regex `\]\][^>]` over-matches runs of 3+ `]`. External scanner + `repeat1()` chunking is required (same approach as tree-sitter-xml)
+- When a tree-sitter external scanner returns false, the lexer position resets to the scan start — advance() calls are undone. This enables peek-ahead patterns: advance past potential delimiters, return false if found (letting the grammar match the literal), return true with mark_end if not
+
 ## 2026-03-22: Helix 25.07.1 rejects `#strip!` in SVG queries
 
 Helix logged `Failed to compile highlights for 'svg': unknown predicate #strip!` even though
 the predicate only appeared in `queries/tags.scm` and `queries/locals.scm`.
 
 Practical consequence:
+
 - SVG buffers could show no Tree-sitter syntax highlighting at all when Helix loaded the query set.
 
 Workaround used here:
+
 - remove `#strip!` from the SVG Helix query set and keep only the `#match? "^#"` guards
 
 Tradeoff:
+
 - tag/locals references that rely on stripping the leading `#` may no longer resolve as precisely
   in editors that do not support `#strip!`, but highlighting compiles again.
