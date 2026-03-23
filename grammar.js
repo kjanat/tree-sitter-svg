@@ -32,6 +32,7 @@ export default grammar({
 		$._erroneous_end_tag_name,
 		$._raw_text,
 		'/>',
+		$._cdata_text,
 	],
 
 	extras: () => [],
@@ -148,7 +149,7 @@ export default grammar({
 				']]>',
 			),
 
-		cdata_text: _ => token(/([^\]]|\][^\]])+/),
+		cdata_text: $ => repeat1($._cdata_text),
 
 		// ─── SVG Root Element ───────────────────────────────────────
 
@@ -1044,6 +1045,8 @@ export default grammar({
 
 		event_attribute_name: _ => token(prec(1, /on[A-Za-z][A-Za-z0-9_-]*/)),
 
+		// Manual quoting (not `quoted()`) — each quote type needs a distinct
+		// inner token (script_text_double/single) for injection targeting.
 		event_attribute_value: $ =>
 			choice(
 				seq('"', optional(field('content', $.script_text_double)), '"'),
@@ -1114,7 +1117,6 @@ export default grammar({
 		number_or_percentage: $ => choice($.number, $.percentage),
 		length_or_percentage: $ => choice($.length, $.percentage),
 		length_or_percentage_or_auto: $ => choice($.length_or_percentage, 'auto'),
-		length_list: $ => seq($.length_or_percentage, repeat(seq($.comma_wsp, $.length_or_percentage))),
 
 		length: $ => seq($.number, optional($.length_unit)),
 

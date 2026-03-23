@@ -63,3 +63,27 @@ Misc text around root
     (end_tag
       name: (name)))
   (text))
+
+==================
+CDATA with consecutive close brackets
+==================
+
+<svg><text><![CDATA[a[0]=b[1]]]></text></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (start_tag
+        name: (name))
+      (cdata_section
+        (cdata_text))
+      (end_tag
+        name: (name)))
+    (end_tag
+      name: (name)))
+  (text))

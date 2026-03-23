@@ -18,6 +18,7 @@ enum TokenType {
   ERRONEOUS_END_TAG_NAME,
   RAW_TEXT,
   SELF_CLOSING_TAG_DELIMITER,
+  CDATA_TEXT,
 };
 
 typedef Array(char) String;
@@ -248,6 +249,57 @@ static bool scan_raw_text(TagStack *tags, TSLexer *lexer) {
   return false;
 }
 
+// Scan one chunk of CDATA content. Called via repeat1() in the grammar.
+// Returns false when ]]> is next, letting the grammar match the literal.
+//
+// When returning false, tree-sitter resets the lexer position to the
+// scan start — the advance() calls are effectively undone.
+//
+// Emits one of:
+//   - A run of non-] characters
+//   - Exactly one ] (confirmed non-]]> by peeking two chars ahead)
+//
+// For ]]X (two ] not followed by >): emits one ] as content via
+// mark_end, leaving the second ] to be re-lexed on the next call.
+static bool scan_cdata_text(TSLexer *lexer) {
+  if (lexer->lookahead == 0) {
+    return false;
+  }
+
+  if (lexer->lookahead == ']') {
+    advance(lexer);           // consume first ]
+    lexer->mark_end(lexer);   // token boundary: after first ]
+
+    if (lexer->lookahead == ']') {
+      advance(lexer);         // consume second ] (past mark_end, re-lexed if true)
+
+      if (lexer->lookahead == '>') {
+        // ]]> found. Return false — lexer resets to before the first ],
+        // grammar matches ]]> as a literal.
+        return false;
+      }
+
+      // ]] not followed by >. First ] is content (mark_end covers it).
+      // Second ] is past mark_end — gets re-lexed on next call.
+      lexer->result_symbol = CDATA_TEXT;
+      return true;
+    }
+
+    // Single ] — not start of ]]>, so it's content.
+    lexer->result_symbol = CDATA_TEXT;
+    return true;
+  }
+
+  // Consume run of non-] characters
+  while (lexer->lookahead != 0 && lexer->lookahead != ']') {
+    advance(lexer);
+  }
+
+  lexer->mark_end(lexer);
+  lexer->result_symbol = CDATA_TEXT;
+  return true;
+}
+
 static bool scan_self_closing_tag_delimiter(TagStack *tags, TSLexer *lexer) {
   if (lexer->lookahead != '/') {
     return false;
@@ -373,6 +425,12 @@ bool tree_sitter_svg_external_scanner_scan(void *payload, TSLexer *lexer, const 
   // not during error recovery (where all valid_symbols are true).
   if (valid_symbols[RAW_TEXT] && !valid_symbols[START_TAG_NAME] && !valid_symbols[END_TAG_NAME]) {
     return scan_raw_text(tags, lexer);
+  }
+
+  // CDATA text: scan content up to ]]> with correct boundary handling.
+  // Guard against error recovery (all valid_symbols true).
+  if (valid_symbols[CDATA_TEXT] && !valid_symbols[START_TAG_NAME] && !valid_symbols[END_TAG_NAME]) {
+    return scan_cdata_text(lexer);
   }
 
   if (valid_symbols[SELF_CLOSING_TAG_DELIMITER] && lexer->lookahead == '/') {

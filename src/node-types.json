@@ -96,6 +96,11 @@
 		}
 	},
 	{
+		"type": "cdata_text",
+		"named": true,
+		"fields": {}
+	},
+	{
 		"type": "class_attribute",
 		"named": true,
 		"fields": {
@@ -2577,10 +2582,6 @@
 	{
 		"type": "auto",
 		"named": false
-	},
-	{
-		"type": "cdata_text",
-		"named": true
 	},
 	{
 		"type": "ch",
