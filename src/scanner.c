@@ -221,14 +221,14 @@ static bool scan_raw_text(TagStack *tags, TSLexer *lexer) {
           advance(lexer);
         }
 
-        // Accept XML whitespace or '>' as tag-name terminators.
-        // Form-feed (\f) is included for completeness per XML 1.0 S production.
+        // Accept XML 1.0 whitespace (S ::= #x20 | #x9 | #xD | #xA) or '>'
+        // as tag-name terminators.
         // '/' is NOT accepted: `</tag/>` is malformed XML.
         // EOF after `</name` is not a match — fall through and continue
         // consuming as raw text for error tolerance.
         if (matches && (lexer->lookahead == '>' || lexer->lookahead == ' ' ||
                         lexer->lookahead == '\t' || lexer->lookahead == '\r' ||
-                        lexer->lookahead == '\n' || lexer->lookahead == '\f')) {
+                        lexer->lookahead == '\n')) {
           // Found the closing tag — return the raw_text up to `</`
           if (has_content) {
             lexer->result_symbol = RAW_TEXT;

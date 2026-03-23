@@ -17,11 +17,11 @@
 
 (element
   (start_tag) @start
-  (end_tag)? @end) @indent
+  [(end_tag) (erroneous_end_tag)]? @end) @indent
 
 (svg_root_element
   (start_tag) @start
-  (end_tag)? @end) @indent
+  [(end_tag) (erroneous_end_tag)]? @end) @indent
 
 ((end_tag) @outdent
  (#set! "scope" "all"))
