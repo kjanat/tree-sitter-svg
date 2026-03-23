@@ -99,6 +99,10 @@ static void string_destroy(String *s) {
   array_delete(s);
 }
 
+// Tag names stored as char (8-bit). The (char) cast from int32_t truncates
+// code points above U+007F. Safe for SVG (all element names are ASCII) and
+// matches tree-sitter-xml/html. To support non-ASCII XML names, change
+// String to Array(int32_t) and update serialization.
 static String scan_tag_name(TSLexer *lexer) {
   String name = array_new();
 
@@ -209,6 +213,7 @@ static bool scan_raw_text(TagStack *tags, TSLexer *lexer) {
         // Check if the following characters match the tag name
         bool matches = true;
         for (uint32_t i = 0; i < tag->size; i++) {
+          // Cast safe: tag names are ASCII (see scan_tag_name note)
           if ((char)lexer->lookahead != tag->contents[i]) {
             matches = false;
             break;
@@ -357,6 +362,9 @@ unsigned tree_sitter_svg_external_scanner_serialize(void *payload, char *buffer)
 
   uint16_t written = 0;
 
+  // Serialize as many tags as fit. If buffer fills, stop early and patch
+  // the count header. Truncated deep tags become erroneous_end_tag.
+  // SVG nesting rarely exceeds the ~1024-byte buffer.
   for (uint16_t i = 0; i < count; i++) {
     String *tag = array_get(tags, i);
     uint8_t length = tag->size > UINT8_MAX ? UINT8_MAX : (uint8_t)tag->size;

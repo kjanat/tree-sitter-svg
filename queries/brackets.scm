@@ -29,3 +29,13 @@
   (end_tag) @close)
   (#set! newline.only)
   (#set! rainbow.exclude))
+
+((comment
+  "<!--" @open
+  "-->" @close)
+  (#set! rainbow.exclude))
+
+((cdata_section
+  "<![CDATA[" @open
+  "]]>" @close)
+  (#set! rainbow.exclude))
