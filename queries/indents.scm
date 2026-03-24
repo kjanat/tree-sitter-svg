@@ -1,5 +1,5 @@
 ; Tag-level @indent captures intentionally duplicate the element-level captures
-; below (lines 10-16). Editors like Zed query tag-level positions directly for
+; below (lines 18-24). Editors like Zed query tag-level positions directly for
 ; indentation rather than walking to the parent element node.
 ;
 ; Multi-line tags also align continuation lines to the tag name, which makes
@@ -23,5 +23,5 @@
   (start_tag) @start
   [(end_tag) (erroneous_end_tag)]? @end) @indent
 
-((end_tag) @outdent
+([(end_tag) (erroneous_end_tag)] @outdent
  (#set! "scope" "all"))
