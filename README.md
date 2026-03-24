@@ -9,22 +9,28 @@ A [Tree-sitter] grammar for **SVG** (Scalable Vector Graphics), built against th
 
 ## What This Parser Does
 
-Most XML parsers treat SVG as generic markup. This grammar parses SVG structure
-— XML syntax, attribute value sub-grammars, and embedded languages — while
-keeping element vocabulary generic. SVG-specific awareness lives in Tree-sitter
-query files, not the grammar itself.
+Most XML parsers treat SVG as generic markup. This grammar parses SVG-specific
+structure in three layers:
+
+1. XML document and tag syntax
+2. Typed SVG attribute-value sub-grammars
+3. Embedded language regions (CSS, JavaScript, HTML)
+
+Element names stay mostly generic. SVG-specific behavior is split between the
+grammar (`grammar.js`), scanner (`src/scanner.c`), and query files
+(`queries/*.scm`).
 
 ### Element Structure
 
-The parser recognizes 5 element types via an external scanner (`src/scanner.c`):
+The parser uses five parsing paths for elements:
 
-| Element Type | Purpose                                      |
-| ------------ | -------------------------------------------- |
-| `svg`        | Root element (enforced as document root)     |
-| `path`       | Enables `d` attribute sub-grammar            |
-| `script`     | Raw text content (no XML parsing inside)     |
-| `style`      | Raw text content (no XML parsing inside)     |
-| Generic      | All other elements — parsed as XML structure |
+| Path            | Purpose                                    |
+| --------------- | ------------------------------------------ |
+| `svg` root gate | Enforces local name `svg` at document root |
+| `path` tags     | Dedicated path-element parse path          |
+| `script` tags   | Raw text content (no XML parsing inside)   |
+| `style` tags    | Raw text content (no XML parsing inside)   |
+| `generic` tags  | All other elements as XML structure        |
 
 ### Structured Path Data
 
@@ -32,15 +38,28 @@ The `d` attribute on `<path>` elements is parsed into its constituent parts:
 
 ```text
 d="M 10 20 L 30 40 A 5 5 0 0 1 50 60 Z"
-   ├─────┤ ├─────┤ ├───────────────┤ │
-   │       │       │               └─ closepath_segment
-   │       │       └─ elliptical_arc_segment
-   │       └─ lineto_segment                 command:  path_command (A)
-   └─ moveto_segment                         radii:    path_coordinate × 2
-       command: path_command (M)             rotation: path_rotation
-       args:    path_coordinate_pair         flags:    path_arc_flag, path_sweep_flag
-                ├── path_number (10)         target:   path_coordinate_pair
-                └── path_number (20)
+
+moveto_segment
+  command: path_command (M)
+  args:    path_coordinate_pair
+             path_number (10)
+             path_number (20)
+
+lineto_segment
+  command: path_command (L)
+  args:    path_coordinate_pair
+             path_number (30)
+             path_number (40)
+
+elliptical_arc_segment
+  command:  path_command (A)
+  radii:    path_coordinate x2
+  rotation: path_rotation
+  flags:    path_arc_flag, path_sweep_flag
+  target:   path_coordinate_pair
+
+closepath_segment
+  command: path_command (Z)
 ```
 
 This enables queries and tools to operate on individual path segments rather
@@ -55,16 +74,16 @@ are parsed as generic `attribute_name`/`quoted_attribute_value` pairs.
 | --------------------- | ------------------------------------------------ |
 | `d`                   | Full SVG path data (commands, coordinates, arcs) |
 | `viewBox`             | Four-number box                                  |
-| `preserveAspectRatio` | Alignment + meet/slice keywords                  |
+| `preserveAspectRatio` | Optional `defer`, alignment, optional meet/slice |
 | `transform`           | Function list (matrix, translate, rotate, ...)   |
 | `points`              | Coordinate pair list                             |
 | `style`               | CSS injection point                              |
 | `on*` events          | JavaScript injection point                       |
-| `href`/`xlink:href`   | URI reference parsing                            |
+| `href`/`xlink:href`   | IRI reference or structured data URI             |
 | `id`, `class`         | Identity tokens                                  |
 | Paint attributes      | `url()`, keywords, color functions               |
-| IRI attributes        | `url(#ref)` functional references                |
-| Length attributes     | Number + unit                                    |
+| IRI attributes        | `none`, `iri_reference`, or `url(...)` server    |
+| Length attributes     | Length, percentage, or `auto`                    |
 | `opacity`             | Number or percentage                             |
 
 ### Language Injections
@@ -74,10 +93,12 @@ Embedded languages are injected via `queries/injections.scm`:
 | Context                                      | Injected Language |
 | -------------------------------------------- | ----------------- |
 | `<style>` element content (including CDATA)  | CSS               |
-| `style` attribute value                      | CSS               |
+| Typed `style="..."` attribute value          | CSS               |
+| Generic `style="..."` attribute fallback     | CSS               |
 | `<script>` element content (including CDATA) | JavaScript        |
 | Event handler attribute values               | JavaScript        |
-| `<foreignObject>` child elements             | HTML              |
+| `<foreignObject>` element children           | HTML              |
+| `<foreignObject>` text children              | HTML              |
 
 ### Query Files
 
@@ -88,108 +109,105 @@ Embedded languages are injected via `queries/injections.scm`:
 | `locals.scm`     | Local scope/reference tracking |
 | `tags.scm`       | Symbol/tag navigation          |
 
-<!--## Installation
+<!--
+## Installation
 
-<details>
-<summary><strong>Node.js</strong></summary>
+### Node.js / Bun
 
 ```sh
-npm install tree-sitter-svg tree-sitter
+npm install tree-sitter tree-sitter-svg
 ```
 
+Use ESM imports (`import ...`) rather than CommonJS `require(...)`.
+
 ```js
-const Parser = require('tree-sitter');
-const SVG = require('tree-sitter-svg');
+import Parser from "tree-sitter";
+import Svg from "tree-sitter-svg";
 
 const parser = new Parser();
-parser.setLanguage(SVG);
+parser.setLanguage(Svg);
 
 const tree = parser.parse(`
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <path d="M 10 80 C 40 10, 65 10, 95 80" stroke="black" fill="none"/>
 </svg>
 `);
-console.log(tree.rootNode.toString());
+
+console.log(tree.rootNode.type); // source_file
 ```
 
-</details>
-
-<details>
-<summary><strong>Rust</strong></summary>
+### Rust
 
 ```toml
 [dependencies]
+tree-sitter = "0.26"
 tree-sitter-svg = "0.1"
-tree-sitter     = "0.26"
 ```
 
 ```rust
 let mut parser = tree_sitter::Parser::new();
-parser.set_language(&tree_sitter_svg::LANGUAGE.into()).unwrap();
+parser
+    .set_language(&tree_sitter_svg::LANGUAGE.into())
+    .expect("Error loading SVG parser");
 
 let source = r#"<svg viewBox="0 0 100 100">
   <circle cx="50" cy="50" r="40" fill="red"/>
 </svg>"#;
 
-let tree = parser.parse(source, None).unwrap();
-println!("{}", tree.root_node().to_sexp());
+let tree = parser.parse(source, None).expect("parse failed");
+assert_eq!(tree.root_node().kind(), "source_file");
 ```
 
-</details>
-
-<details>
-<summary><strong>Python</strong></summary>
+### Python
 
 ```sh
-pip install tree-sitter-svg
+pip install tree-sitter tree-sitter-svg
 ```
 
 ```python
-import tree_sitter_svg as ts_svg
+import tree_sitter_svg
 from tree_sitter import Language, Parser
 
-parser = Parser(Language(ts_svg.language()))
+parser = Parser(Language(tree_sitter_svg.language()))
+tree = parser.parse(b"<svg xmlns='http://www.w3.org/2000/svg'/>")
 
-tree = parser.parse(b"""
-<svg xmlns="http://www.w3.org/2000/svg">
-  <rect x="10" y="10" width="80" height="80" fill="blue"/>
-</svg>
-""")
-print(tree.root_node.sexp())
+assert tree.root_node.type == "source_file"
 ```
 
-</details>
-
-<details>
-<summary><strong>Go</strong></summary>
+### Go
 
 ```sh
-go get github.com/kjanat/tree-sitter-svg
+go get github.com/tree-sitter/go-tree-sitter github.com/kjanat/tree-sitter-svg
 ```
 
 ```go
 package main
 
 import (
-	ts_svg "github.com/kjanat/tree-sitter-svg/bindings/go"
-	ts "github.com/tree-sitter/go-tree-sitter"
+    "fmt"
+
+    tree_sitter_svg "github.com/kjanat/tree-sitter-svg/bindings/go"
+    tree_sitter "github.com/tree-sitter/go-tree-sitter"
 )
 
 func main() {
-	parser := ts.NewParser()
-	defer parser.Close()
-	parser.SetLanguage(ts.NewLanguage(ts_svg.Language()))
+    parser := tree_sitter.NewParser()
+    defer parser.Close()
 
-	source := []byte(`<svg><rect width="10" height="10"/></svg>`)
-	tree := parser.Parse(source, nil)
-	defer tree.Close()
+    err := parser.SetLanguage(tree_sitter.NewLanguage(tree_sitter_svg.Language()))
+    if err != nil {
+        panic(err)
+    }
+
+    source := []byte(`<svg><rect width="10" height="10"/></svg>`)
+    tree := parser.Parse(source, nil)
+    defer tree.Close()
+
+    fmt.Println(tree.RootNode().Kind()) // source_file
 }
 ```
 
-</details>
-
-<details>
-<summary><strong>Swift</strong></summary>
+### Swift
 
 Add to `Package.swift`:
 
@@ -197,10 +215,7 @@ Add to `Package.swift`:
 .package(url: "https://github.com/kjanat/tree-sitter-svg", from: "0.1.0")
 ```
 
-</details>
-
-<details>
-<summary><strong>C/C++</strong></summary>
+### C/C++
 
 ```sh
 make && sudo make install
@@ -212,10 +227,7 @@ make && sudo make install
 const TSLanguage *lang = tree_sitter_svg();
 ```
 
-</details>
-
-<details>
-<summary><strong>Zig</strong></summary>
+### Zig
 
 Add to `build.zig.zon` dependencies:
 
@@ -225,22 +237,19 @@ Add to `build.zig.zon` dependencies:
 },
 ```
 
-</details>
+### Java
 
-<details>
-<summary><strong>Java</strong></summary>
-
-Via Maven (coordinates TBD — build from source for now):
+Via Maven:
 
 ```xml
 <dependency>
-	<groupId>io.github.tree-sitter</groupId>
-	<artifactId>tree-sitter-svg</artifactId>
-	<version>0.1.0</version>
+  <groupId>io.github.tree-sitter</groupId>
+  <artifactId>jtreesitter-svg</artifactId>
+  <version>0.1.0</version>
 </dependency>
 ```
 
-</details>-->
+-->
 
 ## Development
 
@@ -254,8 +263,9 @@ Via Maven (coordinates TBD — build from source for now):
 
 ```sh
 tree-sitter generate          # regenerate src/parser.c from grammar.js
-tree-sitter test              # run test/corpus/ tests
+tree-sitter test              # run corpus + highlight assertions
 npm test                      # Node binding tests
+npm run test:regex            # regex sample harness
 npm start                     # build WASM + open playground
 ```
 
@@ -282,24 +292,28 @@ bindings/
   swift/                      # Swift binding + test
   zig/                        # Zig binding + test
 test/corpus/                  # tree-sitter corpus tests
+test/highlight/               # highlight query assertions
+test/regex_samples/           # regex harness fixtures/tests
 ```
 
 ### Contributing
 
 1. Edit `grammar.js` (and `src/scanner.c` for tag matching changes)
 2. Run `tree-sitter generate && tree-sitter test`
-3. Add or update corpus tests in `test/corpus/`
+3. Add or update tests in `test/corpus/` and `test/highlight/`
 4. Open a pull request
 
 ## Spec Compliance
 
-This parser is built against the SVG2 specification with reference to the
-SVG 1.1 DTD for element categorization.
+This parser targets SVG2 syntax and uses SVG 1.1 DTD tables as supporting
+reference data.
+
+Element parsing stays mostly XML-generic, with explicit typed coverage for
+selected SVG value grammars (for example path data, transforms, and paint/IRI
+families).
 
 ## License
 
-[MIT]([LICENSE]) © Kaj Kowalski
+[MIT][LICENSE] © Kaj Kowalski
 
 [LICENSE]: https://github.com/kjanat/tree-sitter-svg/blob/master/LICENSE
-
-<!-- markdownlint-disable-file MD010 MD033 -->
