@@ -1,0 +1,15 @@
+{
+	"extends": "https://raw.githubusercontent.com/kjanat/kjanat/refs/heads/master/configs/dprint.remote.json",
+	"excludes": ["tree-sitter.json", "src/*.json", "**/*.svg"],
+	"exec": {
+		"associations": ["package.json", "*.rs", "*.toml"],
+		"commands": [
+			{ "command": "bunx sort-package-json --stdin", "fileNames": ["package.json"] },
+			{ "command": "rustfmt --edition 2024", "exts": ["rs"] },
+			{ "command": "bunx tombi format - --stdin-filename {{file_path}}", "exts": ["toml"] },
+		],
+	},
+	"plugins": [
+		"https://plugins.dprint.dev/exec-0.6.0.json@a054130d458f124f9b5c91484833828950723a5af3f8ff2bd1523bd47b83b364",
+	],
+}

@@ -44,7 +44,8 @@
 		"postinstall": "git config core.hooksPath .githooks",
 		"prestart": "tree-sitter build --wasm",
 		"start": "tree-sitter playground --quiet",
-		"test": "node --test bindings/node/*_test.js"
+		"test": "node --test bindings/node/*_test.js",
+		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
 		"node-addon-api": "^8.5.0",
@@ -53,7 +54,8 @@
 	"devDependencies": {
 		"prebuildify": "^6.0.1",
 		"tree-sitter": "^0.25.0",
-		"tree-sitter-cli": "^0.26.7"
+		"tree-sitter-cli": "^0.26.7",
+		"typescript": "^6.0.2"
 	},
 	"peerDependencies": {
 		"tree-sitter": "^0.25.0"

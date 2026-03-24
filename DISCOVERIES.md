@@ -2,6 +2,7 @@
 
 ## Build & Tooling
 
+- `tree-sitter.json` should declare `highlights`, `injections`, and `locals` query paths in the grammar entry; omitting them triggers a CLI warning and may prevent editors from finding the queries
 - External scanner enum order must exactly match `externals` order in `grammar.js`; mismatches silently corrupt tokenization
 - For simple external tokens (tag names, `/>`), avoid `mark_end` unless doing lookahead rollback; premature `mark_end` can truncate tokens
 - `tree-sitter build --wasm` can look stuck at `Extracting wasi-sdk...`, but for this grammar the real stall is later in wasm backend codegen for `src/parser.c`; syntax-only and LLVM IR emission finish quickly, object/wasm emission does not
@@ -29,6 +30,8 @@
 
 - `:error` corpus sections are best for invalid syntax checks; for recovery-node checks without parser error state, keep normal sections with expected trees
 - Add dedicated path-data corpus cases for implicit separators and arc-flag adjacency (e.g. `A... 01 ...`) to prevent regressions
+- Highlight tests for XML-based grammars use `<!-- -->` comments for assertions; `<!--` occupies cols 0-3 so `^` carets can only target col 4+; use indented arrow tests (`<!-- <- capture -->`) to reach earlier columns
+- In highlight tests, child literal captures (`"<?"`, `"<!--"`, `"<!DOCTYPE"` → `@punctuation.delimiter`) override parent node captures (`(xml_declaration) @keyword`, `(comment) @comment`); test the inner text, not the delimiter, for the parent's highlight
 
 ## Bindings
 

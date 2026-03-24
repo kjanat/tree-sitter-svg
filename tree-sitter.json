@@ -10,7 +10,10 @@
 				"svg"
 			],
 			"injection-regex": "^svg$",
-			"class-name": "TreeSitterSvg"
+			"class-name": "TreeSitterSvg",
+			"highlights": "queries/highlights.scm",
+			"injections": "queries/injections.scm",
+			"locals": "queries/locals.scm"
 		}
 	],
 	"metadata": {

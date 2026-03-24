@@ -510,3 +510,82 @@ Sign and exponent numbers
     (end_tag
       name: (name)))
   (text))
+
+=============================
+Long path implicit separators
+=============================
+
+<svg><path d="m19.6 66.5 19.7-11 .3-1-.3-.5h-1l-3.3-.2-11.2-.3"/></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (self_closing_tag
+        name: (name)
+        (attribute
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      command: (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number))))
+                    (path_wsp)
+                    (path_segment
+                      (implicit_lineto_segment
+                        (path_coordinate_pair
+                          (path_coordinate
+                            (path_number))
+                          (path_coordinate
+                            (path_number)))))
+                    (path_wsp)
+                    (path_segment
+                      (implicit_lineto_segment
+                        (path_coordinate_pair
+                          (path_coordinate
+                            (path_number))
+                          (path_coordinate
+                            (path_number)))))
+                    (path_segment
+                      (implicit_lineto_segment
+                        (path_coordinate_pair
+                          (path_coordinate
+                            (path_number))
+                          (path_coordinate
+                            (path_number)))))
+                    (path_segment
+                      (horizontal_lineto_segment
+                        command: (path_command)
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (lineto_segment
+                        command: (path_command)
+                        (path_coordinate_pair
+                          (path_coordinate
+                            (path_number))
+                          (path_coordinate
+                            (path_number)))))
+                    (path_segment
+                      (implicit_lineto_segment
+                        (path_coordinate_pair
+                          (path_coordinate
+                            (path_number))
+                          (path_coordinate
+                            (path_number)))))))))))))
+    (end_tag
+      name: (name)))
+  (text))

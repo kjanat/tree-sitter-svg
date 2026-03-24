@@ -12,6 +12,7 @@
         "prebuildify": "^6.0.1",
         "tree-sitter": "^0.25.0",
         "tree-sitter-cli": "^0.26.7",
+        "typescript": "^6.0.2",
       },
       "peerDependencies": {
         "tree-sitter": "^0.25.0",
@@ -73,6 +74,8 @@
     "tree-sitter": ["tree-sitter@0.25.0", "", { "dependencies": { "node-addon-api": "^8.3.0", "node-gyp-build": "^4.8.4" } }, "sha512-PGZZzFW63eElZJDe/b/R/LbsjDDYJa5UEjLZJB59RQsMX+fo0j54fqBPn1MGKav/QNa0JR0zBiVaikYDWCj5KQ=="],
 
     "tree-sitter-cli": ["tree-sitter-cli@0.26.7", "", { "bin": { "tree-sitter": "cli.js" } }, "sha512-fOg/DokJr/gW7suy9IypT1MQon28+JxOmtjudrT04rHRyqVJzrvakrojwyU8r0U6UNRsZKilb8VIhyarv2XUkQ=="],
+
+    "typescript": ["typescript@6.0.2", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-bGdAIrZ0wiGDo5l8c++HWtbaNCWTS4UTv7RaTH/ThVIgjkveJt83m74bBHMJkuCbslY8ixgLBVZJIOiQlQTjfQ=="],
 
     "util-deprecate": ["util-deprecate@1.0.2", "", {}, "sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw=="],
 

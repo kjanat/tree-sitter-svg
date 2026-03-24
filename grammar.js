@@ -10,6 +10,7 @@
 const PATH_COMMAND = /[MmZzLlHhVvCcSsQqTtAa]/;
 const NUMBER_PATTERN = /[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?/;
 
+/** @param {RuleOrLiteral} value */
 function quoted(value) {
 	return choice(
 		seq('"', optional(value), '"'),
@@ -416,6 +417,7 @@ export default grammar({
 			choice(
 				$.closepath_segment,
 				$.moveto_segment,
+				$.implicit_lineto_segment,
 				$.lineto_segment,
 				$.horizontal_lineto_segment,
 				$.vertical_lineto_segment,
@@ -432,11 +434,19 @@ export default grammar({
 					field('command', alias($.moveto_command, $.path_command)),
 					optional($.path_wsp),
 					$.path_coordinate_pair,
-					repeat(seq($.path_comma_wsp, $.path_coordinate_pair)),
+					repeat(seq(optional($.path_comma_wsp), $.path_coordinate_pair)),
 				),
 			),
 
 		closepath_segment: $ => field('command', alias($.closepath_command, $.path_command)),
+
+		implicit_lineto_segment: $ =>
+			prec.left(
+				seq(
+					$.path_coordinate_pair,
+					repeat(seq(optional($.path_comma_wsp), $.path_coordinate_pair)),
+				),
+			),
 
 		lineto_segment: $ =>
 			prec.left(
@@ -444,7 +454,7 @@ export default grammar({
 					field('command', alias($.lineto_command, $.path_command)),
 					optional($.path_wsp),
 					$.path_coordinate_pair,
-					repeat(seq($.path_comma_wsp, $.path_coordinate_pair)),
+					repeat(seq(optional($.path_comma_wsp), $.path_coordinate_pair)),
 				),
 			),
 
@@ -454,7 +464,7 @@ export default grammar({
 					field('command', alias($.horizontal_lineto_command, $.path_command)),
 					optional($.path_wsp),
 					$.path_coordinate,
-					repeat(seq($.path_comma_wsp, $.path_coordinate)),
+					repeat(seq(optional($.path_comma_wsp), $.path_coordinate)),
 				),
 			),
 
@@ -464,7 +474,7 @@ export default grammar({
 					field('command', alias($.vertical_lineto_command, $.path_command)),
 					optional($.path_wsp),
 					$.path_coordinate,
-					repeat(seq($.path_comma_wsp, $.path_coordinate)),
+					repeat(seq(optional($.path_comma_wsp), $.path_coordinate)),
 				),
 			),
 
@@ -474,7 +484,7 @@ export default grammar({
 					field('command', alias($.curveto_command, $.path_command)),
 					optional($.path_wsp),
 					$.curveto_argument,
-					repeat(seq($.path_comma_wsp, $.curveto_argument)),
+					repeat(seq(optional($.path_comma_wsp), $.curveto_argument)),
 				),
 			),
 
@@ -484,7 +494,7 @@ export default grammar({
 					field('command', alias($.smooth_curveto_command, $.path_command)),
 					optional($.path_wsp),
 					$.smooth_curveto_argument,
-					repeat(seq($.path_comma_wsp, $.smooth_curveto_argument)),
+					repeat(seq(optional($.path_comma_wsp), $.smooth_curveto_argument)),
 				),
 			),
 
@@ -494,7 +504,7 @@ export default grammar({
 					field('command', alias($.quadratic_bezier_curveto_command, $.path_command)),
 					optional($.path_wsp),
 					$.quadratic_bezier_curveto_argument,
-					repeat(seq($.path_comma_wsp, $.quadratic_bezier_curveto_argument)),
+					repeat(seq(optional($.path_comma_wsp), $.quadratic_bezier_curveto_argument)),
 				),
 			),
 
@@ -504,7 +514,7 @@ export default grammar({
 					field('command', alias($.smooth_quadratic_bezier_curveto_command, $.path_command)),
 					optional($.path_wsp),
 					$.path_coordinate_pair,
-					repeat(seq($.path_comma_wsp, $.path_coordinate_pair)),
+					repeat(seq(optional($.path_comma_wsp), $.path_coordinate_pair)),
 				),
 			),
 
@@ -514,30 +524,30 @@ export default grammar({
 					field('command', alias($.elliptical_arc_command, $.path_command)),
 					optional($.path_wsp),
 					$.elliptical_arc_argument,
-					repeat(seq($.path_comma_wsp, $.elliptical_arc_argument)),
+					repeat(seq(optional($.path_comma_wsp), $.elliptical_arc_argument)),
 				),
 			),
 
 		curveto_argument: $ =>
 			seq(
 				$.path_coordinate_pair,
-				$.path_comma_wsp,
+				optional($.path_comma_wsp),
 				$.path_coordinate_pair,
-				$.path_comma_wsp,
+				optional($.path_comma_wsp),
 				$.path_coordinate_pair,
 			),
 
 		smooth_curveto_argument: $ =>
 			seq(
 				$.path_coordinate_pair,
-				$.path_comma_wsp,
+				optional($.path_comma_wsp),
 				$.path_coordinate_pair,
 			),
 
 		quadratic_bezier_curveto_argument: $ =>
 			seq(
 				$.path_coordinate_pair,
-				$.path_comma_wsp,
+				optional($.path_comma_wsp),
 				$.path_coordinate_pair,
 			),
 
