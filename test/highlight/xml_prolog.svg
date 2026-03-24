@@ -9,9 +9,10 @@
 <!-- <- punctuation.delimiter -->
 <!-- comment text -->
      <!-- <- comment -->
-<?pi target?>
-<!-- <- punctuation.delimiter -->
-  <!-- <- keyword -->
+      <?pi target?>
+<!--  ^^ punctuation.delimiter -->
+<!--    ^^ keyword -->
+<!--             ^^ punctuation.delimiter -->
 <svg>
   <g>Hi &amp; bye</g>
   <!--  ^^^^^ string.escape -->

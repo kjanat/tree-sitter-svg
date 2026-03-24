@@ -149,16 +149,20 @@ function loadCurrentCandidate(): Candidate {
 	throw new Error("svg grammar not found in tree-sitter.json");
 }
 
+function ensureMultiline(flags: string): string {
+	return flags.includes("m") ? flags : flags + "m";
+}
+
 function compileRegex(pattern: string): RegExp {
 	try {
-		return new RegExp(pattern);
+		return new RegExp(pattern, "m");
 	} catch {
 		const scopedInlineFlags = /^\(\?([ims]+):(.*)\)$/s.exec(pattern);
 		if (scopedInlineFlags !== null) {
 			const flags = scopedInlineFlags[1];
 			const body = scopedInlineFlags[2];
 			if (typeof flags === "string" && typeof body === "string") {
-				return new RegExp(body, flags);
+				return new RegExp(body, ensureMultiline(flags));
 			}
 		}
 
@@ -167,7 +171,7 @@ function compileRegex(pattern: string): RegExp {
 			const flags = leadingInlineFlags[1];
 			const body = leadingInlineFlags[2];
 			if (typeof flags === "string" && typeof body === "string") {
-				return new RegExp(body, flags);
+				return new RegExp(body, ensureMultiline(flags));
 			}
 		}
 
@@ -225,23 +229,21 @@ function metricsFrom(samples: readonly SampleMatch[], key: "firstLineMatch" | "c
 }
 
 async function loadSampleInputs(entries: readonly ManifestEntry[]): Promise<SampleInput[]> {
-	const inputs: SampleInput[] = [];
+	return Promise.all(
+		entries.map(async (entry): Promise<SampleInput> => {
+			const path = `${import.meta.dir}/${entry.file}`;
+			const content = await Bun.file(path).text();
+			const firstLine = content.split(/\r?\n/, 1)[0] ?? "";
 
-	for (const entry of entries) {
-		const path = `${import.meta.dir}/${entry.file}`;
-		const content = await Bun.file(path).text();
-		const firstLine = content.split(/\r?\n/, 1)[0] ?? "";
-
-		inputs.push({
-			file: entry.file,
-			kind: entry.kind,
-			expectedSvg: entry.expectedSvg,
-			firstLine,
-			content,
-		});
-	}
-
-	return inputs;
+			return {
+				file: entry.file,
+				kind: entry.kind,
+				expectedSvg: entry.expectedSvg,
+				firstLine,
+				content,
+			};
+		}),
+	);
 }
 
 function evaluateCandidate(samples: readonly SampleInput[], candidate: Candidate): CandidateResultDetailed {
@@ -301,5 +303,5 @@ export async function runHarness(candidates: readonly Candidate[]): Promise<Cand
 export const strictRootOnlyCandidate: Candidate = {
 	name: "strict_root_only",
 	firstLineRegex: String.raw`^\s*(?:<!DOCTYPE\s+svg\b|<(?:[A-Za-z_][\w.-]*:)?svg\b)`,
-	contentRegex: String.raw`(?is)^\s*(?:<\?xml\b[^>]*\?>\s*)?(?:(?:<!--(?:[^-]|-[^-])*-->|<\?[^>]*\?>)\s*)*(?:<!DOCTYPE\s+svg\b[^>]*>\s*)?<(?:[A-Za-z_][\w.-]*:)?svg\b`,
+	contentRegex: String.raw`(?is)^\s*(?:<\?xml\b[^>]*\?>\s*)?(?:(?:<!--(?:[^-]|-(?!->))*-->|<\?[^>]*\?>)\s*)*(?:<!DOCTYPE\s+svg\b[^>]*>\s*)?<(?:[A-Za-z_][\w.-]*:)?svg\b`,
 };

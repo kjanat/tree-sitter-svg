@@ -10,9 +10,7 @@
 (attribute
   (_ value: (_) @parameter.inside))
 
-; The current grammar exposes `comment` as a leaf node (no inner `comment_text`
-; child), so `@comment.around` and `@comment.inside` intentionally capture the
-; same node. When `comment_text` exists, move `@comment.inside` to that child so
-; `@comment.around` keeps delimiters and `@comment.inside` excludes them.
+; `@comment.around` captures the full XML comment (with `<!--`/`-->` delimiters),
+; while `@comment.inside` captures only the inner `comment_text` child.
 (comment) @comment.around
-(comment) @comment.inside
+(comment text: (comment_text) @comment.inside)

@@ -133,15 +133,18 @@ export default grammar({
 
 		pi_content: _ => token(/([^?]|\?[^>])+/),
 
-		comment: _ =>
+		comment: $ =>
 			seq(
 				'<!--',
-				repeat(choice(
-					token.immediate(/[^-]+/),
-					token.immediate(/-[^-]/),
-				)),
+				optional(field('text', $.comment_text)),
 				'-->',
 			),
+
+		comment_text: _ =>
+			repeat1(choice(
+				token.immediate(/[^-]+/),
+				token.immediate(/-[^-]/),
+			)),
 
 		cdata_section: $ =>
 			seq(

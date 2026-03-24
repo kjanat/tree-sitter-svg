@@ -1313,7 +1313,8 @@ Comment with single dashes inside
   root: (svg_root_element
     (start_tag
       name: (name))
-    (comment)
+    (comment
+      text: (comment_text))
     (end_tag
       name: (name)))
   (text))

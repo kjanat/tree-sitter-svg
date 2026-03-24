@@ -296,7 +296,8 @@ Root with pre and post misc nodes
       value: (quoted_attribute_value
         (attribute_text_double))))
   (text)
-  (comment)
+  (comment
+    text: (comment_text))
   (text)
   (processing_instruction
     target: (name)
@@ -311,7 +312,8 @@ Root with pre and post misc nodes
     (end_tag
       name: (name)))
   (text)
-  (comment)
+  (comment
+    text: (comment_text))
   (text)
   (processing_instruction
     target: (name)

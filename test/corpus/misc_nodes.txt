@@ -17,7 +17,8 @@ Comments, PI, CDATA, entities
     (start_tag
       name: (name))
     (text)
-    (comment)
+    (comment
+      text: (comment_text))
     (text)
     (processing_instruction
       target: (name)

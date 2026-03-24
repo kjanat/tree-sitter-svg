@@ -7,7 +7,7 @@
 			"title": "SVG",
 			"scope": "source.svg",
 			"first-line-regex": "^\\s*<(?:[A-Za-z_][\\w.-]*:)?svg\\b",
-			"content-regex": "(?s)^\\s*(?:<\\?xml\\b[^>]*\\?>\\s*)?(?:(?:<!--(?:[^-]|-[^-])*-->|<\\?[^>]*\\?>)\\s*)*(?:<!DOCTYPE\\s+svg\\b[^>]*>\\s*)?<(?:[A-Za-z_][\\w.-]*:)?svg\\b",
+			"content-regex": "(?s)^\\s*(?:<\\?xml\\b[^>]*\\?>\\s*)?(?:(?:<!--(?:[^-]|-(?!->))*-->|<\\?[^>]*\\?>)\\s*)*(?:<!DOCTYPE\\s+svg\\b[^>]*>\\s*)?<(?:[A-Za-z_][\\w.-]*:)?svg\\b",
 			"file-types": [
 				"svg"
 			],

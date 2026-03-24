@@ -1,18 +1,20 @@
-<svg>
-<!-- <- punctuation.delimiter -->
- <!-- <- tag -->
-    <!-- <- punctuation.delimiter -->
-  <rect/>
-  <!-- <- punctuation.delimiter -->
-   <!-- <- tag -->
-       <!-- <- punctuation.delimiter -->
-        <!-- <- punctuation.delimiter -->
-  <g>
-   <!-- <- tag -->
-    <!-- <- punctuation.delimiter -->
-  </g>
-  <!-- <- punctuation.delimiter -->
-   <!-- <- punctuation.delimiter -->
-    <!-- <- tag -->
-     <!-- <- punctuation.delimiter -->
-</svg>
+      <svg>
+<!--  ^ punctuation.delimiter -->
+<!--   ^^^ tag -->
+<!--      ^ punctuation.delimiter -->
+        <rect/>
+<!--    ^ punctuation.delimiter -->
+<!--     ^^^^ tag -->
+<!--         ^^ punctuation.delimiter -->
+        <g>
+<!--    ^ punctuation.delimiter -->
+<!--     ^ tag -->
+<!--      ^ punctuation.delimiter -->
+        </g>
+<!--    ^^ punctuation.delimiter -->
+<!--      ^ tag -->
+<!--       ^ punctuation.delimiter -->
+      </svg>
+<!--  ^^ punctuation.delimiter -->
+<!--    ^^^ tag -->
+<!--       ^ punctuation.delimiter -->

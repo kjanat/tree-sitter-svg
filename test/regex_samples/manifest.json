@@ -40,6 +40,11 @@
     "kind": "svg"
   },
   {
+    "file": "svg_comment_double_hyphen.xml",
+    "expected_svg": true,
+    "kind": "svg"
+  },
+  {
     "file": "html_doctype.html",
     "expected_svg": false,
     "kind": "html"
