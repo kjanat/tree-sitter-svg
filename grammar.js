@@ -363,6 +363,12 @@ export default grammar({
 				$.functional_iri_attribute,
 				$.opacity_attribute,
 				$.length_attribute,
+				$.number_attribute,
+				$.dasharray_attribute,
+				$.keyword_attribute,
+				$.font_weight_attribute,
+				$.text_decoration_attribute,
+				$.font_family_attribute,
 				$.href_attribute,
 				$.id_attribute,
 				$.class_attribute,
@@ -981,12 +987,169 @@ export default grammar({
 				'markerWidth',
 				'markerHeight',
 				'stroke-width',
+				'stroke-dashoffset',
 				'font-size',
 				'startOffset',
 				'textLength',
 			),
 
 		length_attribute_value: $ => quoted($.length_or_percentage_or_auto),
+
+		// ─── number attribute (stroke-miterlimit, etc.) ─────────────
+
+		number_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.number_attribute_name),
+					$._eq,
+					field('value', $.number_attribute_value),
+				),
+			),
+
+		number_attribute_name: _ => choice(
+			'stroke-miterlimit',
+		),
+
+		number_attribute_value: $ => quoted($.number),
+
+		// ─── dasharray attribute (stroke-dasharray) ─────────────────
+
+		dasharray_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.dasharray_attribute_name),
+					$._eq,
+					field('value', $.dasharray_attribute_value),
+				),
+			),
+
+		dasharray_attribute_name: _ => 'stroke-dasharray',
+
+		dasharray_attribute_value: $ => quoted($.dasharray_value),
+
+		dasharray_value: $ => choice(
+			'none',
+			$.dash_list,
+		),
+
+		dash_list: $ => seq(
+			$.length_or_percentage,
+			repeat(seq($.comma_wsp, $.length_or_percentage)),
+		),
+
+		// ─── keyword attribute (enumerated value attributes) ────────
+
+		keyword_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.keyword_attribute_name),
+					$._eq,
+					field('value', $.keyword_attribute_value),
+				),
+			),
+
+		keyword_attribute_name: _ => choice(
+			'stroke-linecap',
+			'stroke-linejoin',
+			'font-style',
+			'text-anchor',
+			'dominant-baseline',
+		),
+
+		keyword_attribute_value: $ => quoted($.keyword_value),
+
+		keyword_value: _ => choice(
+			// stroke-linecap
+			'butt', 'square',
+			// stroke-linejoin
+			'miter', 'miter-clip', 'bevel', 'arcs',
+			// shared (linecap + linejoin)
+			'round',
+			// font-style
+			'normal', 'italic', 'oblique',
+			// text-anchor
+			'start', 'middle', 'end',
+			// dominant-baseline
+			'auto', 'text-bottom', 'alphabetic', 'ideographic',
+			'central', 'mathematical', 'hanging', 'text-top',
+			// shared
+			'inherit',
+		),
+
+		// ─── font-weight attribute ──────────────────────────────────
+
+		font_weight_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.font_weight_attribute_name),
+					$._eq,
+					field('value', $.font_weight_attribute_value),
+				),
+			),
+
+		font_weight_attribute_name: _ => 'font-weight',
+
+		font_weight_attribute_value: $ => quoted($.font_weight_value),
+
+		font_weight_value: $ => choice(
+			'normal', 'bold', 'bolder', 'lighter',
+			$.number,
+		),
+
+		// ─── text-decoration attribute ──────────────────────────────
+
+		text_decoration_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.text_decoration_attribute_name),
+					$._eq,
+					field('value', $.text_decoration_attribute_value),
+				),
+			),
+
+		text_decoration_attribute_name: _ => 'text-decoration',
+
+		text_decoration_attribute_value: $ => quoted($.text_decoration_value),
+
+		text_decoration_value: $ => choice(
+			'none',
+			seq(
+				$.text_decoration_keyword,
+				repeat(seq($.wsp, $.text_decoration_keyword)),
+			),
+		),
+
+		text_decoration_keyword: _ => choice(
+			'underline', 'overline', 'line-through', 'blink',
+		),
+
+		// ─── font-family attribute ──────────────────────────────────
+
+		font_family_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.font_family_attribute_name),
+					$._eq,
+					field('value', $.font_family_attribute_value),
+				),
+			),
+
+		font_family_attribute_name: _ => 'font-family',
+
+		font_family_attribute_value: $ =>
+			choice(
+				seq('"', optional(field('content', $.font_family_text_double)), '"'),
+				seq("'", optional(field('content', $.font_family_text_single)), "'"),
+			),
+
+		font_family_text_double: _ => token(/[^"]+/),
+		font_family_text_single: _ => token(/[^']+/),
 
 		// ─── href attribute ─────────────────────────────────────────
 

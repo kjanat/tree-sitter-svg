@@ -310,15 +310,86 @@ Opacity and stroke dasharray
             (number_or_percentage
               (number)))))
       (attribute
-        (generic_attribute
-          name: (attribute_name)
-          value: (quoted_attribute_value
-            (attribute_text_double))))
+        (dasharray_attribute
+          name: (dasharray_attribute_name)
+          value: (dasharray_attribute_value
+            (dasharray_value
+              (dash_list
+                (length_or_percentage
+                  (length
+                    (number)))
+                (comma_wsp
+                  (wsp))
+                (length_or_percentage
+                  (length
+                    (number)))
+                (comma_wsp
+                  (wsp))
+                (length_or_percentage
+                  (length
+                    (number))))))))
       (attribute
-        (generic_attribute
-          name: (attribute_name)
-          value: (quoted_attribute_value
-            (attribute_text_double)))))
+        (length_attribute
+          name: (length_attribute_name)
+          value: (length_attribute_value
+            (length_or_percentage_or_auto
+              (length_or_percentage
+                (length
+                  (number))))))))
+    (end_tag
+      name: (name)))
+  (text))
+
+==================
+Stroke keyword and number attributes
+==================
+
+<svg stroke-linecap="round" stroke-linejoin="miter" stroke-miterlimit="4"></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name)
+      (attribute
+        (keyword_attribute
+          name: (keyword_attribute_name)
+          value: (keyword_attribute_value
+            (keyword_value))))
+      (attribute
+        (keyword_attribute
+          name: (keyword_attribute_name)
+          value: (keyword_attribute_value
+            (keyword_value))))
+      (attribute
+        (number_attribute
+          name: (number_attribute_name)
+          value: (number_attribute_value
+            (number)))))
+    (end_tag
+      name: (name)))
+  (text))
+
+==================
+Dasharray with none value
+==================
+
+<svg stroke-dasharray="none"></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name)
+      (attribute
+        (dasharray_attribute
+          name: (dasharray_attribute_name)
+          value: (dasharray_attribute_value
+            (dasharray_value)))))
     (end_tag
       name: (name)))
   (text))

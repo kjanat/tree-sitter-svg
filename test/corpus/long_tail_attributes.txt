@@ -316,10 +316,51 @@ Text layout and typography attributes
             value: (quoted_attribute_value
               (attribute_text_double))))
         (attribute
+          (keyword_attribute
+            name: (keyword_attribute_name)
+            value: (keyword_attribute_value
+              (keyword_value))))
+        (attribute
           (generic_attribute
             name: (attribute_name)
             value: (quoted_attribute_value
               (attribute_text_double))))
+        (attribute
+          (generic_attribute
+            name: (attribute_name)
+            value: (quoted_attribute_value
+              (attribute_text_double))))
+        (attribute
+          (font_family_attribute
+            name: (font_family_attribute_name)
+            value: (font_family_attribute_value
+              content: (font_family_text_double))))
+        (attribute
+          (generic_attribute
+            name: (attribute_name)
+            value: (quoted_attribute_value
+              (attribute_text_double))))
+        (attribute
+          (generic_attribute
+            name: (attribute_name)
+            value: (quoted_attribute_value
+              (attribute_text_double))))
+        (attribute
+          (keyword_attribute
+            name: (keyword_attribute_name)
+            value: (keyword_attribute_value
+              (keyword_value))))
+        (attribute
+          (generic_attribute
+            name: (attribute_name)
+            value: (quoted_attribute_value
+              (attribute_text_double))))
+        (attribute
+          (font_weight_attribute
+            name: (font_weight_attribute_name)
+            value: (font_weight_attribute_value
+              (font_weight_value
+                (number)))))
         (attribute
           (generic_attribute
             name: (attribute_name)
@@ -346,55 +387,18 @@ Text layout and typography attributes
             value: (quoted_attribute_value
               (attribute_text_double))))
         (attribute
-          (generic_attribute
-            name: (attribute_name)
-            value: (quoted_attribute_value
-              (attribute_text_double))))
+          (keyword_attribute
+            name: (keyword_attribute_name)
+            value: (keyword_attribute_value
+              (keyword_value))))
         (attribute
-          (generic_attribute
-            name: (attribute_name)
-            value: (quoted_attribute_value
-              (attribute_text_double))))
-        (attribute
-          (generic_attribute
-            name: (attribute_name)
-            value: (quoted_attribute_value
-              (attribute_text_double))))
-        (attribute
-          (generic_attribute
-            name: (attribute_name)
-            value: (quoted_attribute_value
-              (attribute_text_double))))
-        (attribute
-          (generic_attribute
-            name: (attribute_name)
-            value: (quoted_attribute_value
-              (attribute_text_double))))
-        (attribute
-          (generic_attribute
-            name: (attribute_name)
-            value: (quoted_attribute_value
-              (attribute_text_double))))
-        (attribute
-          (generic_attribute
-            name: (attribute_name)
-            value: (quoted_attribute_value
-              (attribute_text_double))))
-        (attribute
-          (generic_attribute
-            name: (attribute_name)
-            value: (quoted_attribute_value
-              (attribute_text_double))))
-        (attribute
-          (generic_attribute
-            name: (attribute_name)
-            value: (quoted_attribute_value
-              (attribute_text_double))))
-        (attribute
-          (generic_attribute
-            name: (attribute_name)
-            value: (quoted_attribute_value
-              (attribute_text_double))))
+          (text_decoration_attribute
+            name: (text_decoration_attribute_name)
+            value: (text_decoration_attribute_value
+              (text_decoration_value
+                (text_decoration_keyword)
+                (wsp)
+                (text_decoration_keyword)))))
         (attribute
           (generic_attribute
             name: (attribute_name)
