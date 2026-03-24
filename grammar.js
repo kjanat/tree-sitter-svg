@@ -1007,9 +1007,10 @@ export default grammar({
 				),
 			),
 
-		number_attribute_name: _ => choice(
-			'stroke-miterlimit',
-		),
+		number_attribute_name: _ =>
+			choice(
+				'stroke-miterlimit',
+			),
 
 		number_attribute_value: $ => quoted($.number),
 
@@ -1029,15 +1030,17 @@ export default grammar({
 
 		dasharray_attribute_value: $ => quoted($.dasharray_value),
 
-		dasharray_value: $ => choice(
-			'none',
-			$.dash_list,
-		),
+		dasharray_value: $ =>
+			choice(
+				'none',
+				$.dash_list,
+			),
 
-		dash_list: $ => seq(
-			$.length_or_percentage,
-			repeat(seq($.comma_wsp, $.length_or_percentage)),
-		),
+		dash_list: $ =>
+			seq(
+				$.length_or_percentage,
+				repeat(seq($.comma_wsp, $.length_or_percentage)),
+			),
 
 		// ─── keyword attribute (enumerated value attributes) ────────
 
@@ -1051,33 +1054,49 @@ export default grammar({
 				),
 			),
 
-		keyword_attribute_name: _ => choice(
-			'stroke-linecap',
-			'stroke-linejoin',
-			'font-style',
-			'text-anchor',
-			'dominant-baseline',
-		),
+		keyword_attribute_name: _ =>
+			choice(
+				'stroke-linecap',
+				'stroke-linejoin',
+				'font-style',
+				'text-anchor',
+				'dominant-baseline',
+			),
 
 		keyword_attribute_value: $ => quoted($.keyword_value),
 
-		keyword_value: _ => choice(
-			// stroke-linecap
-			'butt', 'square',
-			// stroke-linejoin
-			'miter', 'miter-clip', 'bevel', 'arcs',
-			// shared (linecap + linejoin)
-			'round',
-			// font-style
-			'normal', 'italic', 'oblique',
-			// text-anchor
-			'start', 'middle', 'end',
-			// dominant-baseline
-			'auto', 'text-bottom', 'alphabetic', 'ideographic',
-			'central', 'mathematical', 'hanging', 'text-top',
-			// shared
-			'inherit',
-		),
+		keyword_value: _ =>
+			choice(
+				// stroke-linecap
+				'butt',
+				'square',
+				// stroke-linejoin
+				'miter',
+				'miter-clip',
+				'bevel',
+				'arcs',
+				// shared (linecap + linejoin)
+				'round',
+				// font-style
+				'normal',
+				'italic',
+				'oblique',
+				// text-anchor
+				'start',
+				'middle',
+				'end',
+				// dominant-baseline
+				'auto',
+				'text-bottom',
+				'alphabetic',
+				'ideographic',
+				'central',
+				'mathematical',
+				'hanging',
+				'text-top',
+				// shared
+				'inherit',
+			),
 
 		// ─── font-weight attribute ──────────────────────────────────
 
@@ -1095,10 +1114,14 @@ export default grammar({
 
 		font_weight_attribute_value: $ => quoted($.font_weight_value),
 
-		font_weight_value: $ => choice(
-			'normal', 'bold', 'bolder', 'lighter',
-			$.number,
-		),
+		font_weight_value: $ =>
+			choice(
+				'normal',
+				'bold',
+				'bolder',
+				'lighter',
+				$.number,
+			),
 
 		// ─── text-decoration attribute ──────────────────────────────
 
@@ -1116,17 +1139,22 @@ export default grammar({
 
 		text_decoration_attribute_value: $ => quoted($.text_decoration_value),
 
-		text_decoration_value: $ => choice(
-			'none',
-			seq(
-				$.text_decoration_keyword,
-				repeat(seq($.wsp, $.text_decoration_keyword)),
+		text_decoration_value: $ =>
+			choice(
+				'none',
+				seq(
+					$.text_decoration_keyword,
+					repeat(seq($.wsp, $.text_decoration_keyword)),
+				),
 			),
-		),
 
-		text_decoration_keyword: _ => choice(
-			'underline', 'overline', 'line-through', 'blink',
-		),
+		text_decoration_keyword: _ =>
+			choice(
+				'underline',
+				'overline',
+				'line-through',
+				'blink',
+			),
 
 		// ─── font-family attribute ──────────────────────────────────
 
