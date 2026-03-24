@@ -38,13 +38,15 @@
 		"*.wasm"
 	],
 	"scripts": {
-		"fmt": "dprint fmt .",
+		"fmt": "dprint fmt",
 		"helix:sync": "DIR=\"${HOME}/.config/helix/runtime/queries/svg\"; mkdir -p \"${DIR}\" && cp queries/*.scm \"${DIR}\"",
 		"install": "node-gyp-build",
 		"postinstall": "git config core.hooksPath .githooks",
 		"prestart": "tree-sitter build --wasm",
 		"start": "tree-sitter playground --quiet",
 		"test": "node --test bindings/node/*_test.js",
+		"test:regex": "CI=1 bun test test/regex_samples/regex_harness.test.ts",
+		"test:regex:dev": "bun test test/regex_samples/regex_harness.test.ts",
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
