@@ -217,6 +217,22 @@
   {
     "type": "comment",
     "named": true,
+    "fields": {
+      "text": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "comment_text",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "comment_text",
+    "named": true,
     "fields": {}
   },
   {
