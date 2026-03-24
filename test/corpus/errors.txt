@@ -55,14 +55,14 @@ Mismatched end tag name
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (start_tag
         name: (name))
       (erroneous_end_tag
         name: (name)))
-    (erroneous_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -207,204 +207,6 @@ Invalid path arc flag token
 
 
 ================================================================================
-Invalid script type for script element
-:error
-================================================================================
-
-<svg><script type="application/json">x</script></svg>
-
---------------------------------------------------------------------------------
-
-
-
-================================================================================
-Invalid style type for style element
-:error
-================================================================================
-
-<svg><style type="text/plain">.a{fill:red}</style></svg>
-
---------------------------------------------------------------------------------
-
-
-
-================================================================================
-Path disallows generic child element
-:error
-================================================================================
-
-<svg><path><g/></path></svg>
-
---------------------------------------------------------------------------------
-
-
-
-================================================================================
-Shape disallows generic child element
-:error
-================================================================================
-
-<svg><rect><g/></rect></svg>
-
---------------------------------------------------------------------------------
-
-
-
-================================================================================
-Gradient disallows generic child element
-:error
-================================================================================
-
-<svg><linearGradient><rect/></linearGradient></svg>
-
---------------------------------------------------------------------------------
-
-
-
-================================================================================
-Filter disallows generic child element
-:error
-================================================================================
-
-<svg><filter><g/></filter></svg>
-
---------------------------------------------------------------------------------
-
-
-
-================================================================================
-Text container disallows generic child element
-:error
-================================================================================
-
-<svg><text><g/></text></svg>
-
---------------------------------------------------------------------------------
-
-
-
-================================================================================
-Invalid linking media type value
-:error
-================================================================================
-
-<svg><a type="matrix" href="#x">x</a></svg>
-
---------------------------------------------------------------------------------
-
-
-
-================================================================================
-Invalid filter primitive type value
-:error
-================================================================================
-
-<svg><filter><feTurbulence type="text/css"/></filter></svg>
-
---------------------------------------------------------------------------------
-
-
-
-================================================================================
-Invalid feColorMatrix type value
-:error
-================================================================================
-
-<svg><filter><feColorMatrix type="fractalNoise"/></filter></svg>
-
---------------------------------------------------------------------------------
-
-
-
-================================================================================
-Invalid feTurbulence type value
-:error
-================================================================================
-
-<svg><filter><feTurbulence type="matrix"/></filter></svg>
-
---------------------------------------------------------------------------------
-
-
-
-================================================================================
-Invalid feFuncR type value
-:error
-================================================================================
-
-<svg><filter><feComponentTransfer><feFuncR type="turbulence"/></feComponentTransfer></filter></svg>
-
---------------------------------------------------------------------------------
-
-
-
-================================================================================
-feFuncR outside feComponentTransfer
-:error
-================================================================================
-
-<svg><filter><feFuncR type="linear"/></filter></svg>
-
---------------------------------------------------------------------------------
-
-(ERROR
-  (text)
-  (svg_root_start_tag
-    (name))
-  (start_tag
-    (name))
-  (iri_reference)
-  (path_wsp)
-  (name)
-  (name)
-  (iri_reference)
-  (path_wsp))
-
-
-
-================================================================================
-feMergeNode outside feMerge
-:error
-================================================================================
-
-<svg><filter><feMergeNode/></filter></svg>
-
---------------------------------------------------------------------------------
-
-(ERROR
-  (text)
-  (svg_root_start_tag
-    (name))
-  (start_tag
-    (name))
-  (iri_reference)
-  (path_wsp))
-
-
-
-================================================================================
-Light source outside lighting primitive
-:error
-================================================================================
-
-<svg><filter><fePointLight/></filter></svg>
-
---------------------------------------------------------------------------------
-
-
-
-================================================================================
-Light source inside non-lighting primitive
-:error
-================================================================================
-
-<svg><filter><feGaussianBlur><fePointLight/></feGaussianBlur></filter></svg>
-
---------------------------------------------------------------------------------
-
-
-
-================================================================================
 Pinned recovery: feFuncR outside feComponentTransfer
 ================================================================================
 
@@ -412,20 +214,27 @@ Pinned recovery: feFuncR outside feComponentTransfer
 
 --------------------------------------------------------------------------------
 
-(ERROR
+(source_file
   (text)
-  (svg_root_start_tag
-    (name))
-  (start_tag
-    (name))
-  (iri_reference)
-  (path_wsp)
-  (name)
-  (name)
-  (iri_reference)
-  (path_wsp))
-
-
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (start_tag
+        name: (name))
+      (element
+        (self_closing_tag
+          name: (name)
+          (attribute
+            (generic_attribute
+              name: (attribute_name)
+              value: (quoted_attribute_value
+                (attribute_text_double))))))
+      (end_tag
+        name: (name)))
+    (end_tag
+      name: (name)))
+  (text))
 
 ================================================================================
 Pinned recovery: feMergeNode outside feMerge
@@ -435,16 +244,22 @@ Pinned recovery: feMergeNode outside feMerge
 
 --------------------------------------------------------------------------------
 
-(ERROR
+(source_file
   (text)
-  (svg_root_start_tag
-    (name))
-  (start_tag
-    (name))
-  (iri_reference)
-  (path_wsp))
-
-
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (start_tag
+        name: (name))
+      (element
+        (self_closing_tag
+          name: (name)))
+      (end_tag
+        name: (name)))
+    (end_tag
+      name: (name)))
+  (text))
 
 ================================================================================
 Pinned recovery: light source outside lighting primitive
@@ -454,11 +269,19 @@ Pinned recovery: light source outside lighting primitive
 
 --------------------------------------------------------------------------------
 
-(ERROR
+(source_file
   (text)
-  (svg_root_start_tag
-    (name))
-  (start_tag
-    (name))
-  (iri_reference)
-  (path_wsp))
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (start_tag
+        name: (name))
+      (element
+        (self_closing_tag
+          name: (name)))
+      (end_tag
+        name: (name)))
+    (end_tag
+      name: (name)))
+  (text))

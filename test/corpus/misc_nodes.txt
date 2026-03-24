@@ -14,10 +14,11 @@ Comments, PI, CDATA, entities
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (text)
-    (comment)
+    (comment
+      text: (comment_text))
     (text)
     (processing_instruction
       target: (name)
@@ -29,22 +30,16 @@ Comments, PI, CDATA, entities
     (element
       (start_tag
         name: (name))
-      (text_container_content
-        (text))
-      (text_container_content
-        (entity_reference))
-      (text_container_content
-        (text))
-      (text_container_content
-        (entity_reference))
-      (text_container_content
-        (text))
-      (text_container_content
-        (entity_reference))
+      (text)
+      (entity_reference)
+      (text)
+      (entity_reference)
+      (text)
+      (entity_reference)
       (end_tag
         name: (name)))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -61,11 +56,35 @@ Misc text around root
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (self_closing_tag
         name: (name)))
-    (svg_root_end_tag
+    (end_tag
+      name: (name)))
+  (text))
+
+==================
+CDATA with consecutive close brackets
+==================
+
+<svg><text><![CDATA[a[0]=b[1]]]></text></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (start_tag
+        name: (name))
+      (cdata_section
+        (cdata_text))
+      (end_tag
+        name: (name)))
+    (end_tag
       name: (name)))
   (text))

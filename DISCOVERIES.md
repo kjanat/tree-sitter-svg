@@ -2,9 +2,14 @@
 
 ## Build & Tooling
 
+- `tree-sitter.json` should declare `highlights`, `injections`, and `locals` query paths in the grammar entry; omitting them triggers a CLI warning and may prevent editors from finding the queries
 - External scanner enum order must exactly match `externals` order in `grammar.js`; mismatches silently corrupt tokenization
 - For simple external tokens (tag names, `/>`), avoid `mark_end` unless doing lookahead rollback; premature `mark_end` can truncate tokens
 - `tree-sitter build --wasm` can look stuck at `Extracting wasi-sdk...`, but for this grammar the real stall is later in wasm backend codegen for `src/parser.c`; syntax-only and LLVM IR emission finish quickly, object/wasm emission does not
+- WASM build fails when parser.c exceeds ~100K lines; at 102K lines (458 rules, 50 externals) the WASM backend cannot complete; at 21K lines (120 rules, 13 externals) it succeeds instantly
+- Zed's extension builder uses wasi-sdk clang-19 to compile grammar WASM; 102K-line parser.c hung indefinitely (23GB RSS); 21K-line parser.c compiles in ~17s
+- Scanner stores tag names as `Array(char)`, truncating `int32_t` lookahead to 8 bits; safe for SVG (ASCII-only names), matches tree-sitter-xml/html; widening to `Array(int32_t)` would require serialization format change
+- Serialization silently truncates tag stack when 1024-byte buffer exceeded; `written` count is patched to reflect actual serialized tags
 
 ## Grammar
 
@@ -19,11 +24,14 @@
 - Using `$.attribute` (typed + generic) on specialized container tags restores extension/custom attribute support without weakening the global XML quoting constraint
 - Filter primitive conformance needs family-scoped tag tokens and rules (`feColorMatrix`, `feTurbulence`, `feComponentTransfer` + `feFunc*`, `feMerge` + `feMergeNode`, lighting + light-source) rather than one shared primitive bucket
 - `text` content should include linking/media (`<a>`) to accept common inline link patterns (`<text><a><tspan>…`)
+- Zed's `jsx_tag_auto_close` matches exact grammar node names for open/close tags; if the SVG root uses distinct tag node kinds from nested elements, root auto-close fails even when the visible CST looks equivalent
 
 ## Testing
 
 - `:error` corpus sections are best for invalid syntax checks; for recovery-node checks without parser error state, keep normal sections with expected trees
 - Add dedicated path-data corpus cases for implicit separators and arc-flag adjacency (e.g. `A... 01 ...`) to prevent regressions
+- Highlight tests for XML-based grammars use `<!-- -->` comments for assertions; `<!--` occupies cols 0-3 so `^` carets can only target col 4+; use indented arrow tests (`<!-- <- capture -->`) to reach earlier columns
+- In highlight tests, child literal captures (`"<?"`, `"<!--"`, `"<!DOCTYPE"` → `@punctuation.delimiter`) override parent node captures (`(xml_declaration) @keyword`, `(comment) @comment`); test the inner text, not the delimiter, for the parent's highlight
 
 ## Bindings
 
@@ -45,3 +53,31 @@
 - If one rule is a strict superset of another (e.g. `length` includes bare numbers), avoid including both in the same `choice` without precedence; this creates unresolved LR conflicts
 - Aliasing a named subrule to `$.element` inside the `element` rule can create nested `(element (element ...))`; use hidden subrules (`_foo_element`) to keep CST stable
 - With many specialized externals, choose token symbol *after* scanning the full name against all valid symbols; pairwise ambiguity guards do not scale
+
+## Architecture: Parse Structure Not Schema
+
+- Encoding SVG element categories × attribute combinations in the grammar causes LR state explosion (458 rules → 102K-line parser.c); collapsing to 5 element types + 14 typed attributes → 120 rules, 21K-line parser.c (79% reduction)
+- Content model constraints (e.g. "path cannot contain child elements") belong in linting/query layers, not the parser; grammar should accept structurally valid XML
+- `raw_text` external token for script/style must guard against error recovery: when tree-sitter sets all `valid_symbols` true, check `!valid_symbols[START_TAG_NAME] && !valid_symbols[END_TAG_NAME]` to prevent raw_text from consuming normal content
+- Only 5 element names need scanner recognition: svg (root enforcement), path (d attribute), script/style (raw text capture), plus generic fallback
+- Attribute sub-grammars worth keeping in the parser are those with genuine value syntax (path data, viewBox numbers, transform functions, paint functions, URI references) — keyword-only attributes (calcMode, spreadMethod, edgeMode) belong in queries
+- CDATA text cannot be tokenized correctly with a pure regex when content contains `]` before `]]>` (e.g. `a]]]>`); the regex `\]\][^>]` over-matches runs of 3+ `]`. External scanner + `repeat1()` chunking is required (same approach as tree-sitter-xml)
+- When a tree-sitter external scanner returns false, the lexer position resets to the scan start — advance() calls are undone. This enables peek-ahead patterns: advance past potential delimiters, return false if found (letting the grammar match the literal), return true with mark_end if not
+
+## 2026-03-22: Helix 25.07.1 rejects `#strip!` in SVG queries
+
+Helix logged `Failed to compile highlights for 'svg': unknown predicate #strip!` even though
+the predicate only appeared in `queries/tags.scm` and `queries/locals.scm`.
+
+Practical consequence:
+
+- SVG buffers could show no Tree-sitter syntax highlighting at all when Helix loaded the query set.
+
+Workaround used here:
+
+- remove `#strip!` from the SVG Helix query set and keep only the `#match? "^#"` guards
+
+Tradeoff:
+
+- tag/locals references that rely on stripping the leading `#` may no longer resolve as precisely
+  in editors that do not support `#strip!`, but highlighting compiles again.

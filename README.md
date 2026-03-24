@@ -9,28 +9,22 @@ A [Tree-sitter] grammar for **SVG** (Scalable Vector Graphics), built against th
 
 ## What This Parser Does
 
-Most XML parsers treat SVG as generic markup. This grammar understands SVG
-semantics:
+Most XML parsers treat SVG as generic markup. This grammar parses SVG structure
+— XML syntax, attribute value sub-grammars, and embedded languages — while
+keeping element vocabulary generic. SVG-specific awareness lives in Tree-sitter
+query files, not the grammar itself.
 
-### Typed Elements and Content Models
+### Element Structure
 
-The parser distinguishes SVG element categories and enforces which children are
-valid where. An external scanner (`src/scanner.c`) handles tag name recognition
-and matching at parse time.
+The parser recognizes 5 element types via an external scanner (`src/scanner.c`):
 
-| Category             | Examples                                                                 |
-| -------------------- | ------------------------------------------------------------------------ |
-| Root                 | `<svg>`                                                                  |
-| Shapes               | `<rect>`, `<circle>`, `<ellipse>`, `<line>`, `<polygon>`, `<polyline>`   |
-| Path                 | `<path>`                                                                 |
-| Container/structural | `<g>`, `<defs>`, `<clipPath>`, `<symbol>`, `<use>`                       |
-| Gradients            | `<linearGradient>`, `<radialGradient>`, `<stop>`                         |
-| Filters              | `<filter>`, `<feGaussianBlur>`, `<feColorMatrix>`, `<feTurbulence>`, ... |
-| Text                 | `<text>`, `<tspan>`, `<textPath>`                                        |
-| Descriptive          | `<title>`, `<desc>`, `<metadata>`                                        |
-| Linking/media        | `<a>`, `<image>`, `<foreignObject>`                                      |
-| Animation            | `<animate>`, `<animateTransform>`, `<set>`, ...                          |
-| Script/style         | `<script>`, `<style>`                                                    |
+| Element Type | Purpose                                      |
+| ------------ | -------------------------------------------- |
+| `svg`        | Root element (enforced as document root)     |
+| `path`       | Enables `d` attribute sub-grammar            |
+| `script`     | Raw text content (no XML parsing inside)     |
+| `style`      | Raw text content (no XML parsing inside)     |
+| Generic      | All other elements — parsed as XML structure |
 
 ### Structured Path Data
 
@@ -54,28 +48,36 @@ than treating `d` as an opaque string.
 
 ### Typed Attributes
 
-Attributes are parsed into semantic categories rather than generic
-name/value pairs:
+Attributes with meaningful value sub-grammars get dedicated parsing. All others
+are parsed as generic `attribute_name`/`quoted_attribute_value` pairs.
 
-- **Presentation attributes** — `fill`, `stroke`, `opacity`, `transform`, etc.
-- **Event handlers** — `onclick`, `onload`, `onmouseover`, etc.
-- **`style` attribute** — separated from generic attributes with its own node type
-- **`viewBox`**, **`xmlns`**, **`preserveAspectRatio`** — dedicated parsing
-- **XML declaration attributes** — `version`, `encoding`, `standalone`
+| Attribute             | Sub-grammar                                      |
+| --------------------- | ------------------------------------------------ |
+| `d`                   | Full SVG path data (commands, coordinates, arcs) |
+| `viewBox`             | Four-number box                                  |
+| `preserveAspectRatio` | Alignment + meet/slice keywords                  |
+| `transform`           | Function list (matrix, translate, rotate, ...)   |
+| `points`              | Coordinate pair list                             |
+| `style`               | CSS injection point                              |
+| `on*` events          | JavaScript injection point                       |
+| `href`/`xlink:href`   | URI reference parsing                            |
+| `id`, `class`         | Identity tokens                                  |
+| Paint attributes      | `url()`, keywords, color functions               |
+| IRI attributes        | `url(#ref)` functional references                |
+| Length attributes     | Number + unit                                    |
+| `opacity`             | Number or percentage                             |
 
 ### Language Injections
 
 Embedded languages are injected via `queries/injections.scm`:
 
-| Context                          | Injected Language |
-| -------------------------------- | ----------------- |
-| `<style>` element content        | CSS               |
-| `<style>` CDATA content          | CSS               |
-| `style` attribute value          | CSS               |
-| `<script>` element content       | JavaScript        |
-| `<script>` CDATA content         | JavaScript        |
-| Event handler attribute values   | JavaScript        |
-| `<foreignObject>` child elements | HTML              |
+| Context                                      | Injected Language |
+| -------------------------------------------- | ----------------- |
+| `<style>` element content (including CDATA)  | CSS               |
+| `style` attribute value                      | CSS               |
+| `<script>` element content (including CDATA) | JavaScript        |
+| Event handler attribute values               | JavaScript        |
+| `<foreignObject>` child elements             | HTML              |
 
 ### Query Files
 
@@ -262,7 +264,7 @@ npm start                     # build WASM + open playground
 ```text
 grammar.js                    # grammar definition (source of truth)
 src/
-  scanner.c                   # external scanner — tag matching, content models
+  scanner.c                   # external scanner — tag matching, raw text capture
   parser.c                    # generated (do not edit)
   node-types.json             # generated node type metadata
 queries/
@@ -284,7 +286,7 @@ test/corpus/                  # tree-sitter corpus tests
 
 ### Contributing
 
-1. Edit `grammar.js` (and `src/scanner.c` for tag/content model changes)
+1. Edit `grammar.js` (and `src/scanner.c` for tag matching changes)
 2. Run `tree-sitter generate && tree-sitter test`
 3. Add or update corpus tests in `test/corpus/`
 4. Open a pull request

@@ -11,7 +11,7 @@ Geometry length and percentage attributes
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (length_attribute
@@ -83,7 +83,7 @@ Geometry length and percentage attributes
                   (length
                     (number)))))))))
     (text)
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -98,7 +98,7 @@ ViewBox and preserveAspectRatio forms
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (viewbox_attribute
@@ -124,7 +124,7 @@ ViewBox and preserveAspectRatio forms
               (align_keyword)
               (wsp)
               (meet_or_slice_keyword))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -139,7 +139,7 @@ Transform lists
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (transform_attribute
@@ -191,7 +191,7 @@ Transform lists
                   (comma_wsp
                     (wsp))
                   (number))))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -206,7 +206,7 @@ Points list
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name))
     (element
       (self_closing_tag
@@ -232,7 +232,7 @@ Points list
                   (number)
                   (comma_wsp)
                   (number))))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -247,7 +247,7 @@ Paint keywords and functions
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (paint_attribute
@@ -273,7 +273,7 @@ Paint keywords and functions
             (paint_value
               (color_value
                 (functional_color)))))))
-    (svg_root_end_tag
+    (end_tag
       name: (name)))
   (text))
 
@@ -288,7 +288,7 @@ Opacity and stroke dasharray
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (opacity_attribute
@@ -310,30 +310,16 @@ Opacity and stroke dasharray
             (number_or_percentage
               (number)))))
       (attribute
-        (stroke_dasharray_attribute
-          name: (stroke_dasharray_attribute_name)
-          value: (stroke_dasharray_attribute_value
-            (stroke_dasharray_value
-              (length_list
-                (length_or_percentage
-                  (length
-                    (number)))
-                (comma_wsp
-                  (wsp))
-                (length_or_percentage
-                  (length
-                    (number)))
-                (comma_wsp
-                  (wsp))
-                (length_or_percentage
-                  (length
-                    (number))))))))
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double))))
       (attribute
-        (number_attribute
-          name: (number_attribute_name)
-          value: (number_attribute_value
-            (number)))))
-    (svg_root_end_tag
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double)))))
+    (end_tag
       name: (name)))
   (text))
 
@@ -348,49 +334,49 @@ Enumerated rendering attributes
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
-        (display_attribute
-          name: (display_attribute_name)
-          value: (display_attribute_value
-            (display_keyword))))
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double))))
       (attribute
-        (visibility_attribute
-          name: (visibility_attribute_name)
-          value: (visibility_attribute_value
-            (visibility_keyword))))
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double))))
       (attribute
-        (overflow_attribute
-          name: (overflow_attribute_name)
-          value: (overflow_attribute_value
-            (overflow_keyword))))
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double))))
       (attribute
-        (pointer_events_attribute
-          name: (pointer_events_attribute_name)
-          value: (pointer_events_attribute_value
-            (pointer_events_keyword))))
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double))))
       (attribute
-        (shape_rendering_attribute
-          name: (shape_rendering_attribute_name)
-          value: (shape_rendering_attribute_value
-            (shape_rendering_keyword))))
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double))))
       (attribute
-        (text_rendering_attribute
-          name: (text_rendering_attribute_name)
-          value: (text_rendering_attribute_value
-            (text_rendering_keyword))))
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double))))
       (attribute
-        (color_rendering_attribute
-          name: (color_rendering_attribute_name)
-          value: (color_rendering_attribute_value
-            (color_rendering_keyword))))
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double))))
       (attribute
-        (vector_effect_attribute
-          name: (vector_effect_attribute_name)
-          value: (vector_effect_attribute_value
-            (vector_effect_keyword)))))
-    (svg_root_end_tag
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double)))))
+    (end_tag
       name: (name)))
   (text))
 
@@ -405,7 +391,7 @@ Identity and language attributes
 (source_file
   (text)
   root: (svg_root_element
-    (svg_root_start_tag
+    (start_tag
       name: (name)
       (attribute
         (id_attribute
@@ -423,21 +409,21 @@ Identity and language attributes
               (wsp)
               (class_name)))))
       (attribute
-        (lang_attribute
-          name: (lang_attribute_name)
-          value: (lang_attribute_value
-            (language_tag))))
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double))))
       (attribute
-        (lang_attribute
-          name: (lang_attribute_name)
-          value: (lang_attribute_value
-            (language_tag))))
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double))))
       (attribute
-        (xml_space_attribute
-          name: (xml_space_attribute_name)
-          value: (xml_space_attribute_value
-            (xml_space_keyword)))))
-    (svg_root_end_tag
+        (generic_attribute
+          name: (attribute_name)
+          value: (quoted_attribute_value
+            (attribute_text_double)))))
+    (end_tag
       name: (name)))
   (text))
 
@@ -451,59 +437,59 @@ IRI attributes
 
 (source_file
   (text)
-  (svg_root_element
-    (svg_root_start_tag
-      (name)
+  root: (svg_root_element
+    (start_tag
+      name: (name)
       (attribute
         (href_attribute
-          (href_attribute_name)
-          (href_attribute_value
+          name: (href_attribute_name)
+          value: (href_attribute_value
             (href_reference
               (iri_reference)))))
       (attribute
         (href_attribute
-          (href_attribute_name)
-          (href_attribute_value
+          name: (href_attribute_name)
+          value: (href_attribute_value
             (href_reference
               (iri_reference)))))
       (attribute
         (functional_iri_attribute
-          (functional_iri_attribute_name)
-          (functional_iri_attribute_value
+          name: (functional_iri_attribute_name)
+          value: (functional_iri_attribute_value
             (paint_server
               (iri_reference)))))
       (attribute
         (functional_iri_attribute
-          (functional_iri_attribute_name)
-          (functional_iri_attribute_value)))
+          name: (functional_iri_attribute_name)
+          value: (functional_iri_attribute_value)))
       (attribute
         (functional_iri_attribute
-          (functional_iri_attribute_name)
-          (functional_iri_attribute_value
+          name: (functional_iri_attribute_name)
+          value: (functional_iri_attribute_value
             (iri_reference))))
       (attribute
         (functional_iri_attribute
-          (functional_iri_attribute_name)
-          (functional_iri_attribute_value
+          name: (functional_iri_attribute_name)
+          value: (functional_iri_attribute_value
             (paint_server
               (iri_reference)))))
       (attribute
         (functional_iri_attribute
-          (functional_iri_attribute_name)
-          (functional_iri_attribute_value
+          name: (functional_iri_attribute_name)
+          value: (functional_iri_attribute_value
             (iri_reference))))
       (attribute
         (functional_iri_attribute
-          (functional_iri_attribute_name)
-          (functional_iri_attribute_value
+          name: (functional_iri_attribute_name)
+          value: (functional_iri_attribute_value
             (paint_server
               (iri_reference)))))
       (attribute
         (functional_iri_attribute
-          (functional_iri_attribute_name)
-          (functional_iri_attribute_value
+          name: (functional_iri_attribute_name)
+          value: (functional_iri_attribute_value
             (paint_server
               (iri_reference))))))
-    (svg_root_end_tag
-      (name)))
+    (end_tag
+      name: (name)))
   (text))
