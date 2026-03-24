@@ -6,6 +6,8 @@
 			"camelcase": "Svg",
 			"title": "SVG",
 			"scope": "source.svg",
+			"first-line-regex": "^\\s*(?:<\\?xml\\b|<!--|<(?:[A-Za-z_][\\w.-]*:)?svg\\b)",
+			"content-regex": "(?i:<!doctype\\s+svg\\b|<svg\\b|<[a-z_][\\w.-]*:svg\\b)",
 			"file-types": [
 				"svg"
 			],
@@ -13,7 +15,8 @@
 			"class-name": "TreeSitterSvg",
 			"highlights": "queries/highlights.scm",
 			"injections": "queries/injections.scm",
-			"locals": "queries/locals.scm"
+			"locals": "queries/locals.scm",
+			"tags": "queries/tags.scm"
 		}
 	],
 	"metadata": {

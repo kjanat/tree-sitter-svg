@@ -1,6 +1,6 @@
 {
 	"extends": "https://raw.githubusercontent.com/kjanat/kjanat/refs/heads/master/configs/dprint.remote.json",
-	"excludes": ["tree-sitter.json", "src/*.json", "**/*.svg"],
+	"excludes": ["tree-sitter.json", "src/*.json", "**/*.svg", "**/test/regex_samples"],
 	"exec": {
 		"associations": ["package.json", "*.rs", "*.toml"],
 		"commands": [
