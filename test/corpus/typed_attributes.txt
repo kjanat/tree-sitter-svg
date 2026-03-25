@@ -395,6 +395,114 @@ Dasharray with none value
   (text))
 
 ==================
+Inherit keyword on typed attributes
+==================
+
+<svg stroke-dasharray="inherit" stroke-miterlimit="inherit" font-weight="inherit" text-decoration="inherit"></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name)
+      (attribute
+        (dasharray_attribute
+          name: (dasharray_attribute_name)
+          value: (dasharray_attribute_value
+            (dasharray_value))))
+      (attribute
+        (number_attribute
+          name: (number_attribute_name)
+          value: (number_attribute_value)))
+      (attribute
+        (font_weight_attribute
+          name: (font_weight_attribute_name)
+          value: (font_weight_attribute_value
+            (font_weight_value))))
+      (attribute
+        (text_decoration_attribute
+          name: (text_decoration_attribute_name)
+          value: (text_decoration_attribute_value
+            (text_decoration_value)))))
+    (end_tag
+      name: (name)))
+  (text))
+
+==================
+Comma-separated dasharray and font-weight bold
+==================
+
+<svg stroke-dasharray="5,3,2" font-weight="bold" text-decoration="line-through"></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name)
+      (attribute
+        (dasharray_attribute
+          name: (dasharray_attribute_name)
+          value: (dasharray_attribute_value
+            (dasharray_value
+              (dash_list
+                (length_or_percentage
+                  (length
+                    (number)))
+                (comma_wsp)
+                (length_or_percentage
+                  (length
+                    (number)))
+                (comma_wsp)
+                (length_or_percentage
+                  (length
+                    (number))))))))
+      (attribute
+        (font_weight_attribute
+          name: (font_weight_attribute_name)
+          value: (font_weight_attribute_value
+            (font_weight_value))))
+      (attribute
+        (text_decoration_attribute
+          name: (text_decoration_attribute_name)
+          value: (text_decoration_attribute_value
+            (text_decoration_value
+              (text_decoration_keyword))))))
+    (end_tag
+      name: (name)))
+  (text))
+
+==================
+Single-quoted keyword and font-family attributes
+==================
+
+<svg stroke-linecap='butt' font-family='Fira Sans, serif'></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name)
+      (attribute
+        (keyword_attribute
+          name: (keyword_attribute_name)
+          value: (keyword_attribute_value
+            (keyword_value))))
+      (attribute
+        (font_family_attribute
+          name: (font_family_attribute_name)
+          value: (font_family_attribute_value
+            content: (font_family_text_single)))))
+    (end_tag
+      name: (name)))
+  (text))
+
+==================
 Enumerated rendering attributes
 ==================
 

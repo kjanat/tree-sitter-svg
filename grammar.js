@@ -1012,7 +1012,7 @@ export default grammar({
 				'stroke-miterlimit',
 			),
 
-		number_attribute_value: $ => quoted($.number),
+		number_attribute_value: $ => quoted(choice($.number, 'inherit')),
 
 		// ─── dasharray attribute (stroke-dasharray) ─────────────────
 
@@ -1033,6 +1033,7 @@ export default grammar({
 		dasharray_value: $ =>
 			choice(
 				'none',
+				'inherit',
 				$.dash_list,
 			),
 
@@ -1120,6 +1121,7 @@ export default grammar({
 				'bold',
 				'bolder',
 				'lighter',
+				'inherit',
 				$.number,
 			),
 
@@ -1142,6 +1144,7 @@ export default grammar({
 		text_decoration_value: $ =>
 			choice(
 				'none',
+				'inherit',
 				seq(
 					$.text_decoration_keyword,
 					repeat(seq($.wsp, $.text_decoration_keyword)),

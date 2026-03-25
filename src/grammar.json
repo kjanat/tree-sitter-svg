@@ -4664,8 +4664,17 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "SYMBOL",
-                  "name": "number"
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "number"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "inherit"
+                    }
+                  ]
                 },
                 {
                   "type": "BLANK"
@@ -4689,8 +4698,17 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "SYMBOL",
-                  "name": "number"
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "number"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "inherit"
+                    }
+                  ]
                 },
                 {
                   "type": "BLANK"
@@ -4799,6 +4817,10 @@
         {
           "type": "STRING",
           "value": "none"
+        },
+        {
+          "type": "STRING",
+          "value": "inherit"
         },
         {
           "type": "SYMBOL",
@@ -5141,6 +5163,10 @@
           "value": "lighter"
         },
         {
+          "type": "STRING",
+          "value": "inherit"
+        },
+        {
           "type": "SYMBOL",
           "name": "number"
         }
@@ -5240,6 +5266,10 @@
         {
           "type": "STRING",
           "value": "none"
+        },
+        {
+          "type": "STRING",
+          "value": "inherit"
         },
         {
           "type": "SEQ",
