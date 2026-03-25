@@ -81,3 +81,8 @@ Tradeoff:
 
 - tag/locals references that rely on stripping the leading `#` may no longer resolve as precisely
   in editors that do not support `#strip!`, but highlighting compiles again.
+
+## Typed Attribute Families
+
+- All SVG presentation attributes accept `inherit` per the SVG 2 spec; every typed value rule must include `'inherit'` in its `choice()`, not just `keyword_value`. Omitting it causes `attr="inherit"` to fall through to `generic_attribute` instead of the typed family.
+- Keyword literals shared across multiple `choice()` rules (e.g. `'normal'`, `'none'`, `'inherit'`) do not cause LR conflicts when the parent rules are disambiguated by distinct attribute-name tokens — the name literal resolves which value grammar applies before the parser reaches the value.

@@ -28,16 +28,22 @@
 (attribute_name) @attribute
 (class_attribute_name) @attribute
 (d_attribute_name) @attribute
+(dasharray_attribute_name) @attribute
 (event_attribute_name) @attribute
+(font_family_attribute_name) @attribute
+(font_weight_attribute_name) @attribute
 (functional_iri_attribute_name) @attribute
 (href_attribute_name) @attribute
 (id_attribute_name) @attribute
+(keyword_attribute_name) @attribute
 (length_attribute_name) @attribute
+(number_attribute_name) @attribute
 (opacity_attribute_name) @attribute
 (paint_attribute_name) @attribute
 (points_attribute_name) @attribute
 (preserve_aspect_ratio_attribute_name) @attribute
 (style_attribute_name) @attribute
+(text_decoration_attribute_name) @attribute
 (transform_attribute_name) @attribute
 (viewbox_attribute_name) @attribute
 
@@ -47,14 +53,20 @@
 
 [(quoted_attribute_value)
  (class_attribute_value)
+ (dasharray_attribute_value)
+ (font_family_attribute_value)
+ (font_weight_attribute_value)
  (functional_iri_attribute_value)
  (href_attribute_value)
  (id_attribute_value)
+ (keyword_attribute_value)
  (length_attribute_value)
+ (number_attribute_value)
  (opacity_attribute_value)
  (paint_attribute_value)
  (points_attribute_value)
  (preserve_aspect_ratio_attribute_value)
+ (text_decoration_attribute_value)
  (transform_attribute_value)
  (viewbox_attribute_value)] @string
 
@@ -69,6 +81,8 @@
 (style_text_single) @string
 (script_text_double) @string
 (script_text_single) @string
+(font_family_text_double) @string
+(font_family_text_single) @string
 
 (class_name) @link_uri
 (iri_reference) @link_uri
