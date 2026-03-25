@@ -5419,14 +5419,14 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[^\"]+"
+        "value": "(?:[^<&\"]|&[A-Za-z0-9]+;)+"
       }
     },
     "font_family_text_single": {
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[^']+"
+        "value": "(?:[^<&']|&[A-Za-z0-9]+;)+"
       }
     },
     "href_attribute": {

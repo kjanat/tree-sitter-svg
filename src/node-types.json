@@ -897,16 +897,6 @@
     }
   },
   {
-    "type": "font_family_text_double",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "font_family_text_single",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "font_weight_attribute",
     "named": true,
     "fields": {
@@ -3165,6 +3155,14 @@
   },
   {
     "type": "font_family_attribute_name",
+    "named": true
+  },
+  {
+    "type": "font_family_text_double",
+    "named": true
+  },
+  {
+    "type": "font_family_text_single",
     "named": true
   },
   {

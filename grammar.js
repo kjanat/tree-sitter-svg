@@ -1179,8 +1179,8 @@ export default grammar({
 				seq("'", optional(field('content', $.font_family_text_single)), "'"),
 			),
 
-		font_family_text_double: _ => token(/[^"]+/),
-		font_family_text_single: _ => token(/[^']+/),
+		font_family_text_double: _ => token(/(?:[^<&"]|&[A-Za-z0-9]+;)+/),
+		font_family_text_single: _ => token(/(?:[^<&']|&[A-Za-z0-9]+;)+/),
 
 		// ─── href attribute ─────────────────────────────────────────
 
