@@ -54,6 +54,7 @@
 [(quoted_attribute_value)
  (class_attribute_value)
  (dasharray_attribute_value)
+ (font_family_attribute_value)
  (font_weight_attribute_value)
  (functional_iri_attribute_value)
  (href_attribute_value)
