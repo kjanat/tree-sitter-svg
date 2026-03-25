@@ -4642,13 +4642,8 @@
       }
     },
     "number_attribute_name": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "stroke-miterlimit"
-        }
-      ]
+      "type": "STRING",
+      "value": "stroke-miterlimit"
     },
     "number_attribute_value": {
       "type": "CHOICE",

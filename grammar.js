@@ -1007,10 +1007,7 @@ export default grammar({
 				),
 			),
 
-		number_attribute_name: _ =>
-			choice(
-				'stroke-miterlimit',
-			),
+		number_attribute_name: _ => 'stroke-miterlimit',
 
 		number_attribute_value: $ => quoted(choice($.number, 'inherit')),
 
