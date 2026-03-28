@@ -1,6 +1,70 @@
-; ─── ID definitions ──────────────────────────────────────────────
-; Elements with id attributes are the primary navigation targets in SVG.
-; Gradients, clipPaths, symbols, markers, filters — all referenceable by id.
+; ─── ID definitions with docstrings ──────────────────────────────
+; Comments adjacent to id-bearing elements serve as documentation.
+; These patterns must precede the simple id_attribute fallback
+; because tree-sitter tags uses the first matching pattern.
+;
+; Two variants per element form: with/without intervening (text) node.
+; Whitespace between comment and element produces a (text) sibling;
+; inline placement (<!-- doc --><el/>) does not.
+
+; with whitespace — start_tag
+(
+  (comment (comment_text) @doc)
+  .
+  (text)
+  .
+  (element
+    (start_tag
+      (attribute
+        (id_attribute
+          value: (id_attribute_value
+            (id_token) @name))))) @definition.id
+  (#select-adjacent! @doc @definition.id)
+)
+
+; with whitespace — self_closing_tag
+(
+  (comment (comment_text) @doc)
+  .
+  (text)
+  .
+  (element
+    (self_closing_tag
+      (attribute
+        (id_attribute
+          value: (id_attribute_value
+            (id_token) @name))))) @definition.id
+  (#select-adjacent! @doc @definition.id)
+)
+
+; without whitespace — start_tag
+(
+  (comment (comment_text) @doc)
+  .
+  (element
+    (start_tag
+      (attribute
+        (id_attribute
+          value: (id_attribute_value
+            (id_token) @name))))) @definition.id
+  (#select-adjacent! @doc @definition.id)
+)
+
+; without whitespace — self_closing_tag
+(
+  (comment (comment_text) @doc)
+  .
+  (element
+    (self_closing_tag
+      (attribute
+        (id_attribute
+          value: (id_attribute_value
+            (id_token) @name))))) @definition.id
+  (#select-adjacent! @doc @definition.id)
+)
+
+; ─── ID definitions (fallback, no docstring) ─────────────────────
+; Matches id-bearing elements without an adjacent comment.
 
 (id_attribute
   value: (id_attribute_value

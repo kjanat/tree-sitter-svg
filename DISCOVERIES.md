@@ -33,6 +33,15 @@
 - Add dedicated path-data corpus cases for implicit separators and arc-flag adjacency (e.g. `A... 01 ...`) to prevent regressions
 - Highlight tests for XML-based grammars use `<!-- -->` comments for assertions; `<!--` occupies cols 0-3 so `^` carets can only target col 4+; use indented arrow tests (`<!-- <- capture -->`) to reach earlier columns
 - In highlight tests, child literal captures (`"<?"`, `"<!--"`, `"<!DOCTYPE"` → `@punctuation.delimiter`) override parent node captures (`(xml_declaration) @keyword`, `(comment) @comment`); test the inner text, not the delimiter, for the parent's highlight
+- Tag test assertion comments (`<!-- ^ definition.id -->`) are real comment nodes in the CST; if an assertion comment appears right before another id-bearing element, it becomes that element's `@doc` docstring. Insert a non-id element between them to break the adjacency chain
+
+## Tags (code navigation)
+
+- `tree-sitter tags` only allows capture names `@definition.*`, `@reference.*`, `@doc`, `@name`, `@local.*`; any other capture (e.g. `@_name` for predicate filtering) causes `Invalid capture` error and no output at all
+- In `tree-sitter tags`, when multiple patterns match the same `@name`/`@definition.*` node, the first matching pattern wins; doc-bearing patterns must precede simpler fallback patterns or the docstring is lost
+- With `extras: () => []`, explicit `(text)` whitespace nodes appear between sibling comments and elements; the `.` anchor requires consecutive named siblings, so use `(comment) . (text) . (element)` to bridge. Also need a variant without `(text)` for inline placement (`<!-- doc --><el/>`)
+- Query child patterns match direct children only, not descendants; `(element (self_closing_tag (id_attribute ...)))` is "Impossible pattern" because `attribute` wraps `id_attribute` — must write `(element (self_closing_tag (attribute (id_attribute ...))))`
+- SVG IDs are document-global; `@local.scope` should be on `svg_root_element` only, not per-element — a `<linearGradient id="grad1">` inside `<defs>` must be referenceable from anywhere
 
 ## Bindings
 
