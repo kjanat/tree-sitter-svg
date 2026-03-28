@@ -23,7 +23,7 @@
   (name) @tag)
 
 (erroneous_end_tag
-  (name) @tag)
+  (name) @tag.error)
 
 (attribute_name) @attribute
 (class_attribute_name) @attribute
@@ -47,6 +47,8 @@
 
 [(quoted_attribute_value)
  (class_attribute_value)
+ (d_attribute_value)
+ (event_attribute_value)
  (functional_iri_attribute_value)
  (href_attribute_value)
  (id_attribute_value)
@@ -55,6 +57,7 @@
  (paint_attribute_value)
  (points_attribute_value)
  (preserve_aspect_ratio_attribute_value)
+ (style_attribute_value)
  (transform_attribute_value)
  (viewbox_attribute_value)] @string
 
@@ -72,6 +75,14 @@
 
 (class_name) @link_uri
 (iri_reference) @link_uri
+
+(paint_value
+  ["none" "currentColor" "context-fill" "context-stroke" "inherit"] @constant.builtin)
+
+(align_keyword) @constant
+(meet_or_slice_keyword) @constant
+
+(length_unit) @type
 
 ((path_command) @constructor
   (#match? @constructor "^[Mm]$"))
@@ -129,6 +140,8 @@
 (path_arc_flag) @boolean
 (path_sweep_flag) @boolean
 (path_comma) @punctuation.delimiter
+
+["(" ")"] @punctuation.bracket
 
 [
   "<?"

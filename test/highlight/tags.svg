@@ -14,6 +14,10 @@
 <!--    ^^ punctuation.delimiter -->
 <!--      ^ tag -->
 <!--       ^ punctuation.delimiter -->
+        <g>
+        </div>
+<!--      ^^^ tag.error -->
+        </g>
       </svg>
 <!--  ^^ punctuation.delimiter -->
 <!--    ^^^ tag -->

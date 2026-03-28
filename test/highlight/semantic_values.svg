@@ -1,0 +1,18 @@
+<svg>
+  <rect fill="none"/>
+  <!--        ^^^^ constant.builtin -->
+  <rect fill="currentColor"/>
+  <!--        ^^^^^^^^^^^^ constant.builtin -->
+  <rect fill="inherit"/>
+  <!--        ^^^^^^^ constant.builtin -->
+  <image preserveAspectRatio="xMidYMid meet"/>
+  <!--                        ^^^^^^^^ constant -->
+  <!--                                 ^^^^ constant -->
+  <rect width="10px"/>
+  <!--           ^^ type -->
+  <rect width="5em"/>
+  <!--          ^^ type -->
+  <g transform="translate(10)"/>
+  <!--                   ^ punctuation.bracket -->
+  <!--                      ^ punctuation.bracket -->
+</svg>
