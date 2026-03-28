@@ -655,10 +655,32 @@ Other regular long-tail attributes
           value: (quoted_attribute_value
             (attribute_text_double))))
       (attribute
-        (generic_attribute
-          name: (attribute_name)
-          value: (quoted_attribute_value
-            (attribute_text_double))))
+        (d_attribute
+          name: (d_attribute_name)
+          value: (d_attribute_value
+            (double_quoted_path_data
+              (path_data_content
+                (path_data
+                  (moveto_segment
+                    command: (path_command)
+                    (path_coordinate_pair
+                      (path_coordinate
+                        (path_number))
+                      (path_comma_wsp
+                        (path_wsp))
+                      (path_coordinate
+                        (path_number))))
+                  (path_wsp)
+                  (path_segment
+                    (lineto_segment
+                      command: (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number)))))))))))
       (attribute
         (generic_attribute
           name: (attribute_name)

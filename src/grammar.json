@@ -1602,8 +1602,17 @@
       }
     },
     "d_attribute_name": {
-      "type": "STRING",
-      "value": "d"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "d"
+        },
+        {
+          "type": "STRING",
+          "value": "path"
+        }
+      ]
     },
     "d_attribute_value": {
       "type": "CHOICE",

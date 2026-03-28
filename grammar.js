@@ -382,7 +382,7 @@ export default grammar({
 				),
 			),
 
-		d_attribute_name: _ => 'd',
+		d_attribute_name: _ => choice('d', 'path'),
 
 		d_attribute_value: $ =>
 			choice(
