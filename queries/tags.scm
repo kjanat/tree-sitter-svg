@@ -1,37 +1,22 @@
-(element
-  (start_tag
-    (name) @name) @definition.element)
+; ─── ID definitions ──────────────────────────────────────────────
+; Elements with id attributes are the primary navigation targets in SVG.
+; Gradients, clipPaths, symbols, markers, filters — all referenceable by id.
 
-(self_closing_tag
-  (name) @name) @definition.element
-
-(svg_root_element
-  (start_tag
-    (name) @name) @definition.element)
-
-; id definitions
-((id_attribute
+(id_attribute
   value: (id_attribute_value
-    (id_token) @name)) @definition.id)
+    (id_token) @name)) @definition.id
 
-((generic_attribute
-  name: (attribute_name) @_name
-  value: (quoted_attribute_value
-    (attribute_text_double) @name)) @definition.id
- (#eq? @_name "id"))
+; ─── ID references (href) ───────────────────────────────────────
+; <use href="#foo"/>, <textPath href="#path1">, <a href="#section">
 
-((generic_attribute
-  name: (attribute_name) @_name
-  value: (quoted_attribute_value
-    (attribute_text_single) @name)) @definition.id
- (#eq? @_name "id"))
-
-; href references
 ((href_attribute
   value: (href_attribute_value
     (href_reference
       (iri_reference) @name))) @reference.id
  (#match? @name "^#"))
+
+; ─── ID references (paint url()) ────────────────────────────────
+; fill="url(#grad1)", stroke="url(#pattern)"
 
 ((paint_attribute
   value: (paint_attribute_value
@@ -40,19 +25,8 @@
         (iri_reference) @name)))) @reference.id
  (#match? @name "^#"))
 
-((generic_attribute
-  name: (attribute_name) @_name
-  value: (quoted_attribute_value
-    (attribute_text_double) @name)) @reference.id
- (#any-of? @_name "href" "xlink:href")
- (#match? @name "^#"))
-
-((generic_attribute
-  name: (attribute_name) @_name
-  value: (quoted_attribute_value
-    (attribute_text_single) @name)) @reference.id
- (#any-of? @_name "href" "xlink:href")
- (#match? @name "^#"))
+; ─── ID references (functional IRI) ─────────────────────────────
+; clip-path="url(#clip)", mask="url(#mask)", filter="url(#blur)"
 
 ((functional_iri_attribute
   value: (functional_iri_attribute_value
