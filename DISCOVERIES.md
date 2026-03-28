@@ -81,3 +81,6 @@ Tradeoff:
 
 - tag/locals references that rely on stripping the leading `#` may no longer resolve as precisely
   in editors that do not support `#strip!`, but highlighting compiles again.
+- Downstream editor-specific query packs can still keep a separate `locals.scm`
+  with `#strip!` for `#foo` -> `foo` normalization; do not reintroduce it in the
+  shared upstream queries unless Helix gains support.
