@@ -983,6 +983,7 @@ export default grammar({
 				'markerHeight',
 				'stroke-width',
 				'font-size',
+				'offset',
 				'startOffset',
 				'textLength',
 			),

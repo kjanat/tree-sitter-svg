@@ -4522,6 +4522,10 @@
         },
         {
           "type": "STRING",
+          "value": "offset"
+        },
+        {
+          "type": "STRING",
           "value": "startOffset"
         },
         {

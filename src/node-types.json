@@ -2840,6 +2840,10 @@
     "named": false
   },
   {
+    "type": "offset",
+    "named": false
+  },
+  {
     "type": "opacity",
     "named": false
   },

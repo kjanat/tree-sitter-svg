@@ -82,6 +82,8 @@
 (align_keyword) @constant
 (meet_or_slice_keyword) @constant
 
+(number) @number
+
 (length_unit) @type
 
 ((path_command) @constructor

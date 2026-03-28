@@ -561,19 +561,25 @@ Defs, gradients, filter primitives, text containers, linking type
           (self_closing_tag
             name: (name)
             (attribute
-              (generic_attribute
-                name: (attribute_name)
-                value: (quoted_attribute_value
-                  (attribute_text_double))))))
+              (length_attribute
+                name: (length_attribute_name)
+                value: (length_attribute_value
+                  (length_or_percentage_or_auto
+                    (length_or_percentage
+                      (percentage
+                        (number)))))))))
         (text)
         (element
           (self_closing_tag
             name: (name)
             (attribute
-              (generic_attribute
-                name: (attribute_name)
-                value: (quoted_attribute_value
-                  (attribute_text_double))))))
+              (length_attribute
+                name: (length_attribute_name)
+                value: (length_attribute_value
+                  (length_or_percentage_or_auto
+                    (length_or_percentage
+                      (percentage
+                        (number)))))))))
         (text)
         (end_tag
           name: (name)))
