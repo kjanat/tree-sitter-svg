@@ -32,6 +32,20 @@ jobs:
       - name: Tree-sitter tests
         run: tree-sitter test
 
+      - name: Fuzz (incremental parse consistency)
+        run: tree-sitter fuzz --iterations 50 --edits 5
+
+      - name: Parse samples
+        run: |
+          fail=0
+          for f in samples/*.svg samples/assets/*.svg; do
+            if tree-sitter parse "$f" 2>&1 | grep -q ERROR; then
+              echo "FAIL: $f"
+              fail=1
+            fi
+          done
+          [[ "$fail" -eq 0 ]] || exit 1
+
       - name: Node binding tests
         run: bun test
 
