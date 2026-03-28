@@ -589,3 +589,1245 @@ Long path implicit separators
     (end_tag
       name: (name)))
   (text))
+
+=============================
+Arc repeated arguments (space-separated)
+=============================
+
+<svg><path d="M0 0a1 1 0 0 0 5 5 1 1 0 0 0 3 3"/></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (self_closing_tag
+        name: (name)
+        (attribute
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      command: (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (elliptical_arc_segment
+                        command: (path_command)
+                        (elliptical_arc_argument
+                          (elliptical_arc_radii
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_rotation
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_arc_flag)
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_sweep_flag)
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number))))
+                        (elliptical_arc_argument
+                          (elliptical_arc_radii
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_rotation
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_arc_flag)
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_sweep_flag)
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number))))))))))))))
+    (end_tag
+      name: (name)))
+  (text))
+
+=============================
+Arc repeated arguments (comma-separated)
+=============================
+
+<svg><path d="M0 0A1 1 0 0 0 5 5,1 1 0 0 0 3 3"/></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (self_closing_tag
+        name: (name)
+        (attribute
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      command: (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (elliptical_arc_segment
+                        command: (path_command)
+                        (elliptical_arc_argument
+                          (elliptical_arc_radii
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_rotation
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_arc_flag)
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_sweep_flag)
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number))))
+                        (elliptical_arc_argument
+                          (elliptical_arc_radii
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_rotation
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_arc_flag)
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_sweep_flag)
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number))))))))))))))
+    (end_tag
+      name: (name)))
+  (text))
+
+=============================
+Arc followed by closepath
+=============================
+
+<svg><path d="M0 0A1 1 0 0 1 5 5 Z"/></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (self_closing_tag
+        name: (name)
+        (attribute
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      command: (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (elliptical_arc_segment
+                        command: (path_command)
+                        (elliptical_arc_argument
+                          (elliptical_arc_radii
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_rotation
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_arc_flag)
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_sweep_flag)
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number))))))
+                    (path_wsp)
+                    (path_segment
+                      (closepath_segment
+                        command: (path_command)))))))))))
+    (end_tag
+      name: (name)))
+  (text))
+
+=============================
+Arc with adjacent flags
+=============================
+
+<svg><path d="M0 0A25 25 0 0150 50"/></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (self_closing_tag
+        name: (name)
+        (attribute
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      command: (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (elliptical_arc_segment
+                        command: (path_command)
+                        (elliptical_arc_argument
+                          (elliptical_arc_radii
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_rotation
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_arc_flag)
+                          (path_sweep_flag)
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number))))))))))))))
+    (end_tag
+      name: (name)))
+  (text))
+
+=============================
+Arc with adjacent flags and negative coordinates
+=============================
+
+<svg><path d="M0 0A25 25 0 01-50-50"/></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (self_closing_tag
+        name: (name)
+        (attribute
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      command: (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (elliptical_arc_segment
+                        command: (path_command)
+                        (elliptical_arc_argument
+                          (elliptical_arc_radii
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_rotation
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_arc_flag)
+                          (path_sweep_flag)
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_coordinate
+                              (path_number))))))))))))))
+    (end_tag
+      name: (name)))
+  (text))
+
+=============================
+Arc repeated with negative implicit separator
+=============================
+
+<svg><path d="M0 0a25 25 0 01 50 0 25 25 0 01-50 0"/></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (self_closing_tag
+        name: (name)
+        (attribute
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      command: (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (elliptical_arc_segment
+                        command: (path_command)
+                        (elliptical_arc_argument
+                          (elliptical_arc_radii
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_rotation
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_arc_flag)
+                          (path_sweep_flag)
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number))))
+                        (elliptical_arc_argument
+                          (elliptical_arc_radii
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_rotation
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_arc_flag)
+                          (path_sweep_flag)
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number))))))))))))))
+    (end_tag
+      name: (name)))
+  (text))
+
+=============================
+Negative number implicit separators
+=============================
+
+<svg><path d="M-1-2L-3-4"/></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (self_closing_tag
+        name: (name)
+        (attribute
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      command: (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (lineto_segment
+                        command: (path_command)
+                        (path_coordinate_pair
+                          (path_coordinate
+                            (path_number))
+                          (path_coordinate
+                            (path_number)))))))))))))
+    (end_tag
+      name: (name)))
+  (text))
+
+=============================
+Decimal-only implicit separators
+=============================
+
+<svg><path d="M.5.5L.1.2"/></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (self_closing_tag
+        name: (name)
+        (attribute
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      command: (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (lineto_segment
+                        command: (path_command)
+                        (path_coordinate_pair
+                          (path_coordinate
+                            (path_number))
+                          (path_coordinate
+                            (path_number)))))))))))))
+    (end_tag
+      name: (name)))
+  (text))
+
+=============================
+Close reopen subpath
+=============================
+
+<svg><path d="M0 0L5 5ZM10 10L15 15Z"/></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (self_closing_tag
+        name: (name)
+        (attribute
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      command: (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (lineto_segment
+                        command: (path_command)
+                        (path_coordinate_pair
+                          (path_coordinate
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate
+                            (path_number)))))
+                    (path_segment
+                      (closepath_segment
+                        command: (path_command)))
+                    (path_segment
+                      (moveto_segment
+                        command: (path_command)
+                        (path_coordinate_pair
+                          (path_coordinate
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate
+                            (path_number)))))
+                    (path_segment
+                      (lineto_segment
+                        command: (path_command)
+                        (path_coordinate_pair
+                          (path_coordinate
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate
+                            (path_number)))))
+                    (path_segment
+                      (closepath_segment
+                        command: (path_command)))))))))))
+    (end_tag
+      name: (name)))
+  (text))
+
+=============================
+Arc repeated arguments (space-separated)
+=============================
+
+<svg><path d="M0 0a1 1 0 0 0 5 5 1 1 0 0 0 3 3"/></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (self_closing_tag
+        (name)
+        (attribute
+          (d_attribute
+            (d_attribute_name)
+            (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (elliptical_arc_segment
+                        (path_command)
+                        (elliptical_arc_argument
+                          (elliptical_arc_radii
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_rotation
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_arc_flag)
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_sweep_flag)
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number))))
+                        (elliptical_arc_argument
+                          (elliptical_arc_radii
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_rotation
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_arc_flag)
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_sweep_flag)
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number))))))))))))))
+    (end_tag
+      (name)))
+  (text))
+
+=============================
+Arc repeated arguments (comma-separated)
+=============================
+
+<svg><path d="M0 0A1 1 0 0 0 5 5,1 1 0 0 0 3 3"/></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (self_closing_tag
+        (name)
+        (attribute
+          (d_attribute
+            (d_attribute_name)
+            (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (elliptical_arc_segment
+                        (path_command)
+                        (elliptical_arc_argument
+                          (elliptical_arc_radii
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_rotation
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_arc_flag)
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_sweep_flag)
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number))))
+                        (elliptical_arc_argument
+                          (elliptical_arc_radii
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_rotation
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_arc_flag)
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_sweep_flag)
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number))))))))))))))
+    (end_tag
+      (name)))
+  (text))
+
+=============================
+Arc followed by closepath with space
+=============================
+
+<svg><path d="M0 0A1 1 0 0 1 5 5 Z"/></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (self_closing_tag
+        (name)
+        (attribute
+          (d_attribute
+            (d_attribute_name)
+            (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (elliptical_arc_segment
+                        (path_command)
+                        (elliptical_arc_argument
+                          (elliptical_arc_radii
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_rotation
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_arc_flag)
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_sweep_flag)
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number))))))
+                    (path_wsp)
+                    (path_segment
+                      (closepath_segment
+                        (path_command)))))))))))
+    (end_tag
+      (name)))
+  (text))
+
+=============================
+Arc with adjacent flags
+=============================
+
+<svg><path d="M0 0A25 25 0 0150 50"/></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (self_closing_tag
+        (name)
+        (attribute
+          (d_attribute
+            (d_attribute_name)
+            (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (elliptical_arc_segment
+                        (path_command)
+                        (elliptical_arc_argument
+                          (elliptical_arc_radii
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_rotation
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_arc_flag)
+                          (path_sweep_flag)
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number))))))))))))))
+    (end_tag
+      (name)))
+  (text))
+
+=============================
+Arc with adjacent flags and negative coordinates
+=============================
+
+<svg><path d="M0 0A25 25 0 01-50-50"/></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (self_closing_tag
+        (name)
+        (attribute
+          (d_attribute
+            (d_attribute_name)
+            (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (elliptical_arc_segment
+                        (path_command)
+                        (elliptical_arc_argument
+                          (elliptical_arc_radii
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_rotation
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_arc_flag)
+                          (path_sweep_flag)
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_coordinate
+                              (path_number))))))))))))))
+    (end_tag
+      (name)))
+  (text))
+
+=============================
+Arc repeated with negative implicit separator
+=============================
+
+<svg><path d="M0 0a25 25 0 01 50 0 25 25 0 01-50 0"/></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (self_closing_tag
+        (name)
+        (attribute
+          (d_attribute
+            (d_attribute_name)
+            (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (elliptical_arc_segment
+                        (path_command)
+                        (elliptical_arc_argument
+                          (elliptical_arc_radii
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_rotation
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_arc_flag)
+                          (path_sweep_flag)
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number))))
+                        (elliptical_arc_argument
+                          (elliptical_arc_radii
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_rotation
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_arc_flag)
+                          (path_sweep_flag)
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number))))))))))))))
+    (end_tag
+      (name)))
+  (text))
+
+=============================
+Negative number implicit separators
+=============================
+
+<svg><path d="M-1-2L-3-4"/></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (self_closing_tag
+        (name)
+        (attribute
+          (d_attribute
+            (d_attribute_name)
+            (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (lineto_segment
+                        (path_command)
+                        (path_coordinate_pair
+                          (path_coordinate
+                            (path_number))
+                          (path_coordinate
+                            (path_number)))))))))))))
+    (end_tag
+      (name)))
+  (text))
+
+=============================
+Decimal-only implicit separators
+=============================
+
+<svg><path d="M.5.5L.1.2"/></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (self_closing_tag
+        (name)
+        (attribute
+          (d_attribute
+            (d_attribute_name)
+            (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (lineto_segment
+                        (path_command)
+                        (path_coordinate_pair
+                          (path_coordinate
+                            (path_number))
+                          (path_coordinate
+                            (path_number)))))))))))))
+    (end_tag
+      (name)))
+  (text))
+
+=============================
+Close reopen subpath
+=============================
+
+<svg><path d="M0 0L5 5ZM10 10L15 15Z"/></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (self_closing_tag
+        (name)
+        (attribute
+          (d_attribute
+            (d_attribute_name)
+            (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (lineto_segment
+                        (path_command)
+                        (path_coordinate_pair
+                          (path_coordinate
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate
+                            (path_number)))))
+                    (path_segment
+                      (closepath_segment
+                        (path_command)))
+                    (path_segment
+                      (moveto_segment
+                        (path_command)
+                        (path_coordinate_pair
+                          (path_coordinate
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate
+                            (path_number)))))
+                    (path_segment
+                      (lineto_segment
+                        (path_command)
+                        (path_coordinate_pair
+                          (path_coordinate
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate
+                            (path_number)))))
+                    (path_segment
+                      (closepath_segment
+                        (path_command)))))))))))
+    (end_tag
+      (name)))
+  (text))

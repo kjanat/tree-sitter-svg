@@ -13,6 +13,7 @@
 
 ## Grammar
 
+- `prec.left` on path segment rules causes the parser to exit after the first argument instead of continuing the repeat; subsequent values become `implicit_lineto_segment` nodes. For coordinate-pair-based segments (lineto, curveto, etc.) this is structurally harmless but semantically wrong. For arc segments (7-value arguments, odd count), the leftover produces ERROR nodes. Fix: external scanner `_arc_continuation` peeks past whitespace to verify a number follows before entering the arc repeat — gives LR(k) lookahead for an inherently LR(2) conflict.
 - Keeping `extras` empty preserves XML whitespace as explicit `text` nodes (including indentation/newlines)
 - Generic XML attributes should require quoted values; allowing valueless/unquoted attrs accepts non-XML SVG
 - Tag-name matching needs an external scanner stack; CFG-only grammar cannot enforce `<a>...</a>` equality

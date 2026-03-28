@@ -2384,16 +2384,8 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "path_comma_wsp"
-                    },
-                    {
-                      "type": "BLANK"
-                    }
-                  ]
+                  "type": "SYMBOL",
+                  "name": "_arc_continuation"
                 },
                 {
                   "type": "SYMBOL",
@@ -5618,6 +5610,10 @@
     {
       "type": "SYMBOL",
       "name": "_cdata_text"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_arc_continuation"
     }
   ],
   "inline": [],

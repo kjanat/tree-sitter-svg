@@ -1328,8 +1328,6 @@ Pinned recovery: comment with double dashes is invalid XML
 
 ---
 
-
-
 (ERROR
   (text)
   (start_tag
@@ -2414,3 +2412,388 @@ Multiple erroneous end tags
   (ERROR
     (iri_reference)
     (path_wsp)))
+
+=============================
+Self-closing svg root
+=============================
+
+<svg/>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (self_closing_tag
+      name: (name)))
+  (text))
+
+=============================
+Namespaced element
+=============================
+
+<svg><svg:rect xmlns:svg="http://www.w3.org/2000/svg"/></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (self_closing_tag
+        name: (name)
+        (attribute
+          (generic_attribute
+            name: (attribute_name)
+            value: (quoted_attribute_value
+              (attribute_text_double))))))
+    (end_tag
+      name: (name)))
+  (text))
+
+=============================
+Deep nesting
+=============================
+
+<svg><g><g><g><rect/></g></g></g></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (start_tag
+        name: (name))
+      (element
+        (start_tag
+          name: (name))
+        (element
+          (start_tag
+            name: (name))
+          (element
+            (self_closing_tag
+              name: (name)))
+          (end_tag
+            name: (name)))
+        (end_tag
+          name: (name)))
+      (end_tag
+        name: (name)))
+    (end_tag
+      name: (name)))
+  (text))
+
+=============================
+Text with tspan
+=============================
+
+<svg><text>Hello <tspan>World</tspan></text></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (start_tag
+        name: (name))
+      (text)
+      (element
+        (start_tag
+          name: (name))
+        (text)
+        (end_tag
+          name: (name)))
+      (end_tag
+        name: (name)))
+    (end_tag
+      name: (name)))
+  (text))
+
+=============================
+Multiline attribute value
+=============================
+
+<svg viewBox="0 0
+100 100"></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name)
+      (attribute
+        (viewbox_attribute
+          name: (viewbox_attribute_name)
+          value: (viewbox_attribute_value
+            (viewbox_value
+              (number)
+              (comma_wsp
+                (wsp))
+              (number)
+              (comma_wsp
+                (wsp))
+              (number)
+              (comma_wsp
+                (wsp))
+              (number))))))
+    (end_tag
+      name: (name)))
+  (text))
+
+=============================
+Self-closing svg root
+=============================
+
+<svg/>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (self_closing_tag
+      (name)))
+  (text))
+
+=============================
+Namespaced element
+=============================
+
+<svg><svg:rect xmlns:svg="http://www.w3.org/2000/svg"/></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (self_closing_tag
+        (name)
+        (attribute
+          (generic_attribute
+            (attribute_name)
+            (quoted_attribute_value
+              (attribute_text_double))))))
+    (end_tag
+      (name)))
+  (text))
+
+=============================
+Deep nesting
+=============================
+
+<svg><g><g><g><rect/></g></g></g></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (start_tag
+        (name))
+      (element
+        (start_tag
+          (name))
+        (element
+          (start_tag
+            (name))
+          (element
+            (self_closing_tag
+              (name)))
+          (end_tag
+            (name)))
+        (end_tag
+          (name)))
+      (end_tag
+        (name)))
+    (end_tag
+      (name)))
+  (text))
+
+=============================
+Text with tspan
+=============================
+
+<svg><text>Hello <tspan>World</tspan></text></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (start_tag
+        (name))
+      (text)
+      (element
+        (start_tag
+          (name))
+        (text)
+        (end_tag
+          (name)))
+      (end_tag
+        (name)))
+    (end_tag
+      (name)))
+  (text))
+
+=============================
+Nested svg with viewBox
+=============================
+
+<svg><svg viewBox="0 0 10 10"><rect/></svg></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (start_tag
+        (name)
+        (attribute
+          (viewbox_attribute
+            (viewbox_attribute_name)
+            (viewbox_attribute_value
+              (viewbox_value
+                (number)
+                (comma_wsp
+                  (wsp))
+                (number)
+                (comma_wsp
+                  (wsp))
+                (number)
+                (comma_wsp
+                  (wsp))
+                (number))))))
+      (element
+        (self_closing_tag
+          (name)))
+      (end_tag
+        (name)))
+    (end_tag
+      (name)))
+  (text))
+
+=============================
+ForeignObject with HTML content
+=============================
+
+<svg><foreignObject><div xmlns="http://www.w3.org/1999/xhtml">hi</div></foreignObject></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (start_tag
+        (name))
+      (element
+        (start_tag
+          (name)
+          (attribute
+            (generic_attribute
+              (attribute_name)
+              (quoted_attribute_value
+                (attribute_text_double)))))
+        (text)
+        (end_tag
+          (name)))
+      (end_tag
+        (name)))
+    (end_tag
+      (name)))
+  (text))
+
+=============================
+Mixed text with entity
+=============================
+
+<svg><text>a &amp; b</text></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (start_tag
+        (name))
+      (text)
+      (entity_reference)
+      (text)
+      (end_tag
+        (name)))
+    (end_tag
+      (name)))
+  (text))
+
+=============================
+Comment inside svg
+=============================
+
+<svg><!-- inner comment --><rect/></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (comment
+      (comment_text))
+    (element
+      (self_closing_tag
+        (name)))
+    (end_tag
+      (name)))
+  (text))
+
+=============================
+Empty attribute value
+=============================
+
+<svg><rect class=""/></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (self_closing_tag
+        (name)
+        (attribute
+          (class_attribute
+            (class_attribute_name)
+            (class_attribute_value)))))
+    (end_tag
+      (name)))
+  (text))

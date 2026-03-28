@@ -663,10 +663,6 @@
           "named": true
         },
         {
-          "type": "path_comma_wsp",
-          "named": true
-        },
-        {
           "type": "path_wsp",
           "named": true
         }

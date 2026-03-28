@@ -34,6 +34,7 @@ export default grammar({
 		$._raw_text,
 		'/>',
 		$._cdata_text,
+		$._arc_continuation,
 	],
 
 	extras: () => [],
@@ -527,7 +528,7 @@ export default grammar({
 					field('command', alias($.elliptical_arc_command, $.path_command)),
 					optional($.path_wsp),
 					$.elliptical_arc_argument,
-					repeat(seq(optional($.path_comma_wsp), $.elliptical_arc_argument)),
+					repeat(seq($._arc_continuation, $.elliptical_arc_argument)),
 				),
 			),
 
