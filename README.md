@@ -7,6 +7,10 @@ A [Tree-sitter] grammar for **SVG** (Scalable Vector Graphics), built against th
 [Tree-sitter]: https://tree-sitter.github.io/tree-sitter/
 [SVG2 specification]: https://www.w3.org/TR/SVG2/
 
+> [!IMPORTANT]
+> THIS GRAMMAR IS NOT PUBLISHED NOR DO I HAVE A TIMELINE FOR PUBLICATION.
+> IT IS CURRENTLY IN DEVELOPMENT AND SUBJECT TO BREAKING CHANGES.
+
 ## What This Parser Does
 
 Most XML parsers treat SVG as generic markup. This grammar parses SVG-specific
