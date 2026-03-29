@@ -880,7 +880,7 @@ Functional color variants rgba and hsla
               (color_value
                 (functional_color
                   (color_function_name)
-                  (number_or_percentage
+                  (hue_value
                     (number))
                   (comma_wsp)
                   (number_or_percentage

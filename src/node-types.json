@@ -5,6 +5,11 @@
     "fields": {}
   },
   {
+    "type": "angle_unit",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "attribute",
     "named": true,
     "fields": {},
@@ -983,6 +988,10 @@
           "named": true
         },
         {
+          "type": "hue_value",
+          "named": true
+        },
+        {
           "type": "number_or_percentage",
           "named": true
         },
@@ -1163,6 +1172,25 @@
         },
         {
           "type": "iri_reference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "hue_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "angle_unit",
+          "named": true
+        },
+        {
+          "type": "number",
           "named": true
         }
       ]
@@ -3251,6 +3279,10 @@
     "named": false
   },
   {
+    "type": "/",
+    "named": false
+  },
+  {
     "type": "/>",
     "named": false
   },
@@ -3427,6 +3459,10 @@
     "named": false
   },
   {
+    "type": "deg",
+    "named": false
+  },
+  {
     "type": "diffuseConstant",
     "named": false
   },
@@ -3504,6 +3540,10 @@
   },
   {
     "type": "fy",
+    "named": false
+  },
+  {
+    "type": "grad",
     "named": false
   },
   {
@@ -3707,6 +3747,10 @@
     "named": false
   },
   {
+    "type": "rad",
+    "named": false
+  },
+  {
     "type": "radius",
     "named": false
   },
@@ -3844,6 +3888,10 @@
   },
   {
     "type": "translate",
+    "named": false
+  },
+  {
+    "type": "turn",
     "named": false
   },
   {

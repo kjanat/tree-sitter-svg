@@ -910,13 +910,14 @@ export default grammar({
 		hex_color: _ => token(/#(?:[0-9A-Fa-f]{3}|[0-9A-Fa-f]{4}|[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})/),
 		functional_color: $ =>
 			choice(
-				$._color_3,
-				$._color_4,
+				$._rgb_color,
+				$._hsl_color,
 			),
 
-		_color_3: $ =>
+		// rgb() / rgba() — 3 components + optional /alpha
+		_rgb_color: $ =>
 			seq(
-				alias(token(prec(1, choice('rgb', 'hsl'))), $.color_function_name),
+				alias(token(prec(1, choice('rgb', 'rgba'))), $.color_function_name),
 				'(',
 				optional($.wsp),
 				$.number_or_percentage,
@@ -924,25 +925,37 @@ export default grammar({
 				$.number_or_percentage,
 				$.comma_wsp,
 				$.number_or_percentage,
+				optional($._color_alpha),
 				optional($.wsp),
 				')',
 			),
 
-		_color_4: $ =>
+		// hsl() / hsla() — hue + 2 percentages + optional /alpha
+		_hsl_color: $ =>
 			seq(
-				alias(token(prec(1, choice('rgba', 'hsla'))), $.color_function_name),
+				alias(token(prec(1, choice('hsl', 'hsla'))), $.color_function_name),
 				'(',
 				optional($.wsp),
-				$.number_or_percentage,
+				$.hue_value,
 				$.comma_wsp,
 				$.number_or_percentage,
 				$.comma_wsp,
 				$.number_or_percentage,
-				$.comma_wsp,
-				$.number_or_percentage,
+				optional($._color_alpha),
 				optional($.wsp),
 				')',
 			),
+
+		_color_alpha: $ =>
+			choice(
+				seq($.comma_wsp, $.number_or_percentage),
+				seq(optional($.wsp), '/', optional($.wsp), $.number_or_percentage),
+			),
+
+		hue_value: $ => seq($.number, optional($.angle_unit)),
+
+		angle_unit: _ => choice('deg', 'rad', 'grad', 'turn'),
+
 		named_color: _ => token(/[A-Za-z][A-Za-z-]*/),
 
 		// ─── functional IRI attribute (url(#ref)) ───────────────────

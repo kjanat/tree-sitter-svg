@@ -4187,15 +4187,15 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_color_3"
+          "name": "_rgb_color"
         },
         {
           "type": "SYMBOL",
-          "name": "_color_4"
+          "name": "_hsl_color"
         }
       ]
     },
-    "_color_3": {
+    "_rgb_color": {
       "type": "SEQ",
       "members": [
         {
@@ -4214,7 +4214,7 @@
                   },
                   {
                     "type": "STRING",
-                    "value": "hsl"
+                    "value": "rgba"
                   }
                 ]
               }
@@ -4264,6 +4264,18 @@
           "members": [
             {
               "type": "SYMBOL",
+              "name": "_color_alpha"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
               "name": "wsp"
             },
             {
@@ -4277,7 +4289,7 @@
         }
       ]
     },
-    "_color_4": {
+    "_hsl_color": {
       "type": "SEQ",
       "members": [
         {
@@ -4292,7 +4304,7 @@
                 "members": [
                   {
                     "type": "STRING",
-                    "value": "rgba"
+                    "value": "hsl"
                   },
                   {
                     "type": "STRING",
@@ -4323,15 +4335,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "number_or_percentage"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "comma_wsp"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "number_or_percentage"
+          "name": "hue_value"
         },
         {
           "type": "SYMBOL",
@@ -4354,6 +4358,18 @@
           "members": [
             {
               "type": "SYMBOL",
+              "name": "_color_alpha"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
               "name": "wsp"
             },
             {
@@ -4364,6 +4380,103 @@
         {
           "type": "STRING",
           "value": ")"
+        }
+      ]
+    },
+    "_color_alpha": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "comma_wsp"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "number_or_percentage"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "wsp"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": "/"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "wsp"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "SYMBOL",
+              "name": "number_or_percentage"
+            }
+          ]
+        }
+      ]
+    },
+    "hue_value": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "number"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "angle_unit"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "angle_unit": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "deg"
+        },
+        {
+          "type": "STRING",
+          "value": "rad"
+        },
+        {
+          "type": "STRING",
+          "value": "grad"
+        },
+        {
+          "type": "STRING",
+          "value": "turn"
         }
       ]
     },

@@ -115,6 +115,7 @@
 
 (length_unit) @type
 (time_unit) @type
+(angle_unit) @type
 (percentage "%" @type)
 
 ((path_command) @constructor
