@@ -981,7 +981,9 @@ export default grammar({
 				'cursor',
 			),
 
-		functional_iri_attribute_value: $ => quoted(choice('none', $.paint_server, $.iri_reference)),
+		functional_iri_attribute_value: $ => quoted(choice('none', $.functional_iri, $.iri_reference)),
+
+		functional_iri: $ => seq('url(', optional($.wsp), $.iri_reference, optional($.wsp), ')'),
 
 		// ─── clip attribute (deprecated, rect() function) ───────────
 

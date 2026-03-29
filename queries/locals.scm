@@ -29,6 +29,6 @@
 
 ((functional_iri_attribute
   value: (functional_iri_attribute_value
-    (paint_server
+    (functional_iri
       (iri_reference) @local.reference)))
  (#match? @local.reference "^#"))

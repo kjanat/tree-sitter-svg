@@ -1003,6 +1003,25 @@
     }
   },
   {
+    "type": "functional_iri",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "iri_reference",
+          "named": true
+        },
+        {
+          "type": "wsp",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "functional_iri_attribute",
     "named": true,
     "fields": {
@@ -1042,11 +1061,11 @@
       "required": false,
       "types": [
         {
-          "type": "iri_reference",
+          "type": "functional_iri",
           "named": true
         },
         {
-          "type": "paint_server",
+          "type": "iri_reference",
           "named": true
         }
       ]

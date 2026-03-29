@@ -492,7 +492,7 @@ IRI attributes
         (functional_iri_attribute
           name: (functional_iri_attribute_name)
           value: (functional_iri_attribute_value
-            (paint_server
+            (functional_iri
               (iri_reference)))))
       (attribute
         (functional_iri_attribute
@@ -507,7 +507,7 @@ IRI attributes
         (functional_iri_attribute
           name: (functional_iri_attribute_name)
           value: (functional_iri_attribute_value
-            (paint_server
+            (functional_iri
               (iri_reference)))))
       (attribute
         (functional_iri_attribute
@@ -518,13 +518,13 @@ IRI attributes
         (functional_iri_attribute
           name: (functional_iri_attribute_name)
           value: (functional_iri_attribute_value
-            (paint_server
+            (functional_iri
               (iri_reference)))))
       (attribute
         (functional_iri_attribute
           name: (functional_iri_attribute_name)
           value: (functional_iri_attribute_value
-            (paint_server
+            (functional_iri
               (iri_reference))))))
     (end_tag
       name: (name)))

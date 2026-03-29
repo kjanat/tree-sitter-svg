@@ -4571,7 +4571,7 @@
                     },
                     {
                       "type": "SYMBOL",
-                      "name": "paint_server"
+                      "name": "functional_iri"
                     },
                     {
                       "type": "SYMBOL",
@@ -4609,7 +4609,7 @@
                     },
                     {
                       "type": "SYMBOL",
-                      "name": "paint_server"
+                      "name": "functional_iri"
                     },
                     {
                       "type": "SYMBOL",
@@ -4627,6 +4627,47 @@
               "value": "'"
             }
           ]
+        }
+      ]
+    },
+    "functional_iri": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "url("
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "wsp"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "iri_reference"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "wsp"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ")"
         }
       ]
     },

@@ -112,7 +112,7 @@ Single-quoted typed attribute values
           (functional_iri_attribute
             name: (functional_iri_attribute_name)
             value: (functional_iri_attribute_value
-              (paint_server
+              (functional_iri
                 (iri_reference)))))))
     (text)
     (end_tag
@@ -1924,31 +1924,31 @@ Multiple functional IRI attributes on one element
           (functional_iri_attribute
             name: (functional_iri_attribute_name)
             value: (functional_iri_attribute_value
-              (paint_server
+              (functional_iri
                 (iri_reference)))))
         (attribute
           (functional_iri_attribute
             name: (functional_iri_attribute_name)
             value: (functional_iri_attribute_value
-              (paint_server
+              (functional_iri
                 (iri_reference)))))
         (attribute
           (functional_iri_attribute
             name: (functional_iri_attribute_name)
             value: (functional_iri_attribute_value
-              (paint_server
+              (functional_iri
                 (iri_reference)))))
         (attribute
           (functional_iri_attribute
             name: (functional_iri_attribute_name)
             value: (functional_iri_attribute_value
-              (paint_server
+              (functional_iri
                 (iri_reference)))))
         (attribute
           (functional_iri_attribute
             name: (functional_iri_attribute_name)
             value: (functional_iri_attribute_value
-              (paint_server
+              (functional_iri
                 (iri_reference)))))))
     (end_tag
       name: (name)))

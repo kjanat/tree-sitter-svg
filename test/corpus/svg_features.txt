@@ -236,7 +236,7 @@ Typed references and paint servers
           (functional_iri_attribute
             name: (functional_iri_attribute_name)
             value: (functional_iri_attribute_value
-              (paint_server
+              (functional_iri
                 (iri_reference)))))))
     (text)
     (element
