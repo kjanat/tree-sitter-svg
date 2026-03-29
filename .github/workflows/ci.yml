@@ -38,6 +38,7 @@ jobs:
 
       - name: Parse samples
         run: |
+          shopt -s nullglob
           fail=0
           for f in samples/*.svg samples/assets/*.svg; do
             if tree-sitter parse "$f" 2>&1 | grep -q ERROR; then
