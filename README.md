@@ -4,9 +4,6 @@
 
 A [Tree-sitter] grammar for **SVG** (Scalable Vector Graphics), built against the [SVG2 specification].
 
-[Tree-sitter]: https://tree-sitter.github.io/tree-sitter/
-[SVG2 specification]: https://www.w3.org/TR/SVG2/
-
 > [!IMPORTANT]
 > THIS GRAMMAR IS NOT PUBLISHED NOR DO I HAVE A TIMELINE FOR PUBLICATION.
 > IT IS CURRENTLY IN DEVELOPMENT AND SUBJECT TO BREAKING CHANGES.
@@ -21,8 +18,8 @@ structure in three layers:
 3. Embedded language regions (CSS, JavaScript, HTML)
 
 Element names stay mostly generic. SVG-specific behavior is split between the
-grammar (`grammar.js`), scanner (`src/scanner.c`), and query files
-(`queries/*.scm`).
+grammar ([`grammar.js`]), scanner ([`src/scanner.c`]), and query files
+([`queries/*.scm`]).
 
 ### Element Structure
 
@@ -74,25 +71,36 @@ than treating `d` as an opaque string.
 Attributes with meaningful value sub-grammars get dedicated parsing. All others
 are parsed as generic `attribute_name`/`quoted_attribute_value` pairs.
 
-| Attribute             | Sub-grammar                                      |
-| --------------------- | ------------------------------------------------ |
-| `d`                   | Full SVG path data (commands, coordinates, arcs) |
-| `viewBox`             | Four-number box                                  |
-| `preserveAspectRatio` | Optional `defer`, alignment, optional meet/slice |
-| `transform`           | Function list (matrix, translate, rotate, ...)   |
-| `points`              | Coordinate pair list                             |
-| `style`               | CSS injection point                              |
-| `on*` events          | JavaScript injection point                       |
-| `href`/`xlink:href`   | IRI reference or structured data URI             |
-| `id`, `class`         | Identity tokens                                  |
-| Paint attributes      | `url()`, keywords, color functions               |
-| IRI attributes        | `none`, `iri_reference`, or `url(...)` server    |
-| Length attributes     | Length, percentage, or `auto`                    |
-| `opacity`             | Number or percentage                             |
+| Attribute                   | Sub-grammar                                        |
+| --------------------------- | -------------------------------------------------- |
+| `d`, `path`                 | Full SVG path data (commands, coordinates, arcs)   |
+| `viewBox`                   | Four-number box                                    |
+| `preserveAspectRatio`       | Optional `defer`, alignment, optional meet/slice   |
+| `transform` and variants    | Function list (matrix, translate, rotate, ...)     |
+| `points`                    | Coordinate pair list                               |
+| `style`                     | CSS injection point                                |
+| `on*` events                | JavaScript injection point                         |
+| `href`/`xlink:href`         | IRI reference or structured data URI               |
+| `id`, `class`               | Identity tokens                                    |
+| Paint attributes            | `url()`, keywords, `rgb()`/`hsl()` decomposed      |
+| IRI attributes              | `none`, `iri_reference`, or `url(...)` server      |
+| `clip`                      | `rect()` function with length arguments            |
+| Length attributes           | Length, percentage, or `auto` (24 attribute names) |
+| `offset`                    | Number or percentage                               |
+| `opacity` and variants      | Number or percentage                               |
+| Number attributes           | Pure numeric (pathLength, k1–k4, seed, ...)        |
+| `dx`, `dy`                  | Space/comma-separated length lists                 |
+| `stroke-dasharray`          | `none`, `inherit`, or length list                  |
+| `stdDeviation`, `rotate`, … | Space/comma-separated number lists                 |
+| `dur`, `repeatDur`          | Time value, `indefinite`, or `media`               |
+| `repeatCount`               | Number or `indefinite`                             |
+| `keyTimes`                  | Semicolon-separated numbers                        |
+| `keySplines`                | Semicolon-separated control point tuples           |
+| `enable-background`         | `new` with optional coords, or `accumulate`        |
 
 ### Language Injections
 
-Embedded languages are injected via `queries/injections.scm`:
+Embedded languages are injected via [`queries/injections.scm`]:
 
 | Context                                      | Injected Language |
 | -------------------------------------------- | ----------------- |
@@ -106,12 +114,16 @@ Embedded languages are injected via `queries/injections.scm`:
 
 ### Query Files
 
-| File             | Purpose                        |
-| ---------------- | ------------------------------ |
-| `highlights.scm` | Syntax highlighting captures   |
-| `injections.scm` | Language injection rules       |
-| `locals.scm`     | Local scope/reference tracking |
-| `tags.scm`       | Symbol/tag navigation          |
+| File              | Purpose                                            |
+| ----------------- | -------------------------------------------------- |
+| `highlights.scm`  | Syntax highlighting captures                       |
+| `injections.scm`  | Language injection rules (CSS, JS, HTML)           |
+| `locals.scm`      | Local scope/reference tracking (id ↔ href/url)     |
+| `tags.scm`        | Symbol navigation with `@doc` docstrings           |
+| `indents.scm`     | Auto-indentation (Helix, Neovim, Zed)              |
+| `textobjects.scm` | Vim-style selections (elements, attributes, paths) |
+| `outline.scm`     | Symbol outline / code folding with id context      |
+| `brackets.scm`    | Bracket matching and rainbow pairs                 |
 
 <!--
 ## Installation
@@ -259,8 +271,8 @@ Via Maven:
 
 ### Prerequisites
 
-- [Tree-sitter CLI](https://tree-sitter.github.io/tree-sitter/creating-parsers/tool-overview.html)
-- Node.js 22+ (grammar generation, Node binding tests)
+- [Tree-sitter CLI]
+- Node.js 22 (grammar generation, Node binding tests)
 - C compiler (parser + external scanner)
 
 ### Commands
@@ -268,9 +280,9 @@ Via Maven:
 ```sh
 tree-sitter generate          # regenerate src/parser.c from grammar.js
 tree-sitter test              # run corpus + highlight assertions
-npm test                      # Node binding tests
-npm run test:regex            # regex sample harness
-npm start                     # build WASM + open playground
+bun run test                  # Node binding tests
+bun run test:regex            # regex sample harness
+bun start                     # build WASM + open playground
 ```
 
 ### Project Structure
@@ -285,7 +297,11 @@ queries/
   highlights.scm              # syntax highlighting
   injections.scm              # CSS/JS/HTML injection
   locals.scm                  # scope tracking
-  tags.scm                    # symbol navigation
+  tags.scm                    # symbol navigation (with `@doc`)
+  indents.scm                 # auto-indentation
+  textobjects.scm             # vim-style text object selections
+  outline.scm                 # symbol outline / code folding
+  brackets.scm                # bracket matching
 bindings/
   c/                          # C header + pkg-config
   go/                         # Go binding + test
@@ -297,14 +313,15 @@ bindings/
   zig/                        # Zig binding + test
 test/corpus/                  # tree-sitter corpus tests
 test/highlight/               # highlight query assertions
+test/tags/                    # tag query assertions
 test/regex_samples/           # regex harness fixtures/tests
 ```
 
 ### Contributing
 
-1. Edit `grammar.js` (and `src/scanner.c` for tag matching changes)
+1. Edit [`grammar.js`] (and [`src/scanner.c`] for tag matching changes)
 2. Run `tree-sitter generate && tree-sitter test`
-3. Add or update tests in `test/corpus/` and `test/highlight/`
+3. Add or update tests in [`test/corpus/`] and [`test/highlight/`]
 4. Open a pull request
 
 ## Spec Compliance
@@ -320,4 +337,13 @@ families).
 
 [MIT][LICENSE] © Kaj Kowalski
 
+[`grammar.js`]: ./grammar.js
+[`queries/*.scm`]: ./queries/
+[`queries/injections.scm`]: ./queries/injections.scm
+[`src/scanner.c`]: ./src/scanner.c
+[`test/corpus/`]: ./test/corpus/
+[`test/highlight/`]: ./test/highlight/
 [LICENSE]: https://github.com/kjanat/tree-sitter-svg/blob/master/LICENSE
+[SVG2 specification]: https://www.w3.org/TR/SVG2/
+[Tree-sitter CLI]: https://tree-sitter.github.io/tree-sitter/creating-parsers/tool-overview.html
+[Tree-sitter]: https://tree-sitter.github.io/tree-sitter/

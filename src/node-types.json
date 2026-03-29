@@ -5,6 +5,11 @@
     "fields": {}
   },
   {
+    "type": "angle_unit",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "attribute",
     "named": true,
     "fields": {},
@@ -17,7 +22,19 @@
           "named": true
         },
         {
+          "type": "clip_attribute",
+          "named": true
+        },
+        {
           "type": "d_attribute",
+          "named": true
+        },
+        {
+          "type": "duration_attribute",
+          "named": true
+        },
+        {
+          "type": "enable_background_attribute",
           "named": true
         },
         {
@@ -41,7 +58,31 @@
           "named": true
         },
         {
+          "type": "key_splines_attribute",
+          "named": true
+        },
+        {
+          "type": "key_times_attribute",
+          "named": true
+        },
+        {
           "type": "length_attribute",
+          "named": true
+        },
+        {
+          "type": "length_list_attribute",
+          "named": true
+        },
+        {
+          "type": "number_attribute",
+          "named": true
+        },
+        {
+          "type": "number_list_attribute",
+          "named": true
+        },
+        {
+          "type": "offset_attribute",
           "named": true
         },
         {
@@ -58,6 +99,14 @@
         },
         {
           "type": "preserve_aspect_ratio_attribute",
+          "named": true
+        },
+        {
+          "type": "repeat_count_attribute",
+          "named": true
+        },
+        {
+          "type": "stroke_dasharray_attribute",
           "named": true
         },
         {
@@ -151,6 +200,70 @@
       "types": [
         {
           "type": "class_name",
+          "named": true
+        },
+        {
+          "type": "wsp",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "clip_attribute",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "clip_attribute_name",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "clip_attribute_value",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "clip_attribute_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "clip_rect",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "clip_rect",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "comma_wsp",
+          "named": true
+        },
+        {
+          "type": "length_or_percentage_or_auto",
           "named": true
         },
         {
@@ -353,6 +466,11 @@
     }
   },
   {
+    "type": "d_attribute_name",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "d_attribute_value",
     "named": true,
     "fields": {},
@@ -531,6 +649,52 @@
     }
   },
   {
+    "type": "duration_attribute",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "duration_attribute_name",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "duration_attribute_value",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "duration_attribute_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "duration_attribute_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "time_value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "element",
     "named": true,
     "fields": {},
@@ -663,11 +827,67 @@
           "named": true
         },
         {
-          "type": "path_comma_wsp",
+          "type": "path_wsp",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "enable_background_attribute",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "enable_background_attribute_name",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "enable_background_attribute_value",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "enable_background_attribute_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "enable_background_new",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "enable_background_new",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "number",
           "named": true
         },
         {
-          "type": "path_wsp",
+          "type": "wsp",
           "named": true
         }
       ]
@@ -752,6 +972,56 @@
     }
   },
   {
+    "type": "functional_color",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "color_function_name",
+          "named": true
+        },
+        {
+          "type": "comma_wsp",
+          "named": true
+        },
+        {
+          "type": "hue_value",
+          "named": true
+        },
+        {
+          "type": "number_or_percentage",
+          "named": true
+        },
+        {
+          "type": "wsp",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "functional_iri",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "iri_reference",
+          "named": true
+        },
+        {
+          "type": "wsp",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "functional_iri_attribute",
     "named": true,
     "fields": {
@@ -791,11 +1061,11 @@
       "required": false,
       "types": [
         {
-          "type": "iri_reference",
+          "type": "functional_iri",
           "named": true
         },
         {
-          "type": "paint_server",
+          "type": "iri_reference",
           "named": true
         }
       ]
@@ -927,6 +1197,25 @@
     }
   },
   {
+    "type": "hue_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "angle_unit",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "id_attribute",
     "named": true,
     "fields": {
@@ -992,6 +1281,126 @@
     }
   },
   {
+    "type": "key_spline_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "comma_wsp",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "key_splines_attribute",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "key_splines_attribute_name",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "key_splines_attribute_value",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "key_splines_attribute_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "key_splines_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "key_splines_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "key_spline_value",
+          "named": true
+        },
+        {
+          "type": "wsp",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "key_times_attribute",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "key_times_attribute_name",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "key_times_attribute_value",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "key_times_attribute_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "semicolon_number_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "length",
     "named": true,
     "fields": {},
@@ -1051,6 +1460,71 @@
       "types": [
         {
           "type": "length_or_percentage_or_auto",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "length_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "comma_wsp",
+          "named": true
+        },
+        {
+          "type": "length_or_percentage",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "length_list_attribute",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "length_list_attribute_name",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "length_list_attribute_value",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "length_list_attribute_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "length_list_attribute_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "length_list",
           "named": true
         }
       ]
@@ -1202,6 +1676,117 @@
     "fields": {}
   },
   {
+    "type": "number_attribute",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number_attribute_name",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number_attribute_value",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "number_attribute_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "number_attribute_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "number",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "number_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "comma_wsp",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "number_list_attribute",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number_list_attribute_name",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number_list_attribute_value",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "number_list_attribute_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "number_list_attribute_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "number_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "number_or_percentage",
     "named": true,
     "fields": {},
@@ -1215,6 +1800,47 @@
         },
         {
           "type": "percentage",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "offset_attribute",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "offset_attribute_name",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "offset_attribute_value",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "offset_attribute_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "number_or_percentage",
           "named": true
         }
       ]
@@ -1762,6 +2388,47 @@
     }
   },
   {
+    "type": "repeat_count_attribute",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "repeat_count_attribute_name",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "repeat_count_attribute_value",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "repeat_count_attribute_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "number",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "rotate_transform",
     "named": true,
     "fields": {},
@@ -1838,6 +2505,25 @@
       "types": [
         {
           "type": "attribute",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "semicolon_number_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "wsp",
           "named": true
         }
       ]
@@ -2069,6 +2755,47 @@
     }
   },
   {
+    "type": "stroke_dasharray_attribute",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "stroke_dasharray_attribute_name",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "stroke_dasharray_attribute_value",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "stroke_dasharray_attribute_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "length_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "style_attribute",
     "named": true,
     "fields": {
@@ -2169,6 +2896,30 @@
         },
         {
           "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "time_unit",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "time_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "time_unit",
           "named": true
         }
       ]
@@ -2547,6 +3298,10 @@
     "named": false
   },
   {
+    "type": "/",
+    "named": false
+  },
+  {
     "type": "/>",
     "named": false
   },
@@ -2611,6 +3366,10 @@
     "named": false
   },
   {
+    "type": "accumulate",
+    "named": false
+  },
+  {
     "type": "attribute_text_double",
     "named": true
   },
@@ -2620,6 +3379,18 @@
   },
   {
     "type": "auto",
+    "named": false
+  },
+  {
+    "type": "azimuth",
+    "named": false
+  },
+  {
+    "type": "baseFrequency",
+    "named": false
+  },
+  {
+    "type": "bias",
     "named": false
   },
   {
@@ -2639,12 +3410,20 @@
     "named": false
   },
   {
+    "type": "clip_attribute_name",
+    "named": true
+  },
+  {
     "type": "cm",
     "named": false
   },
   {
     "type": "color",
     "named": false
+  },
+  {
+    "type": "color_function_name",
+    "named": true
   },
   {
     "type": "context-fill",
@@ -2671,8 +3450,8 @@
     "named": false
   },
   {
-    "type": "d_attribute_name",
-    "named": true
+    "type": "d",
+    "named": false
   },
   {
     "type": "data:",
@@ -2699,12 +3478,44 @@
     "named": false
   },
   {
+    "type": "deg",
+    "named": false
+  },
+  {
+    "type": "diffuseConstant",
+    "named": false
+  },
+  {
+    "type": "divisor",
+    "named": false
+  },
+  {
     "type": "doctype_external_id",
     "named": true
   },
   {
+    "type": "dur",
+    "named": false
+  },
+  {
+    "type": "dx",
+    "named": false
+  },
+  {
+    "type": "dy",
+    "named": false
+  },
+  {
+    "type": "elevation",
+    "named": false
+  },
+  {
     "type": "em",
     "named": false
+  },
+  {
+    "type": "enable_background_attribute_name",
+    "named": true
   },
   {
     "type": "entity_reference",
@@ -2743,10 +3554,6 @@
     "named": false
   },
   {
-    "type": "functional_color",
-    "named": true
-  },
-  {
     "type": "fx",
     "named": false
   },
@@ -2755,7 +3562,15 @@
     "named": false
   },
   {
+    "type": "grad",
+    "named": false
+  },
+  {
     "type": "gradientTransform",
+    "named": false
+  },
+  {
+    "type": "h",
     "named": false
   },
   {
@@ -2779,6 +3594,10 @@
     "named": false
   },
   {
+    "type": "indefinite",
+    "named": false
+  },
+  {
     "type": "inherit",
     "named": false
   },
@@ -2787,7 +3606,35 @@
     "named": true
   },
   {
+    "type": "k1",
+    "named": false
+  },
+  {
+    "type": "k2",
+    "named": false
+  },
+  {
+    "type": "k3",
+    "named": false
+  },
+  {
+    "type": "k4",
+    "named": false
+  },
+  {
+    "type": "key_splines_attribute_name",
+    "named": true
+  },
+  {
+    "type": "key_times_attribute_name",
+    "named": true
+  },
+  {
     "type": "lighting-color",
+    "named": false
+  },
+  {
+    "type": "limitingConeAngle",
     "named": false
   },
   {
@@ -2819,6 +3666,10 @@
     "named": false
   },
   {
+    "type": "media",
+    "named": false
+  },
+  {
     "type": "meet",
     "named": false
   },
@@ -2827,7 +3678,15 @@
     "named": true
   },
   {
+    "type": "min",
+    "named": false
+  },
+  {
     "type": "mm",
+    "named": false
+  },
+  {
+    "type": "ms",
     "named": false
   },
   {
@@ -2835,11 +3694,31 @@
     "named": true
   },
   {
+    "type": "new",
+    "named": false
+  },
+  {
     "type": "none",
     "named": false
   },
   {
+    "type": "numOctaves",
+    "named": false
+  },
+  {
+    "type": "offset_attribute_name",
+    "named": true
+  },
+  {
     "type": "opacity",
+    "named": false
+  },
+  {
+    "type": "path",
+    "named": false
+  },
+  {
+    "type": "pathLength",
     "named": false
   },
   {
@@ -2887,8 +3766,20 @@
     "named": false
   },
   {
+    "type": "rad",
+    "named": false
+  },
+  {
+    "type": "radius",
+    "named": false
+  },
+  {
     "type": "raw_text",
     "named": true
+  },
+  {
+    "type": "rect",
+    "named": false
   },
   {
     "type": "refX",
@@ -2903,6 +3794,14 @@
     "named": false
   },
   {
+    "type": "repeatDur",
+    "named": false
+  },
+  {
+    "type": "repeat_count_attribute_name",
+    "named": true
+  },
+  {
     "type": "rotate",
     "named": false
   },
@@ -2915,7 +3814,15 @@
     "named": false
   },
   {
+    "type": "s",
+    "named": false
+  },
+  {
     "type": "scale",
+    "named": false
+  },
+  {
+    "type": "seed",
     "named": false
   },
   {
@@ -2931,7 +3838,19 @@
     "named": false
   },
   {
+    "type": "specularConstant",
+    "named": false
+  },
+  {
+    "type": "specularExponent",
+    "named": false
+  },
+  {
     "type": "startOffset",
+    "named": false
+  },
+  {
+    "type": "stdDeviation",
     "named": false
   },
   {
@@ -2947,6 +3866,14 @@
     "named": false
   },
   {
+    "type": "stroke-dashoffset",
+    "named": false
+  },
+  {
+    "type": "stroke-miterlimit",
+    "named": false
+  },
+  {
     "type": "stroke-opacity",
     "named": false
   },
@@ -2955,8 +3882,16 @@
     "named": false
   },
   {
+    "type": "stroke_dasharray_attribute_name",
+    "named": true
+  },
+  {
     "type": "style_attribute_name",
     "named": true
+  },
+  {
+    "type": "surfaceScale",
+    "named": false
   },
   {
     "type": "text",
@@ -2972,6 +3907,10 @@
   },
   {
     "type": "translate",
+    "named": false
+  },
+  {
+    "type": "turn",
     "named": false
   },
   {
@@ -3076,6 +4015,10 @@
   },
   {
     "type": "y2",
+    "named": false
+  },
+  {
+    "type": "z",
     "named": false
   }
 ]

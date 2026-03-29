@@ -236,7 +236,7 @@ Typed references and paint servers
           (functional_iri_attribute
             name: (functional_iri_attribute_name)
             value: (functional_iri_attribute_value
-              (paint_server
+              (functional_iri
                 (iri_reference)))))))
     (text)
     (element
@@ -335,10 +335,12 @@ Shape content allows animation and descriptive only
               value: (quoted_attribute_value
                 (attribute_text_double))))
           (attribute
-            (generic_attribute
-              name: (attribute_name)
-              value: (quoted_attribute_value
-                (attribute_text_double))))))
+            (duration_attribute
+              name: (duration_attribute_name)
+              value: (duration_attribute_value
+                (time_value
+                  (number)
+                  (time_unit)))))))
       (text)
       (end_tag
         name: (name)))
@@ -561,19 +563,23 @@ Defs, gradients, filter primitives, text containers, linking type
           (self_closing_tag
             name: (name)
             (attribute
-              (generic_attribute
-                name: (attribute_name)
-                value: (quoted_attribute_value
-                  (attribute_text_double))))))
+              (offset_attribute
+                name: (offset_attribute_name)
+                value: (offset_attribute_value
+                  (number_or_percentage
+                    (percentage
+                      (number))))))))
         (text)
         (element
           (self_closing_tag
             name: (name)
             (attribute
-              (generic_attribute
-                name: (attribute_name)
-                value: (quoted_attribute_value
-                  (attribute_text_double))))))
+              (offset_attribute
+                name: (offset_attribute_name)
+                value: (offset_attribute_value
+                  (number_or_percentage
+                    (percentage
+                      (number))))))))
         (text)
         (end_tag
           name: (name)))

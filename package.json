@@ -45,6 +45,10 @@
 		"prestart": "tree-sitter build --wasm",
 		"start": "tree-sitter playground --quiet",
 		"test": "node --test bindings/node/*_test.js",
+		"test:corpus": "tree-sitter test",
+		"test:fuzz": "tree-sitter fuzz --iterations 50 --edits 5",
+		"test:fuzz:quick": "tree-sitter fuzz --iterations 10 --edits 3",
+		"test:parse-samples": "for f in samples/*.svg samples/assets/*.svg; do tree-sitter parse \"$f\" 2>&1 | grep -q ERROR && echo \"FAIL: $f\" && exit 1; done; echo 'All samples OK'",
 		"test:regex": "CI=1 bun test test/regex_samples/regex_harness.test.ts",
 		"test:regex:dev": "bun test test/regex_samples/regex_harness.test.ts",
 		"typecheck": "tsc --noEmit"

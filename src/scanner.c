@@ -19,6 +19,7 @@ enum TokenType {
   RAW_TEXT,
   SELF_CLOSING_TAG_DELIMITER,
   CDATA_TEXT,
+  ARC_CONTINUATION,
 };
 
 typedef Array(char) String;
@@ -305,6 +306,35 @@ static bool scan_cdata_text(TSLexer *lexer) {
   return true;
 }
 
+static inline bool is_wsp(int32_t c) {
+  return c == ' ' || c == '\t' || c == '\r' || c == '\n';
+}
+
+// Peek past optional comma/whitespace separator. If a number follows,
+// consume the separator and return true. Otherwise return false (lexer
+// resets). This gives the arc repeat LR(k) lookahead.
+static bool scan_arc_continuation(TSLexer *lexer) {
+  while (is_wsp(lexer->lookahead)) {
+    advance(lexer);
+  }
+
+  if (lexer->lookahead == ',') {
+    advance(lexer);
+    while (is_wsp(lexer->lookahead)) {
+      advance(lexer);
+    }
+  }
+
+  int32_t c = lexer->lookahead;
+  if (is_ascii_digit(c) || c == '+' || c == '-' || c == '.') {
+    lexer->mark_end(lexer);
+    lexer->result_symbol = ARC_CONTINUATION;
+    return true;
+  }
+
+  return false;
+}
+
 static bool scan_self_closing_tag_delimiter(TagStack *tags, TSLexer *lexer) {
   if (lexer->lookahead != '/') {
     return false;
@@ -328,7 +358,7 @@ static bool scan_self_closing_tag_delimiter(TagStack *tags, TSLexer *lexer) {
 }
 
 void *tree_sitter_svg_external_scanner_create(void) {
-  TagStack *tags = calloc(1, sizeof(TagStack));
+  TagStack *tags = (TagStack *)ts_calloc(1, sizeof(TagStack));
   if (tags == NULL) {
     abort();
   }
@@ -344,7 +374,7 @@ void tree_sitter_svg_external_scanner_destroy(void *payload) {
   }
 
   array_delete(tags);
-  free(tags);
+  ts_free(tags);
 }
 
 unsigned tree_sitter_svg_external_scanner_serialize(void *payload, char *buffer) {
@@ -439,6 +469,11 @@ bool tree_sitter_svg_external_scanner_scan(void *payload, TSLexer *lexer, const 
   // Guard against error recovery (all valid_symbols true).
   if (valid_symbols[CDATA_TEXT] && !valid_symbols[START_TAG_NAME] && !valid_symbols[END_TAG_NAME]) {
     return scan_cdata_text(lexer);
+  }
+
+  // Arc continuation: peek past whitespace/comma; succeed only if a number follows.
+  if (valid_symbols[ARC_CONTINUATION] && !valid_symbols[START_TAG_NAME] && !valid_symbols[END_TAG_NAME]) {
+    return scan_arc_continuation(lexer);
   }
 
   if (valid_symbols[SELF_CLOSING_TAG_DELIMITER] && lexer->lookahead == '/') {

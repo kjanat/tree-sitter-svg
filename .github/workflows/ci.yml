@@ -1,36 +1,52 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - master
+  push: { branches: [master] }
   pull_request:
   workflow_dispatch:
+
+concurrency:
+  { group: "ci-${{ github.sha }}", cancel-in-progress: true }
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - uses: actions/checkout@v6
 
-      - name: Setup Volta(Node)
-        uses: volta-cli/action@v4
+      - uses: actions/setup-node@v6
+        with: { node-version: 22 }
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@v2
 
-      - name: Setup tree-sitter
-        run: npm i -g tree-sitter-cli
+      - run: npm i -g tree-sitter-cli
 
-      - name: Install dependencies
-        run: bun install --frozen-lockfile
+      - run: bun install --frozen-lockfile
 
-      - name: Typecheck
-        run: bun typecheck
+      - run: bun typecheck
 
-      - name: Tree-sitter tests
-        run: tree-sitter test
+      - run: tree-sitter test
+
+      - run: tree-sitter fuzz --iterations 50 --edits 5
+
+      - name: Parse samples
+        run: |
+          shopt -s nullglob
+          fail=0
+          for f in samples/*.svg samples/assets/*.svg; do
+            output="$(tree-sitter parse "$f" 2>&1)" || {
+              echo "FAIL (non-zero exit): $f"
+              printf '%s\n' "$output"
+              fail=1
+              continue
+            }
+            if printf '%s\n' "$output" | grep -q ERROR; then
+              echo "FAIL: $f"
+              printf '%s\n' "$output"
+              fail=1
+            fi
+          done
+          [[ "$fail" -eq 0 ]] || exit 1
 
       - name: Node binding tests
         run: bun test

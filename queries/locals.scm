@@ -1,43 +1,19 @@
-(element) @local.scope
-
+; SVG IDs are document-global — scope at root, not per-element
 (svg_root_element) @local.scope
 
-((generic_attribute
-  name: (attribute_name) @_name
-  value: (quoted_attribute_value
-    (attribute_text_double) @local.definition))
- (#eq? @_name "id"))
-
-((generic_attribute
-  name: (attribute_name) @_name
-  value: (quoted_attribute_value
-    (attribute_text_single) @local.definition))
- (#eq? @_name "id"))
-
+; id attribute definitions
 ((id_attribute
   value: (id_attribute_value
     (id_token) @local.definition)))
 
-((generic_attribute
-  name: (attribute_name) @_name
-  value: (quoted_attribute_value
-    (attribute_text_double) @local.reference))
- (#any-of? @_name "href" "xlink:href")
- (#match? @local.reference "^#"))
-
-((generic_attribute
-  name: (attribute_name) @_name
-  value: (quoted_attribute_value
-    (attribute_text_single) @local.reference))
- (#any-of? @_name "href" "xlink:href")
- (#match? @local.reference "^#"))
-
+; href references to fragment IDs
 ((href_attribute
   value: (href_attribute_value
     (href_reference
       (iri_reference) @local.reference)))
  (#match? @local.reference "^#"))
 
+; paint url() references
 ((paint_attribute
   value: (paint_attribute_value
     (paint_value
@@ -45,6 +21,7 @@
         (iri_reference) @local.reference))))
  (#match? @local.reference "^#"))
 
+; functional IRI references (clip-path, mask, filter, etc.)
 ((functional_iri_attribute
   value: (functional_iri_attribute_value
     (iri_reference) @local.reference))
@@ -52,6 +29,6 @@
 
 ((functional_iri_attribute
   value: (functional_iri_attribute_value
-    (paint_server
+    (functional_iri
       (iri_reference) @local.reference)))
  (#match? @local.reference "^#"))
