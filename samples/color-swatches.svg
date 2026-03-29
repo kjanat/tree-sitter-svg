@@ -43,6 +43,7 @@
 	<rect x="10" y="340" width="380" height="40" rx="8" fill="url(#rainbow)"/>
 
 	<!-- paint server with fallback color — swatch on fallback -->
+	<!-- svg-lint-disable-next-line MissingReferenceDefinition -->
 	<rect x="100" y="290" width="60" height="30" fill="url(#missing) #264653"/>
 
 	<!-- Keywords: none, currentColor, inherit — NO swatch expected -->
