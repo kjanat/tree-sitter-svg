@@ -1,18 +1,16 @@
 <svg viewBox="0 0 100 100">
 <!-- ^^^^^^^ attribute -->
-<!--         ^^^^^^^^^^^^^ string -->
+<!--         ^ punctuation.delimiter -->
+<!--          ^^^^^^^^^^^ string -->
+<!--                     ^ punctuation.delimiter -->
   <rect id="r1"/>
   <!--  ^^ attribute -->
-  <!--     ^^^^ string -->
+  <!--      ^^ string -->
   <rect width="10"/>
   <!--  ^^^^^ attribute -->
-  <!--        ^^^^ string -->
-  <rect height="20"/>
-  <!--  ^^^^^^ attribute -->
-  <!--         ^^^^ string -->
-  <rect x="5"/>
-  <!--  ^ attribute -->
-  <!--    ^^^ string -->
+  <!--        ^ punctuation.delimiter -->
+  <!--         ^^ number -->
+  <!--           ^ punctuation.delimiter -->
   <rect fill="#f00"/>
   <!--  ^^^^ attribute -->
   <!--        ^^^^ constant -->
@@ -21,7 +19,7 @@
   <!--         ^^^ link_uri -->
   <rect opacity="0.5"/>
   <!--  ^^^^^^^ attribute -->
-  <!--          ^^^^^ string -->
+  <!--           ^^^ number -->
   <rect style="display:none"/>
   <!--  ^^^^^ attribute -->
   <!--         ^^^^^^^^^^^^ string -->
@@ -36,11 +34,13 @@
   <!--                 ^^ link_uri -->
   <image preserveAspectRatio="xMidYMid meet"/>
   <!--   ^^^^^^^^^^^^^^^^^^^ attribute -->
-  <!--                       ^^^^^^^^^^^^^^^ string -->
+  <!--                        ^^^^^^^^ constant -->
+  <!--                                 ^^^^ constant -->
   <polygon points="0,0 10,0 5,10"/>
   <!--     ^^^^^^ attribute -->
-  <!--            ^^^^^^^^^^^^^^^ string -->
+  <!--             ^ number -->
   <rect transform="translate(10)"/>
   <!--  ^^^^^^^^^ attribute -->
   <!--             ^^^^^^^^^ function.builtin -->
+  <!--                       ^^ number -->
 </svg>

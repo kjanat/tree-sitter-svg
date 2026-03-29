@@ -10,9 +10,12 @@
 - Zed's extension builder uses wasi-sdk clang-19 to compile grammar WASM; 102K-line parser.c hung indefinitely (23GB RSS); 21K-line parser.c compiles in ~17s
 - Scanner stores tag names as `Array(char)`, truncating `int32_t` lookahead to 8 bits; safe for SVG (ASCII-only names), matches tree-sitter-xml/html; widening to `Array(int32_t)` would require serialization format change
 - Serialization silently truncates tag stack when 1024-byte buffer exceeded; `written` count is patched to reflect actual serialized tags
+- `tree-sitter build --reuse-allocator` fails for any grammar whose scanner uses `tree_sitter/array.h` — the CLI passes `-DTREE_SITTER_REUSE_ALLOCATOR` (mapping `ts_malloc` → `ts_current_malloc`) but doesn't link the runtime that defines those symbols; confirmed broken on tree-sitter-rust too (not our bug)
+- Scanner should use `ts_calloc`/`ts_free` (from `alloc.h` via `array.h`) instead of raw `calloc`/`free` so allocator routing works when the CLI eventually fixes `--reuse-allocator`
 
 ## Grammar
 
+- `prec.left` on path segment rules causes the parser to exit after the first argument instead of continuing the repeat; subsequent values become `implicit_lineto_segment` nodes. For coordinate-pair-based segments (lineto, curveto, etc.) this is structurally harmless but semantically wrong. For arc segments (7-value arguments, odd count), the leftover produces ERROR nodes. Fix: external scanner `_arc_continuation` peeks past whitespace to verify a number follows before entering the arc repeat — gives LR(k) lookahead for an inherently LR(2) conflict.
 - Keeping `extras` empty preserves XML whitespace as explicit `text` nodes (including indentation/newlines)
 - Generic XML attributes should require quoted values; allowing valueless/unquoted attrs accepts non-XML SVG
 - Tag-name matching needs an external scanner stack; CFG-only grammar cannot enforce `<a>...</a>` equality
@@ -32,6 +35,15 @@
 - Add dedicated path-data corpus cases for implicit separators and arc-flag adjacency (e.g. `A... 01 ...`) to prevent regressions
 - Highlight tests for XML-based grammars use `<!-- -->` comments for assertions; `<!--` occupies cols 0-3 so `^` carets can only target col 4+; use indented arrow tests (`<!-- <- capture -->`) to reach earlier columns
 - In highlight tests, child literal captures (`"<?"`, `"<!--"`, `"<!DOCTYPE"` → `@punctuation.delimiter`) override parent node captures (`(xml_declaration) @keyword`, `(comment) @comment`); test the inner text, not the delimiter, for the parent's highlight
+- Tag test assertion comments (`<!-- ^ definition.id -->`) are real comment nodes in the CST; if an assertion comment appears right before another id-bearing element, it becomes that element's `@doc` docstring. Insert a non-id element between them to break the adjacency chain
+
+## Tags (code navigation)
+
+- `tree-sitter tags` only allows capture names `@definition.*`, `@reference.*`, `@doc`, `@name`, `@local.*`; any other capture (e.g. `@_name` for predicate filtering) causes `Invalid capture` error and no output at all
+- In `tree-sitter tags`, when multiple patterns match the same `@name`/`@definition.*` node, the first matching pattern wins; doc-bearing patterns must precede simpler fallback patterns or the docstring is lost
+- With `extras: () => []`, explicit `(text)` whitespace nodes appear between sibling comments and elements; the `.` anchor requires consecutive named siblings, so use `(comment) . (text) . (element)` to bridge. Also need a variant without `(text)` for inline placement (`<!-- doc --><el/>`)
+- Query child patterns match direct children only, not descendants; `(element (self_closing_tag (id_attribute ...)))` is "Impossible pattern" because `attribute` wraps `id_attribute` — must write `(element (self_closing_tag (attribute (id_attribute ...))))`
+- SVG IDs are document-global; `@local.scope` should be on `svg_root_element` only, not per-element — a `<linearGradient id="grad1">` inside `<defs>` must be referenceable from anywhere
 
 ## Bindings
 

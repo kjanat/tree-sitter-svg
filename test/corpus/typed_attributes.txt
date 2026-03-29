@@ -260,7 +260,16 @@ Paint keywords and functions
           value: (paint_attribute_value
             (paint_value
               (color_value
-                (functional_color))))))
+                (functional_color
+                  (color_function_name)
+                  (number_or_percentage
+                    (number))
+                  (comma_wsp)
+                  (number_or_percentage
+                    (number))
+                  (comma_wsp)
+                  (number_or_percentage
+                    (number))))))))
       (attribute
         (paint_attribute
           name: (paint_attribute_name)
@@ -272,7 +281,18 @@ Paint keywords and functions
           value: (paint_attribute_value
             (paint_value
               (color_value
-                (functional_color)))))))
+                (functional_color
+                  (color_function_name)
+                  (hue_value
+                    (number))
+                  (comma_wsp)
+                  (number_or_percentage
+                    (percentage
+                      (number)))
+                  (comma_wsp)
+                  (number_or_percentage
+                    (percentage
+                      (number))))))))))
     (end_tag
       name: (name)))
   (text))
@@ -310,15 +330,31 @@ Opacity and stroke dasharray
             (number_or_percentage
               (number)))))
       (attribute
-        (generic_attribute
-          name: (attribute_name)
-          value: (quoted_attribute_value
-            (attribute_text_double))))
+        (stroke_dasharray_attribute
+          name: (stroke_dasharray_attribute_name)
+          value: (stroke_dasharray_attribute_value
+            (length_list
+              (length_or_percentage
+                (length
+                  (number)))
+              (comma_wsp
+                (wsp))
+              (length_or_percentage
+                (length
+                  (number)))
+              (comma_wsp
+                (wsp))
+              (length_or_percentage
+                (length
+                  (number)))))))
       (attribute
-        (generic_attribute
-          name: (attribute_name)
-          value: (quoted_attribute_value
-            (attribute_text_double)))))
+        (length_attribute
+          name: (length_attribute_name)
+          value: (length_attribute_value
+            (length_or_percentage_or_auto
+              (length_or_percentage
+                (length
+                  (number))))))))
     (end_tag
       name: (name)))
   (text))
@@ -492,4 +528,263 @@ IRI attributes
               (iri_reference))))))
     (end_tag
       name: (name)))
+  (text))
+
+=============================
+ViewBox with decimal values
+=============================
+
+<svg viewBox="0.5 0.5 99.5 99.5"></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name)
+      (attribute
+        (viewbox_attribute
+          (viewbox_attribute_name)
+          (viewbox_attribute_value
+            (viewbox_value
+              (number)
+              (comma_wsp
+                (wsp))
+              (number)
+              (comma_wsp
+                (wsp))
+              (number)
+              (comma_wsp
+                (wsp))
+              (number))))))
+    (end_tag
+      (name)))
+  (text))
+
+=============================
+Transform multiple functions
+=============================
+
+<svg><g transform="translate(10,20) rotate(45) scale(2)"></g></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (start_tag
+        (name)
+        (attribute
+          (transform_attribute
+            (transform_attribute_name)
+            (transform_attribute_value
+              (transform_list
+                (transform_function
+                  (translate_transform
+                    (number)
+                    (comma_wsp)
+                    (number)))
+                (comma_wsp
+                  (wsp))
+                (transform_function
+                  (rotate_transform
+                    (number)))
+                (comma_wsp
+                  (wsp))
+                (transform_function
+                  (scale_transform
+                    (number))))))))
+      (end_tag
+        (name)))
+    (end_tag
+      (name)))
+  (text))
+
+=============================
+Paint with url fallback
+=============================
+
+<svg><rect fill="url(#grad) red"/></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (self_closing_tag
+        (name)
+        (attribute
+          (paint_attribute
+            (paint_attribute_name)
+            (paint_attribute_value
+              (paint_value
+                (paint_server
+                  (iri_reference)
+                  (wsp)
+                  (color_value
+                    (named_color)))))))))
+    (end_tag
+      (name)))
+  (text))
+
+=============================
+Length with percentage and units
+=============================
+
+<svg><rect width="50%" height="100px"/></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (self_closing_tag
+        (name)
+        (attribute
+          (length_attribute
+            (length_attribute_name)
+            (length_attribute_value
+              (length_or_percentage_or_auto
+                (length_or_percentage
+                  (percentage
+                    (number)))))))
+        (attribute
+          (length_attribute
+            (length_attribute_name)
+            (length_attribute_value
+              (length_or_percentage_or_auto
+                (length_or_percentage
+                  (length
+                    (number)
+                    (length_unit)))))))))
+    (end_tag
+      (name)))
+  (text))
+
+=============================
+Stroke dasharray
+=============================
+
+<svg><line stroke-dasharray="5,3,2"/></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (self_closing_tag
+        (name)
+        (attribute
+          (stroke_dasharray_attribute
+            (stroke_dasharray_attribute_name)
+            (stroke_dasharray_attribute_value
+              (length_list
+                (length_or_percentage
+                  (length
+                    (number)))
+                (comma_wsp)
+                (length_or_percentage
+                  (length
+                    (number)))
+                (comma_wsp)
+                (length_or_percentage
+                  (length
+                    (number)))))))))
+    (end_tag
+      (name)))
+  (text))
+
+=============================
+Href with fragment reference
+=============================
+
+<svg><use href="#icon"/></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (self_closing_tag
+        (name)
+        (attribute
+          (href_attribute
+            (href_attribute_name)
+            (href_attribute_value
+              (href_reference
+                (iri_reference)))))))
+    (end_tag
+      (name)))
+  (text))
+
+=============================
+Href with external file reference
+=============================
+
+<svg><use href="icons.svg#home"/></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (self_closing_tag
+        (name)
+        (attribute
+          (href_attribute
+            (href_attribute_name)
+            (href_attribute_value
+              (href_reference
+                (iri_reference)))))))
+    (end_tag
+      (name)))
+  (text))
+
+=============================
+Href with data URI
+=============================
+
+<svg><image href="data:image/png;base64,abc"/></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (self_closing_tag
+        (name)
+        (attribute
+          (href_attribute
+            (href_attribute_name)
+            (href_attribute_value
+              (href_reference
+                (data_uri
+                  (data_uri_media_type
+                    (mime_type))
+                  (data_uri_encoding)
+                  (data_uri_payload))))))))
+    (end_tag
+      (name)))
   (text))

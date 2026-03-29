@@ -14,8 +14,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Setup Volta(Node)
-        uses: volta-cli/action@v4
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with: { node-version: 22 }
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -31,6 +32,22 @@ jobs:
 
       - name: Tree-sitter tests
         run: tree-sitter test
+
+      - name: Fuzz (incremental parse consistency)
+        run: tree-sitter fuzz --iterations 50 --edits 5
+
+      - name: Parse samples
+        run: |
+          shopt -s nullglob
+          set -o pipefail
+          fail=0
+          for f in samples/*.svg samples/assets/*.svg; do
+            if tree-sitter parse "$f" 2>&1 | grep -q ERROR; then
+              echo "FAIL: $f"
+              fail=1
+            fi
+          done
+          [[ "$fail" -eq 0 ]] || exit 1
 
       - name: Node binding tests
         run: bun test

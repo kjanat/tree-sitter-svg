@@ -1,6 +1,7 @@
 {
 	"extends": "https://raw.githubusercontent.com/kjanat/kjanat/refs/heads/master/configs/dprint.remote.json",
-	"excludes": ["tree-sitter.json", "src/*.json", "**/*.svg", "**/test/regex_samples"],
+	"excludes": ["tree-sitter.json", "src/*.json", "test/**"],
+	"svg": {},
 	"exec": {
 		"associations": ["package.json", "*.rs", "*.toml"],
 		"commands": [
@@ -11,5 +12,6 @@
 	},
 	"plugins": [
 		"https://plugins.dprint.dev/exec-0.6.0.json@a054130d458f124f9b5c91484833828950723a5af3f8ff2bd1523bd47b83b364",
+		"https://plugins.dprint.dev/kjanat/svg-v0.1.0.wasm",
 	],
 }

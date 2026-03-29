@@ -34,6 +34,7 @@ export default grammar({
 		$._raw_text,
 		'/>',
 		$._cdata_text,
+		$._arc_continuation,
 	],
 
 	extras: () => [],
@@ -361,8 +362,19 @@ export default grammar({
 				$.style_attribute,
 				$.paint_attribute,
 				$.functional_iri_attribute,
+				$.clip_attribute,
 				$.opacity_attribute,
 				$.length_attribute,
+				$.offset_attribute,
+				$.number_attribute,
+				$.length_list_attribute,
+				$.stroke_dasharray_attribute,
+				$.number_list_attribute,
+				$.duration_attribute,
+				$.repeat_count_attribute,
+				$.key_times_attribute,
+				$.key_splines_attribute,
+				$.enable_background_attribute,
 				$.href_attribute,
 				$.id_attribute,
 				$.class_attribute,
@@ -381,7 +393,7 @@ export default grammar({
 				),
 			),
 
-		d_attribute_name: _ => 'd',
+		d_attribute_name: _ => choice('d', 'path'),
 
 		d_attribute_value: $ =>
 			choice(
@@ -527,7 +539,7 @@ export default grammar({
 					field('command', alias($.elliptical_arc_command, $.path_command)),
 					optional($.path_wsp),
 					$.elliptical_arc_argument,
-					repeat(seq(optional($.path_comma_wsp), $.elliptical_arc_argument)),
+					repeat(seq($._arc_continuation, $.elliptical_arc_argument)),
 				),
 			),
 
@@ -896,7 +908,54 @@ export default grammar({
 		color_value: $ => choice($.hex_color, $.functional_color, $.named_color),
 
 		hex_color: _ => token(/#(?:[0-9A-Fa-f]{3}|[0-9A-Fa-f]{4}|[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})/),
-		functional_color: _ => token(/(?:rgb|rgba|hsl|hsla)\([^)]+\)/),
+		functional_color: $ =>
+			choice(
+				$._rgb_color,
+				$._hsl_color,
+			),
+
+		// rgb() / rgba() — 3 components + optional /alpha
+		_rgb_color: $ =>
+			seq(
+				alias(token(prec(1, choice('rgb', 'rgba'))), $.color_function_name),
+				'(',
+				optional($.wsp),
+				$.number_or_percentage,
+				$.comma_wsp,
+				$.number_or_percentage,
+				$.comma_wsp,
+				$.number_or_percentage,
+				optional($._color_alpha),
+				optional($.wsp),
+				')',
+			),
+
+		// hsl() / hsla() — hue + 2 percentages + optional /alpha
+		_hsl_color: $ =>
+			seq(
+				alias(token(prec(1, choice('hsl', 'hsla'))), $.color_function_name),
+				'(',
+				optional($.wsp),
+				$.hue_value,
+				$.comma_wsp,
+				$.number_or_percentage,
+				$.comma_wsp,
+				$.number_or_percentage,
+				optional($._color_alpha),
+				optional($.wsp),
+				')',
+			),
+
+		_color_alpha: $ =>
+			choice(
+				seq($.comma_wsp, $.number_or_percentage),
+				seq(optional($.wsp), '/', optional($.wsp), $.number_or_percentage),
+			),
+
+		hue_value: $ => seq($.number, optional($.angle_unit)),
+
+		angle_unit: _ => choice('deg', 'rad', 'grad', 'turn'),
+
 		named_color: _ => token(/[A-Za-z][A-Za-z-]*/),
 
 		// ─── functional IRI attribute (url(#ref)) ───────────────────
@@ -923,6 +982,38 @@ export default grammar({
 			),
 
 		functional_iri_attribute_value: $ => quoted(choice('none', $.paint_server, $.iri_reference)),
+
+		// ─── clip attribute (deprecated, rect() function) ───────────
+
+		clip_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.clip_attribute_name),
+					$._eq,
+					field('value', $.clip_attribute_value),
+				),
+			),
+
+		clip_attribute_name: _ => 'clip',
+
+		clip_attribute_value: $ => quoted(choice('auto', 'inherit', $.clip_rect)),
+
+		clip_rect: $ =>
+			seq(
+				'rect',
+				'(',
+				optional($.wsp),
+				$.length_or_percentage_or_auto,
+				$.comma_wsp,
+				$.length_or_percentage_or_auto,
+				$.comma_wsp,
+				$.length_or_percentage_or_auto,
+				$.comma_wsp,
+				$.length_or_percentage_or_auto,
+				optional($.wsp),
+				')',
+			),
 
 		// ─── opacity attribute ──────────────────────────────────────
 
@@ -981,12 +1072,238 @@ export default grammar({
 				'markerWidth',
 				'markerHeight',
 				'stroke-width',
+				'stroke-dashoffset',
 				'font-size',
 				'startOffset',
 				'textLength',
 			),
 
 		length_attribute_value: $ => quoted($.length_or_percentage_or_auto),
+
+		// ─── offset attribute (number or percentage, no units) ──────
+
+		offset_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.offset_attribute_name),
+					$._eq,
+					field('value', $.offset_attribute_value),
+				),
+			),
+
+		offset_attribute_name: _ => 'offset',
+
+		offset_attribute_value: $ => quoted($.number_or_percentage),
+
+		// ─── number attribute (pure numeric, no units) ──────────────
+
+		number_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.number_attribute_name),
+					$._eq,
+					field('value', $.number_attribute_value),
+				),
+			),
+
+		number_attribute_name: _ =>
+			choice(
+				'pathLength',
+				'stroke-miterlimit',
+				'k1',
+				'k2',
+				'k3',
+				'k4',
+				'seed',
+				'scale',
+				'azimuth',
+				'elevation',
+				'z',
+				'numOctaves',
+				'divisor',
+				'bias',
+				'surfaceScale',
+				'diffuseConstant',
+				'specularConstant',
+				'specularExponent',
+				'limitingConeAngle',
+			),
+
+		number_attribute_value: $ => quoted($.number),
+
+		// ─── length-list attribute (dx, dy, stroke-dasharray) ───────
+
+		length_list_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.length_list_attribute_name),
+					$._eq,
+					field('value', $.length_list_attribute_value),
+				),
+			),
+
+		length_list_attribute_name: _ =>
+			choice(
+				'dx',
+				'dy',
+			),
+
+		length_list_attribute_value: $ => quoted($.length_list),
+
+		length_list: $ =>
+			seq(
+				$.length_or_percentage,
+				repeat(seq($.comma_wsp, $.length_or_percentage)),
+			),
+
+		// ─── stroke-dasharray attribute (none or length list) ───────
+
+		stroke_dasharray_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.stroke_dasharray_attribute_name),
+					$._eq,
+					field('value', $.stroke_dasharray_attribute_value),
+				),
+			),
+
+		stroke_dasharray_attribute_name: _ => 'stroke-dasharray',
+
+		stroke_dasharray_attribute_value: $ => quoted(choice('none', 'inherit', $.length_list)),
+
+		// ─── number-list attribute (bare numbers, no units) ─────────
+
+		number_list_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.number_list_attribute_name),
+					$._eq,
+					field('value', $.number_list_attribute_value),
+				),
+			),
+
+		number_list_attribute_name: _ =>
+			choice(
+				'rotate',
+				'radius',
+				'stdDeviation',
+				'baseFrequency',
+			),
+
+		number_list_attribute_value: $ => quoted($.number_list),
+
+		number_list: $ =>
+			seq(
+				$.number,
+				repeat(seq($.comma_wsp, $.number)),
+			),
+
+		// ─── duration attribute (time values) ───────────────────────
+
+		duration_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.duration_attribute_name),
+					$._eq,
+					field('value', $.duration_attribute_value),
+				),
+			),
+
+		duration_attribute_name: _ => choice('dur', 'repeatDur'),
+
+		duration_attribute_value: $ => quoted(choice($.time_value, 'indefinite', 'media')),
+
+		time_value: $ => seq($.number, optional($.time_unit)),
+
+		// ─── repeatCount attribute ──────────────────────────────────
+
+		repeat_count_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.repeat_count_attribute_name),
+					$._eq,
+					field('value', $.repeat_count_attribute_value),
+				),
+			),
+
+		repeat_count_attribute_name: _ => 'repeatCount',
+
+		repeat_count_attribute_value: $ => quoted(choice($.number, 'indefinite')),
+
+		// ─── keyTimes attribute (semicolon-separated numbers) ───────
+
+		key_times_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.key_times_attribute_name),
+					$._eq,
+					field('value', $.key_times_attribute_value),
+				),
+			),
+
+		key_times_attribute_name: _ => 'keyTimes',
+
+		key_times_attribute_value: $ => quoted($.semicolon_number_list),
+
+		semicolon_number_list: $ =>
+			seq(
+				$.number,
+				repeat(seq(optional($.wsp), ';', optional($.wsp), $.number)),
+			),
+
+		// ─── keySplines attribute (semicolon-separated 4-tuples) ────
+
+		key_splines_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.key_splines_attribute_name),
+					$._eq,
+					field('value', $.key_splines_attribute_value),
+				),
+			),
+
+		key_splines_attribute_name: _ => 'keySplines',
+
+		key_splines_attribute_value: $ => quoted($.key_splines_list),
+
+		key_splines_list: $ =>
+			seq(
+				$.key_spline_value,
+				repeat(seq(optional($.wsp), ';', optional($.wsp), $.key_spline_value)),
+			),
+
+		key_spline_value: $ => seq($.number, $.comma_wsp, $.number, $.comma_wsp, $.number, $.comma_wsp, $.number),
+
+		// ─── enable-background attribute ────────────────────────────
+
+		enable_background_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.enable_background_attribute_name),
+					$._eq,
+					field('value', $.enable_background_attribute_value),
+				),
+			),
+
+		enable_background_attribute_name: _ => 'enable-background',
+
+		enable_background_attribute_value: $ => quoted(choice('accumulate', $.enable_background_new)),
+
+		enable_background_new: $ =>
+			seq(
+				'new',
+				optional(seq($.wsp, $.number, $.wsp, $.number, $.wsp, $.number, $.wsp, $.number)),
+			),
 
 		// ─── href attribute ─────────────────────────────────────────
 
@@ -1153,6 +1470,14 @@ export default grammar({
 				'vw',
 				'vmin',
 				'vmax',
+			),
+
+		time_unit: _ =>
+			choice(
+				's',
+				'ms',
+				'min',
+				'h',
 			),
 
 		number: _ => token(NUMBER_PATTERN),
