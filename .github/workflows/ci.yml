@@ -32,11 +32,17 @@ jobs:
       - name: Parse samples
         run: |
           shopt -s nullglob
-          set -o pipefail
           fail=0
           for f in samples/*.svg samples/assets/*.svg; do
-            if tree-sitter parse "$f" 2>&1 | grep -q ERROR; then
+            output="$(tree-sitter parse "$f" 2>&1)" || {
+              echo "FAIL (non-zero exit): $f"
+              printf '%s\n' "$output"
+              fail=1
+              continue
+            }
+            if printf '%s\n' "$output" | grep -q ERROR; then
               echo "FAIL: $f"
+              printf '%s\n' "$output"
               fail=1
             fi
           done
