@@ -71,27 +71,32 @@ than treating `d` as an opaque string.
 Attributes with meaningful value sub-grammars get dedicated parsing. All others
 are parsed as generic `attribute_name`/`quoted_attribute_value` pairs.
 
-| Attribute                   | Sub-grammar                                         |
-| --------------------------- | --------------------------------------------------- |
-| `d`, `path`                 | Full SVG path data (commands, coordinates, arcs)    |
-| `viewBox`                   | Four-number box                                     |
-| `preserveAspectRatio`       | Optional `defer`, alignment, optional meet/slice    |
-| `transform` and variants    | Function list (matrix, translate, rotate, ...)      |
-| `points`                    | Coordinate pair list                                |
-| `style`                     | CSS injection point                                 |
-| `on*` events                | JavaScript injection point                          |
-| `href`/`xlink:href`         | IRI reference or structured data URI                |
-| `id`, `class`               | Identity tokens                                     |
-| Paint attributes            | `url()`, keywords, `rgb()`/`hsl()` decomposed       |
-| IRI attributes              | `none`, `iri_reference`, or `url(...)` server       |
-| `clip`                      | `rect()` function with length arguments             |
-| Length attributes           | Length, percentage, or `auto` (50+ attribute names) |
-| `opacity` and variants      | Number or percentage                                |
-| `dx`, `dy`, `stdDeviation`… | Space/comma-separated number lists                  |
-| `repeatCount`               | Number or `indefinite`                              |
-| `keyTimes`                  | Semicolon-separated numbers                         |
-| `keySplines`                | Semicolon-separated control point tuples            |
-| `enable-background`         | `new` with optional coords, or `accumulate`         |
+| Attribute                   | Sub-grammar                                        |
+| --------------------------- | -------------------------------------------------- |
+| `d`, `path`                 | Full SVG path data (commands, coordinates, arcs)   |
+| `viewBox`                   | Four-number box                                    |
+| `preserveAspectRatio`       | Optional `defer`, alignment, optional meet/slice   |
+| `transform` and variants    | Function list (matrix, translate, rotate, ...)     |
+| `points`                    | Coordinate pair list                               |
+| `style`                     | CSS injection point                                |
+| `on*` events                | JavaScript injection point                         |
+| `href`/`xlink:href`         | IRI reference or structured data URI               |
+| `id`, `class`               | Identity tokens                                    |
+| Paint attributes            | `url()`, keywords, `rgb()`/`hsl()` decomposed      |
+| IRI attributes              | `none`, `iri_reference`, or `url(...)` server      |
+| `clip`                      | `rect()` function with length arguments            |
+| Length attributes           | Length, percentage, or `auto` (24 attribute names) |
+| `offset`                    | Number or percentage                               |
+| `opacity` and variants      | Number or percentage                               |
+| Number attributes           | Pure numeric (pathLength, k1–k4, seed, ...)        |
+| `dx`, `dy`                  | Space/comma-separated length lists                 |
+| `stroke-dasharray`          | `none`, `inherit`, or length list                  |
+| `stdDeviation`, `rotate`, … | Space/comma-separated number lists                 |
+| `dur`, `repeatDur`          | Time value, `indefinite`, or `media`               |
+| `repeatCount`               | Number or `indefinite`                             |
+| `keyTimes`                  | Semicolon-separated numbers                        |
+| `keySplines`                | Semicolon-separated control point tuples           |
+| `enable-background`         | `new` with optional coords, or `accumulate`        |
 
 ### Language Injections
 
