@@ -358,7 +358,7 @@ static bool scan_self_closing_tag_delimiter(TagStack *tags, TSLexer *lexer) {
 }
 
 void *tree_sitter_svg_external_scanner_create(void) {
-  TagStack *tags = calloc(1, sizeof(TagStack));
+  TagStack *tags = (TagStack *)ts_calloc(1, sizeof(TagStack));
   if (tags == NULL) {
     abort();
   }
@@ -374,7 +374,7 @@ void tree_sitter_svg_external_scanner_destroy(void *payload) {
   }
 
   array_delete(tags);
-  free(tags);
+  ts_free(tags);
 }
 
 unsigned tree_sitter_svg_external_scanner_serialize(void *payload, char *buffer) {

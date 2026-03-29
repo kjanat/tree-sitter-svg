@@ -10,6 +10,8 @@
 - Zed's extension builder uses wasi-sdk clang-19 to compile grammar WASM; 102K-line parser.c hung indefinitely (23GB RSS); 21K-line parser.c compiles in ~17s
 - Scanner stores tag names as `Array(char)`, truncating `int32_t` lookahead to 8 bits; safe for SVG (ASCII-only names), matches tree-sitter-xml/html; widening to `Array(int32_t)` would require serialization format change
 - Serialization silently truncates tag stack when 1024-byte buffer exceeded; `written` count is patched to reflect actual serialized tags
+- `tree-sitter build --reuse-allocator` fails for any grammar whose scanner uses `tree_sitter/array.h` — the CLI passes `-DTREE_SITTER_REUSE_ALLOCATOR` (mapping `ts_malloc` → `ts_current_malloc`) but doesn't link the runtime that defines those symbols; confirmed broken on tree-sitter-rust too (not our bug)
+- Scanner should use `ts_calloc`/`ts_free` (from `alloc.h` via `array.h`) instead of raw `calloc`/`free` so allocator routing works when the CLI eventually fixes `--reuse-allocator`
 
 ## Grammar
 
