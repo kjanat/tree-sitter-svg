@@ -76,35 +76,63 @@ Animation attribute set
             value: (quoted_attribute_value
               (attribute_text_double))))
         (attribute
-          (generic_attribute
-            name: (attribute_name)
-            value: (quoted_attribute_value
-              (attribute_text_double))))
+          (length_attribute
+            name: (length_attribute_name)
+            value: (length_attribute_value
+              (length_or_percentage_or_auto
+                (length_or_percentage
+                  (length
+                    (number)
+                    (length_unit)))))))
         (attribute
           (generic_attribute
             name: (attribute_name)
             value: (quoted_attribute_value
               (attribute_text_double))))
         (attribute
-          (generic_attribute
-            name: (attribute_name)
-            value: (quoted_attribute_value
-              (attribute_text_double))))
+          (key_times_attribute
+            name: (key_times_attribute_name)
+            value: (key_times_attribute_value
+              (semicolon_number_list
+                (number)
+                (number)
+                (number)))))
+        (attribute
+          (key_splines_attribute
+            name: (key_splines_attribute_name)
+            value: (key_splines_attribute_value
+              (key_splines_list
+                (key_spline_value
+                  (number)
+                  (comma_wsp
+                    (wsp))
+                  (number)
+                  (comma_wsp
+                    (wsp))
+                  (number)
+                  (comma_wsp
+                    (wsp))
+                  (number))
+                (key_spline_value
+                  (number)
+                  (comma_wsp
+                    (wsp))
+                  (number)
+                  (comma_wsp
+                    (wsp))
+                  (number)
+                  (comma_wsp
+                    (wsp))
+                  (number))))))
         (attribute
           (generic_attribute
             name: (attribute_name)
             value: (quoted_attribute_value
               (attribute_text_double))))
         (attribute
-          (generic_attribute
-            name: (attribute_name)
-            value: (quoted_attribute_value
-              (attribute_text_double))))
-        (attribute
-          (generic_attribute
-            name: (attribute_name)
-            value: (quoted_attribute_value
-              (attribute_text_double))))
+          (repeat_count_attribute
+            name: (repeat_count_attribute_name)
+            value: (repeat_count_attribute_value)))
         (attribute
           (generic_attribute
             name: (attribute_name)
@@ -158,49 +186,34 @@ Filter effect attribute set
         (self_closing_tag
           name: (name)
           (attribute
-            (generic_attribute
-              name: (attribute_name)
-              value: (quoted_attribute_value
-                (attribute_text_double))))
+            (number_list_attribute
+              name: (number_list_attribute_name)
+              value: (number_list_attribute_value
+                (number_list
+                  (length_or_percentage
+                    (length
+                      (number)))
+                  (comma_wsp
+                    (wsp))
+                  (length_or_percentage
+                    (length
+                      (number)))))))
           (attribute
-            (generic_attribute
-              name: (attribute_name)
-              value: (quoted_attribute_value
-                (attribute_text_double))))
+            (length_attribute
+              name: (length_attribute_name)
+              value: (length_attribute_value
+                (length_or_percentage_or_auto
+                  (length_or_percentage
+                    (length
+                      (number)))))))
           (attribute
-            (generic_attribute
-              name: (attribute_name)
-              value: (quoted_attribute_value
-                (attribute_text_double))))
-          (attribute
-            (generic_attribute
-              name: (attribute_name)
-              value: (quoted_attribute_value
-                (attribute_text_double))))
-          (attribute
-            (generic_attribute
-              name: (attribute_name)
-              value: (quoted_attribute_value
-                (attribute_text_double))))))
-      (text)
-      (element
-        (self_closing_tag
-          name: (name)
-          (attribute
-            (generic_attribute
-              name: (attribute_name)
-              value: (quoted_attribute_value
-                (attribute_text_double))))
-          (attribute
-            (generic_attribute
-              name: (attribute_name)
-              value: (quoted_attribute_value
-                (attribute_text_double))))
-          (attribute
-            (generic_attribute
-              name: (attribute_name)
-              value: (quoted_attribute_value
-                (attribute_text_double))))
+            (length_attribute
+              name: (length_attribute_name)
+              value: (length_attribute_value
+                (length_or_percentage_or_auto
+                  (length_or_percentage
+                    (length
+                      (number)))))))
           (attribute
             (generic_attribute
               name: (attribute_name)
@@ -226,6 +239,28 @@ Filter effect attribute set
               value: (quoted_attribute_value
                 (attribute_text_double))))
           (attribute
+            (length_attribute
+              name: (length_attribute_name)
+              value: (length_attribute_value
+                (length_or_percentage_or_auto
+                  (length_or_percentage
+                    (length
+                      (number)))))))
+          (attribute
+            (generic_attribute
+              name: (attribute_name)
+              value: (quoted_attribute_value
+                (attribute_text_double))))
+          (attribute
+            (generic_attribute
+              name: (attribute_name)
+              value: (quoted_attribute_value
+                (attribute_text_double))))))
+      (text)
+      (element
+        (self_closing_tag
+          name: (name)
+          (attribute
             (generic_attribute
               name: (attribute_name)
               value: (quoted_attribute_value
@@ -235,6 +270,22 @@ Filter effect attribute set
               name: (attribute_name)
               value: (quoted_attribute_value
                 (attribute_text_double))))
+          (attribute
+            (length_attribute
+              name: (length_attribute_name)
+              value: (length_attribute_value
+                (length_or_percentage_or_auto
+                  (length_or_percentage
+                    (length
+                      (number)))))))
+          (attribute
+            (length_attribute
+              name: (length_attribute_name)
+              value: (length_attribute_value
+                (length_or_percentage_or_auto
+                  (length_or_percentage
+                    (length
+                      (number)))))))
           (attribute
             (generic_attribute
               name: (attribute_name)
@@ -402,10 +453,23 @@ Text layout and typography attributes
             value: (quoted_attribute_value
               (attribute_text_double))))
         (attribute
-          (generic_attribute
-            name: (attribute_name)
-            value: (quoted_attribute_value
-              (attribute_text_double))))
+          (number_list_attribute
+            name: (number_list_attribute_name)
+            value: (number_list_attribute_value
+              (number_list
+                (length_or_percentage
+                  (length
+                    (number)))
+                (comma_wsp
+                  (wsp))
+                (length_or_percentage
+                  (length
+                    (number)))
+                (comma_wsp
+                  (wsp))
+                (length_or_percentage
+                  (length
+                    (number)))))))
         (attribute
           (generic_attribute
             name: (attribute_name)
@@ -756,10 +820,13 @@ Other regular long-tail attributes
           value: (quoted_attribute_value
             (attribute_text_double))))
       (attribute
-        (generic_attribute
-          name: (attribute_name)
-          value: (quoted_attribute_value
-            (attribute_text_double)))))
+        (length_attribute
+          name: (length_attribute_name)
+          value: (length_attribute_value
+            (length_or_percentage_or_auto
+              (length_or_percentage
+                (length
+                  (number))))))))
     (end_tag
       name: (name)))
   (text))

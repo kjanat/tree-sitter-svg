@@ -366,6 +366,10 @@ export default grammar({
 				$.opacity_attribute,
 				$.length_attribute,
 				$.number_list_attribute,
+				$.repeat_count_attribute,
+				$.key_times_attribute,
+				$.key_splines_attribute,
+				$.enable_background_attribute,
 				$.href_attribute,
 				$.id_attribute,
 				$.class_attribute,
@@ -1022,10 +1026,33 @@ export default grammar({
 				'markerWidth',
 				'markerHeight',
 				'stroke-width',
+				'stroke-miterlimit',
+				'stroke-dashoffset',
 				'font-size',
 				'offset',
 				'startOffset',
 				'textLength',
+				'pathLength',
+				'dur',
+				'repeatDur',
+				'k1',
+				'k2',
+				'k3',
+				'k4',
+				'seed',
+				'scale',
+				'radius',
+				'azimuth',
+				'elevation',
+				'z',
+				'numOctaves',
+				'divisor',
+				'bias',
+				'surfaceScale',
+				'diffuseConstant',
+				'specularConstant',
+				'specularExponent',
+				'limitingConeAngle',
 			),
 
 		length_attribute_value: $ => quoted($.length_or_percentage_or_auto),
@@ -1046,7 +1073,9 @@ export default grammar({
 			choice(
 				'dx',
 				'dy',
+				'rotate',
 				'stdDeviation',
+				'baseFrequency',
 				'stroke-dasharray',
 			),
 
@@ -1056,6 +1085,90 @@ export default grammar({
 			seq(
 				$.length_or_percentage,
 				repeat(seq($.comma_wsp, $.length_or_percentage)),
+			),
+
+		// ─── repeatCount attribute ──────────────────────────────────
+
+		repeat_count_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.repeat_count_attribute_name),
+					$._eq,
+					field('value', $.repeat_count_attribute_value),
+				),
+			),
+
+		repeat_count_attribute_name: _ => 'repeatCount',
+
+		repeat_count_attribute_value: $ => quoted(choice($.number, 'indefinite')),
+
+		// ─── keyTimes attribute (semicolon-separated numbers) ───────
+
+		key_times_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.key_times_attribute_name),
+					$._eq,
+					field('value', $.key_times_attribute_value),
+				),
+			),
+
+		key_times_attribute_name: _ => 'keyTimes',
+
+		key_times_attribute_value: $ => quoted($.semicolon_number_list),
+
+		semicolon_number_list: $ =>
+			seq(
+				$.number,
+				repeat(seq(optional($.wsp), ';', optional($.wsp), $.number)),
+			),
+
+		// ─── keySplines attribute (semicolon-separated 4-tuples) ────
+
+		key_splines_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.key_splines_attribute_name),
+					$._eq,
+					field('value', $.key_splines_attribute_value),
+				),
+			),
+
+		key_splines_attribute_name: _ => 'keySplines',
+
+		key_splines_attribute_value: $ => quoted($.key_splines_list),
+
+		key_splines_list: $ =>
+			seq(
+				$.key_spline_value,
+				repeat(seq(optional($.wsp), ';', optional($.wsp), $.key_spline_value)),
+			),
+
+		key_spline_value: $ => seq($.number, $.comma_wsp, $.number, $.comma_wsp, $.number, $.comma_wsp, $.number),
+
+		// ─── enable-background attribute ────────────────────────────
+
+		enable_background_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.enable_background_attribute_name),
+					$._eq,
+					field('value', $.enable_background_attribute_value),
+				),
+			),
+
+		enable_background_attribute_name: _ => 'enable-background',
+
+		enable_background_attribute_value: $ => quoted(choice('accumulate', $.enable_background_new)),
+
+		enable_background_new: $ =>
+			seq(
+				'new',
+				optional(seq($.wsp, $.number, $.wsp, $.number, $.wsp, $.number, $.wsp, $.number)),
 			),
 
 		// ─── href attribute ─────────────────────────────────────────
@@ -1223,6 +1336,10 @@ export default grammar({
 				'vw',
 				'vmin',
 				'vmax',
+				's',
+				'ms',
+				'min',
+				'h',
 			),
 
 		number: _ => token(NUMBER_PATTERN),
