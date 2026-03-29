@@ -330,10 +330,10 @@ Opacity and stroke dasharray
             (number_or_percentage
               (number)))))
       (attribute
-        (number_list_attribute
-          name: (number_list_attribute_name)
-          value: (number_list_attribute_value
-            (number_list
+        (length_list_attribute
+          name: (length_list_attribute_name)
+          value: (length_list_attribute_value
+            (length_list
               (length_or_percentage
                 (length
                   (number)))
@@ -688,10 +688,10 @@ Stroke dasharray
       (self_closing_tag
         (name)
         (attribute
-          (number_list_attribute
-            (number_list_attribute_name)
-            (number_list_attribute_value
-              (number_list
+          (length_list_attribute
+            (length_list_attribute_name)
+            (length_list_attribute_value
+              (length_list
                 (length_or_percentage
                   (length
                     (number)))

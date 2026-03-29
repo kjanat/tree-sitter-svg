@@ -365,6 +365,8 @@ export default grammar({
 				$.clip_attribute,
 				$.opacity_attribute,
 				$.length_attribute,
+				$.number_attribute,
+				$.length_list_attribute,
 				$.number_list_attribute,
 				$.duration_attribute,
 				$.repeat_count_attribute,
@@ -1032,13 +1034,31 @@ export default grammar({
 				'markerWidth',
 				'markerHeight',
 				'stroke-width',
-				'stroke-miterlimit',
 				'stroke-dashoffset',
 				'font-size',
 				'offset',
 				'startOffset',
 				'textLength',
+			),
+
+		length_attribute_value: $ => quoted($.length_or_percentage_or_auto),
+
+		// ─── number attribute (pure numeric, no units) ──────────────
+
+		number_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.number_attribute_name),
+					$._eq,
+					field('value', $.number_attribute_value),
+				),
+			),
+
+		number_attribute_name: _ =>
+			choice(
 				'pathLength',
+				'stroke-miterlimit',
 				'k1',
 				'k2',
 				'k3',
@@ -1059,9 +1079,36 @@ export default grammar({
 				'limitingConeAngle',
 			),
 
-		length_attribute_value: $ => quoted($.length_or_percentage_or_auto),
+		number_attribute_value: $ => quoted($.number),
 
-		// ─── number-list attribute (dx, dy, stdDeviation, etc.) ─────
+		// ─── length-list attribute (dx, dy, stroke-dasharray) ───────
+
+		length_list_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.length_list_attribute_name),
+					$._eq,
+					field('value', $.length_list_attribute_value),
+				),
+			),
+
+		length_list_attribute_name: _ =>
+			choice(
+				'dx',
+				'dy',
+				'stroke-dasharray',
+			),
+
+		length_list_attribute_value: $ => quoted(choice('none', $.length_list)),
+
+		length_list: $ =>
+			seq(
+				$.length_or_percentage,
+				repeat(seq($.comma_wsp, $.length_or_percentage)),
+			),
+
+		// ─── number-list attribute (bare numbers, no units) ─────────
 
 		number_list_attribute: $ =>
 			prec(
@@ -1075,20 +1122,17 @@ export default grammar({
 
 		number_list_attribute_name: _ =>
 			choice(
-				'dx',
-				'dy',
 				'rotate',
 				'stdDeviation',
 				'baseFrequency',
-				'stroke-dasharray',
 			),
 
 		number_list_attribute_value: $ => quoted($.number_list),
 
 		number_list: $ =>
 			seq(
-				$.length_or_percentage,
-				repeat(seq($.comma_wsp, $.length_or_percentage)),
+				$.number,
+				repeat(seq($.comma_wsp, $.number)),
 			),
 
 		// ─── duration attribute (time values) ───────────────────────

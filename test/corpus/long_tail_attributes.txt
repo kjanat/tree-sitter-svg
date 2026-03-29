@@ -188,30 +188,20 @@ Filter effect attribute set
               name: (number_list_attribute_name)
               value: (number_list_attribute_value
                 (number_list
-                  (length_or_percentage
-                    (length
-                      (number)))
+                  (number)
                   (comma_wsp
                     (wsp))
-                  (length_or_percentage
-                    (length
-                      (number)))))))
+                  (number)))))
           (attribute
-            (length_attribute
-              name: (length_attribute_name)
-              value: (length_attribute_value
-                (length_or_percentage_or_auto
-                  (length_or_percentage
-                    (length
-                      (number)))))))
+            (number_attribute
+              name: (number_attribute_name)
+              value: (number_attribute_value
+                (number))))
           (attribute
-            (length_attribute
-              name: (length_attribute_name)
-              value: (length_attribute_value
-                (length_or_percentage_or_auto
-                  (length_or_percentage
-                    (length
-                      (number)))))))
+            (number_attribute
+              name: (number_attribute_name)
+              value: (number_attribute_value
+                (number))))
           (attribute
             (generic_attribute
               name: (attribute_name)
@@ -237,13 +227,10 @@ Filter effect attribute set
               value: (quoted_attribute_value
                 (attribute_text_double))))
           (attribute
-            (length_attribute
-              name: (length_attribute_name)
-              value: (length_attribute_value
-                (length_or_percentage_or_auto
-                  (length_or_percentage
-                    (length
-                      (number)))))))
+            (number_attribute
+              name: (number_attribute_name)
+              value: (number_attribute_value
+                (number))))
           (attribute
             (generic_attribute
               name: (attribute_name)
@@ -269,21 +256,15 @@ Filter effect attribute set
               value: (quoted_attribute_value
                 (attribute_text_double))))
           (attribute
-            (length_attribute
-              name: (length_attribute_name)
-              value: (length_attribute_value
-                (length_or_percentage_or_auto
-                  (length_or_percentage
-                    (length
-                      (number)))))))
+            (number_attribute
+              name: (number_attribute_name)
+              value: (number_attribute_value
+                (number))))
           (attribute
-            (length_attribute
-              name: (length_attribute_name)
-              value: (length_attribute_value
-                (length_or_percentage_or_auto
-                  (length_or_percentage
-                    (length
-                      (number)))))))
+            (number_attribute
+              name: (number_attribute_name)
+              value: (number_attribute_value
+                (number))))
           (attribute
             (generic_attribute
               name: (attribute_name)
@@ -370,10 +351,10 @@ Text layout and typography attributes
             value: (quoted_attribute_value
               (attribute_text_double))))
         (attribute
-          (number_list_attribute
-            name: (number_list_attribute_name)
-            value: (number_list_attribute_value
-              (number_list
+          (length_list_attribute
+            name: (length_list_attribute_name)
+            value: (length_list_attribute_value
+              (length_list
                 (length_or_percentage
                   (length
                     (number)))
@@ -388,10 +369,10 @@ Text layout and typography attributes
                   (length
                     (number)))))))
         (attribute
-          (number_list_attribute
-            name: (number_list_attribute_name)
-            value: (number_list_attribute_value
-              (number_list
+          (length_list_attribute
+            name: (length_list_attribute_name)
+            value: (length_list_attribute_value
+              (length_list
                 (length_or_percentage
                   (length
                     (number)))
@@ -455,19 +436,13 @@ Text layout and typography attributes
             name: (number_list_attribute_name)
             value: (number_list_attribute_value
               (number_list
-                (length_or_percentage
-                  (length
-                    (number)))
+                (number)
                 (comma_wsp
                   (wsp))
-                (length_or_percentage
-                  (length
-                    (number)))
+                (number)
                 (comma_wsp
                   (wsp))
-                (length_or_percentage
-                  (length
-                    (number)))))))
+                (number)))))
         (attribute
           (generic_attribute
             name: (attribute_name)
@@ -818,13 +793,10 @@ Other regular long-tail attributes
           value: (quoted_attribute_value
             (attribute_text_double))))
       (attribute
-        (length_attribute
-          name: (length_attribute_name)
-          value: (length_attribute_value
-            (length_or_percentage_or_auto
-              (length_or_percentage
-                (length
-                  (number))))))))
+        (number_attribute
+          name: (number_attribute_name)
+          value: (number_attribute_value
+            (number)))))
     (end_tag
       name: (name)))
   (text))

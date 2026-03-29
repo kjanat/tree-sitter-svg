@@ -65,6 +65,14 @@
           "named": true
         },
         {
+          "type": "length_list_attribute",
+          "named": true
+        },
+        {
+          "type": "number_attribute",
+          "named": true
+        },
+        {
           "type": "number_list_attribute",
           "named": true
         },
@@ -1403,6 +1411,71 @@
     }
   },
   {
+    "type": "length_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "comma_wsp",
+          "named": true
+        },
+        {
+          "type": "length_or_percentage",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "length_list_attribute",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "length_list_attribute_name",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "length_list_attribute_value",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "length_list_attribute_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "length_list_attribute_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "length_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "length_or_percentage",
     "named": true,
     "fields": {},
@@ -1548,6 +1621,52 @@
     "fields": {}
   },
   {
+    "type": "number_attribute",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number_attribute_name",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number_attribute_value",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "number_attribute_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "number_attribute_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "number",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "number_list",
     "named": true,
     "fields": {},
@@ -1560,7 +1679,7 @@
           "named": true
         },
         {
-          "type": "length_or_percentage",
+          "type": "number",
           "named": true
         }
       ]

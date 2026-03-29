@@ -38,6 +38,8 @@
 (key_splines_attribute_name) @attribute
 (key_times_attribute_name) @attribute
 (length_attribute_name) @attribute
+(length_list_attribute_name) @attribute
+(number_attribute_name) @attribute
 (number_list_attribute_name) @attribute
 (opacity_attribute_name) @attribute
 (paint_attribute_name) @attribute
@@ -66,6 +68,8 @@
  (key_splines_attribute_value)
  (key_times_attribute_value)
  (length_attribute_value)
+ (length_list_attribute_value)
+ (number_attribute_value)
  (number_list_attribute_value)
  (opacity_attribute_value)
  (paint_attribute_value)
@@ -100,6 +104,7 @@
 (repeat_count_attribute_value "indefinite" @constant.builtin)
 (enable_background_new "new" @keyword)
 (enable_background_attribute_value "accumulate" @constant.builtin)
+(length_list_attribute_value "none" @constant.builtin)
 
 (number) @number
 
