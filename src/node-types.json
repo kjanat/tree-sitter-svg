@@ -753,6 +753,33 @@
     }
   },
   {
+    "type": "functional_color",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "color_function_name",
+          "named": true
+        },
+        {
+          "type": "comma_wsp",
+          "named": true
+        },
+        {
+          "type": "number_or_percentage",
+          "named": true
+        },
+        {
+          "type": "wsp",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "functional_iri_attribute",
     "named": true,
     "fields": {
@@ -2648,6 +2675,10 @@
     "named": false
   },
   {
+    "type": "color_function_name",
+    "named": true
+  },
+  {
     "type": "context-fill",
     "named": false
   },
@@ -2742,10 +2773,6 @@
   {
     "type": "font-size",
     "named": false
-  },
-  {
-    "type": "functional_color",
-    "named": true
   },
   {
     "type": "fx",

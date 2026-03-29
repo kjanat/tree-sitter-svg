@@ -260,7 +260,16 @@ Paint keywords and functions
           value: (paint_attribute_value
             (paint_value
               (color_value
-                (functional_color))))))
+                (functional_color
+                  (color_function_name)
+                  (number_or_percentage
+                    (number))
+                  (comma_wsp)
+                  (number_or_percentage
+                    (number))
+                  (comma_wsp)
+                  (number_or_percentage
+                    (number))))))))
       (attribute
         (paint_attribute
           name: (paint_attribute_name)
@@ -272,7 +281,18 @@ Paint keywords and functions
           value: (paint_attribute_value
             (paint_value
               (color_value
-                (functional_color)))))))
+                (functional_color
+                  (color_function_name)
+                  (number_or_percentage
+                    (number))
+                  (comma_wsp)
+                  (number_or_percentage
+                    (percentage
+                      (number)))
+                  (comma_wsp)
+                  (number_or_percentage
+                    (percentage
+                      (number))))))))))
     (end_tag
       name: (name)))
   (text))

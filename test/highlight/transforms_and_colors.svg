@@ -14,7 +14,12 @@
   <rect fill="#ff0000"/>
   <!--        ^^^^^^^ constant -->
   <rect fill="rgb(255,0,0)"/>
-  <!--        ^^^^^^^^^^^^ function.call -->
+  <!--        ^^^ function.call -->
+  <!--           ^ punctuation.bracket -->
+  <!--            ^^^ number -->
+  <!--                ^ number -->
+  <!--                  ^ number -->
+  <!--                   ^ punctuation.bracket -->
   <rect fill="red"/>
   <!--        ^^^ constant -->
   <rect fill="url(#gradA) #fff"/>

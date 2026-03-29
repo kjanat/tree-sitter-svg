@@ -42,7 +42,7 @@
 (viewbox_attribute_name) @attribute
 
 (hex_color) @constant
-(functional_color) @function.call
+(color_function_name) @function.call
 (named_color) @constant
 
 [(quoted_attribute_value)

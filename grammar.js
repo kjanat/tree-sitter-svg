@@ -897,7 +897,18 @@ export default grammar({
 		color_value: $ => choice($.hex_color, $.functional_color, $.named_color),
 
 		hex_color: _ => token(/#(?:[0-9A-Fa-f]{3}|[0-9A-Fa-f]{4}|[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})/),
-		functional_color: _ => token(/(?:rgb|rgba|hsl|hsla)\([^)]+\)/),
+		functional_color: $ =>
+			seq(
+				$.color_function_name,
+				'(',
+				optional($.wsp),
+				$.number_or_percentage,
+				repeat(seq($.comma_wsp, $.number_or_percentage)),
+				optional($.wsp),
+				')',
+			),
+
+		color_function_name: _ => token(prec(1, choice('rgb', 'rgba', 'hsl', 'hsla'))),
 		named_color: _ => token(/[A-Za-z][A-Za-z-]*/),
 
 		// ─── functional IRI attribute (url(#ref)) ───────────────────
