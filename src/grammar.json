@@ -1564,6 +1564,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "duration_attribute"
+        },
+        {
+          "type": "SYMBOL",
           "name": "repeat_count_attribute"
         },
         {
@@ -4543,20 +4547,28 @@
           "name": "length_or_percentage_or_auto"
         },
         {
-          "type": "REPEAT",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "comma_wsp"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "length_or_percentage_or_auto"
-              }
-            ]
-          }
+          "type": "SYMBOL",
+          "name": "comma_wsp"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "length_or_percentage_or_auto"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "comma_wsp"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "length_or_percentage_or_auto"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "comma_wsp"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "length_or_percentage_or_auto"
         },
         {
           "type": "CHOICE",
@@ -4827,14 +4839,6 @@
         },
         {
           "type": "STRING",
-          "value": "dur"
-        },
-        {
-          "type": "STRING",
-          "value": "repeatDur"
-        },
-        {
-          "type": "STRING",
           "value": "k1"
         },
         {
@@ -5097,6 +5101,124 @@
               }
             ]
           }
+        }
+      ]
+    },
+    "duration_attribute": {
+      "type": "PREC",
+      "value": 2,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "name",
+            "content": {
+              "type": "SYMBOL",
+              "name": "duration_attribute_name"
+            }
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_eq"
+          },
+          {
+            "type": "FIELD",
+            "name": "value",
+            "content": {
+              "type": "SYMBOL",
+              "name": "duration_attribute_value"
+            }
+          }
+        ]
+      }
+    },
+    "duration_attribute_name": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "dur"
+        },
+        {
+          "type": "STRING",
+          "value": "repeatDur"
+        }
+      ]
+    },
+    "duration_attribute_value": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "\""
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "time_value"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": "\""
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "'"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "time_value"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": "'"
+            }
+          ]
+        }
+      ]
+    },
+    "time_value": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "number"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "time_unit"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -6553,7 +6675,12 @@
         {
           "type": "STRING",
           "value": "vmax"
-        },
+        }
+      ]
+    },
+    "time_unit": {
+      "type": "CHOICE",
+      "members": [
         {
           "type": "STRING",
           "value": "s"

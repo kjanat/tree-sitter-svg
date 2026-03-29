@@ -29,6 +29,7 @@
 (class_attribute_name) @attribute
 (clip_attribute_name) @attribute
 (d_attribute_name) @attribute
+(duration_attribute_name) @attribute
 (enable_background_attribute_name) @attribute
 (event_attribute_name) @attribute
 (functional_iri_attribute_name) @attribute
@@ -56,6 +57,7 @@
  (class_attribute_value)
  (clip_attribute_value)
  (d_attribute_value)
+ (duration_attribute_value)
  (enable_background_attribute_value)
  (event_attribute_value)
  (functional_iri_attribute_value)
@@ -102,6 +104,7 @@
 (number) @number
 
 (length_unit) @type
+(time_unit) @type
 (percentage "%" @type)
 
 ((path_command) @constructor

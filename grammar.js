@@ -366,6 +366,7 @@ export default grammar({
 				$.opacity_attribute,
 				$.length_attribute,
 				$.number_list_attribute,
+				$.duration_attribute,
 				$.repeat_count_attribute,
 				$.key_times_attribute,
 				$.key_splines_attribute,
@@ -964,7 +965,12 @@ export default grammar({
 				'(',
 				optional($.wsp),
 				$.length_or_percentage_or_auto,
-				repeat(seq($.comma_wsp, $.length_or_percentage_or_auto)),
+				$.comma_wsp,
+				$.length_or_percentage_or_auto,
+				$.comma_wsp,
+				$.length_or_percentage_or_auto,
+				$.comma_wsp,
+				$.length_or_percentage_or_auto,
 				optional($.wsp),
 				')',
 			),
@@ -1033,8 +1039,6 @@ export default grammar({
 				'startOffset',
 				'textLength',
 				'pathLength',
-				'dur',
-				'repeatDur',
 				'k1',
 				'k2',
 				'k3',
@@ -1086,6 +1090,24 @@ export default grammar({
 				$.length_or_percentage,
 				repeat(seq($.comma_wsp, $.length_or_percentage)),
 			),
+
+		// ─── duration attribute (time values) ───────────────────────
+
+		duration_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.duration_attribute_name),
+					$._eq,
+					field('value', $.duration_attribute_value),
+				),
+			),
+
+		duration_attribute_name: _ => choice('dur', 'repeatDur'),
+
+		duration_attribute_value: $ => quoted($.time_value),
+
+		time_value: $ => seq($.number, optional($.time_unit)),
 
 		// ─── repeatCount attribute ──────────────────────────────────
 
@@ -1336,6 +1358,10 @@ export default grammar({
 				'vw',
 				'vmin',
 				'vmax',
+			),
+
+		time_unit: _ =>
+			choice(
 				's',
 				'ms',
 				'min',

@@ -335,14 +335,12 @@ Shape content allows animation and descriptive only
               value: (quoted_attribute_value
                 (attribute_text_double))))
           (attribute
-            (length_attribute
-              name: (length_attribute_name)
-              value: (length_attribute_value
-                (length_or_percentage_or_auto
-                  (length_or_percentage
-                    (length
-                      (number)
-                      (length_unit)))))))))
+            (duration_attribute
+              name: (duration_attribute_name)
+              value: (duration_attribute_value
+                (time_value
+                  (number)
+                  (time_unit)))))))
       (text)
       (end_tag
         name: (name)))
