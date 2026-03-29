@@ -27,12 +27,14 @@
 
 (attribute_name) @attribute
 (class_attribute_name) @attribute
+(clip_attribute_name) @attribute
 (d_attribute_name) @attribute
 (event_attribute_name) @attribute
 (functional_iri_attribute_name) @attribute
 (href_attribute_name) @attribute
 (id_attribute_name) @attribute
 (length_attribute_name) @attribute
+(number_list_attribute_name) @attribute
 (opacity_attribute_name) @attribute
 (paint_attribute_name) @attribute
 (points_attribute_name) @attribute
@@ -43,16 +45,19 @@
 
 (hex_color) @constant
 (color_function_name) @function.call
+(clip_rect "rect" @function.call)
 (named_color) @constant
 
 [(quoted_attribute_value)
  (class_attribute_value)
+ (clip_attribute_value)
  (d_attribute_value)
  (event_attribute_value)
  (functional_iri_attribute_value)
  (href_attribute_value)
  (id_attribute_value)
  (length_attribute_value)
+ (number_list_attribute_value)
  (opacity_attribute_value)
  (paint_attribute_value)
  (points_attribute_value)

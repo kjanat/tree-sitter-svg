@@ -362,8 +362,10 @@ export default grammar({
 				$.style_attribute,
 				$.paint_attribute,
 				$.functional_iri_attribute,
+				$.clip_attribute,
 				$.opacity_attribute,
 				$.length_attribute,
+				$.number_list_attribute,
 				$.href_attribute,
 				$.id_attribute,
 				$.class_attribute,
@@ -936,6 +938,33 @@ export default grammar({
 
 		functional_iri_attribute_value: $ => quoted(choice('none', $.paint_server, $.iri_reference)),
 
+		// ─── clip attribute (deprecated, rect() function) ───────────
+
+		clip_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.clip_attribute_name),
+					$._eq,
+					field('value', $.clip_attribute_value),
+				),
+			),
+
+		clip_attribute_name: _ => 'clip',
+
+		clip_attribute_value: $ => quoted(choice('auto', 'inherit', $.clip_rect)),
+
+		clip_rect: $ =>
+			seq(
+				'rect',
+				'(',
+				optional($.wsp),
+				$.length_or_percentage_or_auto,
+				repeat(seq($.comma_wsp, $.length_or_percentage_or_auto)),
+				optional($.wsp),
+				')',
+			),
+
 		// ─── opacity attribute ──────────────────────────────────────
 
 		opacity_attribute: $ =>
@@ -1000,6 +1029,34 @@ export default grammar({
 			),
 
 		length_attribute_value: $ => quoted($.length_or_percentage_or_auto),
+
+		// ─── number-list attribute (dx, dy, stdDeviation, etc.) ─────
+
+		number_list_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.number_list_attribute_name),
+					$._eq,
+					field('value', $.number_list_attribute_value),
+				),
+			),
+
+		number_list_attribute_name: _ =>
+			choice(
+				'dx',
+				'dy',
+				'stdDeviation',
+				'stroke-dasharray',
+			),
+
+		number_list_attribute_value: $ => quoted($.number_list),
+
+		number_list: $ =>
+			seq(
+				$.length_or_percentage,
+				repeat(seq($.comma_wsp, $.length_or_percentage)),
+			),
 
 		// ─── href attribute ─────────────────────────────────────────
 

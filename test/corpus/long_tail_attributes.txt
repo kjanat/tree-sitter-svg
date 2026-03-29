@@ -321,15 +321,36 @@ Text layout and typography attributes
             value: (quoted_attribute_value
               (attribute_text_double))))
         (attribute
-          (generic_attribute
-            name: (attribute_name)
-            value: (quoted_attribute_value
-              (attribute_text_double))))
+          (number_list_attribute
+            name: (number_list_attribute_name)
+            value: (number_list_attribute_value
+              (number_list
+                (length_or_percentage
+                  (length
+                    (number)))
+                (comma_wsp
+                  (wsp))
+                (length_or_percentage
+                  (length
+                    (number)))
+                (comma_wsp
+                  (wsp))
+                (length_or_percentage
+                  (length
+                    (number)))))))
         (attribute
-          (generic_attribute
-            name: (attribute_name)
-            value: (quoted_attribute_value
-              (attribute_text_double))))
+          (number_list_attribute
+            name: (number_list_attribute_name)
+            value: (number_list_attribute_value
+              (number_list
+                (length_or_percentage
+                  (length
+                    (number)))
+                (comma_wsp
+                  (wsp))
+                (length_or_percentage
+                  (length
+                    (number)))))))
         (attribute
           (generic_attribute
             name: (attribute_name)
