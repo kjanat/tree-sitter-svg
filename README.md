@@ -74,21 +74,27 @@ than treating `d` as an opaque string.
 Attributes with meaningful value sub-grammars get dedicated parsing. All others
 are parsed as generic `attribute_name`/`quoted_attribute_value` pairs.
 
-| Attribute             | Sub-grammar                                      |
-| --------------------- | ------------------------------------------------ |
-| `d`                   | Full SVG path data (commands, coordinates, arcs) |
-| `viewBox`             | Four-number box                                  |
-| `preserveAspectRatio` | Optional `defer`, alignment, optional meet/slice |
-| `transform`           | Function list (matrix, translate, rotate, ...)   |
-| `points`              | Coordinate pair list                             |
-| `style`               | CSS injection point                              |
-| `on*` events          | JavaScript injection point                       |
-| `href`/`xlink:href`   | IRI reference or structured data URI             |
-| `id`, `class`         | Identity tokens                                  |
-| Paint attributes      | `url()`, keywords, color functions               |
-| IRI attributes        | `none`, `iri_reference`, or `url(...)` server    |
-| Length attributes     | Length, percentage, or `auto`                    |
-| `opacity`             | Number or percentage                             |
+| Attribute                   | Sub-grammar                                         |
+| --------------------------- | --------------------------------------------------- |
+| `d`, `path`                 | Full SVG path data (commands, coordinates, arcs)    |
+| `viewBox`                   | Four-number box                                     |
+| `preserveAspectRatio`       | Optional `defer`, alignment, optional meet/slice    |
+| `transform` and variants    | Function list (matrix, translate, rotate, ...)      |
+| `points`                    | Coordinate pair list                                |
+| `style`                     | CSS injection point                                 |
+| `on*` events                | JavaScript injection point                          |
+| `href`/`xlink:href`         | IRI reference or structured data URI                |
+| `id`, `class`               | Identity tokens                                     |
+| Paint attributes            | `url()`, keywords, `rgb()`/`hsl()` decomposed       |
+| IRI attributes              | `none`, `iri_reference`, or `url(...)` server       |
+| `clip`                      | `rect()` function with length arguments             |
+| Length attributes           | Length, percentage, or `auto` (50+ attribute names) |
+| `opacity` and variants      | Number or percentage                                |
+| `dx`, `dy`, `stdDeviation`… | Space/comma-separated number lists                  |
+| `repeatCount`               | Number or `indefinite`                              |
+| `keyTimes`                  | Semicolon-separated numbers                         |
+| `keySplines`                | Semicolon-separated control point tuples            |
+| `enable-background`         | `new` with optional coords, or `accumulate`         |
 
 ### Language Injections
 
@@ -106,12 +112,16 @@ Embedded languages are injected via `queries/injections.scm`:
 
 ### Query Files
 
-| File             | Purpose                        |
-| ---------------- | ------------------------------ |
-| `highlights.scm` | Syntax highlighting captures   |
-| `injections.scm` | Language injection rules       |
-| `locals.scm`     | Local scope/reference tracking |
-| `tags.scm`       | Symbol/tag navigation          |
+| File              | Purpose                                            |
+| ----------------- | -------------------------------------------------- |
+| `highlights.scm`  | Syntax highlighting captures                       |
+| `injections.scm`  | Language injection rules (CSS, JS, HTML)           |
+| `locals.scm`      | Local scope/reference tracking (id ↔ href/url)     |
+| `tags.scm`        | Symbol navigation with `@doc` docstrings           |
+| `indents.scm`     | Auto-indentation (Helix, Neovim, Zed)              |
+| `textobjects.scm` | Vim-style selections (elements, attributes, paths) |
+| `outline.scm`     | Symbol outline / code folding with id context      |
+| `brackets.scm`    | Bracket matching and rainbow pairs                 |
 
 <!--
 ## Installation
@@ -285,7 +295,11 @@ queries/
   highlights.scm              # syntax highlighting
   injections.scm              # CSS/JS/HTML injection
   locals.scm                  # scope tracking
-  tags.scm                    # symbol navigation
+  tags.scm                    # symbol navigation (with `@doc`)
+  indents.scm                 # auto-indentation
+  textobjects.scm             # vim-style text object selections
+  outline.scm                 # symbol outline / code folding
+  brackets.scm                # bracket matching
 bindings/
   c/                          # C header + pkg-config
   go/                         # Go binding + test
@@ -297,6 +311,7 @@ bindings/
   zig/                        # Zig binding + test
 test/corpus/                  # tree-sitter corpus tests
 test/highlight/               # highlight query assertions
+test/tags/                    # tag query assertions
 test/regex_samples/           # regex harness fixtures/tests
 ```
 
