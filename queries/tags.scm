@@ -93,6 +93,32 @@
   (#select-adjacent! @doc @definition.id)
 )
 
+; without whitespace — svg_root_element start_tag
+(
+  (comment (comment_text) @doc)
+  .
+  (svg_root_element
+    (start_tag
+      (attribute
+        (id_attribute
+          value: (id_attribute_value
+            (id_token) @name))))) @definition.id
+  (#select-adjacent! @doc @definition.id)
+)
+
+; without whitespace — svg_root_element self_closing_tag
+(
+  (comment (comment_text) @doc)
+  .
+  (svg_root_element
+    (self_closing_tag
+      (attribute
+        (id_attribute
+          value: (id_attribute_value
+            (id_token) @name))))) @definition.id
+  (#select-adjacent! @doc @definition.id)
+)
+
 ; ─── ID definitions (fallback, no docstring) ─────────────────────
 ; Matches id-bearing elements without an adjacent comment.
 
