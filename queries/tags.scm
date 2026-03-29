@@ -67,6 +67,8 @@
 (
   (comment (comment_text) @doc)
   .
+  (text)
+  .
   (svg_root_element
     (start_tag
       (attribute
@@ -79,6 +81,8 @@
 ; with whitespace — svg_root_element self_closing_tag
 (
   (comment (comment_text) @doc)
+  .
+  (text)
   .
   (svg_root_element
     (self_closing_tag

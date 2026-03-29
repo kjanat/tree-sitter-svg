@@ -703,13 +703,12 @@ Other regular long-tail attributes
           value: (quoted_attribute_value
             (attribute_text_double))))
       (attribute
-        (length_attribute
-          name: (length_attribute_name)
-          value: (length_attribute_value
-            (length_or_percentage_or_auto
-              (length_or_percentage
-                (percentage
-                  (number)))))))
+        (offset_attribute
+          name: (offset_attribute_name)
+          value: (offset_attribute_value
+            (number_or_percentage
+              (percentage
+                (number))))))
       (attribute
         (generic_attribute
           name: (attribute_name)

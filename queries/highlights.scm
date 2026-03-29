@@ -41,11 +41,13 @@
 (length_list_attribute_name) @attribute
 (number_attribute_name) @attribute
 (number_list_attribute_name) @attribute
+(offset_attribute_name) @attribute
 (opacity_attribute_name) @attribute
 (paint_attribute_name) @attribute
 (points_attribute_name) @attribute
 (preserve_aspect_ratio_attribute_name) @attribute
 (repeat_count_attribute_name) @attribute
+(stroke_dasharray_attribute_name) @attribute
 (style_attribute_name) @attribute
 (transform_attribute_name) @attribute
 (viewbox_attribute_name) @attribute
@@ -71,11 +73,13 @@
  (length_list_attribute_value)
  (number_attribute_value)
  (number_list_attribute_value)
+ (offset_attribute_value)
  (opacity_attribute_value)
  (paint_attribute_value)
  (points_attribute_value)
  (preserve_aspect_ratio_attribute_value)
  (repeat_count_attribute_value)
+ (stroke_dasharray_attribute_value)
  (style_attribute_value)
  (transform_attribute_value)
  (viewbox_attribute_value)] @string
@@ -104,7 +108,8 @@
 (repeat_count_attribute_value "indefinite" @constant.builtin)
 (enable_background_new "new" @keyword)
 (enable_background_attribute_value "accumulate" @constant.builtin)
-(length_list_attribute_value "none" @constant.builtin)
+(stroke_dasharray_attribute_value ["none" "inherit"] @constant.builtin)
+(duration_attribute_value ["indefinite" "media"] @constant.builtin)
 
 (number) @number
 

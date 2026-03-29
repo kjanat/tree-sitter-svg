@@ -365,8 +365,10 @@ export default grammar({
 				$.clip_attribute,
 				$.opacity_attribute,
 				$.length_attribute,
+				$.offset_attribute,
 				$.number_attribute,
 				$.length_list_attribute,
+				$.stroke_dasharray_attribute,
 				$.number_list_attribute,
 				$.duration_attribute,
 				$.repeat_count_attribute,
@@ -907,17 +909,40 @@ export default grammar({
 
 		hex_color: _ => token(/#(?:[0-9A-Fa-f]{3}|[0-9A-Fa-f]{4}|[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})/),
 		functional_color: $ =>
+			choice(
+				$._color_3,
+				$._color_4,
+			),
+
+		_color_3: $ =>
 			seq(
-				$.color_function_name,
+				alias(token(prec(1, choice('rgb', 'hsl'))), $.color_function_name),
 				'(',
 				optional($.wsp),
 				$.number_or_percentage,
-				repeat(seq($.comma_wsp, $.number_or_percentage)),
+				$.comma_wsp,
+				$.number_or_percentage,
+				$.comma_wsp,
+				$.number_or_percentage,
 				optional($.wsp),
 				')',
 			),
 
-		color_function_name: _ => token(prec(1, choice('rgb', 'rgba', 'hsl', 'hsla'))),
+		_color_4: $ =>
+			seq(
+				alias(token(prec(1, choice('rgba', 'hsla'))), $.color_function_name),
+				'(',
+				optional($.wsp),
+				$.number_or_percentage,
+				$.comma_wsp,
+				$.number_or_percentage,
+				$.comma_wsp,
+				$.number_or_percentage,
+				$.comma_wsp,
+				$.number_or_percentage,
+				optional($.wsp),
+				')',
+			),
 		named_color: _ => token(/[A-Za-z][A-Za-z-]*/),
 
 		// ─── functional IRI attribute (url(#ref)) ───────────────────
@@ -1036,12 +1061,27 @@ export default grammar({
 				'stroke-width',
 				'stroke-dashoffset',
 				'font-size',
-				'offset',
 				'startOffset',
 				'textLength',
 			),
 
 		length_attribute_value: $ => quoted($.length_or_percentage_or_auto),
+
+		// ─── offset attribute (number or percentage, no units) ──────
+
+		offset_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.offset_attribute_name),
+					$._eq,
+					field('value', $.offset_attribute_value),
+				),
+			),
+
+		offset_attribute_name: _ => 'offset',
+
+		offset_attribute_value: $ => quoted($.number_or_percentage),
 
 		// ─── number attribute (pure numeric, no units) ──────────────
 
@@ -1065,7 +1105,6 @@ export default grammar({
 				'k4',
 				'seed',
 				'scale',
-				'radius',
 				'azimuth',
 				'elevation',
 				'z',
@@ -1097,16 +1136,31 @@ export default grammar({
 			choice(
 				'dx',
 				'dy',
-				'stroke-dasharray',
 			),
 
-		length_list_attribute_value: $ => quoted(choice('none', $.length_list)),
+		length_list_attribute_value: $ => quoted($.length_list),
 
 		length_list: $ =>
 			seq(
 				$.length_or_percentage,
 				repeat(seq($.comma_wsp, $.length_or_percentage)),
 			),
+
+		// ─── stroke-dasharray attribute (none or length list) ───────
+
+		stroke_dasharray_attribute: $ =>
+			prec(
+				2,
+				seq(
+					field('name', $.stroke_dasharray_attribute_name),
+					$._eq,
+					field('value', $.stroke_dasharray_attribute_value),
+				),
+			),
+
+		stroke_dasharray_attribute_name: _ => 'stroke-dasharray',
+
+		stroke_dasharray_attribute_value: $ => quoted(choice('none', 'inherit', $.length_list)),
 
 		// ─── number-list attribute (bare numbers, no units) ─────────
 
@@ -1123,6 +1177,7 @@ export default grammar({
 		number_list_attribute_name: _ =>
 			choice(
 				'rotate',
+				'radius',
 				'stdDeviation',
 				'baseFrequency',
 			),
@@ -1149,7 +1204,7 @@ export default grammar({
 
 		duration_attribute_name: _ => choice('dur', 'repeatDur'),
 
-		duration_attribute_value: $ => quoted($.time_value),
+		duration_attribute_value: $ => quoted(choice($.time_value, 'indefinite', 'media')),
 
 		time_value: $ => seq($.number, optional($.time_unit)),
 
