@@ -314,15 +314,11 @@ static inline bool is_wsp(int32_t c) {
 // consume the separator and return true. Otherwise return false (lexer
 // resets). This gives the arc repeat LR(k) lookahead.
 static bool scan_arc_continuation(TSLexer *lexer) {
-  bool has_sep = false;
-
   while (is_wsp(lexer->lookahead)) {
-    has_sep = true;
     advance(lexer);
   }
 
   if (lexer->lookahead == ',') {
-    has_sep = true;
     advance(lexer);
     while (is_wsp(lexer->lookahead)) {
       advance(lexer);
