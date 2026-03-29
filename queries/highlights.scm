@@ -102,6 +102,7 @@
 (number) @number
 
 (length_unit) @type
+(percentage "%" @type)
 
 ((path_command) @constructor
   (#match? @constructor "^[Mm]$"))
@@ -161,6 +162,7 @@
 (path_comma) @punctuation.delimiter
 
 ["(" ")"] @punctuation.bracket
+["\"" "'"] @punctuation.delimiter
 
 [
   "<?"
