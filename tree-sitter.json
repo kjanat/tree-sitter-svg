@@ -16,7 +16,10 @@
 			"highlights": "queries/highlights.scm",
 			"injections": "queries/injections.scm",
 			"locals": "queries/locals.scm",
-			"tags": "queries/tags.scm"
+			"tags": "queries/tags.scm",
+			"indents": "queries/indents.scm",
+			"textobjects": "queries/textobjects.scm",
+			"outline": "queries/outline.scm"
 		}
 	],
 	"metadata": {
