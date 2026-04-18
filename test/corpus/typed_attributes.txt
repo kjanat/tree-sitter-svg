@@ -678,6 +678,69 @@ ViewBox with decimal values
   (text))
 
 =============================
+Href with base64-like parameter
+=============================
+
+<svg><image href="data:text/plain;base64=1,abc"/></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (self_closing_tag
+        (name)
+        (attribute
+          (href_attribute
+            (href_attribute_name)
+            (href_attribute_value
+              (href_reference
+                (data_uri
+                  (data_uri_media_type
+                    (mime_type))
+                  (data_uri_parameter
+                    (data_uri_parameter_name)
+                    (data_uri_parameter_value))
+                  (data_uri_payload))))))))
+    (end_tag
+      (name)))
+  (text))
+
+======================================
+Href with base64-prefixed bare parameter
+======================================
+
+<svg><image href="data:text/plain;base64foo,abc"/></svg>
+
+---
+
+(source_file
+  (text)
+  (svg_root_element
+    (start_tag
+      (name))
+    (element
+      (self_closing_tag
+        (name)
+        (attribute
+          (href_attribute
+            (href_attribute_name)
+            (href_attribute_value
+              (href_reference
+                (data_uri
+                  (data_uri_media_type
+                    (mime_type))
+                  (data_uri_parameter
+                    (data_uri_parameter_name))
+                  (data_uri_payload))))))))
+    (end_tag
+      (name)))
+  (text))
+
+=============================
 Transform multiple functions
 =============================
 

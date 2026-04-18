@@ -392,13 +392,10 @@ export default grammar({
 		// ─── d attribute (path data sub-grammar) ────────────────────
 
 		d_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.d_attribute_name),
-					$._eq,
-					field('value', $.d_attribute_value),
-				),
+			seq(
+				field('name', $.d_attribute_name),
+				$._eq,
+				field('value', $.d_attribute_value),
 			),
 
 		d_attribute_name: _ => choice('d', 'path'),
@@ -634,13 +631,10 @@ export default grammar({
 		// ─── style attribute (CSS injection) ────────────────────────
 
 		style_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.style_attribute_name),
-					$._eq,
-					field('value', $.style_attribute_value),
-				),
+			seq(
+				field('name', $.style_attribute_name),
+				$._eq,
+				field('value', $.style_attribute_value),
 			),
 
 		style_attribute_name: _ => 'style',
@@ -671,13 +665,10 @@ export default grammar({
 		// ─── viewBox attribute ──────────────────────────────────────
 
 		viewbox_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.viewbox_attribute_name),
-					$._eq,
-					field('value', $.viewbox_attribute_value),
-				),
+			seq(
+				field('name', $.viewbox_attribute_name),
+				$._eq,
+				field('value', $.viewbox_attribute_value),
 			),
 
 		viewbox_attribute_name: _ => 'viewBox',
@@ -698,13 +689,10 @@ export default grammar({
 		// ─── preserveAspectRatio attribute ──────────────────────────
 
 		preserve_aspect_ratio_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.preserve_aspect_ratio_attribute_name),
-					$._eq,
-					field('value', $.preserve_aspect_ratio_attribute_value),
-				),
+			seq(
+				field('name', $.preserve_aspect_ratio_attribute_name),
+				$._eq,
+				field('value', $.preserve_aspect_ratio_attribute_value),
 			),
 
 		preserve_aspect_ratio_attribute_name: _ => 'preserveAspectRatio',
@@ -737,13 +725,10 @@ export default grammar({
 		// ─── transform attribute ────────────────────────────────────
 
 		transform_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.transform_attribute_name),
-					$._eq,
-					field('value', $.transform_attribute_value),
-				),
+			seq(
+				field('name', $.transform_attribute_name),
+				$._eq,
+				field('value', $.transform_attribute_value),
 			),
 
 		transform_attribute_name: _ =>
@@ -847,13 +832,10 @@ export default grammar({
 		// ─── points attribute ───────────────────────────────────────
 
 		points_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.points_attribute_name),
-					$._eq,
-					field('value', $.points_attribute_value),
-				),
+			seq(
+				field('name', $.points_attribute_name),
+				$._eq,
+				field('value', $.points_attribute_value),
 			),
 
 		points_attribute_name: _ => 'points',
@@ -871,13 +853,10 @@ export default grammar({
 		// ─── paint attribute (fill, stroke, color, etc.) ────────────
 
 		paint_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.paint_attribute_name),
-					$._eq,
-					field('value', $.paint_attribute_value),
-				),
+			seq(
+				field('name', $.paint_attribute_name),
+				$._eq,
+				field('value', $.paint_attribute_value),
 			),
 
 		paint_attribute_name: _ =>
@@ -932,7 +911,7 @@ export default grammar({
 		// rgb() / rgba() — 3 components + optional /alpha
 		_rgb_color: $ =>
 			seq(
-				alias(token(prec(1, choice('rgb', 'rgba'))), $.color_function_name),
+				alias(token(choice('rgb', 'rgba')), $.color_function_name),
 				'(',
 				optional($.wsp),
 				$.number_or_percentage,
@@ -948,7 +927,7 @@ export default grammar({
 		// hsl() / hsla() — hue + 2 percentages + optional /alpha
 		_hsl_color: $ =>
 			seq(
-				alias(token(prec(1, choice('hsl', 'hsla'))), $.color_function_name),
+				alias(token(choice('hsl', 'hsla')), $.color_function_name),
 				'(',
 				optional($.wsp),
 				$.hue_value,
@@ -964,7 +943,7 @@ export default grammar({
 		// hwb() — hue + 2 components + optional /alpha (CSS Color 4)
 		_hwb_color: $ =>
 			seq(
-				alias(token(prec(1, 'hwb')), $.color_function_name),
+				alias(token('hwb'), $.color_function_name),
 				'(',
 				optional($.wsp),
 				$._color_hue_component,
@@ -980,7 +959,7 @@ export default grammar({
 		// lab() — L a b + optional /alpha (CSS Color 4)
 		_lab_color: $ =>
 			seq(
-				alias(token(prec(1, 'lab')), $.color_function_name),
+				alias(token('lab'), $.color_function_name),
 				'(',
 				optional($.wsp),
 				$._color_component,
@@ -996,7 +975,7 @@ export default grammar({
 		// oklab() — L a b + optional /alpha (CSS Color 4)
 		_oklab_color: $ =>
 			seq(
-				alias(token(prec(1, 'oklab')), $.color_function_name),
+				alias(token('oklab'), $.color_function_name),
 				'(',
 				optional($.wsp),
 				$._color_component,
@@ -1012,7 +991,7 @@ export default grammar({
 		// lch() — L C H + optional /alpha (CSS Color 4)
 		_lch_color: $ =>
 			seq(
-				alias(token(prec(1, 'lch')), $.color_function_name),
+				alias(token('lch'), $.color_function_name),
 				'(',
 				optional($.wsp),
 				$._color_component,
@@ -1028,7 +1007,7 @@ export default grammar({
 		// oklch() — L C H + optional /alpha (CSS Color 4)
 		_oklch_color: $ =>
 			seq(
-				alias(token(prec(1, 'oklch')), $.color_function_name),
+				alias(token('oklch'), $.color_function_name),
 				'(',
 				optional($.wsp),
 				$._color_component,
@@ -1044,7 +1023,7 @@ export default grammar({
 		// color(<colorspace> c1 c2 c3 [/alpha]?) — CSS Color 4
 		_color_function: $ =>
 			seq(
-				alias(token(prec(1, 'color')), $.color_function_name),
+				alias(token('color'), $.color_function_name),
 				'(',
 				optional($.wsp),
 				$.color_colorspace,
@@ -1062,7 +1041,7 @@ export default grammar({
 		// color-mix(in <cs> [hue-method]?, <color> [pct]?, <color> [pct]?) — CSS Color 5
 		_color_mix_function: $ =>
 			seq(
-				alias(token(prec(1, 'color-mix')), $.color_function_name),
+				alias(token('color-mix'), $.color_function_name),
 				'(',
 				optional($.wsp),
 				$.color_interpolation_method,
@@ -1076,7 +1055,7 @@ export default grammar({
 
 		color_interpolation_method: $ =>
 			prec.right(seq(
-				alias(token(prec(2, 'in')), $.color_mix_in_keyword),
+				alias(token('in'), $.color_mix_in_keyword),
 				$.wsp,
 				$.color_interpolation_space,
 				optional(seq($.wsp, $.color_hue_interpolation)),
@@ -1084,52 +1063,46 @@ export default grammar({
 
 		// Predefined color() colorspaces (rectangular, XYZ).
 		color_colorspace: _ =>
-			token(prec(
-				2,
-				choice(
-					'srgb-linear',
-					'srgb',
-					'display-p3',
-					'a98-rgb',
-					'prophoto-rgb',
-					'rec2020',
-					'xyz-d50',
-					'xyz-d65',
-					'xyz',
-				),
+			token(choice(
+				'srgb-linear',
+				'srgb',
+				'display-p3',
+				'a98-rgb',
+				'prophoto-rgb',
+				'rec2020',
+				'xyz-d50',
+				'xyz-d65',
+				'xyz',
 			)),
 
 		// color-mix interpolation spaces (rectangular + polar + predefined).
 		color_interpolation_space: _ =>
-			token(prec(
-				2,
-				choice(
-					'srgb-linear',
-					'srgb',
-					'display-p3',
-					'a98-rgb',
-					'prophoto-rgb',
-					'rec2020',
-					'xyz-d50',
-					'xyz-d65',
-					'xyz',
-					'hsl',
-					'hwb',
-					'lab',
-					'lch',
-					'oklab',
-					'oklch',
-				),
+			token(choice(
+				'srgb-linear',
+				'srgb',
+				'display-p3',
+				'a98-rgb',
+				'prophoto-rgb',
+				'rec2020',
+				'xyz-d50',
+				'xyz-d65',
+				'xyz',
+				'hsl',
+				'hwb',
+				'lab',
+				'lch',
+				'oklab',
+				'oklch',
 			)),
 
 		color_hue_interpolation: $ =>
 			seq(
 				alias(
-					token(prec(2, choice('shorter', 'longer', 'increasing', 'decreasing'))),
+					token(choice('shorter', 'longer', 'increasing', 'decreasing')),
 					$.color_hue_direction,
 				),
 				$.wsp,
-				alias(token(prec(2, 'hue')), $.color_hue_keyword),
+				alias(token('hue'), $.color_hue_keyword),
 			),
 
 		color_mix_component: $ =>
@@ -1141,13 +1114,13 @@ export default grammar({
 		_color_component: $ =>
 			choice(
 				$.number_or_percentage,
-				alias(token(prec(2, 'none')), $.color_none),
+				alias(token('none'), $.color_none),
 			),
 
 		_color_hue_component: $ =>
 			choice(
 				$.hue_value,
-				alias(token(prec(2, 'none')), $.color_none),
+				alias(token('none'), $.color_none),
 			),
 
 		_color_alpha: $ =>
@@ -1159,7 +1132,7 @@ export default grammar({
 					optional($.wsp),
 					choice(
 						$.number_or_percentage,
-						alias(token(prec(2, 'none')), $.color_none),
+						alias(token('none'), $.color_none),
 					),
 				),
 			),
@@ -1173,13 +1146,10 @@ export default grammar({
 		// ─── functional IRI attribute (url(#ref)) ───────────────────
 
 		functional_iri_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.functional_iri_attribute_name),
-					$._eq,
-					field('value', $.functional_iri_attribute_value),
-				),
+			seq(
+				field('name', $.functional_iri_attribute_name),
+				$._eq,
+				field('value', $.functional_iri_attribute_value),
 			),
 
 		functional_iri_attribute_name: _ =>
@@ -1200,13 +1170,10 @@ export default grammar({
 		// ─── clip attribute (deprecated, rect() function) ───────────
 
 		clip_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.clip_attribute_name),
-					$._eq,
-					field('value', $.clip_attribute_value),
-				),
+			seq(
+				field('name', $.clip_attribute_name),
+				$._eq,
+				field('value', $.clip_attribute_value),
 			),
 
 		clip_attribute_name: _ => 'clip',
@@ -1232,13 +1199,10 @@ export default grammar({
 		// ─── opacity attribute ──────────────────────────────────────
 
 		opacity_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.opacity_attribute_name),
-					$._eq,
-					field('value', $.opacity_attribute_value),
-				),
+			seq(
+				field('name', $.opacity_attribute_name),
+				$._eq,
+				field('value', $.opacity_attribute_value),
 			),
 
 		opacity_attribute_name: _ =>
@@ -1255,13 +1219,10 @@ export default grammar({
 		// ─── length attribute (x, y, width, height, etc.) ───────────
 
 		length_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.length_attribute_name),
-					$._eq,
-					field('value', $.length_attribute_value),
-				),
+			seq(
+				field('name', $.length_attribute_name),
+				$._eq,
+				field('value', $.length_attribute_value),
 			),
 
 		length_attribute_name: _ =>
@@ -1297,13 +1258,10 @@ export default grammar({
 		// ─── offset attribute (number or percentage, no units) ──────
 
 		offset_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.offset_attribute_name),
-					$._eq,
-					field('value', $.offset_attribute_value),
-				),
+			seq(
+				field('name', $.offset_attribute_name),
+				$._eq,
+				field('value', $.offset_attribute_value),
 			),
 
 		offset_attribute_name: _ => 'offset',
@@ -1313,13 +1271,10 @@ export default grammar({
 		// ─── number attribute (pure numeric, no units) ──────────────
 
 		number_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.number_attribute_name),
-					$._eq,
-					field('value', $.number_attribute_value),
-				),
+			seq(
+				field('name', $.number_attribute_name),
+				$._eq,
+				field('value', $.number_attribute_value),
 			),
 
 		number_attribute_name: _ =>
@@ -1350,13 +1305,10 @@ export default grammar({
 		// ─── length-list attribute (dx, dy, stroke-dasharray) ───────
 
 		length_list_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.length_list_attribute_name),
-					$._eq,
-					field('value', $.length_list_attribute_value),
-				),
+			seq(
+				field('name', $.length_list_attribute_name),
+				$._eq,
+				field('value', $.length_list_attribute_value),
 			),
 
 		length_list_attribute_name: _ =>
@@ -1376,13 +1328,10 @@ export default grammar({
 		// ─── stroke-dasharray attribute (none or length list) ───────
 
 		stroke_dasharray_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.stroke_dasharray_attribute_name),
-					$._eq,
-					field('value', $.stroke_dasharray_attribute_value),
-				),
+			seq(
+				field('name', $.stroke_dasharray_attribute_name),
+				$._eq,
+				field('value', $.stroke_dasharray_attribute_value),
 			),
 
 		stroke_dasharray_attribute_name: _ => 'stroke-dasharray',
@@ -1392,13 +1341,10 @@ export default grammar({
 		// ─── number-list attribute (bare numbers, no units) ─────────
 
 		number_list_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.number_list_attribute_name),
-					$._eq,
-					field('value', $.number_list_attribute_value),
-				),
+			seq(
+				field('name', $.number_list_attribute_name),
+				$._eq,
+				field('value', $.number_list_attribute_value),
 			),
 
 		number_list_attribute_name: _ =>
@@ -1420,13 +1366,10 @@ export default grammar({
 		// ─── duration attribute (time values) ───────────────────────
 
 		duration_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.duration_attribute_name),
-					$._eq,
-					field('value', $.duration_attribute_value),
-				),
+			seq(
+				field('name', $.duration_attribute_name),
+				$._eq,
+				field('value', $.duration_attribute_value),
 			),
 
 		duration_attribute_name: _ => choice('dur', 'repeatDur'),
@@ -1438,13 +1381,10 @@ export default grammar({
 		// ─── repeatCount attribute ──────────────────────────────────
 
 		repeat_count_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.repeat_count_attribute_name),
-					$._eq,
-					field('value', $.repeat_count_attribute_value),
-				),
+			seq(
+				field('name', $.repeat_count_attribute_name),
+				$._eq,
+				field('value', $.repeat_count_attribute_value),
 			),
 
 		repeat_count_attribute_name: _ => 'repeatCount',
@@ -1454,13 +1394,10 @@ export default grammar({
 		// ─── keyTimes attribute (semicolon-separated numbers) ───────
 
 		key_times_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.key_times_attribute_name),
-					$._eq,
-					field('value', $.key_times_attribute_value),
-				),
+			seq(
+				field('name', $.key_times_attribute_name),
+				$._eq,
+				field('value', $.key_times_attribute_value),
 			),
 
 		key_times_attribute_name: _ => 'keyTimes',
@@ -1476,13 +1413,10 @@ export default grammar({
 		// ─── keySplines attribute (semicolon-separated 4-tuples) ────
 
 		key_splines_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.key_splines_attribute_name),
-					$._eq,
-					field('value', $.key_splines_attribute_value),
-				),
+			seq(
+				field('name', $.key_splines_attribute_name),
+				$._eq,
+				field('value', $.key_splines_attribute_value),
 			),
 
 		key_splines_attribute_name: _ => 'keySplines',
@@ -1500,13 +1434,10 @@ export default grammar({
 		// ─── enable-background attribute ────────────────────────────
 
 		enable_background_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.enable_background_attribute_name),
-					$._eq,
-					field('value', $.enable_background_attribute_value),
-				),
+			seq(
+				field('name', $.enable_background_attribute_name),
+				$._eq,
+				field('value', $.enable_background_attribute_value),
 			),
 
 		enable_background_attribute_name: _ => 'enable-background',
@@ -1522,13 +1453,10 @@ export default grammar({
 		// ─── href attribute ─────────────────────────────────────────
 
 		href_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.href_attribute_name),
-					$._eq,
-					field('value', $.href_attribute_value),
-				),
+			seq(
+				field('name', $.href_attribute_name),
+				$._eq,
+				field('value', $.href_attribute_value),
 			),
 
 		href_attribute_name: _ => choice('href', 'xlink:href'),
@@ -1540,13 +1468,10 @@ export default grammar({
 		// ─── id attribute ───────────────────────────────────────────
 
 		id_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.id_attribute_name),
-					$._eq,
-					field('value', $.id_attribute_value),
-				),
+			seq(
+				field('name', $.id_attribute_name),
+				$._eq,
+				field('value', $.id_attribute_value),
 			),
 
 		id_attribute_name: _ => 'id',
@@ -1558,13 +1483,10 @@ export default grammar({
 		// ─── class attribute ────────────────────────────────────────
 
 		class_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.class_attribute_name),
-					$._eq,
-					field('value', $.class_attribute_value),
-				),
+			seq(
+				field('name', $.class_attribute_name),
+				$._eq,
+				field('value', $.class_attribute_value),
 			),
 
 		class_attribute_name: _ => 'class',
@@ -1578,13 +1500,10 @@ export default grammar({
 		// ─── event attribute (JS injection) ─────────────────────────
 
 		event_attribute: $ =>
-			prec(
-				2,
-				seq(
-					field('name', $.event_attribute_name),
-					$._eq,
-					field('value', $.event_attribute_value),
-				),
+			seq(
+				field('name', $.event_attribute_name),
+				$._eq,
+				field('value', $.event_attribute_value),
 			),
 
 		event_attribute_name: _ => token(prec(1, /on[A-Za-z][A-Za-z0-9_-]*/)),
@@ -1637,8 +1556,7 @@ export default grammar({
 				'data:',
 				optional(field('media_type', $.data_uri_media_type)),
 				repeat(field('parameter', $.data_uri_parameter)),
-				optional(field('encoding', $.data_uri_encoding)),
-				',',
+				choice(field('encoding', $.data_uri_encoding), ','),
 				optional(field('payload', $.data_uri_payload)),
 			),
 
@@ -1653,7 +1571,10 @@ export default grammar({
 
 		data_uri_parameter_name: _ => token(/[A-Za-z0-9!#$&^_.+-]+/),
 		data_uri_parameter_value: _ => token(/[^;,"'&<]+/),
-		data_uri_encoding: _ => token(prec(1, /;[Bb][Aa][Ss][Ee]64/)),
+		// Consume the trailing comma so `;base64=...` and `;base64foo`
+		// remain normal parameters instead of losing their `;base64` prefix
+		// to a higher-precedence encoding token.
+		data_uri_encoding: _ => token(/;[Bb][Aa][Ss][Ee]64,/),
 		data_uri_payload: _ => token(/[^"'&<]+/),
 
 		mime_type: _ => token(/[A-Za-z0-9!#$&^_.+-]+\/[A-Za-z0-9!#$&^_.+-]+/),

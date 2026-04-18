@@ -62,6 +62,7 @@
 - `tree-sitter` v0.25.0 native addon fails to compile with newer Node/V8 toolchains in this repo setup; Node 22 LTS works — Volta pin set to 22.22.1
 - Non-start grammar rules cannot match empty strings; wrap optional emptiness in parent rules instead of making the child nullable
 - Overlapping whitespace tokens (e.g. `misc_text` vs path whitespace) can cause wrong token choice; assign precedence for context-specific whitespace tokens
+- Lexical precedence cannot express "match `base64` only when immediately followed by the data-URI comma" without consuming that comma. A higher-precedence `;base64` token steals the prefix from valid parameters like `;base64=1` and `;base64foo`; fix by folding the comma into the encoding token (`/;[Bb][Aa][Ss][Ee]64,/`) so longest-match handles the distinction
 - `tree-sitter test -u` will not update sections that still parse with `ERROR`/`MISSING`; fix grammar/input first, then rerun update
 - If one rule is a strict superset of another (e.g. `length` includes bare numbers), avoid including both in the same `choice` without precedence; this creates unresolved LR conflicts
 - Aliasing a named subrule to `$.element` inside the `element` rule can create nested `(element (element ...))`; use hidden subrules (`_foo_element`) to keep CST stable
