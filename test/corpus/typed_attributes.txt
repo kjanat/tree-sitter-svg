@@ -298,6 +298,121 @@ Paint keywords and functions
   (text))
 
 ==================
+CSS Color 4 oklch with slash alpha and none channel
+==================
+
+<svg fill="oklch(70% 0.15 none / .5)"/>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (self_closing_tag
+      name: (name)
+      (attribute
+        (paint_attribute
+          name: (paint_attribute_name)
+          value: (paint_attribute_value
+            (paint_value
+              (color_value
+                (functional_color
+                  (color_function_name)
+                  (number_or_percentage
+                    (percentage
+                      (number)))
+                  (comma_wsp
+                    (wsp))
+                  (number_or_percentage
+                    (number))
+                  (comma_wsp
+                    (wsp))
+                  (color_none)
+                  (wsp)
+                  (wsp)
+                  (number_or_percentage
+                    (number))))))))))
+  (text))
+
+==================
+CSS Color 4 color() with predefined colorspace
+==================
+
+<svg fill="color(display-p3 1 0 0)"/>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (self_closing_tag
+      name: (name)
+      (attribute
+        (paint_attribute
+          name: (paint_attribute_name)
+          value: (paint_attribute_value
+            (paint_value
+              (color_value
+                (functional_color
+                  (color_function_name)
+                  (color_colorspace)
+                  (wsp)
+                  (number_or_percentage
+                    (number))
+                  (wsp)
+                  (number_or_percentage
+                    (number))
+                  (wsp)
+                  (number_or_percentage
+                    (number))))))))))
+  (text))
+
+==================
+CSS Color 5 color-mix with hue interpolation method
+==================
+
+<svg fill="color-mix(in oklch shorter hue, red 30%, blue)"/>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (self_closing_tag
+      name: (name)
+      (attribute
+        (paint_attribute
+          name: (paint_attribute_name)
+          value: (paint_attribute_value
+            (paint_value
+              (color_value
+                (functional_color
+                  (color_function_name)
+                  (color_interpolation_method
+                    (color_mix_in_keyword)
+                    (wsp)
+                    (color_interpolation_space)
+                    (wsp)
+                    (color_hue_interpolation
+                      (color_hue_direction)
+                      (wsp)
+                      (color_hue_keyword)))
+                  (comma_wsp
+                    (wsp))
+                  (color_mix_component
+                    (color_value
+                      (named_color))
+                    (wsp)
+                    (percentage
+                      (number)))
+                  (comma_wsp
+                    (wsp))
+                  (color_mix_component
+                    (color_value
+                      (named_color)))))))))))
+  (text))
+
+==================
 Opacity and stroke dasharray
 ==================
 

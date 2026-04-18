@@ -57,6 +57,13 @@
 (clip_rect "rect" @function.call)
 (named_color) @constant
 
+(color_colorspace) @type.builtin
+(color_interpolation_space) @type.builtin
+(color_mix_in_keyword) @keyword
+(color_hue_direction) @keyword.modifier
+(color_hue_keyword) @keyword
+(color_none) @constant.builtin
+
 [(quoted_attribute_value)
  (class_attribute_value)
  (clip_attribute_value)

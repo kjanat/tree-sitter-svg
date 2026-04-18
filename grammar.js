@@ -912,6 +912,13 @@ export default grammar({
 			choice(
 				$._rgb_color,
 				$._hsl_color,
+				$._hwb_color,
+				$._lab_color,
+				$._lch_color,
+				$._oklab_color,
+				$._oklch_color,
+				$._color_function,
+				$._color_mix_function,
 			),
 
 		// rgb() / rgba() — 3 components + optional /alpha
@@ -946,10 +953,207 @@ export default grammar({
 				')',
 			),
 
+		// hwb() — hue + 2 components + optional /alpha (CSS Color 4)
+		_hwb_color: $ =>
+			seq(
+				alias(token(prec(1, 'hwb')), $.color_function_name),
+				'(',
+				optional($.wsp),
+				$._color_hue_component,
+				$.comma_wsp,
+				$._color_component,
+				$.comma_wsp,
+				$._color_component,
+				optional($._color_alpha),
+				optional($.wsp),
+				')',
+			),
+
+		// lab() — L a b + optional /alpha (CSS Color 4)
+		_lab_color: $ =>
+			seq(
+				alias(token(prec(1, 'lab')), $.color_function_name),
+				'(',
+				optional($.wsp),
+				$._color_component,
+				$.comma_wsp,
+				$._color_component,
+				$.comma_wsp,
+				$._color_component,
+				optional($._color_alpha),
+				optional($.wsp),
+				')',
+			),
+
+		// oklab() — L a b + optional /alpha (CSS Color 4)
+		_oklab_color: $ =>
+			seq(
+				alias(token(prec(1, 'oklab')), $.color_function_name),
+				'(',
+				optional($.wsp),
+				$._color_component,
+				$.comma_wsp,
+				$._color_component,
+				$.comma_wsp,
+				$._color_component,
+				optional($._color_alpha),
+				optional($.wsp),
+				')',
+			),
+
+		// lch() — L C H + optional /alpha (CSS Color 4)
+		_lch_color: $ =>
+			seq(
+				alias(token(prec(1, 'lch')), $.color_function_name),
+				'(',
+				optional($.wsp),
+				$._color_component,
+				$.comma_wsp,
+				$._color_component,
+				$.comma_wsp,
+				$._color_hue_component,
+				optional($._color_alpha),
+				optional($.wsp),
+				')',
+			),
+
+		// oklch() — L C H + optional /alpha (CSS Color 4)
+		_oklch_color: $ =>
+			seq(
+				alias(token(prec(1, 'oklch')), $.color_function_name),
+				'(',
+				optional($.wsp),
+				$._color_component,
+				$.comma_wsp,
+				$._color_component,
+				$.comma_wsp,
+				$._color_hue_component,
+				optional($._color_alpha),
+				optional($.wsp),
+				')',
+			),
+
+		// color(<colorspace> c1 c2 c3 [/alpha]?) — CSS Color 4
+		_color_function: $ =>
+			seq(
+				alias(token(prec(1, 'color')), $.color_function_name),
+				'(',
+				optional($.wsp),
+				$.color_colorspace,
+				$.wsp,
+				$._color_component,
+				$.wsp,
+				$._color_component,
+				$.wsp,
+				$._color_component,
+				optional($._color_alpha),
+				optional($.wsp),
+				')',
+			),
+
+		// color-mix(in <cs> [hue-method]?, <color> [pct]?, <color> [pct]?) — CSS Color 5
+		_color_mix_function: $ =>
+			seq(
+				alias(token(prec(1, 'color-mix')), $.color_function_name),
+				'(',
+				optional($.wsp),
+				$.color_interpolation_method,
+				$.comma_wsp,
+				$.color_mix_component,
+				$.comma_wsp,
+				$.color_mix_component,
+				optional($.wsp),
+				')',
+			),
+
+		color_interpolation_method: $ =>
+			prec.right(seq(
+				alias(token(prec(2, 'in')), $.color_mix_in_keyword),
+				$.wsp,
+				$.color_interpolation_space,
+				optional(seq($.wsp, $.color_hue_interpolation)),
+			)),
+
+		// Predefined color() colorspaces (rectangular, XYZ).
+		color_colorspace: _ =>
+			token(prec(
+				2,
+				choice(
+					'srgb-linear',
+					'srgb',
+					'display-p3',
+					'a98-rgb',
+					'prophoto-rgb',
+					'rec2020',
+					'xyz-d50',
+					'xyz-d65',
+					'xyz',
+				),
+			)),
+
+		// color-mix interpolation spaces (rectangular + polar + predefined).
+		color_interpolation_space: _ =>
+			token(prec(
+				2,
+				choice(
+					'srgb-linear',
+					'srgb',
+					'display-p3',
+					'a98-rgb',
+					'prophoto-rgb',
+					'rec2020',
+					'xyz-d50',
+					'xyz-d65',
+					'xyz',
+					'hsl',
+					'hwb',
+					'lab',
+					'lch',
+					'oklab',
+					'oklch',
+				),
+			)),
+
+		color_hue_interpolation: $ =>
+			seq(
+				alias(
+					token(prec(2, choice('shorter', 'longer', 'increasing', 'decreasing'))),
+					$.color_hue_direction,
+				),
+				$.wsp,
+				alias(token(prec(2, 'hue')), $.color_hue_keyword),
+			),
+
+		color_mix_component: $ =>
+			prec.right(seq(
+				$.color_value,
+				optional(seq($.wsp, $.percentage)),
+			)),
+
+		_color_component: $ =>
+			choice(
+				$.number_or_percentage,
+				alias(token(prec(2, 'none')), $.color_none),
+			),
+
+		_color_hue_component: $ =>
+			choice(
+				$.hue_value,
+				alias(token(prec(2, 'none')), $.color_none),
+			),
+
 		_color_alpha: $ =>
 			choice(
 				seq($.comma_wsp, $.number_or_percentage),
-				seq(optional($.wsp), '/', optional($.wsp), $.number_or_percentage),
+				seq(
+					optional($.wsp),
+					'/',
+					optional($.wsp),
+					choice(
+						$.number_or_percentage,
+						alias(token(prec(2, 'none')), $.color_none),
+					),
+				),
 			),
 
 		hue_value: $ => seq($.number, optional($.angle_unit)),
