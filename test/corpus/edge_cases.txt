@@ -1389,6 +1389,7 @@ Processing instruction xml-stylesheet
 Leading whitespace before xml declaration (W3C sample style)
 ==================
 
+
 <?xml version="1.0" standalone="no"?>
 <svg/>
 
