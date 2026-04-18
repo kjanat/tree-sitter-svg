@@ -312,9 +312,10 @@ static inline bool is_wsp(int32_t c) {
 
 // Peek past optional comma/whitespace separator. If a number follows,
 // consume the separator and return true. Otherwise return false (lexer
-// resets). This gives path-segment repeats (arc, h, v) LR(k) lookahead
-// so the parser can commit to extending the current segment instead of
-// reducing and falling through to implicit_lineto_segment.
+// resets). This gives path-segment repeats (arc, h, v, C, S, Q, T)
+// LR(k) lookahead so the parser can commit to extending the current
+// segment instead of reducing and falling through to either
+// implicit_lineto_segment or a following explicit command.
 static bool scan_number_continuation(TSLexer *lexer) {
   while (is_wsp(lexer->lookahead)) {
     advance(lexer);

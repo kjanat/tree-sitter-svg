@@ -499,7 +499,7 @@ export default grammar({
 					field('command', alias($.curveto_command, $.path_command)),
 					optional($.path_wsp),
 					$.curveto_argument,
-					repeat(seq(optional($.path_comma_wsp), $.curveto_argument)),
+					repeat(seq($._number_continuation, $.curveto_argument)),
 				),
 			),
 
@@ -509,7 +509,7 @@ export default grammar({
 					field('command', alias($.smooth_curveto_command, $.path_command)),
 					optional($.path_wsp),
 					$.smooth_curveto_argument,
-					repeat(seq(optional($.path_comma_wsp), $.smooth_curveto_argument)),
+					repeat(seq($._number_continuation, $.smooth_curveto_argument)),
 				),
 			),
 
@@ -519,7 +519,7 @@ export default grammar({
 					field('command', alias($.quadratic_bezier_curveto_command, $.path_command)),
 					optional($.path_wsp),
 					$.quadratic_bezier_curveto_argument,
-					repeat(seq(optional($.path_comma_wsp), $.quadratic_bezier_curveto_argument)),
+					repeat(seq($._number_continuation, $.quadratic_bezier_curveto_argument)),
 				),
 			),
 
@@ -529,7 +529,7 @@ export default grammar({
 					field('command', alias($.smooth_quadratic_bezier_curveto_command, $.path_command)),
 					optional($.path_wsp),
 					$.path_coordinate_pair,
-					repeat(seq(optional($.path_comma_wsp), $.path_coordinate_pair)),
+					repeat(seq($._number_continuation, $.path_coordinate_pair)),
 				),
 			),
 

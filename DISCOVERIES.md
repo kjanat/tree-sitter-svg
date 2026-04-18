@@ -15,7 +15,7 @@
 
 ## Grammar
 
-- `prec.left` on path segment rules causes the parser to exit after the first argument instead of continuing the repeat; subsequent values become `implicit_lineto_segment` nodes. For coordinate-pair-based segments (lineto, curveto, etc.) this is structurally harmless but semantically wrong. For arc segments (7-value arguments, odd count), the leftover produces ERROR nodes. Fix: external scanner `_arc_continuation` peeks past whitespace to verify a number follows before entering the arc repeat — gives LR(k) lookahead for an inherently LR(2) conflict.
+- `prec.left` on path segment rules causes the parser to exit after the first argument instead of continuing the repeat; subsequent values become `implicit_lineto_segment` nodes. Impact splits three ways: (a) moveto/lineto = spec-correct (spec itself says trailing pairs after M/L are implicit linetos), (b) curveto family C/S/Q/T = semantically wrong (spec says trailing sets after C/S/Q/T are implicit cubic/quadratic commands, not linetos), (c) arc/H/V = parse ERROR on odd-count tails because implicit_lineto_segment requires a coordinate *pair*. Fix: external scanner `_number_continuation` peeks past wsp/comma/wsp and commits only if a number-starting char follows — gives the GLR parser LR(k) lookahead. Applied to arc, H, V, C, S, Q, T repeats. M/L left alone (declared repeat is dead code but spec-equivalent in behavior).
 - Keeping `extras` empty preserves XML whitespace as explicit `text` nodes (including indentation/newlines)
 - Generic XML attributes should require quoted values; allowing valueless/unquoted attrs accepts non-XML SVG
 - Tag-name matching needs an external scanner stack; CFG-only grammar cannot enforce `<a>...</a>` equality

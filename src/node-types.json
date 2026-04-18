@@ -429,10 +429,6 @@
           "named": true
         },
         {
-          "type": "path_comma_wsp",
-          "named": true
-        },
-        {
           "type": "path_wsp",
           "named": true
         }
@@ -2346,10 +2342,6 @@
       "required": true,
       "types": [
         {
-          "type": "path_comma_wsp",
-          "named": true
-        },
-        {
           "type": "path_wsp",
           "named": true
         },
@@ -2633,10 +2625,6 @@
       "required": true,
       "types": [
         {
-          "type": "path_comma_wsp",
-          "named": true
-        },
-        {
           "type": "path_wsp",
           "named": true
         },
@@ -2666,10 +2654,6 @@
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "path_comma_wsp",
-          "named": true
-        },
         {
           "type": "path_coordinate_pair",
           "named": true

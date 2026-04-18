@@ -1400,6 +1400,296 @@ Horizontal lineto with chained coords followed by explicit command
   (text))
 
 =============================
+Cubic curveto with chained arguments (implicit cubic continuation)
+=============================
+
+<svg><path d="M0 0C1 2 3 4 5 6 7 8 9 10 11 12"/></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (self_closing_tag
+        name: (name)
+        (attribute
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      command: (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (curveto_segment
+                        command: (path_command)
+                        (curveto_argument
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number))))
+                        (curveto_argument
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number))))))))))))))
+    (end_tag
+      name: (name)))
+  (text))
+
+=============================
+Smooth cubic curveto with chained arguments
+=============================
+
+<svg><path d="M0 0S1 2 3 4 5 6 7 8"/></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (self_closing_tag
+        name: (name)
+        (attribute
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      command: (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (smooth_curveto_segment
+                        command: (path_command)
+                        (smooth_curveto_argument
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number))))
+                        (smooth_curveto_argument
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number))))))))))))))
+    (end_tag
+      name: (name)))
+  (text))
+
+=============================
+Quadratic curveto with chained arguments
+=============================
+
+<svg><path d="M0 0Q1 2 3 4 5 6 7 8"/></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (self_closing_tag
+        name: (name)
+        (attribute
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      command: (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (quadratic_bezier_curveto_segment
+                        command: (path_command)
+                        (quadratic_bezier_curveto_argument
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number))))
+                        (quadratic_bezier_curveto_argument
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number)))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate_pair
+                            (path_coordinate
+                              (path_number))
+                            (path_comma_wsp
+                              (path_wsp))
+                            (path_coordinate
+                              (path_number))))))))))))))
+    (end_tag
+      name: (name)))
+  (text))
+
+=============================
+Smooth quadratic curveto with chained pairs
+=============================
+
+<svg><path d="M0 0T1 2 3 4"/></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (self_closing_tag
+        name: (name)
+        (attribute
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      command: (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (smooth_quadratic_bezier_curveto_segment
+                        command: (path_command)
+                        (path_coordinate_pair
+                          (path_coordinate
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate
+                            (path_number)))
+                        (path_coordinate_pair
+                          (path_coordinate
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate
+                            (path_number)))))))))))))
+    (end_tag
+      name: (name)))
+  (text))
+
+=============================
 Arc followed by closepath with space
 =============================
 
