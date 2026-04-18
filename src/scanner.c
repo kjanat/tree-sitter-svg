@@ -19,7 +19,7 @@ enum TokenType {
   RAW_TEXT,
   SELF_CLOSING_TAG_DELIMITER,
   CDATA_TEXT,
-  ARC_CONTINUATION,
+  NUMBER_CONTINUATION,
 };
 
 typedef Array(char) String;
@@ -312,8 +312,10 @@ static inline bool is_wsp(int32_t c) {
 
 // Peek past optional comma/whitespace separator. If a number follows,
 // consume the separator and return true. Otherwise return false (lexer
-// resets). This gives the arc repeat LR(k) lookahead.
-static bool scan_arc_continuation(TSLexer *lexer) {
+// resets). This gives path-segment repeats (arc, h, v) LR(k) lookahead
+// so the parser can commit to extending the current segment instead of
+// reducing and falling through to implicit_lineto_segment.
+static bool scan_number_continuation(TSLexer *lexer) {
   while (is_wsp(lexer->lookahead)) {
     advance(lexer);
   }
@@ -328,7 +330,7 @@ static bool scan_arc_continuation(TSLexer *lexer) {
   int32_t c = lexer->lookahead;
   if (is_ascii_digit(c) || c == '+' || c == '-' || c == '.') {
     lexer->mark_end(lexer);
-    lexer->result_symbol = ARC_CONTINUATION;
+    lexer->result_symbol = NUMBER_CONTINUATION;
     return true;
   }
 
@@ -471,9 +473,11 @@ bool tree_sitter_svg_external_scanner_scan(void *payload, TSLexer *lexer, const 
     return scan_cdata_text(lexer);
   }
 
-  // Arc continuation: peek past whitespace/comma; succeed only if a number follows.
-  if (valid_symbols[ARC_CONTINUATION] && !valid_symbols[START_TAG_NAME] && !valid_symbols[END_TAG_NAME]) {
-    return scan_arc_continuation(lexer);
+  // Number continuation: peek past whitespace/comma; succeed only if a number follows.
+  // Used by elliptical arc, horizontal lineto, and vertical lineto repeats to
+  // commit to extension instead of falling through to implicit_lineto_segment.
+  if (valid_symbols[NUMBER_CONTINUATION] && !valid_symbols[START_TAG_NAME] && !valid_symbols[END_TAG_NAME]) {
+    return scan_number_continuation(lexer);
   }
 
   if (valid_symbols[SELF_CLOSING_TAG_DELIMITER] && lexer->lookahead == '/') {

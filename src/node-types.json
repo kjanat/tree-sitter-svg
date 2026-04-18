@@ -1117,10 +1117,6 @@
       "required": true,
       "types": [
         {
-          "type": "path_comma_wsp",
-          "named": true
-        },
-        {
           "type": "path_coordinate",
           "named": true
         },
@@ -3067,10 +3063,6 @@
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "path_comma_wsp",
-          "named": true
-        },
         {
           "type": "path_coordinate",
           "named": true

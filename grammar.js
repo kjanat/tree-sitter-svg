@@ -34,7 +34,7 @@ export default grammar({
 		$._raw_text,
 		'/>',
 		$._cdata_text,
-		$._arc_continuation,
+		$._number_continuation,
 	],
 
 	extras: () => [],
@@ -479,7 +479,7 @@ export default grammar({
 					field('command', alias($.horizontal_lineto_command, $.path_command)),
 					optional($.path_wsp),
 					$.path_coordinate,
-					repeat(seq(optional($.path_comma_wsp), $.path_coordinate)),
+					repeat(seq($._number_continuation, $.path_coordinate)),
 				),
 			),
 
@@ -489,7 +489,7 @@ export default grammar({
 					field('command', alias($.vertical_lineto_command, $.path_command)),
 					optional($.path_wsp),
 					$.path_coordinate,
-					repeat(seq(optional($.path_comma_wsp), $.path_coordinate)),
+					repeat(seq($._number_continuation, $.path_coordinate)),
 				),
 			),
 
@@ -539,7 +539,7 @@ export default grammar({
 					field('command', alias($.elliptical_arc_command, $.path_command)),
 					optional($.path_wsp),
 					$.elliptical_arc_argument,
-					repeat(seq($._arc_continuation, $.elliptical_arc_argument)),
+					repeat(seq($._number_continuation, $.elliptical_arc_argument)),
 				),
 			),
 

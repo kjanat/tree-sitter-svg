@@ -1212,6 +1212,194 @@ Close reopen subpath
   (text))
 
 =============================
+Vertical lineto with chained coordinates (whitespace separator)
+=============================
+
+<svg><path d="M0 0v1 2 3"/></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (self_closing_tag
+        name: (name)
+        (attribute
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      command: (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (vertical_lineto_segment
+                        command: (path_command)
+                        (path_coordinate
+                          (path_number))
+                        (path_coordinate
+                          (path_number))
+                        (path_coordinate
+                          (path_number))))))))))))
+    (end_tag
+      name: (name)))
+  (text))
+
+=============================
+Horizontal lineto with chained coordinates (whitespace separator)
+=============================
+
+<svg><path d="M0 0h1 2 3 4"/></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (self_closing_tag
+        name: (name)
+        (attribute
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      command: (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (horizontal_lineto_segment
+                        command: (path_command)
+                        (path_coordinate
+                          (path_number))
+                        (path_coordinate
+                          (path_number))
+                        (path_coordinate
+                          (path_number))
+                        (path_coordinate
+                          (path_number))))))))))))
+    (end_tag
+      name: (name)))
+  (text))
+
+=============================
+Vertical lineto with implicit-separator decimals (firefox.svg shape)
+=============================
+
+<svg><path d="M0 0v.007-.009"/></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (self_closing_tag
+        name: (name)
+        (attribute
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      command: (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (vertical_lineto_segment
+                        command: (path_command)
+                        (path_coordinate
+                          (path_number))
+                        (path_coordinate
+                          (path_number))))))))))))
+    (end_tag
+      name: (name)))
+  (text))
+
+=============================
+Horizontal lineto with chained coords followed by explicit command
+=============================
+
+<svg><path d="M0 0h1 2L3 3"/></svg>
+
+---
+
+(source_file
+  (text)
+  root: (svg_root_element
+    (start_tag
+      name: (name))
+    (element
+      (self_closing_tag
+        name: (name)
+        (attribute
+          (d_attribute
+            name: (d_attribute_name)
+            value: (d_attribute_value
+              (double_quoted_path_data
+                (path_data_content
+                  (path_data
+                    (moveto_segment
+                      command: (path_command)
+                      (path_coordinate_pair
+                        (path_coordinate
+                          (path_number))
+                        (path_comma_wsp
+                          (path_wsp))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (horizontal_lineto_segment
+                        command: (path_command)
+                        (path_coordinate
+                          (path_number))
+                        (path_coordinate
+                          (path_number))))
+                    (path_segment
+                      (lineto_segment
+                        command: (path_command)
+                        (path_coordinate_pair
+                          (path_coordinate
+                            (path_number))
+                          (path_comma_wsp
+                            (path_wsp))
+                          (path_coordinate
+                            (path_number)))))))))))))
+    (end_tag
+      name: (name)))
+  (text))
+
+=============================
 Arc followed by closepath with space
 =============================
 
