@@ -42,7 +42,12 @@ export default grammar({
 	rules: {
 		source_file: $ =>
 			seq(
-				optional($.xml_declaration),
+				// XML 1.0 §2.8 requires xml_declaration to be absolute first,
+				// but real-world SVGs (incl. W3C reference samples) often
+				// have a leading newline/BOM/whitespace; be lenient here.
+				// Leading misc only permitted when an xml_declaration follows,
+				// to keep source_file_repeat1 unambiguous.
+				optional(seq(repeat($._misc), $.xml_declaration)),
 				repeat($._misc),
 				optional(seq($.doctype, repeat($._misc))),
 				field('root', $.svg_root_element),
@@ -62,8 +67,11 @@ export default grammar({
 
 		xml_declaration: $ =>
 			seq(
+				// Start token consumes `<?xml` + mandatory whitespace. The
+				// trailing ws disambiguates from PI targets that begin with
+				// `xml` (e.g. `<?xml-stylesheet`), which XML 1.0 §2.8 and the
+				// pi_target_name regex reserve as valid PIs.
 				$._xml_declaration_start,
-				$._s,
 				$.xml_version_attribute,
 				optional(seq($._s, $.xml_encoding_attribute)),
 				optional(seq($._s, $.xml_standalone_attribute)),
@@ -71,7 +79,7 @@ export default grammar({
 				'?>',
 			),
 
-		_xml_declaration_start: _ => token(prec(2, '<?xml')),
+		_xml_declaration_start: _ => token(prec(2, /<\?xml[ \t\r\n]+/)),
 
 		xml_version_attribute: $ =>
 			seq(

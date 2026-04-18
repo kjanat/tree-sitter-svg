@@ -9,8 +9,20 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "xml_declaration"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_misc"
+                  }
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "xml_declaration"
+                }
+              ]
             },
             {
               "type": "BLANK"
@@ -107,10 +119,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_s"
-        },
-        {
-          "type": "SYMBOL",
           "name": "xml_version_attribute"
         },
         {
@@ -179,8 +187,8 @@
         "type": "PREC",
         "value": 2,
         "content": {
-          "type": "STRING",
-          "value": "<?xml"
+          "type": "PATTERN",
+          "value": "<\\?xml[ \\t\\r\\n]+"
         }
       }
     },

@@ -1386,6 +1386,31 @@ Processing instruction xml-stylesheet
   (text))
 
 ==================
+Leading whitespace before xml declaration (W3C sample style)
+==================
+
+<?xml version="1.0" standalone="no"?>
+<svg/>
+
+---
+
+(source_file
+  (text)
+  (xml_declaration
+    (xml_version_attribute
+      name: (xml_version_attribute_name)
+      value: (quoted_attribute_value
+        (attribute_text_double)))
+    (xml_standalone_attribute
+      name: (xml_standalone_attribute_name)
+      value: (xml_standalone_attribute_value)))
+  (text)
+  root: (svg_root_element
+    (self_closing_tag
+      name: (name)))
+  (text))
+
+==================
 Data URI without charset or base64
 ==================
 

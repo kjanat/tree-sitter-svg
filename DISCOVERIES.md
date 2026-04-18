@@ -57,7 +57,8 @@
 
 ## Tree-sitter Quirks
 
-- `<?xml` can be lexically stolen by generic `<?` processing-instruction rules; `token(prec(..., '<?xml'))` fixes declaration recognition
+- `<?xml` can be lexically stolen by generic `<?` processing-instruction rules; `token(prec(..., '<?xml'))` fixes declaration recognition. The literal 5-char token is *insufficient* though: it also matches the `<?xml-stylesheet` PI target prefix, causing xml_declaration to commit and then fail at the `-`. Require mandatory trailing whitespace in the start token (`token(prec(2, /<\?xml[ \t\r\n]+/))`) so the lexer only emits `_xml_declaration_start` when a well-formed declaration follows; `<?xml-*` PI targets fall through to the generic `<?` + `pi_target_name` path. XML 1.0 §2.8 guarantees VersionInfo begins with S whitespace, so this is spec-sound
+- XML 1.0 §2.8 requires `<?xml ... ?>` to be the absolute first thing in the document (no preceding whitespace), but real-world SVGs can gain a leading newline/BOM/whitespace via formatters, editors, or copy-paste pipelines (our local `samples/w3/arcs01.svg` picked up a leading `\n` from dprint before we stripped it; upstream W3C is clean). Strict `source_file = optional(xml_declaration) ...` fails these inputs because misc cannot appear before xml_declaration. Fix: `source_file` takes `optional(seq(repeat($._misc), $.xml_declaration))` so leading misc is permitted only when an xml_declaration follows, keeping `source_file_repeat1` unambiguous. Regression fixture at `samples/leading-ws-before-xml-decl.svg`
 - `tree-sitter` v0.25.0 native addon fails to compile with newer Node/V8 toolchains in this repo setup; Node 22 LTS works — Volta pin set to 22.22.1
 - Non-start grammar rules cannot match empty strings; wrap optional emptiness in parent rules instead of making the child nullable
 - Overlapping whitespace tokens (e.g. `misc_text` vs path whitespace) can cause wrong token choice; assign precedence for context-specific whitespace tokens
