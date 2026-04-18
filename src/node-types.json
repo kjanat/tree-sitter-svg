@@ -290,6 +290,79 @@
     }
   },
   {
+    "type": "color_hue_interpolation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "color_hue_direction",
+          "named": true
+        },
+        {
+          "type": "color_hue_keyword",
+          "named": true
+        },
+        {
+          "type": "wsp",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "color_interpolation_method",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "color_hue_interpolation",
+          "named": true
+        },
+        {
+          "type": "color_interpolation_space",
+          "named": true
+        },
+        {
+          "type": "color_mix_in_keyword",
+          "named": true
+        },
+        {
+          "type": "wsp",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "color_mix_component",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "color_value",
+          "named": true
+        },
+        {
+          "type": "percentage",
+          "named": true
+        },
+        {
+          "type": "wsp",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "color_value",
     "named": true,
     "fields": {},
@@ -976,7 +1049,23 @@
       "required": true,
       "types": [
         {
+          "type": "color_colorspace",
+          "named": true
+        },
+        {
           "type": "color_function_name",
+          "named": true
+        },
+        {
+          "type": "color_interpolation_method",
+          "named": true
+        },
+        {
+          "type": "color_mix_component",
+          "named": true
+        },
+        {
+          "type": "color_none",
           "named": true
         },
         {
@@ -3398,7 +3487,31 @@
     "named": false
   },
   {
+    "type": "color_colorspace",
+    "named": true
+  },
+  {
     "type": "color_function_name",
+    "named": true
+  },
+  {
+    "type": "color_hue_direction",
+    "named": true
+  },
+  {
+    "type": "color_hue_keyword",
+    "named": true
+  },
+  {
+    "type": "color_interpolation_space",
+    "named": true
+  },
+  {
+    "type": "color_mix_in_keyword",
+    "named": true
+  },
+  {
+    "type": "color_none",
     "named": true
   },
   {
