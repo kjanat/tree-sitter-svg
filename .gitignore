@@ -55,3 +55,17 @@ zig-out/
 
 # CMake artifacts
 __cmake_systeminformation/
+# Created by https://gitignore.kjanat.com/api/zig
+# Edit at https://gitignore.kjanat.com?templates=zig
+
+### zig ###
+# Zig programming language
+
+.zig-cache/
+zig-out/
+zig-pkg/
+build/
+build-*/
+docgen_tmp/
+
+# End of https://gitignore.kjanat.com/api/zig

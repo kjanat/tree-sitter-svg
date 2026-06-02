@@ -13,18 +13,18 @@
 			],
 			"injection-regex": "^svg$",
 			"class-name": "TreeSitterSvg",
-			"highlights": "queries/highlights.scm",
-			"injections": "queries/injections.scm",
-			"locals": "queries/locals.scm",
-			"tags": "queries/tags.scm",
-			"indents": "queries/indents.scm",
-			"textobjects": "queries/textobjects.scm",
-			"outline": "queries/outline.scm"
+			"highlights": ["queries/highlights.scm"],
+			"injections": ["queries/injections.scm"],
+			"locals": ["queries/locals.scm"],
+			"tags": ["queries/tags.scm"],
+			"indents": ["queries/indents.scm"],
+			"textobjects": ["queries/textobjects.scm"],
+			"outline": ["queries/outline.scm"]
 		}
 	],
 	"metadata": {
 		"version": "0.1.0",
-		"license": "MIT",
+		"license": "MIT OR Apache-2.0",
 		"description": "SVG grammar for Tree-sitter",
 		"authors": [
 			{

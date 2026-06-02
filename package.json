@@ -19,7 +19,7 @@
 	"funding": {
 		"url": "https://github.com/kjanat/funding"
 	},
-	"license": "MIT",
+	"license": "MIT OR Apache-2.0",
 	"author": "Kaj Kowalski <info@kajkowalski.nl> (https://github.com/kjanat)",
 	"type": "module",
 	"main": "bindings/node",

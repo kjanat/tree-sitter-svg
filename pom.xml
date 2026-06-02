@@ -17,6 +17,10 @@
 			<name>MIT</name>
 			<url>https://spdx.org/licenses/MIT.html</url>
 		</license>
+		<license>
+			<name>Apache-2.0</name>
+			<url>https://spdx.org/licenses/Apache-2.0.html</url>
+		</license>
 	</licenses>
 	<developers>
 		<developer>

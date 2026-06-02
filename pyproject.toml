@@ -4,7 +4,7 @@ version         = "0.1.0"
 description     = "SVG grammar for Tree-sitter"
 readme          = "README.md"
 requires-python = ">=3.10"
-license         = "MIT"
+license         = "MIT OR Apache-2.0"
 authors         = [{ name = "Kaj Kowalski", email = "info@kajkowalski.nl" }]
 keywords        = ["incremental", "parsing", "svg", "tree-sitter"]
 classifiers     = [
@@ -22,7 +22,7 @@ Homepage = "https://github.com/kjanat/tree-sitter-svg"
 core = ["tree-sitter~=0.25"]
 
 [build-system]
-requires      = ["setuptools>=62.4.0", "wheel"]
+requires      = ["setuptools>=77.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.cibuildwheel]
