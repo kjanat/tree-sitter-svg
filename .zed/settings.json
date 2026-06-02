@@ -1,5 +1,4 @@
 {
 	"prettier": { "allowed": false },
-	"formatter": [{ "external": { "command": "dprint", "arguments": ["fmt", "--stdin", "{buffer_path}"] } }],
-	"lsp": { "rust-analyzer": { "enable_lsp_tasks": false } } // prevents hogging resources when not editing rust, in this grammar repo
+	"formatter": [{ "external": { "command": "dprint", "arguments": ["fmt", "--stdin", "{buffer_path}"] } }]
 }
