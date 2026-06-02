@@ -1,55 +1,21 @@
 name: CI
-
-on:
-  push: { branches: [master] }
-  pull_request:
-  workflow_dispatch:
-
-concurrency:
-  { group: "ci-${{ github.sha }}", cancel-in-progress: true }
-
+on: { push: { branches: [master] }, pull_request: null, workflow_dispatch: null }
+concurrency: { group: "ci-${{ github.sha }}", cancel-in-progress: true }
 jobs:
   test:
     runs-on: ubuntu-latest
+    env: { RUNNER_PM: bun }
     steps:
       - uses: actions/checkout@v6
-
+      - uses: kjanat/runner@master
       - uses: actions/setup-node@v6
-        with: { node-version: 22 }
-
+        with: { node-version-file: .node-version }
       - uses: oven-sh/setup-bun@v2
-
-      - run: npm i -g tree-sitter-cli
-
-      - run: bun install --frozen-lockfile
-
-      - run: bun typecheck
-
-      - run: tree-sitter test
-
-      - run: tree-sitter fuzz --iterations 50 --edits 5
-
-      - name: Parse samples
-        run: |
-          shopt -s nullglob
-          fail=0
-          for f in samples/*.svg samples/assets/*.svg; do
-            output="$(tree-sitter parse "$f" 2>&1)" || {
-              echo "FAIL (non-zero exit): $f"
-              printf '%s\n' "$output"
-              fail=1
-              continue
-            }
-            if printf '%s\n' "$output" | grep -q ERROR; then
-              echo "FAIL: $f"
-              printf '%s\n' "$output"
-              fail=1
-            fi
-          done
-          [[ "$fail" -eq 0 ]] || exit 1
-
-      - name: Node binding tests
-        run: bun test
-
-      - name: Regex harness
-        run: bun test:regex
+      - run: runner install --frozen --keep-going \
+          typecheck \
+          test:corpus \
+          test:fuzz \
+          parse:examples \
+          test \
+          test:bun \
+          test:regex
