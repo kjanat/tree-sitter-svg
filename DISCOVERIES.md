@@ -12,6 +12,7 @@
 - Serialization silently truncates tag stack when 1024-byte buffer exceeded; `written` count is patched to reflect actual serialized tags
 - `tree-sitter build --reuse-allocator` fails for any grammar whose scanner uses `tree_sitter/array.h` — the CLI passes `-DTREE_SITTER_REUSE_ALLOCATOR` (mapping `ts_malloc` → `ts_current_malloc`) but doesn't link the runtime that defines those symbols; confirmed broken on tree-sitter-rust too (not our bug)
 - Scanner should use `ts_calloc`/`ts_free` (from `alloc.h` via `array.h`) instead of raw `calloc`/`free` so allocator routing works when the CLI eventually fixes `--reuse-allocator`
+- CI `run:` using a YAML folded scalar (`>-`) must keep continuation lines at the *same* indentation as the first line. Lines indented deeper are treated as literal blocks and keep their newlines, so `runner install --frozen --keep-going` + deeper-indented task names became two shell commands — `runner install` (ran) then bare `typecheck` (exit 127, command not found). Fix: dedent task lines to align with `runner`. The intended single command is `runner install --frozen --keep-going typecheck test:corpus …` (install-then-chain; `runner install [TASKS]...` is a real feature, and `--keep-going` still returns the first non-zero chain exit so CI stays honest)
 
 ## Grammar
 

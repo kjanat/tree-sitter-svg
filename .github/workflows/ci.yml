@@ -12,10 +12,10 @@ jobs:
       - { uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b } # v8.1.0
       - run: >-
           runner install --frozen --keep-going
-            typecheck
-            test:corpus
-            test:fuzz
-            parse:examples
-            test
-            test:bun
-            test:regex
+          typecheck
+          test:corpus
+          test:fuzz
+          parse:examples
+          test
+          test:bun
+          test:regex
