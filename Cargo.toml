@@ -1,10 +1,8 @@
-#:tombi lint = { disabled = true }
-
 [package]
 name         = "tree-sitter-svg"
 version      = "0.1.0"
-authors      = ["Kaj Kowalski <info@kajkowalski.nl>"]
-edition      = "2021"
+authors      = ["Kaj Kowalski <info@kajkowalski.nl>"]                                                        # tombi: lint.rules = { deprecated.disabled = true, unused-noqa.disabled = true }
+edition      = "2024"
 description  = "SVG grammar for Tree-sitter"
 readme       = "README.md"
 repository   = "https://github.com/kjanat/tree-sitter-svg"
@@ -12,14 +10,7 @@ license      = "MIT"
 keywords     = ["incremental", "parsing", "svg", "tree-sitter"]
 categories   = ["parser-implementations", "parsing", "text-editors"]
 build        = "bindings/rust/build.rs"
-include      = [
-  "/LICENSE",
-  "bindings/rust/*",
-  "grammar.js",
-  "queries/*",
-  "src/*",
-  "tree-sitter.json",
-]
+include      = ["/LICENSE", "/bindings/rust/*", "/grammar.js", "/queries/*", "/src/*", "/tree-sitter.json"]
 autoexamples = false
 
 [lib]
@@ -29,7 +20,7 @@ path = "bindings/rust/lib.rs"
 tree-sitter-language = "0.1"
 
 [dev-dependencies]
-tree-sitter = "0.26.7"
+tree-sitter = "0.26.9"
 
 [build-dependencies]
 cc = "1.2"
